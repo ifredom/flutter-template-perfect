@@ -1,2 +1,19 @@
-# flutter-template-perfect
-这是一个商用级模板。This is a commercial grade template.
+# chinaculture
+
+一个完整得flutter项目模板
+
+* `api` http(接口请求)封装
+* `routers` fluro(路由)封装
+* `utils` custom utils (常用工具)封装
+* `store` Provider （类vuex数据）封装
+* `localstorage` shared_preferences （本地数据存储）封装
+
+## enviroment
+
+flutter version: 1.12.13+hotfix.8
+
+## Getting Started
+
+```bash
+flutter run
+```
