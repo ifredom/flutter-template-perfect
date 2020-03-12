@@ -1,4 +1,4 @@
-# chinaculture
+# flutter template
 
 一个完整得flutter项目模板
 
@@ -14,6 +14,10 @@ flutter version: 1.12.13+hotfix.8
 
 ## Getting Started
 
-```bash
+```dash
+# 运行
 flutter run
+
+# 打包，注意需要提前准备好签名
+# flutter build apk
 ```
