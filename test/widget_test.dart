@@ -1,18 +1,17 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+//这是一个基本的flutter小部件测试。
 
-import 'package:chinaculture/pages/home/home.dart';
+//要在测试中执行与小部件的交互，请使用flutter提供的  WidgetTester utility
+
+// 例如，您可以发送点击和滚动手势。您还可以使用widgetter在小部件中查找子小部件树、读取文本并验证小部件属性的值是否正确。
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:template/ui/root/root_component.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(HomePage());
+    await tester.pumpWidget(RootComponent());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

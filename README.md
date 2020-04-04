@@ -1,23 +1,16 @@
-# flutter template
+# template
 
-一个完整得flutter项目模板
-
-* `api` http(接口请求)封装
-* `routers` fluro(路由)封装
-* `utils` custom utils (常用工具)封装
-* `store` Provider （类vuex数据）封装
-* `localstorage` shared_preferences （本地数据存储）封装
-
-## enviroment
-
-flutter version: 1.12.13+hotfix.8
+A new Flutter project.
 
 ## Getting Started
 
-```dash
-# 运行
-flutter run
+This project is a starting point for a Flutter application.
 
-# 打包，注意需要提前准备好签名
-# flutter build apk
-```
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

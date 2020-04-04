@@ -1,11 +1,10 @@
 import 'dart:convert';
-
+import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart'
     show InterceptorsWrapper, Response, RequestOptions, Headers;
-import 'package:chinaculture/constants/constants.dart';
-import 'package:chinaculture/utils/common/sign.dart';
-import 'package:chinaculture/utils/res/local_storage.dart';
-import 'package:chinaculture/utils/res/local_storage_keys.dart';
+import 'package:template/core/constants/constants.dart';
+import 'package:template/core/utils/res/local_storage.dart';
+import 'package:template/core/utils/res/local_storage_keys.dart';
 import '../code.dart' show Code;
 import '../result_data.dart' show ResultData;
 import '../whiteListApi.dart';
@@ -17,7 +16,6 @@ class ApiInterceptors extends InterceptorsWrapper {
         .toString();
     var params = json.decode(options.data);
     var apiCode = params.remove("apiCode"); //remove()返回删除得值
-    params["isMobile"] = "1";
 
     /// 为了给sign使用
     Map signMap = Map();
@@ -25,7 +23,7 @@ class ApiInterceptors extends InterceptorsWrapper {
     signMap["appId"] = Constants.APP_ID;
     signMap["params"] = jsonEncode(params);
     signMap["timeStamp"] = time.substring(0, time.length - 4);
-    signMap["token"] = await _getToken(apiCode);
+    signMap["token"] = await _getUnWhitelistToken(apiCode);
 
     /// 为了给sign使用 -end
 
@@ -36,19 +34,17 @@ class ApiInterceptors extends InterceptorsWrapper {
     options.queryParameters["appId"] = Constants.APP_ID;
     options.queryParameters["params"] = json.encode(params);
     options.queryParameters["timeStamp"] = time.substring(0, time.length - 4);
-    options.queryParameters["token"] = await _getToken(apiCode);
+    options.queryParameters["token"] = await _getUnWhitelistToken(apiCode);
     options.queryParameters["sign"] = SignServices.getSign(signMap);
 
     return options;
   }
 
-  // 只在登陆时,进行token的存储
-  _getToken(String apiCode) async {
-    String token;
+  // 登陆时,进行token的存储
+  _getUnWhitelistToken(String apiCode) async {
+    String token = await LocalStorage.get(LocalStorageKeys.TOKEN_KEY);
     if (WhiteListApi.list.contains(apiCode)) {
-      token = 'noToken';
-    } else {
-      token = await LocalStorage.get(LocalStorageKeys.TOKEN_KEY);
+      token = LocalStorageKeys.DEFAULT_TOKEN;
     }
     return token;
   }
@@ -90,5 +86,19 @@ class ApiInterceptors extends InterceptorsWrapper {
       );
     }
     return Future.value(value);
+  }
+}
+
+class SignServices {
+  static String getSign(Map map) {
+    List attrKeys = map.keys.toList();
+    attrKeys.sort();
+    String str = Constants.APP_SECRET;
+    for (var i = 0; i < attrKeys.length; i++) {
+      str += "${attrKeys[i]}${map[attrKeys[i]]}";
+    }
+
+    Digest d = md5.convert(Utf8Encoder().convert(str + Constants.APP_SECRET));
+    return d.toString();
   }
 }

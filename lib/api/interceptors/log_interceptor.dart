@@ -1,18 +1,19 @@
 import 'package:dio/dio.dart'
     show InterceptorsWrapper, RequestOptions, Response, DioError;
-import 'package:chinaculture/constants/constants.dart' show Constants;
+import 'package:template/core/constants/constants.dart';
+import 'package:template/core/utils/common/logger.dart';
 
 class LogsInterceptors extends InterceptorsWrapper {
   // static List
   @override
   onRequest(RequestOptions options) async {
     if (Constants.DEBUG) {
-      print('request url: ${options.path}');
-      print('request header: ${options.headers.toString()}');
+      Logger.d('request url: ${options.path}');
+      Logger.d('request header: ${options.headers.toString()}');
       if (options.data != null) {
-        print('request params: ${options.data.toString()}');
+        Logger.d('request params: ${options.data.toString()}');
       }
-      print('\r\n');
+      Logger.d('\r\n');
     }
 
     return options;
@@ -22,8 +23,8 @@ class LogsInterceptors extends InterceptorsWrapper {
   onResponse(Response response) async {
     if (Constants.DEBUG) {
       if (response != null) {
-        print('response: ${response.toString()}');
-        print('\r\n');
+        Logger.d('response: ${response.toString()}');
+        Logger.d('\r\n');
       }
     }
 
@@ -33,8 +34,8 @@ class LogsInterceptors extends InterceptorsWrapper {
   @override
   onError(DioError error) async {
     if (Constants.DEBUG) {
-      print('request error: ${error.toString()}');
-      print('request error info: ${error.response?.toString() ?? ""}');
+      Logger.e('request error: ${error.toString()}');
+      Logger.e('request error info: ${error.response?.toString() ?? ""}');
     }
     return error;
   }

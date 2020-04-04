@@ -1,0 +1,8 @@
+/// 枚举: 支持的语言种类
+enum SupportLocale {
+  FOLLOW_SYSTEM,
+  SIMPLIFIED_CHINESE,
+  TRADITIONAL_CHINESE_TW,
+  TRADITIONAL_CHINESE_HK,
+  ENGLISH
+}

@@ -1,0 +1,1 @@
+enum BackImageMode { light, black }
