@@ -8,8 +8,6 @@ part of serializers;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ResponseData.serializer)
-      ..add(TeacherHomeBean.serializer)
-      ..add(Teachingbook.serializer)
       ..add(User.serializer))
     .build();
 

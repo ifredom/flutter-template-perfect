@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/ui/pages/homework/homework_index.dart';
+import 'package:template/ui/pages/user/login.dart';
 
 import 'drawer_user_controller.dart';
 import 'home_drawer.dart';
@@ -20,7 +20,7 @@ class _DrawerExampleState extends State<DrawerExample> {
         animationController: (AnimationController animationController) {
           sliderAnimationController = animationController;
         },
-        screenView: HomeworkIndex(), //任何页面
+        screenView: LoginPage(), //任何页面
       ),
     );
   }

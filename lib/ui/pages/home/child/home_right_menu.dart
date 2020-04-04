@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:template/ui/pages/actives/actives_index.dart';
-import 'package:template/ui/pages/rank/rank_index.dart';
-import 'package:template/ui/pages/shop/shop_index.dart';
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/res/gaps.dart';
 
@@ -18,13 +15,7 @@ class HomeRightMenu extends StatelessWidget {
             width: ScreenUtil().setSp(124),
             height: ScreenUtil().setSp(124),
           ),
-          onTap: () {
-            /// 排行
-            showDialog(
-              context: context,
-              builder: (_) => RankIndex(),
-            );
-          },
+          onTap: () {},
         ),
         Gaps.hGap26,
         GestureDetector(
@@ -33,13 +24,7 @@ class HomeRightMenu extends StatelessWidget {
             width: ScreenUtil().setSp(124),
             height: ScreenUtil().setSp(124),
           ),
-          onTap: () {
-            /// 商店
-            showDialog(
-              context: context,
-              builder: (_) => ShopIndex(),
-            );
-          },
+          onTap: () {},
         ),
         Gaps.hGap26,
         GestureDetector(
@@ -48,13 +33,7 @@ class HomeRightMenu extends StatelessWidget {
             width: ScreenUtil().setSp(124),
             height: ScreenUtil().setSp(124),
           ),
-          onTap: () {
-            /// 活动
-            showDialog(
-              context: context,
-              builder: (_) => ActivesIndex(),
-            );
-          },
+          onTap: () {},
         ),
         Gaps.hGap26,
         GestureDetector(

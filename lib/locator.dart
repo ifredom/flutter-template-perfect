@@ -17,9 +17,6 @@ import 'core/services/key_storage/key_storage_service_impl.dart';
 import 'core/services/navigation/navigation_service_impl.dart';
 import 'core/services/snackbar/snack_bar_service.dart';
 import 'core/services/snackbar/snack_bar_service_impl.dart';
-import 'core/services/teaching/teaching_service.dart';
-import 'core/services/teaching/teaching_service_impl.dart';
-import 'core/view_models/settings/settings_view_model.dart';
 import 'core/view_models/userinfo_view_model.dart';
 
 GetIt locator = GetIt.instance;
@@ -40,13 +37,11 @@ Future<void> setupLocator({bool test = false}) async {
   locator.registerLazySingleton<DialogService>(() => DialogServiceImpl());
   locator.registerLazySingleton<SnackBarService>(() => SnackBarServiceImpl());
   locator.registerLazySingleton<AuthService>(() => AuthServiceImpl());
-  locator.registerLazySingleton<TeachingService>(() => TeachingServiceImpl());
 
   // Singleton of the viewmodel
   // locator.registerFactory(() => ConfigViewModel());
   locator.registerLazySingleton<ConfigViewModel>(() => ConfigViewModel());
   locator.registerLazySingleton<UserinfoViewModel>(() => UserinfoViewModel());
-  locator.registerLazySingleton<SettingsViewModel>(() => SettingsViewModel());
 
   // Data sources
 
