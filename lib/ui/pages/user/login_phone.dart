@@ -86,7 +86,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                     constraints: BoxConstraints(
                       maxHeight: MediaQuery.of(context).size.height * 0.8,
                     ),
-                    decoration: new BoxDecoration(
+                    decoration:  BoxDecoration(
                       color: Colors.white,
                       border: Border.all(
                         color: Color.fromRGBO(0, 0, 0, 0.2),
