@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/constants/formatter_text.dart';
-import 'package:template/core/routes/routers.dart';
+
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/core/view_models/home_view_model.dart';
-import 'package:template/locator.dart';
+import 'package:template/ui/pages/home/home_view_model.dart';
+
 
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/core/utils/res/dimens.dart';
 import 'package:template/core/utils/res/gaps.dart';
-import 'package:provider_architecture/provider_widget.dart';
 
-class HomeTopMenu extends ProviderWidget<HomeViewModel> {
-  HomeTopMenu({Key key}) : super(key: key, listen: false);
+import '../../../routers.dart';
+
+class HomeTopMenu extends ViewModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
@@ -54,8 +56,7 @@ class HomeTopMenu extends ProviderWidget<HomeViewModel> {
   }
 }
 
-class BuildPortrait extends ProviderWidget<HomeViewModel> {
-  BuildPortrait({Key key}) : super(key: key, listen: true);
+class BuildPortrait extends ViewModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
@@ -120,8 +121,7 @@ class BuildPortrait extends ProviderWidget<HomeViewModel> {
   }
 }
 
-class BuildMessageNotice extends ProviderWidget<HomeViewModel> {
-  BuildMessageNotice({Key key}) : super(key: key, listen: false);
+class BuildMessageNotice extends ViewModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
@@ -145,7 +145,7 @@ class BuildMessageNotice extends ProviderWidget<HomeViewModel> {
               ),
               Gaps.hGap15,
               Text(
-                '恭喜奥特曼在世界工会获得第一名',
+                '恭喜奥特曼获得第一名',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: HexToColor('#ffffff'),
@@ -162,8 +162,7 @@ class BuildMessageNotice extends ProviderWidget<HomeViewModel> {
   }
 }
 
-class BuildDiamonds extends ProviderWidget<HomeViewModel> {
-  BuildDiamonds({Key key}) : super(key: key, listen: false);
+class BuildDiamonds extends ViewModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
@@ -204,14 +203,13 @@ class BuildDiamonds extends ProviderWidget<HomeViewModel> {
         ),
       ),
       onTap: () {
-        locator<NavigationService>().push(RoutesUtils.completematerialPage);
+        locator<NavigationService>().push(RoutesUtils.webViewPage);
       },
     );
   }
 }
 
-class BuildGoldCoin extends ProviderWidget<HomeViewModel> {
-  BuildGoldCoin({Key key}) : super(key: key, listen: false);
+class BuildGoldCoin extends ViewModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
@@ -252,8 +250,7 @@ class BuildGoldCoin extends ProviderWidget<HomeViewModel> {
   }
 }
 
-class BuildEmail extends ProviderWidget<HomeViewModel> {
-  BuildEmail({Key key}) : super(key: key, listen: false);
+class BuildEmail extends ViewModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
@@ -281,8 +278,7 @@ class BuildEmail extends ProviderWidget<HomeViewModel> {
   }
 }
 
-class BuildSetting extends ProviderWidget<HomeViewModel> {
-  BuildSetting({Key key}) : super(key: key, listen: false);
+class BuildSetting extends ViewModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {

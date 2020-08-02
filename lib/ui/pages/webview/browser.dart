@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/locator.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
 // https://www.jianshu.com/p/91b4c615b2b4
@@ -13,8 +13,8 @@ class Browser extends StatefulWidget {
 
 class _BrowserState extends State<Browser> with WidgetsBindingObserver {
   AppLifecycleState appLifecycleState;
-  InAppLocalhostServer localhostServer = new InAppLocalhostServer();
-  final MyInAppBrowser browser = new MyInAppBrowser();
+  InAppLocalhostServer localhostServer = InAppLocalhostServer();
+  final MyInAppBrowser browser = MyInAppBrowser();
   InAppWebViewController webView;
   String url = "";
   double progress = 0;
@@ -93,8 +93,7 @@ class _BrowserState extends State<Browser> with WidgetsBindingObserver {
           // useOnLoadResource: true,
         ),
       ),
-      shouldOverrideUrlLoading:
-          (InAppWebViewController controller, String url) {},
+      shouldOverrideUrlLoading: (InAppWebViewController controller, String url) {},
       onWebViewCreated: (InAppWebViewController controller) {
         print("onWebViewCreated");
         webView = controller;

@@ -1,18 +1,13 @@
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:template/core/utils/res/local_storage.dart';
-import 'package:template/core/utils/res/local_storage_keys.dart';
-import 'package:template/core/view_models/config_view_model.dart';
-import 'package:template/core/view_models/home_view_model.dart';
+import 'package:stacked/stacked.dart';
+import 'package:template/core/app/locator.dart';
+import 'package:template/ui/pages/home/config_view_model.dart';
+import 'package:template/ui/pages/home/home_view_model.dart';
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/res/gaps.dart';
-import 'package:template/locator.dart';
-import 'package:provider_architecture/provider_widget.dart';
-import 'package:provider_architecture/viewmodel_provider.dart';
 
-import 'child/home_freemodel_button.dart';
-import 'child/home_homework_button.dart';
 import 'child/home_right_menu.dart';
 import 'child/home_top_menu.dart';
 
@@ -39,10 +34,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<HomeViewModel>.withoutConsumer(
-      viewModel: HomeViewModel(),
-      // 以登录状态下，需要请求用户数据
-      onModelReady: (model) async => model.initialise(),
+    return ViewModelBuilder<HomeViewModel>.nonReactive(
+      viewModelBuilder: () => HomeViewModel(),
+      onModelReady: (model) => model.initialise(),
       builder: (context, model, child) => PlatformScaffold(
         body: BuildMainContent(),
       ),
@@ -51,8 +45,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 // 此模式，保证home页面不会rebuild ,或者使用consume
-class BuildMainContent extends ProviderWidget<HomeViewModel> {
-  BuildMainContent({Key key}) : super(key: key, listen: false);
+class BuildMainContent extends ViewModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
@@ -84,9 +77,7 @@ class BuildMainContent extends ProviderWidget<HomeViewModel> {
               right: ScreenUtil().setSp(50),
               child: Row(
                 children: <Widget>[
-                  HomeHomeworkButton(),
                   Gaps.hGap10,
-                  HomeFreeModelButton()
                 ],
               )),
         ],
@@ -95,7 +86,7 @@ class BuildMainContent extends ProviderWidget<HomeViewModel> {
   }
 }
 
-class BuildAudioPlayer extends ProviderWidget<HomeViewModel> {
+class BuildAudioPlayer extends ViewModelWidget<HomeViewModel> {
   final String url;
   final FijkPlayer player;
 
@@ -103,7 +94,7 @@ class BuildAudioPlayer extends ProviderWidget<HomeViewModel> {
     Key key,
     this.url = "asset:///assets/audio/bgaudio.mp3",
     this.player,
-  }) : super(key: key, listen: false);
+  });
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {

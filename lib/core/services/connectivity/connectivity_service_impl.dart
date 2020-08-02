@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:logging/logging.dart';
 import 'package:template/core/enums/connectivity_status.dart';
-import 'package:template/core/utils/common/logger.dart';
 
 import 'connectivity_service.dart';
 
 class ConnectivityServiceImpl implements ConnectivityService {
+  final _log = Logger("ConnectivityServiceImpl");
   final _connectivityResultController = StreamController<ConnectivityStatus>();
   final _connectivity = Connectivity();
 
@@ -15,14 +16,12 @@ class ConnectivityServiceImpl implements ConnectivityService {
   bool _serviceStopped = false;
 
   @override
-  Stream<ConnectivityStatus> get connectivity$ =>
-      _connectivityResultController.stream;
+  Stream<ConnectivityStatus> get connectivity$ => _connectivityResultController.stream;
 
   bool get serviceStopped => _serviceStopped;
 
   ConnectivityServiceImpl() {
-    _subscription =
-        _connectivity.onConnectivityChanged.listen(_emitConnectivity);
+    _subscription = _connectivity.onConnectivityChanged.listen(_emitConnectivity);
   }
 
   Future<bool> get isConnected async {
@@ -40,7 +39,7 @@ class ConnectivityServiceImpl implements ConnectivityService {
 
   @override
   void start() async {
-    Logger.d('ConnectivityService resumed');
+    _log.info('ConnectivityService resumed');
     _serviceStopped = false;
 
     await _resumeSignal();
@@ -49,7 +48,7 @@ class ConnectivityServiceImpl implements ConnectivityService {
 
   @override
   void stop() {
-    Logger.d('ConnectivityService paused');
+    _log.info('ConnectivityService paused');
     _serviceStopped = true;
 
     _subscription.pause(_resumeSignal());
@@ -58,7 +57,7 @@ class ConnectivityServiceImpl implements ConnectivityService {
   void _emitConnectivity(ConnectivityResult event) {
     if (event == _lastResult) return;
 
-    Logger.d('Connectivity status changed to $event');
+    _log.info('Connectivity status changed to $event');
     _connectivityResultController.add(_convertResult(event));
     _lastResult = event;
   }

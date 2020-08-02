@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:template/api/api.dart';
-import 'package:template/api/http.dart';
-import 'package:template/core/routes/routers.dart';
+import 'package:stacked/stacked.dart';
+import 'package:template/api/apicode/api.dart';
+import 'package:template/api/http_service_impl.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/services/auth/auth_service.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/core/view_models/login_view_model.dart';
-import 'package:template/locator.dart';
+import 'package:template/ui/pages/user/login_view_model.dart';
 
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/core/utils/res/gaps.dart';
 import 'package:template/ui/widgets/textfield/text_field.dart';
-import 'package:provider_architecture/viewmodel_provider.dart';
+
+import '../../routers.dart';
 
 class LoginPhonePage extends StatefulWidget {
   @override
@@ -25,8 +26,8 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
   final formKey = GlobalKey<FormState>();
   FocusNode _phoneFocus = FocusNode();
   FocusNode _vCodeFocus = FocusNode();
-  final TextEditingController phoneController = new TextEditingController();
-  final TextEditingController vcodeController = new TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController vcodeController = TextEditingController();
 
   @override
   void initState() {
@@ -49,7 +50,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
   Future _tappedGetCode() async {
     var params = Map<String, String>();
     params["phone"] = phoneController.text;
-    var res = await httpUtil.request(ApiCode.GET_CODE, params);
+    var res = await httpService.request(ApiCode.GET_CODE, params);
 
     if (res.data["code"] == 0) {
       showToast('发送成功');
@@ -60,13 +61,13 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<LoginViewModel>.withoutConsumer(
-      viewModel: LoginViewModel(),
+    return ViewModelBuilder<LoginViewModel>.nonReactive(
+      viewModelBuilder: () =>LoginViewModel(),
       builder: (context, model, child) => PlatformScaffold(
         body: Form(
           key: formKey,
           child: IgnorePointer(
-            ignoring: model.busy,
+            ignoring: model.isbusy,
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
@@ -101,8 +102,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                           _buildTitle(title: "登录"),
                           Gaps.vGap40,
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ScreenUtil().setSp(70)),
+                            padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setSp(70)),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -115,8 +115,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                                   keyboardType: TextInputType.phone,
                                   controller: phoneController,
                                   borderColor: HexToColor("#CBAEFA"),
-                                  validator: (_) => model.validatePhoneNumber(
-                                      phoneController.text),
+                                  validator: (_) => model.validatePhoneNumber(phoneController.text),
                                 ),
                                 Gaps.vGap40,
                                 InputField(
@@ -160,8 +159,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                                       ),
                                     ),
                                     onTap: () {
-                                      locator<NavigationService>()
-                                          .push(RoutesUtils.loginPage);
+                                      locator<NavigationService>().push(RoutesUtils.loginPage);
                                     },
                                   ),
                                 ),
@@ -178,11 +176,9 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                                 ),
                                 Gaps.vGap30,
                                 Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: ScreenUtil().setSp(340)),
+                                  padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setSp(340)),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Image.asset(
                                         "assets/images/custom/wechat.png",
@@ -226,8 +222,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
       child: new FlatButton(
         child: new Text(
           '登录',
-          style: new TextStyle(
-              fontSize: ScreenUtil().setSp(30), color: HexToColor('#ffffff')),
+          style: new TextStyle(fontSize: ScreenUtil().setSp(30), color: HexToColor('#ffffff')),
         ),
         // onPressed: _tappedLogin,
         onPressed: () {
@@ -244,9 +239,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
 
   Widget _buildTitle({String title}) {
     return Container(
-      padding: EdgeInsets.symmetric(
-          vertical: ScreenUtil().setHeight(20),
-          horizontal: ScreenUtil().setWidth(50)),
+      padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(20), horizontal: ScreenUtil().setWidth(50)),
       decoration: new BoxDecoration(
         color: HexToColor('#F7F2FF'),
         border: Border.all(color: Colors.transparent, width: 0.5), // 边色与边宽度
@@ -258,8 +251,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
           Gaps.empty,
           Text(
             title,
-            style: TextStyle(
-                color: HexToColor('#5324B3'), fontWeight: FontWeight.bold),
+            style: TextStyle(color: HexToColor('#5324B3'), fontWeight: FontWeight.bold),
           ),
           GestureDetector(
             child: Image.asset(

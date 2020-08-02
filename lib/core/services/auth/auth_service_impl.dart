@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:template/api/api.dart';
-import 'package:template/api/http.dart';
+import 'package:logging/logging.dart';
+import 'package:template/api/apicode/api.dart';
+import 'package:template/api/http_service_impl.dart';
 import 'package:template/core/exceptions/auth_exception.dart';
 import 'package:template/core/model/userinfo/user.dart';
-import 'package:template/core/utils/common/logger.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
@@ -12,6 +12,7 @@ import 'auth_service.dart';
 //  service 控制层，定义数据变化，定义异步接口请求
 // view_model 视图层，连接service,
 class AuthServiceImpl implements AuthService {
+  final _log = Logger("AuthServiceImpl");
   User _currentUser;
   User get currentUser => _currentUser;
 
@@ -32,12 +33,12 @@ class AuthServiceImpl implements AuthService {
     String password,
   ) async {
     try {
-      return await httpUtil.request(ApiCode.SIGN_IN, {
+      return await httpService.request(ApiCode.SIGN_IN, {
         "mobile": mobile,
         "pwd": password,
       });
     } on Exception {
-      Logger.e('AuthServiceImpl: signUpWithAuthcode 接口异常');
+      _log.severe('AuthServiceImpl: signUpWithAuthcode 接口异常');
       throw AuthException('signUpWithAuthcode 接口异常');
     }
   }
@@ -49,12 +50,12 @@ class AuthServiceImpl implements AuthService {
     String authCode,
   ) async {
     try {
-      return await httpUtil.request(ApiCode.SIGN_IN, {
+      return await httpService.request(ApiCode.SIGN_IN, {
         "mobile": mobile,
         "authCode": authCode,
       });
     } on Exception {
-      Logger.e('AuthServiceImpl: signUpWithAuthcode 接口异常');
+      _log.severe('AuthServiceImpl: signUpWithAuthcode 接口异常');
       throw AuthException('signUpWithAuthcode 接口异常');
     }
   }
@@ -64,9 +65,9 @@ class AuthServiceImpl implements AuthService {
     String id,
   ) async {
     try {
-      return await httpUtil.request(ApiCode.CHECK_USERINFO, {"id": id});
+      return await httpService.request(ApiCode.CHECK_USERINFO, {"id": id});
     } on Exception {
-      Logger.e('AuthServiceImpl: fetchUserInfo 接口异常');
+      _log.severe('AuthServiceImpl: fetchUserInfo 接口异常');
       throw AuthException('fetchUserInfo 接口异常');
     }
   }
@@ -77,10 +78,9 @@ class AuthServiceImpl implements AuthService {
     String pwd,
   ) async {
     try {
-      return await httpUtil
-          .request(ApiCode.RESET_PASSWORD, {"code": vcode, "pwd": pwd});
+      return await httpService.request(ApiCode.RESET_PASSWORD, {"code": vcode, "pwd": pwd});
     } on Exception {
-      Logger.e('AuthServiceImpl: fetchResetPassword 接口异常');
+      _log.severe('AuthServiceImpl: fetchResetPassword 接口异常');
       throw AuthException('fetchResetPassword 接口异常');
     }
   }
@@ -91,10 +91,9 @@ class AuthServiceImpl implements AuthService {
     String openId,
   ) async {
     try {
-      return await httpUtil
-          .request(ApiCode.ISNEW_USER, {"mobile": mobile, "openId": openId});
+      return await httpService.request(ApiCode.ISNEW_USER, {"mobile": mobile, "openId": openId});
     } on Exception {
-      Logger.e('AuthServiceImpl: fetchResetPassword 接口异常');
+      _log.severe('AuthServiceImpl: fetchResetPassword 接口异常');
       throw AuthException('fetchResetPassword 接口异常');
     }
   }
@@ -123,9 +122,9 @@ class AuthServiceImpl implements AuthService {
   @override
   Future fetchUserBalance() async {
     try {
-      return await httpUtil.request(ApiCode.USER_BALANCE, {});
+      return await httpService.request(ApiCode.USER_BALANCE, {});
     } on Exception {
-      Logger.e('AuthServiceImpl: fetchResetPassword 接口异常');
+      _log.severe('AuthServiceImpl: fetchResetPassword 接口异常');
       throw AuthException('fetchResetPassword 接口异常');
     }
   }
@@ -154,8 +153,7 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<void> updateUserAddress(String detailAddress) async {
-    _currentUser =
-        _currentUser.rebuild((u) => u..detailAddress = detailAddress);
+    _currentUser = _currentUser.rebuild((u) => u..detailAddress = detailAddress);
   }
 
   @override

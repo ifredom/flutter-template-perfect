@@ -4,7 +4,7 @@ class Constants {
 
   ///请求地址
 
-  static const String BASE_URL = 'http://test.youxspace.com/piano/piano/api';
+  static const String BASE_URL = 'http://mytest.ifredom.com';
 
   static const bool DEBUG = true; // 是否开启debug模式
 
@@ -12,10 +12,9 @@ class Constants {
   static const String USER_BASIC_CODE = 'userBasicCode';
 
   /// appId
-  static const String APP_ID = 'XT_WEB_CLIENT';
+  static const String APP_ID = 'IFREDOM_APPID';
 
   /// appSecrect
-  static const String APP_SECRET = 'XT_WEB_CLIENT_2019';
+  static const String APP_SECRET = 'IFREDOM_APPSECRECT_2020';
 
-  static double sidebarWidth = 156.0;
 }
