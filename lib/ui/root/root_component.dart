@@ -31,7 +31,7 @@ class _RootComponentState extends State<RootComponent> {
               // localizationsDelegates: localizationsDelegates,
               // supportedLocales: supportedLocales,
               // localeResolutionCallback: loadSupportedLocals,
-              title: '享弹',
+              title: 'perfect-app',
               theme: AppTheme.themData,
               navigatorKey: navigationService.navigatorKey,
               navigatorObservers: [CustomNavigatorObserver.routeObserver],

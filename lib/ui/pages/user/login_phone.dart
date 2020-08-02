@@ -137,7 +137,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                                 ),
                                 Gaps.vGap10,
                                 Text(
-                                  '未注册享弹的手机号，登录时将自动注册。',
+                                  '未注的手机号，登录时将自动注册。',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     color: HexToColor('#999999'),

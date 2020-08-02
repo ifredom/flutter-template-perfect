@@ -41,7 +41,7 @@ class LoginViewModel extends BaseViewModel with Validators {
     try {
       var res = await _authService.signUpWithAuthPassword(mobile, password);
       setBusy(false);
-      saveUserInfo(res, mobile);
+      await saveUserInfo(res, mobile);
     } on AuthException {
       setBusy(false);
     }
@@ -91,7 +91,7 @@ class LoginViewModel extends BaseViewModel with Validators {
         await _navigationService.push(RoutesUtils.splashPage);
       } else {
         if (userInfo.userType == "T") {
-          await _navigationService.pushReplacementNamed(RoutesUtils.teacherHomePage);
+          await _navigationService.pushReplacementNamed(RoutesUtils.adminHomePage);
         } else {
           await _navigationService.pushReplacementNamed(RoutesUtils.homePage);
         }

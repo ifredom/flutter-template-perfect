@@ -24,7 +24,7 @@ class StartUpViewModel extends BaseViewModel {
       if (res.data["code"] == 0) {
         User userinfo = User.fromMap(res.data["data"]);
         if (userinfo.userType == "T") {
-          unawaited(_navigationService.pushReplacementNamed(RoutesUtils.teacherHomePage));
+          unawaited(_navigationService.pushReplacementNamed(RoutesUtils.adminHomePage));
         } else {
           unawaited(_navigationService.pushReplacementNamed(RoutesUtils.homePage));
         }

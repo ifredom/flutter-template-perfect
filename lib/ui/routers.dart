@@ -10,7 +10,7 @@ import 'pages/home/home.dart';
 // 保持参数与路由的值一致
 class RoutesUtils {
   static const String homePage = 'app://';
-  static const String teacherHomePage = 'app://teacherHomePage';
+  static const String adminHomePage = 'app://adminHomePage';
 
   static const String playViewPage = "app://playview";
   static const String bluelibPage = "app://bluelibPage";

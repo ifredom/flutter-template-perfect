@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 Gaps.vGap10,
                                 Text(
-                                  "未注册享弹的手机号，登陆时将自动注册",
+                                  "未注册的手机号，登陆时将自动注册",
                                   style:
                                       TextStyle(color: HexToColor("#999999")),
                                 ),
