@@ -1,3 +1,4 @@
+import 'package:stacked/stacked.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/services/auth/auth_service.dart';
@@ -5,7 +6,6 @@ import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 import 'package:template/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'base_view_model.dart';
 
 class StartUpViewModel extends BaseViewModel {
   final _authService = locator<AuthService>();
@@ -20,13 +20,13 @@ class StartUpViewModel extends BaseViewModel {
       if (res.data["code"] == 0) {
         User userinfo = User.fromMap(res.data["data"]);
         if (userinfo.userType == "T") {
-          _navigationService.pushReplacementNamed(RoutesUtils.teacherHomePage);
+          _navigationService.pushReplacementNamed(ViewRoutes.adminHomePage);
         } else {
-          _navigationService.pushReplacementNamed(RoutesUtils.homePage);
+          _navigationService.pushReplacementNamed(ViewRoutes.homePage);
         }
       }
     } else {
-      _navigationService.pushReplacementNamed(RoutesUtils.loginPage);
+      _navigationService.pushReplacementNamed(ViewRoutes.loginPage);
     }
   }
 }

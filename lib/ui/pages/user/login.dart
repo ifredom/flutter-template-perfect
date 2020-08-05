@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/core/view_models/login_view_model.dart';
+import 'package:template/ui/pages/user/login_view_model.dart';
 import 'package:template/locator.dart';
 
 import 'package:template/core/utils/common/ScreenUtil.dart';
@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
         body: Form(
           key: formKey,
           child: IgnorePointer(
-            ignoring: model.busy,
+            ignoring: model.isBusy,
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
-                    "assets/images/bg/login@2x.png",
+                    "assets/images/loginbg.png",
                   ),
                 ),
               ),
@@ -157,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     onTap: () {
                                       locator<NavigationService>()
-                                          .push(RoutesUtils.loginPhonePage);
+                                          .push(ViewRoutes.loginPhonePage);
                                     },
                                   ),
                                 ),

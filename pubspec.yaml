@@ -15,57 +15,81 @@ dependencies:
   dio: 3.0.9
   flutter_spinkit: 4.1.2
   url_launcher: 5.4.2
-  fluro: 1.6.1
-  event_bus: 1.1.0
   shared_preferences: 0.5.3
-  path_provider: 1.6.5
+  path_provider: ^1.6.10
   flutter_cupertino_date_picker: 1.0.12
   orientation: 1.1.0
-  rxdart: 0.23.1
-  provider: 4.0.4
-  provider_architecture: 1.0.5
+  rxdart: 0.24.1
+  provider: 4.0.5
+  provider_architecture: 1.0.6
+  stacked: 1.7.4
   oktoast: 2.3.1
   flutter_inner_drawer: 0.5.4
   flutter_swiper: 1.1.6
   city_pickers: 0.1.30
   connectivity: 0.4.8+1
-  permission_handler: 4.4.0+hotfix.2
+  permission_handler: 4.4.0+hotfix.4
   built_value: 7.0.4
-  get_it: 3.1.0
-  hive: 1.4.1+1
+  injectable: 1.0.2
+  get_it: 4.0.4
+  quiver: ^2.0.5
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
   device_info: 0.4.2+1
   shimmer: 1.1.0
-  app_settings: 3.0.1
-  flutter_platform_widgets: 0.32.4
+  app_settings: 4.0.0
+  flutter_platform_widgets: ^0.41.0
   flare_flutter: 2.0.1
   http_parser: 3.1.3
   mime: 0.9.6+3
-  json_annotation: 3.0.1
-  get: 1.11.1
-  fijkplayer: 0.7.0
-  flutter_bluetooth_basic: 0.1.3
+  audioplayers: 0.15.1
+  get: 2.10.1
+  # 二维码
   barcode_scan: 2.0.1
-  qr_flutter: 3.1.0
+  qr_flutter: 3.2.0
+  web_socket_channel: 1.1.0
   protobuf: 1.0.1
-  audioplayers: 0.14.0
-  nested: 0.0.4
-  cached_network_image: 2.0.0
-  flushbar: 1.9.1
+  cached_network_image: 2.1.0+1
+  focus_detector: 1.0.2
+  freezed_annotation: ^0.7.1
+  json_annotation: ^3.0.0
+  date_format: 1.0.8
+  flutter_inappwebview: 3.4.0+1
+  webview_flutter: 0.3.21
+  flutter_webview_plugin: 0.3.11
+  flutter_local_notifications: 1.4.0
+  jaguar: 2.4.36
+  flutter_picker: ^1.1.3
+  fijkplayer: 0.8.4
+  numberpicker: 1.2.0
+  # 日志
+  logging: 0.11.4
+  # 日志
+  fimber: ^0.4.2
+  flutter_blue: 0.7.2
+  # 蓝牙插件
+  flutter_ble_lib: 2.2.5
+  # 蓝牙设备模拟器，仅适用于 flutter_ble_lib
+  blemulator: 1.1.3
+  # midi 要求SDK>25
+  # flutter_midi_command: 0.1.7
+  # socket两个库是一家人
+  socket_io: 0.9.4
+  socket_io_client: 0.9.10
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   # 数据mock
   mockito: ^4.1.1
+  injectable_generator: 1.0.2
   build_runner: ^1.7.2
+  freezed: ^0.10.8
   json_serializable: ^3.2.0
   built_value_generator: ^7.0.4
-  hive_generator: ^0.7.0
+  hive_generator: ^0.7.0+2
   pedantic: ^1.8.0
-  logger: ^0.8.2
-
-  flutter_inappwebview: 2.1.0
+  logger: ^0.9.1
 
 flutter:
   uses-material-design: true
@@ -83,17 +107,8 @@ flutter:
     - assets/webview/dist/js/
     - assets/webview/dist/musicXML/
     - assets/animations/
+    - assets/images/
 
-    - assets/images/bg/
-    - assets/images/index/
-    - assets/images/teacher_home/
-    - assets/images/teacher_home/student_info/
-    - assets/images/custom/
-    - assets/images/userpack/
-    - assets/images/actives/
-    - assets/images/shop/
-    - assets/images/freemode/
-    - assets/images/complectmaterial/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

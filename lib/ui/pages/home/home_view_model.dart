@@ -1,5 +1,5 @@
 import 'package:oktoast/oktoast.dart';
-import 'package:template/core/enums/view_state.dart';
+import 'package:stacked/stacked.dart';
 import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/model/userinfo/user.dart';
@@ -9,7 +9,6 @@ import 'package:template/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
-import 'base_view_model.dart';
 
 // ViewModelProvider应该使用得是 HomeViewModel中得数据
 class HomeViewModel extends BaseViewModel with Validators {
@@ -27,18 +26,17 @@ class HomeViewModel extends BaseViewModel with Validators {
   int _musicNote = 0; // 乐符
   int get musicNote => _musicNote;
 
-  bool get busy => state == ViewState.Busy;
 
   // 查询用户信息
   Future<void> initialise() async {
-    setState(ViewState.Busy);
+    setBusy(true);
     String id = await LocalStorage.get(LocalStorageKeys.USER_ID);
     bool hasLoggedInUser = await _authService.isUserLoggedIn();
 
     if (hasLoggedInUser) {
       try {
         var res = await _authService.fetchUserInfo(id);
-        setState(ViewState.DataFetched);
+        setBusy(false);
         if (res.data["code"] == 0) {
           User userinfo = User.fromMap(res.data["data"]);
           _authService.updateCurrentUser(userinfo);
@@ -47,10 +45,10 @@ class HomeViewModel extends BaseViewModel with Validators {
           showToast(res.data["msg"]);
         }
       } on RepositoryException {
-        setState(ViewState.Error);
+        setBusy(false);
       }
     } else {
-      _navigationService.pushReplacementNamed(RoutesUtils.loginPage);
+      _navigationService.pushReplacementNamed(ViewRoutes.loginPage);
     }
   }
 

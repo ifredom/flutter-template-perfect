@@ -1,5 +1,5 @@
 import 'package:oktoast/oktoast.dart';
-import 'package:template/core/enums/view_state.dart';
+import 'package:stacked/stacked.dart';
 import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/model/userinfo/user.dart';
@@ -10,7 +10,6 @@ import 'package:template/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
-import 'base_view_model.dart';
 
 // ViewModelProvider应该使用得是 UserinfoViewModel中得数据
 class UserinfoViewModel extends BaseViewModel with Validators {
@@ -25,6 +24,7 @@ class UserinfoViewModel extends BaseViewModel with Validators {
 
   bool _isNewUser = true; // 是否新用户
 
+  bool _isBusy = false;
   String get nickName => user.nickName;
   int get gender => user.gender;
   String get firstTeachingDate => user.firstTeachingDate;
@@ -33,16 +33,16 @@ class UserinfoViewModel extends BaseViewModel with Validators {
 
   bool get isNewUser => _isNewUser;
 
-  bool get busy => state == ViewState.Busy;
+  bool get isBusy => _isBusy;
 
   // 查询用户信息
   Future<void> initialise(String id) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     final hasLoggedInUser = await _authService.isUserLoggedIn();
     if (hasLoggedInUser) {
       try {
         var res = await _authService.fetchUserInfo(id);
-        setState(ViewState.DataFetched);
+        setBusy(false);
         if (res.data["code"] == 0) {
           User userinfo = User.fromMap(res.data["data"]);
           _authService.updateCurrentUser(userinfo);
@@ -50,22 +50,22 @@ class UserinfoViewModel extends BaseViewModel with Validators {
           showToast(res.data["msg"]);
         }
       } on RepositoryException {
-        setState(ViewState.Error);
+        setBusy(false);
       }
     } else {
-      _navigationService.pushReplacementNamed(RoutesUtils.loginPage);
+      _navigationService.pushReplacementNamed(ViewRoutes.loginPage);
     }
   }
 
   // 设置用户密码
   Future<dynamic> resetPassword(String vCode, String pwd) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     try {
       var res = await _authService.fetchResetPassword(vCode, pwd);
-      setState(ViewState.DataFetched);
+      setBusy(false);
       return res;
     } on RepositoryException {
-      setState(ViewState.Error);
+      setBusy(false);
     }
   }
 
@@ -89,7 +89,7 @@ class UserinfoViewModel extends BaseViewModel with Validators {
     // p = (p.toBuilder().type = 'hello world').build();
     /// 写法一
     _authService.updateUserSex(gender);
-    setState(ViewState.Success);
+    setBusy(false);
   }
 
   setNickname(String nickName) {

@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:template/core/services/dialog/dialog_service_impl.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/core/view_models/config_view_model.dart';
+import 'package:template/ui/pages/home/config_view_model.dart';
 
 import './core/utils/common/file_helper.dart';
 import 'core/services/auth/auth_service.dart';
@@ -17,7 +17,7 @@ import 'core/services/key_storage/key_storage_service_impl.dart';
 import 'core/services/navigation/navigation_service_impl.dart';
 import 'core/services/snackbar/snack_bar_service.dart';
 import 'core/services/snackbar/snack_bar_service_impl.dart';
-import 'core/view_models/userinfo_view_model.dart';
+import 'ui/pages/user/userinfo_view_model.dart';
 
 GetIt locator = GetIt.instance;
 

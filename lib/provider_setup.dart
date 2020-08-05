@@ -1,10 +1,10 @@
-import 'package:template/core/enums/connectivity_status.dart';
 import 'package:template/core/services/connectivity/connectivity_service.dart';
-import 'package:template/core/view_models/config_view_model.dart';
+import 'package:template/ui/pages/home/config_view_model.dart';
 import 'package:template/locator.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
+import 'core/enums/component_state.dart';
 import 'core/model/userinfo/user.dart';
 import 'core/services/auth/auth_service.dart';
 

@@ -9,22 +9,20 @@ void main() async {
   // 初始化 访问二进制文件/初始化插件
   WidgetsFlutterBinding.ensureInitialized();
 
+  // 初始化日志
   setupLogger();
+
+  // 初始化定位器
   await setupLocator();
 
   // 设置全屏
   SystemChrome.setEnabledSystemUIOverlays([]);
 
-  // 强制横屏
-  SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
-      .then((_) {
-    runApp(RootComponent());
-    if (Platform.isAndroid) {
-      //设置Android头部的导航栏透明
-      SystemUiOverlayStyle systemUiOverlayStyle =
-          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-    }
-  });
+  runApp(RootComponent());
+
+   // 设置Android头部的导航栏透明
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
 }

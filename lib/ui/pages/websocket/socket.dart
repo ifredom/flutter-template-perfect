@@ -1,21 +1,35 @@
 import 'package:web_socket_channel/io.dart';
-import 'package:web_socket_channel/status.dart' as status;
 
-// 方案1 ：html 与 dart 使用 webview 通信，dart 再通过websocket与第三方模块通信
-class SocketServer {
-  static runSocket() async {
-    var channel = IOWebSocketChannel.connect("ws://localhost:3300");
+class WebSocket {
+  static String targetUrl = "ws://33.99.94.189:80/webSocket";
 
-    print("启动监听端口：3300");
+  IOWebSocketChannel channel;
+
+  factory WebSocket() => _socketServer();
+  static WebSocket _instance;
+  // 构造函数
+  WebSocket._() {
+    // 初始化webSocket路由
+  }
+  static WebSocket _socketServer() {
+    if (_instance == null) {
+      _instance = WebSocket._();
+    }
+    return _instance;
+  }
+
+  Future<IOWebSocketChannel> create({String url}) async {
+    channel = IOWebSocketChannel.connect(targetUrl);
+    return channel;
+  }
+
+  static Future<void> listenSocketServe({IOWebSocketChannel channel}) async {
     channel.stream.listen((message) {
-      channel.sink.add("received!");
-
-      channel.stream.listen((message) {
-        // ...
-        print("监听信息$message");
-      });
-
-      channel.sink.close(status.goingAway);
+      // ...
+      print("监听信息$message");
     });
   }
+
+  void sendMessage(dynamic message) => channel.sink.add(message);
+  void close() => channel.sink.close();
 }

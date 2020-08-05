@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:template/api/api.dart';
-import 'package:template/api/http.dart';
+import 'package:provider_architecture/viewmodel_provider.dart';
+import 'package:template/api/apicode/api.dart';
+import 'package:template/api/http_service_impl.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/services/auth/auth_service.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/core/view_models/login_view_model.dart';
-import 'package:template/locator.dart';
-
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/core/utils/res/gaps.dart';
+import 'package:template/ui/pages/user/login_view_model.dart';
+import 'package:template/locator.dart';
 import 'package:template/ui/widgets/textfield/text_field.dart';
-import 'package:provider_architecture/viewmodel_provider.dart';
 
 class LoginPhonePage extends StatefulWidget {
   @override
@@ -49,7 +48,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
   Future _tappedGetCode() async {
     var params = Map<String, String>();
     params["phone"] = phoneController.text;
-    var res = await httpUtil.request(ApiCode.GET_CODE, params);
+    var res = await httpService.request(ApiCode.GET_CODE, params);
 
     if (res.data["code"] == 0) {
       showToast('发送成功');
@@ -66,7 +65,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
         body: Form(
           key: formKey,
           child: IgnorePointer(
-            ignoring: model.busy,
+            ignoring: model.isBusy,
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
@@ -74,7 +73,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
-                    "assets/images/bg/login@2x.png",
+                    "assets/images/loginbg.png",
                   ),
                 ),
               ),
@@ -161,7 +160,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                                     ),
                                     onTap: () {
                                       locator<NavigationService>()
-                                          .push(RoutesUtils.loginPage);
+                                          .push(ViewRoutes.loginPage);
                                     },
                                   ),
                                 ),

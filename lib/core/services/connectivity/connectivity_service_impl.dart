@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:template/core/enums/connectivity_status.dart';
+import 'package:template/core/enums/component_state.dart';
 import 'package:template/core/utils/common/logger.dart';
 
 import 'connectivity_service.dart';
@@ -15,14 +15,12 @@ class ConnectivityServiceImpl implements ConnectivityService {
   bool _serviceStopped = false;
 
   @override
-  Stream<ConnectivityStatus> get connectivity$ =>
-      _connectivityResultController.stream;
+  Stream<ConnectivityStatus> get connectivity$ => _connectivityResultController.stream;
 
   bool get serviceStopped => _serviceStopped;
 
   ConnectivityServiceImpl() {
-    _subscription =
-        _connectivity.onConnectivityChanged.listen(_emitConnectivity);
+    _subscription = _connectivity.onConnectivityChanged.listen(_emitConnectivity);
   }
 
   Future<bool> get isConnected async {

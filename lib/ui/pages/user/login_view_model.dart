@@ -1,5 +1,5 @@
 import 'package:oktoast/oktoast.dart';
-import 'package:template/core/enums/view_state.dart';
+import 'package:stacked/stacked.dart';
 import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routers.dart';
@@ -9,7 +9,6 @@ import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/exceptions/auth_exception.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
-import 'base_view_model.dart';
 
 // ViewModelProvider应该使用得是 LoginViewModel中得数据
 class LoginViewModel extends BaseViewModel with Validators {
@@ -23,6 +22,8 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   bool _isNewUser = true; // 是否新用户
 
+  bool _isBusy = false;
+
   String get nickName => user.nickName;
   int get gender => user.gender;
   String get firstTeachingDate => user.firstTeachingDate;
@@ -31,46 +32,46 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   bool get isNewUser => _isNewUser;
 
-  bool get busy => state == ViewState.Busy;
+  bool get isBusy => _isBusy;
 
   /// 密码登录
   Future<void> loginWithPassword(String mobile, String password) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     try {
       var res = await _authService.signUpWithAuthPassword(mobile, password);
-      setState(ViewState.DataFetched);
+      setBusy(false);
       saveUserInfo(res, mobile);
     } on AuthException {
-      setState(ViewState.Error);
+      setBusy(false);
     }
   }
 
   /// 验证码登录
   Future<void> loginWithVcode(String mobile, String authCode) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     try {
       var res = await _authService.signUpWithAuthcode(mobile, authCode);
-      setState(ViewState.DataFetched);
+      setBusy(false);
       saveUserInfo(res, mobile);
     } on AuthException {
-      setState(ViewState.Error);
+      setBusy(false);
     }
   }
 
   /// 是否新用户
   Future queryIsNewUser(String mobile, String id) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     try {
       var res = await _authService.fetchIsNewUser(mobile, id);
-      setState(ViewState.DataFetched);
+      setBusy(false);
       if (res.data["code"] == 0) {
         return res.data["data"] != "";
       } else {
-        setState(ViewState.NoDataAvailable);
+        setBusy(false);
         showToast(res.data["msg"]);
       }
     } on AuthException {
-      setState(ViewState.Error);
+      setBusy(false);
     }
   }
 
@@ -86,12 +87,12 @@ class LoginViewModel extends BaseViewModel with Validators {
       bool isNewUser = await queryIsNewUser(mobile, userInfo.id);
       print("是否新用户: $isNewUser");
       if (isNewUser) {
-        _navigationService.push(RoutesUtils.completematerialPage);
+        _navigationService.push(ViewRoutes.audioPlayDemoPage);
       } else {
         if (userInfo.userType == "T") {
-          _navigationService.pushReplacementNamed(RoutesUtils.teacherHomePage);
+          _navigationService.pushReplacementNamed(ViewRoutes.adminHomePage);
         } else {
-          _navigationService.pushReplacementNamed(RoutesUtils.homePage);
+          _navigationService.pushReplacementNamed(ViewRoutes.homePage);
         }
       }
     } else {

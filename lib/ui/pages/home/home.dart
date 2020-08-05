@@ -3,18 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
-import 'package:template/core/view_models/config_view_model.dart';
-import 'package:template/core/view_models/home_view_model.dart';
+import 'package:template/ui/pages/home/config_view_model.dart';
+import 'package:template/ui/pages/home/home_view_model.dart';
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/res/gaps.dart';
 import 'package:template/locator.dart';
 import 'package:provider_architecture/provider_widget.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
 
-import 'child/home_freemodel_button.dart';
-import 'child/home_homework_button.dart';
-import 'child/home_right_menu.dart';
-import 'child/home_top_menu.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -56,15 +52,7 @@ class BuildMainContent extends ProviderWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
-    print('Home页面 主体内容 BuildMainContent build');
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage("assets/images/bg/home.png"),
-        ),
-      ),
-      // child: Text('123'),
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -72,21 +60,21 @@ class BuildMainContent extends ProviderWidget<HomeViewModel> {
             top: ScreenUtil().setSp(32),
             left: 0,
             right: ScreenUtil().setSp(39),
-            child: HomeTopMenu(),
+            child: Text("topMenu"),
           ),
           Positioned(
             top: ScreenUtil().setSp(235),
             right: ScreenUtil().setSp(50),
-            child: HomeRightMenu(),
+            child: Text("topMenu"),
           ),
           Positioned(
               bottom: ScreenUtil().setSp(36),
               right: ScreenUtil().setSp(50),
               child: Row(
                 children: <Widget>[
-                  HomeHomeworkButton(),
+                  Text("menuOne"),
                   Gaps.hGap10,
-                  HomeFreeModelButton()
+                  Text("menuTwo")
                 ],
               )),
         ],

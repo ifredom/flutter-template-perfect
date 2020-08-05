@@ -1,10 +1,10 @@
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
-import 'package:template/core/enums/support_lang.dart';
+import 'package:stacked/stacked.dart';
+import 'package:template/core/enums/component_state.dart';
 import 'package:template/core/model/config.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
-import 'base_view_model.dart';
 
 typedef FijkVolumeCallback = void Function(FijkVolumeEvent value);
 
