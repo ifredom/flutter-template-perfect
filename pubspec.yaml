@@ -68,13 +68,32 @@ dev_dependencies:
   flutter_inappwebview: 2.1.0
 
 flutter:
-
   uses-material-design: true
+  assets:
+    - assets/lang/zh.json
+    - assets/lang/en.json
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+    - assets/ifredom.jpg
+    - assets/audio/viper.mp3
+    - assets/audio/bgaudio.mp3
+
+    - assets/webview/dist/index.html
+    - assets/webview/dist/
+    - assets/webview/dist/css/
+    - assets/webview/dist/js/
+    - assets/webview/dist/musicXML/
+    - assets/animations/
+
+    - assets/images/bg/
+    - assets/images/index/
+    - assets/images/teacher_home/
+    - assets/images/teacher_home/student_info/
+    - assets/images/custom/
+    - assets/images/userpack/
+    - assets/images/actives/
+    - assets/images/shop/
+    - assets/images/freemode/
+    - assets/images/complectmaterial/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
