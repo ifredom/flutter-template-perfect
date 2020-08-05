@@ -1,11 +1,11 @@
 import 'package:logging/logging.dart';
 import 'package:stacked/stacked.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/model/alert_request/confirm_alert_request.dart';
 import 'package:template/core/model/alert_response/confirm_alert_response.dart';
 import 'package:template/core/model/snack_bar_request/confirm_snack_bar_request.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/utils/res/local_keys.dart';
-import 'package:template/locator.dart';
 import 'package:template/core/services/dialog/dialog_service.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/services/auth/auth_service.dart';

@@ -503,7 +503,7 @@ packages:
       name: hive
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.4.1+1"
+    version: "1.4.2"
   hive_flutter:
     dependency: "direct main"
     description:
@@ -861,13 +861,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.5"
-  provider_architecture:
-    dependency: "direct main"
-    description:
-      name: provider_architecture
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.6"
   pub_semver:
     dependency: transitive
     description:

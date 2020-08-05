@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/common/color_utils.dart';
-import 'package:template/locator.dart';
 
 enum BackImageMode { light, black }
 

@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:logging/logging.dart';
 import 'package:template/core/enums/component_state.dart';
-import 'package:template/core/utils/common/logger.dart';
-
 import 'connectivity_service.dart';
 
 class ConnectivityServiceImpl implements ConnectivityService {
+  final _log = Logger("ConnectivityServiceImpl");
   final _connectivityResultController = StreamController<ConnectivityStatus>();
   final _connectivity = Connectivity();
 
@@ -38,7 +38,7 @@ class ConnectivityServiceImpl implements ConnectivityService {
 
   @override
   void start() async {
-    Logger.d('ConnectivityService resumed');
+    _log.info('ConnectivityService resumed');
     _serviceStopped = false;
 
     await _resumeSignal();
@@ -47,7 +47,7 @@ class ConnectivityServiceImpl implements ConnectivityService {
 
   @override
   void stop() {
-    Logger.d('ConnectivityService paused');
+    _log.info('ConnectivityService paused');
     _serviceStopped = true;
 
     _subscription.pause(_resumeSignal());
@@ -56,7 +56,7 @@ class ConnectivityServiceImpl implements ConnectivityService {
   void _emitConnectivity(ConnectivityResult event) {
     if (event == _lastResult) return;
 
-    Logger.d('Connectivity status changed to $event');
+    _log.info('Connectivity status changed to $event');
     _connectivityResultController.add(_convertResult(event));
     _lastResult = event;
   }

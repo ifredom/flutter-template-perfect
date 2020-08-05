@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:stacked/stacked.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/ui/pages/user/login_view_model.dart';
-import 'package:template/locator.dart';
-
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/core/utils/res/gaps.dart';
+import 'package:template/ui/pages/user/login_view_model.dart';
 import 'package:template/ui/widgets/textfield/text_field.dart';
-import 'package:provider_architecture/provider_widget.dart';
-import 'package:provider_architecture/viewmodel_provider.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -21,8 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   FocusNode _phoneFocus = FocusNode();
   FocusNode _pwdFocus = FocusNode();
-  final TextEditingController phoneController = new TextEditingController();
-  final TextEditingController pwdController = new TextEditingController();
+  final TextEditingController phoneController =  TextEditingController();
+  final TextEditingController pwdController =  TextEditingController();
 
   @override
   void initState() {
@@ -47,8 +45,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<LoginViewModel>.withoutConsumer(
-      viewModel: LoginViewModel(),
+    return ViewModelBuilder<LoginViewModel>.nonReactive(
+      viewModelBuilder: () => LoginViewModel(),
       builder: (context, model, child) => PlatformScaffold(
         body: Form(
           key: formKey,
@@ -112,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 Gaps.vGap10,
                                 Text(
-                                  "未注册享弹的手机号，登陆时将自动注册",
+                                  "未注册的手机号，登陆时将自动注册",
                                   style:
                                       TextStyle(color: HexToColor("#999999")),
                                 ),
@@ -214,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class BuildLoginButton extends ProviderWidget<LoginViewModel> {
+class BuildLoginButton extends ViewModelWidget<LoginViewModel> {
   final GlobalKey<FormState> formKey;
   final String phone;
   final String password;
@@ -224,7 +222,7 @@ class BuildLoginButton extends ProviderWidget<LoginViewModel> {
     @required this.formKey,
     @required this.phone,
     @required this.password,
-  }) : super(key: key, listen: false);
+  });
 
   @override
   Widget build(BuildContext context, LoginViewModel model) {

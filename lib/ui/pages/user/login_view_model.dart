@@ -1,10 +1,10 @@
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked/stacked.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/services/auth/auth_service.dart';
-import 'package:template/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/exceptions/auth_exception.dart';
 import 'package:template/core/utils/res/local_storage.dart';
@@ -82,7 +82,7 @@ class LoginViewModel extends BaseViewModel with Validators {
       LocalStorage.set<String>(LocalStorageKeys.USER_ID, userInfo.id);
       LocalStorage.set<bool>(LocalStorageKeys.HAS_LOGIN, true);
 
-      _authService.updateCurrentUser(userInfo);
+      await _authService.updateCurrentUser(userInfo);
 
       bool isNewUser = await queryIsNewUser(mobile, userInfo.id);
       print("是否新用户: $isNewUser");
@@ -93,6 +93,7 @@ class LoginViewModel extends BaseViewModel with Validators {
           _navigationService.pushReplacementNamed(ViewRoutes.adminHomePage);
         } else {
           _navigationService.pushReplacementNamed(ViewRoutes.homePage);
+
         }
       }
     } else {

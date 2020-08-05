@@ -5,11 +5,11 @@ import 'dart:io';
 
 import 'package:dio/dio.dart' show Dio, Options, DioError, Response, Headers;
 import 'package:logging/logging.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/utils/common/file_helper.dart';
 
 import '../core/constants/constants.dart';
 import '../core/utils/common/network_utils.dart' as network_utils;
-import '../locator.dart';
 import 'common/exception_handle.dart' show ExceptionHandle;
 import 'common/result_data.dart';
 import 'http_service.dart';

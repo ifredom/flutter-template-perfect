@@ -6,11 +6,11 @@ import 'package:template/core/constants/app_theme.dart';
 import 'package:template/core/managers/core_manager.dart';
 import 'package:template/core/managers/restart_manager.dart';
 import 'package:template/core/routes/routers.dart';
+import 'package:template/core/app/locator.dart';
+import 'package:template/core/app/provider_setup.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/locator.dart';
-import 'package:template/provider_setup.dart';
-import 'package:template/ui/root/start_up_view.dart';
 
+import './start_up_view.dart';
 
 class RootComponent extends StatefulWidget {
   @override

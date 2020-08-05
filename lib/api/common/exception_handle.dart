@@ -3,13 +3,12 @@ import 'dart:io';
 import 'package:dio/dio.dart' show DioError, Response, DioErrorType;
 import 'package:flutter/widgets.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/model/response_date/response_data.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
-import 'package:template/locator.dart';
-
 import 'code.dart';
 import 'result_data.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/locator.dart';
 
 class ErrorPage extends StatefulWidget {
   final FlutterErrorDetails details;
@@ -12,8 +12,7 @@ class ErrorPage extends StatefulWidget {
 }
 
 class _ErrorPageState extends State<ErrorPage> {
-  final TextEditingController textEditingController =
-      new TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +88,7 @@ class _ErrorPageState extends State<ErrorPage> {
   }
 
   void _errorReport() {
-    String content =
-        '${widget.details.exception.toString()}\n${widget.details.stack.toString()}';
+    String content = '${widget.details.exception.toString()}\n${widget.details.stack.toString()}';
     showDialog(
         context: context,
         builder: (BuildContext context) {

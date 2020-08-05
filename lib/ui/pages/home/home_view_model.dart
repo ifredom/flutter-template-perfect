@@ -1,11 +1,11 @@
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked/stacked.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/services/auth/auth_service.dart';
-import 'package:template/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
@@ -39,8 +39,8 @@ class HomeViewModel extends BaseViewModel with Validators {
         setBusy(false);
         if (res.data["code"] == 0) {
           User userinfo = User.fromMap(res.data["data"]);
-          _authService.updateCurrentUser(userinfo);
-          getUserBalance();
+          await _authService.updateCurrentUser(userinfo);
+          await getUserBalance();
         } else {
           showToast(res.data["msg"]);
         }
@@ -48,7 +48,7 @@ class HomeViewModel extends BaseViewModel with Validators {
         setBusy(false);
       }
     } else {
-      _navigationService.pushReplacementNamed(ViewRoutes.loginPage);
+      await _navigationService.pushReplacementNamed(ViewRoutes.loginPage);
     }
   }
 

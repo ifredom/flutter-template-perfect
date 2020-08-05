@@ -2,11 +2,20 @@
 
 A new Flutter project template(flutter完整商用项目模板).
 
-* `/android/app/build.gradle` android SDK minSdkVersion Version(android SDK minSdkVersion 版本) : 21
+* `/android/app/build.gradle` android SDK minSdkVersion Version(android SDK minSdkVersion ) : 25
 
 ## Getting Starter(开始)
 
 > flutter run
+
+## Features(演示功能)
+
+* 蓝牙搜索，连接硬件设备，互传数据 (Bluetooth)
+* 地图 ( Map )
+* 图表（ Canvas ）
+* 极光推送 ( Push )
+* webview
+* 乐器曲谱( Score )
 
 ## Automatic generation model (自动生成模型)
 

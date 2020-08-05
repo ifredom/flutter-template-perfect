@@ -23,6 +23,7 @@ class ApiInterceptors extends InterceptorsWrapper {
     return token;
   }
 
+
   @override
   onRequest(RequestOptions options) async {
     return _generateRequestParams(options);
