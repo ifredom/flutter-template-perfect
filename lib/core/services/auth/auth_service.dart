@@ -8,14 +8,12 @@ abstract class AuthService {
   String get userType;
   Future<void> updateCurrentUser(User userinfo);
 
-  Stream<User> get user; // 测试使用流控制数据
-  Future signUpWithAuthcode(String mobile, String authCode);
+  Stream<User> get user; // 使用流控制数据
+  Future signUpWithAuthcode(String name, String authCode);
   Future signUpWithAuthPassword(String mobile, String password);
   Future fetchUserInfo(String id);
   Future fetchResetPassword(String vcode, String pwd);
   Future fetchIsNewUser(String mobile, String openId);
-
-  Future fetchUserBalance();
 
   Future<void> signOut();
   Future<bool> isUserLoggedIn();
@@ -24,6 +22,5 @@ abstract class AuthService {
   Future<void> updateUserNiceName(String name);
   Future<void> updateUserAddress(String name);
   Future<void> updateUserDescription(String name);
-  Future<void> updateUserfirstTeachingDate(String name);
   Future<void> updateUserSex(int sex);
 }

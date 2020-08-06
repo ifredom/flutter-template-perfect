@@ -1,6 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:template/core/app/locator.dart';
-import 'package:template/core/exceptions/auth_exception.dart';
+import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/services/auth/auth_service.dart';
 
@@ -25,7 +25,7 @@ class LoginPhoneViewModel extends BaseViewModel with Validators {
     try {
       var res = await _authService.signUpWithAuthPassword(mobile, password);
       setBusy(false);
-    } on AuthException {
+    } on RepositoryException {
       setBusy(false);
     }
   }

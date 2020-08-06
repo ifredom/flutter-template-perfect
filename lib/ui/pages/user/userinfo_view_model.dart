@@ -105,8 +105,4 @@ class UserinfoViewModel extends BaseViewModel with Validators {
     notifyListeners();
   }
 
-  setFirstTeachingDate(String year) {
-    _authService.updateUserfirstTeachingDate(year);
-    notifyListeners();
-  }
 }

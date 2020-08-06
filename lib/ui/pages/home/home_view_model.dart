@@ -40,7 +40,6 @@ class HomeViewModel extends BaseViewModel with Validators {
         if (res.data["code"] == 0) {
           User userinfo = User.fromMap(res.data["data"]);
           await _authService.updateCurrentUser(userinfo);
-          await getUserBalance();
         } else {
           showToast(res.data["msg"]);
         }
@@ -52,15 +51,4 @@ class HomeViewModel extends BaseViewModel with Validators {
     }
   }
 
-  Future<void> getUserBalance() async {
-    var res = await _authService.fetchUserBalance();
-
-    if (res.data["code"] == 0) {
-      Map response = res.data["data"];
-      _musicStone = response["musicStone"];
-      _musicNote = response["musicNote"];
-    } else {
-      showToast(res.data["msg"]);
-    }
-  }
 }

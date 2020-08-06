@@ -6,7 +6,7 @@ import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/services/auth/auth_service.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/core/exceptions/auth_exception.dart';
+import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
@@ -35,13 +35,13 @@ class LoginViewModel extends BaseViewModel with Validators {
   bool get isBusy => _isBusy;
 
   /// 密码登录
-  Future<void> loginWithPassword(String mobile, String password) async {
+  Future<void> loginWithPassword(String name, String password) async {
     setBusy(true);
     try {
-      var res = await _authService.signUpWithAuthPassword(mobile, password);
+      var res = await _authService.signUpWithAuthPassword(name, password);
       setBusy(false);
-      saveUserInfo(res, mobile);
-    } on AuthException {
+      await saveUserInfo(res, name);
+    } on RepositoryException {
       setBusy(false);
     }
   }
@@ -53,7 +53,7 @@ class LoginViewModel extends BaseViewModel with Validators {
       var res = await _authService.signUpWithAuthcode(mobile, authCode);
       setBusy(false);
       saveUserInfo(res, mobile);
-    } on AuthException {
+    } on RepositoryException {
       setBusy(false);
     }
   }
@@ -70,7 +70,7 @@ class LoginViewModel extends BaseViewModel with Validators {
         setBusy(false);
         showToast(res.data["msg"]);
       }
-    } on AuthException {
+    } on RepositoryException {
       setBusy(false);
     }
   }
@@ -79,7 +79,6 @@ class LoginViewModel extends BaseViewModel with Validators {
     if (res.data["code"] == 0) {
       User userInfo = User.fromMap(res.data["data"]);
       LocalStorage.set<String>(LocalStorageKeys.TOKEN_KEY, userInfo.token);
-      LocalStorage.set<String>(LocalStorageKeys.USER_ID, userInfo.id);
       LocalStorage.set<bool>(LocalStorageKeys.HAS_LOGIN, true);
 
       await _authService.updateCurrentUser(userInfo);
@@ -87,12 +86,12 @@ class LoginViewModel extends BaseViewModel with Validators {
       bool isNewUser = await queryIsNewUser(mobile, userInfo.id);
       print("是否新用户: $isNewUser");
       if (isNewUser) {
-        _navigationService.push(ViewRoutes.audioPlayDemoPage);
+        await _navigationService.push(ViewRoutes.audioPlayDemoPage);
       } else {
-        if (userInfo.userType == "T") {
-          _navigationService.pushReplacementNamed(ViewRoutes.adminHomePage);
+        if (userInfo.userType == "admin") {
+          await _navigationService.pushReplacementNamed(ViewRoutes.adminHomePage);
         } else {
-          _navigationService.pushReplacementNamed(ViewRoutes.homePage);
+          await _navigationService.pushReplacementNamed(ViewRoutes.homePage);
 
         }
       }
