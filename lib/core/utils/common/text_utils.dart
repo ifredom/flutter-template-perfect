@@ -12,9 +12,8 @@ class TextUtil {
   }
 
   /// 每隔 x位 加 pattern
-  static String formatDigitPattern(String text,
-      {int digit = 4, String pattern = ' '}) {
-    text = text?.replaceAllMapped(new RegExp("(.{$digit})"), (Match match) {
+  static String formatDigitPattern(String text, {int digit = 4, String pattern = ' '}) {
+    text = text?.replaceAllMapped(RegExp("(.{$digit})"), (Match match) {
       return "${match.group(0)}$pattern";
     });
     if (text != null && text.endsWith(pattern)) {
@@ -24,8 +23,7 @@ class TextUtil {
   }
 
   /// 每隔 x位 加 pattern, 从末尾开始
-  static String formatDigitPatternEnd(String text,
-      {int digit = 4, String pattern = ' '}) {
+  static String formatDigitPatternEnd(String text, {int digit = 4, String pattern = ' '}) {
     String temp = reverse(text);
     temp = formatDigitPattern(temp, digit: 3, pattern: ',');
     temp = reverse(temp);
@@ -44,8 +42,7 @@ class TextUtil {
   }
 
   /// hideNumber
-  static String hideNumber(String phoneNo,
-      {int start = 3, int end = 7, String replacement = '****'}) {
+  static String hideNumber(String phoneNo, {int start = 3, int end = 7, String replacement = '****'}) {
     return phoneNo?.replaceRange(start, end, replacement);
   }
 
@@ -55,8 +52,7 @@ class TextUtil {
   }
 
   /// split
-  static List<String> split(String text, Pattern pattern,
-      {List<String> defValue = const []}) {
+  static List<String> split(String text, Pattern pattern, {List<String> defValue = const []}) {
     List<String> list = text?.split(pattern);
     return list ?? defValue;
   }

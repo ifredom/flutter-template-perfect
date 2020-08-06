@@ -57,7 +57,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   }) : assert(title != null);
 
   @override
-  Size get preferredSize => new Size.fromHeight(height);
+  Size get preferredSize =>  Size.fromHeight(height);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     double _opacity = max(min(this.opacity, 1), 0);
 
     // 背景色
-    if (_widgetColors.length == 0) {
+    if (_widgetColors.isEmpty) {
       // 默认背景色
       _backgroundColors = HexToColor("#F7F2FF");
       _linearGradient = null;

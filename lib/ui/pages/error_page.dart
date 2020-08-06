@@ -42,7 +42,7 @@ class _ErrorPageState extends State<ErrorPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Image(
-                image: AssetImage("assets/ifredom.jpg"),
+                image: AssetImage("assets/images/ifredom.jpg"),
                 width: 90.0,
                 height: 90.0,
               ),

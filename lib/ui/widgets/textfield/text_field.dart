@@ -11,7 +11,9 @@ class InputField extends StatefulWidget {
   final bool isReadOnly;
   final int maxLength;
   final int maxLines;
+  final TextStyle textStyle;
   final String hintText;
+  final String labelText;
   final TextStyle hintStyle;
   final EdgeInsetsGeometry padding;
   final Color borderColor;
@@ -28,7 +30,7 @@ class InputField extends StatefulWidget {
   final FocusNode nextFocusNode;
   final TextInputType keyboardType;
   final Function onFieldSubmitted;
-  final TextInputFormatter formatter;
+  final RegExp formatter;
   final Future<bool> Function() getVCode;
 
   const InputField({
@@ -36,7 +38,9 @@ class InputField extends StatefulWidget {
     this.isReadOnly = false,
     this.maxLength,
     this.maxLines,
-    this.hintText: "",
+    this.textStyle,
+    this.hintText = "",
+    this.labelText,
     this.hintStyle,
     this.padding,
     this.borderColor,
@@ -45,7 +49,7 @@ class InputField extends StatefulWidget {
     this.getVCode,
     this.autofocus = false,
     this.obscureText = false,
-    this.roundBox = true, // 圆角边框风格 | 一条底线风格
+    this.roundBox = false, // 圆角边框风格 | 一条底线风格
     this.roundBoxRadius, // 圆角边框风格 | 一条底线风格
     this.controller,
     this.validator,
@@ -54,7 +58,7 @@ class InputField extends StatefulWidget {
     this.nextFocusNode,
     this.formatter,
     this.onFieldSubmitted,
-    this.keyboardType: TextInputType.text,
+    this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
   @override
@@ -67,39 +71,48 @@ class _CustomTextFieldState extends State<InputField> {
   final int second = 20;
 
   /// 当前秒数
-  int s;
-  StreamSubscription _subscription;
+  int currentSecond;
+  StreamSubscription _obs;
 
-  Future _getVCode() async {
+  fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
+
+  void _getVCode() async {
     bool isSuccess = await widget.getVCode();
     if (isSuccess != null && isSuccess) {
       setState(() {
-        s = second;
+        currentSecond = second;
         _isClick = false;
       });
-      _subscription = Stream.periodic(Duration(seconds: 1), (i) => i)
-          .take(second)
-          .listen((i) {
+      _obs = Stream.periodic(Duration(seconds: 1), (i) => i).take(second).listen((i) {
         setState(() {
-          s = second - i - 1;
-          _isClick = s < 1;
+          currentSecond = second - i - 1;
+          _isClick = currentSecond < 1;
         });
       });
     }
   }
 
-  fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
-  }
-
   @override
   void dispose() {
+    _obs.cancel();
     super.dispose();
   }
 
   Widget _createTextField() {
+    List<TextInputFormatter> textInputFormatter;
+    if (null == widget.formatter) {
+      if (widget.keyboardType == TextInputType.number || widget.keyboardType == TextInputType.phone) {
+        textInputFormatter = [FilteringTextInputFormatter.allow(RegExp("[0-9]"))];
+      } else {
+        textInputFormatter = null;
+      }
+    } else {
+      textInputFormatter = [FilteringTextInputFormatter.allow(widget.formatter)];
+    }
+
     return TextFormField(
       readOnly: widget.isReadOnly,
       maxLength: widget.maxLength,
@@ -121,18 +134,17 @@ class _CustomTextFieldState extends State<InputField> {
       // 在改变属性，当正在编辑的文本发生更改时调用。每次修改字段文本时都会调用一次。
       onChanged: widget.onChanged,
       // 数字、手机号限制格式为0到9(白名单)， 密码限制不包含汉字（黑名单）
-      inputFormatters: (widget.keyboardType == TextInputType.number ||
-              widget.keyboardType == TextInputType.phone)
-          ? [WhitelistingTextInputFormatter(RegExp("[0-9]"))]
-          : [BlacklistingTextInputFormatter(RegExp("[\u4e00-\u9fa5]"))],
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 15.0,
-        textBaseline: TextBaseline.alphabetic,
-      ),
+      // 白名单: WhitelistingTextInputFormatter， 黑名单: BlacklistingTextInputFormatter
+      inputFormatters: textInputFormatter,
+      style: widget.textStyle ??
+          TextStyle(
+            color: Colors.black,
+            fontSize: 15.0,
+            textBaseline: TextBaseline.alphabetic,
+          ),
       decoration: InputDecoration(
         isDense: true,
-        // labelText: "用户名",
+        labelText: widget.labelText,
         // contentPadding: EdgeInsets.only(
         //   top: ScreenUtil().setSp(5),
         //   bottom: ScreenUtil().setSp(5),
@@ -145,13 +157,7 @@ class _CustomTextFieldState extends State<InputField> {
         //计算数字
         counterText: "",
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle ?? null,
-        // prefixIcon: widget.prefixIcon ?? null,
-        // prefixStyle: TextStyle(
-        //   fontSize: ScreenUtil().setSp(30),
-        //   height: ScreenUtil().setSp(30),
-        // ),
-        // suffixIcon: widget.suffixIcon ?? null,
+        hintStyle: widget.hintStyle ?? TextStyle(),
       ),
     );
   }
@@ -159,10 +165,26 @@ class _CustomTextFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
     // return _createTextField();
-    return _buildTextfieldWrapper(child: _createTextField());
+    return BuildTextfieldWrapper(
+      _createTextField(),
+      widget,
+      _isClick,
+      getVCodeCallback: _getVCode,
+      second: currentSecond.toString(),
+    );
   }
+}
 
-  Widget _buildTextfieldWrapper({Widget child}) {
+class BuildTextfieldWrapper extends StatelessWidget {
+  final Widget child;
+  final widget;
+  final bool _isClick;
+  final Function getVCodeCallback;
+  final String second;
+  BuildTextfieldWrapper(this.child, this.widget, this._isClick, {this.getVCodeCallback, this.second});
+
+  @override
+  Widget build(BuildContext context) {
     Decoration _decoration = widget.roundBox
         ? BoxDecoration(
             border: Border.all(
@@ -171,16 +193,14 @@ class _CustomTextFieldState extends State<InputField> {
             ),
             borderRadius: widget.roundBoxRadius == 0
                 ? BorderRadius.zero
-                : BorderRadius.all(
-                    Radius.circular(widget.roundBoxRadius ?? 32)),
+                : BorderRadius.all(Radius.circular(widget.roundBoxRadius ?? 32)),
           )
         : UnderlineTabIndicator(
-            borderSide: BorderSide(width: 1.0, color: Color(0xFFeeeeee)),
+            borderSide: BorderSide(width: 1.0, color: Colors.black),
           );
 
-    EdgeInsetsGeometry _padding = widget.padding ??
-        EdgeInsets.fromLTRB(
-            ScreenUtil().setWidth(32), 0, ScreenUtil().setWidth(32), 0);
+    EdgeInsetsGeometry _padding =
+        widget.padding ?? EdgeInsets.fromLTRB(ScreenUtil().setWidth(32), 0, ScreenUtil().setWidth(32), 0);
 
     return Container(
       padding: _padding,
@@ -205,7 +225,7 @@ class _CustomTextFieldState extends State<InputField> {
                     SizedBox(width: ScreenUtil().setWidth(32)),
                     SizedBox(
                       width: 1,
-                      height: ScreenUtil().setSp(48),
+                      height: ScreenUtil().setWidth(48),
                       child: Container(
                         color: HexToColor('#767680'),
                       ),
@@ -214,10 +234,10 @@ class _CustomTextFieldState extends State<InputField> {
                     GestureDetector(
                       // padding: EdgeInsets.symmetric(vertical: 0),
                       child: Text(
-                        _isClick ? "获取验证码" : "$s秒后重发",
+                        _isClick ? "获取验证码" : "$second秒后重发",
                         style: TextStyle(color: HexToColor('#A061FD')),
                       ),
-                      onTap: _isClick ? _getVCode : null,
+                      onTap: _isClick ? getVCodeCallback : null,
                     ),
                   ],
                 ),

@@ -54,7 +54,7 @@ class ImageBackgroundButton extends StatelessWidget {
             style: style ??
                 TextStyle(
                   color: Colors.white,
-                  fontSize: ScreenUtil().setSp(24.0),
+                  fontSize: ScreenUtil().setSp(30.0),
                 ),
           ),
         ),

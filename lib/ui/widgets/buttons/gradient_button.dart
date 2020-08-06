@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:template/core/utils/common/ScreenUtil.dart';
-import 'package:template/core/utils/common/color_utils.dart';
-import 'package:template/core/utils/res/resources.dart';
+import 'package:template/core/utils/res/gaps.dart';
 
 //自定义按钮
 class GradientButton extends StatelessWidget {
@@ -39,7 +38,7 @@ class GradientButton extends StatelessWidget {
     Color _backgroundColors; // 单色
     LinearGradient _linearGradient; // 渐变色
 
-    if (_colors.length == 0) {
+    if (_colors.isEmpty) {
       _backgroundColors = theme.primaryColorDark ?? theme.primaryColor;
       _linearGradient = null;
     } else if (_colors.length == 1) {
@@ -51,8 +50,8 @@ class GradientButton extends StatelessWidget {
     }
 
     return Container(
-        width: this.width ?? ScreenUtil().setSp(180.0),
-        height: this.height ?? ScreenUtil().setHeight(50),
+        width: this.width ?? ScreenUtil().setWidth(180),
+        height: this.height ?? ScreenUtil().setWidth(72),
         decoration: BoxDecoration(
           color: _backgroundColors,
           gradient: _linearGradient,
@@ -63,19 +62,6 @@ class GradientButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             null == this.prefixIcon ? Gaps.empty : this.prefixIcon,
-            // GestureDetector(
-            //   child: Text(
-            //     text,
-            //     style: style ??
-            //         TextStyle(
-            //           color: Colors.white,
-            //           fontSize: ScreenUtil().setSp(24.0),
-            //         ),
-            //   ),
-            //   onTap: () {
-            //     onPressed();
-            //   },
-            // ),
             RaisedButton(
               color: Colors.transparent, // 设为透明色
               elevation: 0, // 正常时阴影隐藏
@@ -94,7 +80,7 @@ class GradientButton extends StatelessWidget {
                   style: style ??
                       TextStyle(
                         color: Colors.white,
-                        fontSize: ScreenUtil().setSp(24.0),
+                        fontSize: ScreenUtil().setSp(30.0),
                       ),
                 ),
               ),

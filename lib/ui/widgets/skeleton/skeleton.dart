@@ -6,8 +6,7 @@ class SkeletonBox extends StatelessWidget {
   final double height;
   final bool isCircle;
 
-  SkeletonBox(
-      {@required this.width, @required this.height, this.isCircle: false});
+  SkeletonBox({@required this.width, @required this.height, this.isCircle = false});
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +23,8 @@ class SkeletonBox extends StatelessWidget {
 /// 骨架屏 元素背景 ->形状及颜色
 class SkeletonDecoration extends BoxDecoration {
   SkeletonDecoration({
-    isCircle: false,
-    isDark: false,
+    isCircle = false,
+    isDark = false,
   }) : super(
           color: !isDark ? Colors.grey[350] : Colors.grey[700],
           shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
@@ -34,8 +33,7 @@ class SkeletonDecoration extends BoxDecoration {
 
 /// 骨架屏 元素背景 ->形状及颜色
 class BottomBorderDecoration extends BoxDecoration {
-  BottomBorderDecoration()
-      : super(border: Border(bottom: BorderSide(width: 0.3)));
+  BottomBorderDecoration() : super(border: Border(bottom: BorderSide(width: 0.3)));
 }
 
 /// 骨架屏
@@ -45,7 +43,7 @@ class SkeletonList extends StatelessWidget {
   final IndexedWidgetBuilder builder;
 
   SkeletonList(
-      {this.length: 6, //一般屏幕长度够用
+      {this.length = 6, //一般屏幕长度够用
       this.padding = const EdgeInsets.all(7),
       @required this.builder});
 
@@ -67,8 +65,7 @@ class SkeletonList extends StatelessWidget {
           child: Padding(
               padding: padding,
               child: Column(
-                children:
-                    List.generate(length, (index) => builder(context, index)),
+                children: List.generate(length, (index) => builder(context, index)),
               ))),
     );
   }

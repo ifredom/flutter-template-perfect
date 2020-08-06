@@ -1,12 +1,11 @@
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked/stacked.dart';
 import 'package:template/core/app/locator.dart';
-import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/exceptions/repository_exception.dart';
+import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routers.dart';
 import 'package:template/core/services/auth/auth_service.dart';
-import 'package:template/core/services/dialog/dialog_service.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
@@ -14,7 +13,6 @@ import 'package:template/core/utils/res/local_storage_keys.dart';
 // ViewModelProvider应该使用得是 UserinfoViewModel中得数据
 class UserinfoViewModel extends BaseViewModel with Validators {
   final _authService = locator<AuthService>();
-  final _dialogService = locator<DialogService>();
   final _navigationService = locator<NavigationService>();
 
   /// 必须实例化用户

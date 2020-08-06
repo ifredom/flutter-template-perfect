@@ -19,9 +19,6 @@ class SettingsView extends StatelessWidget {
       builder: (context, model, child) => PlatformScaffold(
         appBar: PlatformAppBar(
           title: Text(local.settingsViewTitle),
-          ios: (_) => CupertinoNavigationBarData(
-            transitionBetweenRoutes: false,
-          ),
         ),
         body: ListView(
           children: <Widget>[

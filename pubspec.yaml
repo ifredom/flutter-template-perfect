@@ -37,14 +37,17 @@ dependencies:
   device_info: 0.4.2+1
   shimmer: 1.1.0
   app_settings: 4.0.0
-  flutter_platform_widgets: ^0.41.0
-  flare_flutter: 2.0.1
+  flutter_platform_widgets: 0.60.1
   http_parser: 3.1.3
   mime: 0.9.6+3
   audioplayers: 0.15.1
   get: 2.10.1
   # 二维码
   barcode_scan: 2.0.1
+  # 动画
+  flare_flutter: 2.0.6
+  # 动画
+  lottie: 0.5.1
   qr_flutter: 3.2.0
   web_socket_channel: 1.1.0
   protobuf: 1.0.1
@@ -96,7 +99,6 @@ flutter:
     - assets/lang/zh.json
     - assets/lang/en.json
 
-    - assets/ifredom.jpg
     - assets/audio/viper.mp3
     - assets/audio/bgaudio.mp3
 
@@ -105,7 +107,9 @@ flutter:
     - assets/webview/dist/css/
     - assets/webview/dist/js/
     - assets/webview/dist/musicXML/
+
     - assets/animations/
+    - assets/animations/lottie/
     - assets/images/
 
 

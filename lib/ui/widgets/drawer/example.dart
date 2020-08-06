@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/ui/pages/user/login.dart';
+import 'package:template/ui/pages/login/login_view.dart';
 
 import 'drawer_user_controller.dart';
 import 'home_drawer.dart';

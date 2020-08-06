@@ -14,7 +14,7 @@ class Validators {
   final passwordRegExp = RegExp(r"(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");
 
   /// 身份证号码
-  RegExp postalCode = new RegExp(
+  RegExp postalCode = RegExp(
       r'^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|[Xx])$');
 
   String validateEmail(String value) {
@@ -46,7 +46,7 @@ class Validators {
       return LocalKeys.invalid_postal_idcard; // 位数不够
     }
     // 身份证号码正则
-    RegExp postalCode = new RegExp(
+    RegExp postalCode = RegExp(
         r'^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|[Xx])$');
     // 通过验证，说明格式正确，但仍需计算准确性
     if (!postalCode.hasMatch(value)) {

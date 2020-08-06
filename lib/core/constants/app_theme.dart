@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  static setTheme({String themeMode: 'light'}) {
+  static setTheme({String themeMode = 'light'}) {
     final _lightThemeData = ThemeData.light();
     final _darkThemeData = ThemeData.dark();
 
@@ -21,8 +21,7 @@ class AppTheme {
   }
 
   static const Color mainBackgroundColor = Color(0xFFEDF0F2); // appbar背景
-  static const Color scaffoldBackgroundColor =
-      Color(0xFFEDF0F2); // 整体的scaffold背景颜色
+  static const Color scaffoldBackgroundColor = Color(0xFFEDF0F2); // 整体的scaffold背景颜色
   static const Color iconColor = Color(0xFFEDF0F2);
   static const Color primaryIconColor = Color(0xFFEDF0F2); // 导航栏按钮颜色
 
@@ -53,23 +52,7 @@ class AppTheme {
   );
 
   static const TextTheme textTheme = TextTheme(
-    display1: display1,
-    headline: headline,
-    title: title,
-    subtitle: subtitle,
-    body2: body2,
-    body1: body1,
     caption: caption,
-  );
-
-  static const TextStyle display1 = TextStyle(
-    // h4 -> display1
-    fontFamily: fontName,
-    fontWeight: FontWeight.bold,
-    fontSize: 36,
-    letterSpacing: 0.4,
-    height: 0.9,
-    color: darkerText,
   );
 
   static const TextStyle headline = TextStyle(
@@ -96,24 +79,6 @@ class AppTheme {
     fontWeight: FontWeight.w400,
     fontSize: 14,
     letterSpacing: -0.04,
-    color: darkText,
-  );
-
-  static const TextStyle body2 = TextStyle(
-    // body1 -> body2
-    fontFamily: fontName,
-    fontWeight: FontWeight.w400,
-    fontSize: 14,
-    letterSpacing: 0.2,
-    color: darkText,
-  );
-
-  static const TextStyle body1 = TextStyle(
-    // body2 -> body1
-    fontFamily: fontName,
-    fontWeight: FontWeight.w400,
-    fontSize: 16,
-    letterSpacing: -0.05,
     color: darkText,
   );
 

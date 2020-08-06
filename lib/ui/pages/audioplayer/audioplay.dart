@@ -14,21 +14,22 @@ class _AudioPlayDemoState extends State<AudioPlayDemo> {
   double _volume = 0.5;
 
   _executar() async {
-    _audioPlayer.setVolume(_volume);
+    await _audioPlayer.setVolume(_volume);
 
     if (_primeiraExecucao) {
       _audioPlayer = await _audiocache.play("viper.mp3");
       _primeiraExecucao = false;
-    } else
-      _audioPlayer.resume();
+    } else {
+      await _audioPlayer.resume();
+    }
   }
 
   _pausar() async {
-    int resultado = await _audioPlayer.pause();
+    await _audioPlayer.pause();
   }
 
   _parar() async {
-    int resultado = await _audioPlayer.stop();
+    await _audioPlayer.stop();
   }
 
   @override

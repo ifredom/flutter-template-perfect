@@ -22,7 +22,7 @@ class EmptyAnimatedSwitcher extends StatelessWidget {
   final bool display;
   final Widget child;
 
-  EmptyAnimatedSwitcher({this.display: true, this.child});
+  EmptyAnimatedSwitcher({this.display = true, this.child});
 
   @override
   Widget build(BuildContext context) {

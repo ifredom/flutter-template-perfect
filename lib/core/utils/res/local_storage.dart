@@ -25,7 +25,7 @@ class LocalStorage {
 
   static remove(String key) async {
     SharedPreferences _preferences = await SharedPreferences.getInstance();
-    _preferences.remove(key);
+    await _preferences.remove(key);
   }
 
   static getList(String key) async {
@@ -39,7 +39,7 @@ class LocalStorage {
     list.forEach((item) {
       items..add(json.encode(item));
     });
-    _preferences.setStringList(key, items);
+    await _preferences.setStringList(key, items);
   }
 
   static setMap(String key, value) async {
@@ -59,11 +59,11 @@ class LocalStorage {
 
   static setListStr(String key, List<String> list) async {
     SharedPreferences _preferences = await SharedPreferences.getInstance();
-    _preferences.setStringList(key, list);
+    await _preferences.setStringList(key, list);
   }
 
   static clear() async {
     SharedPreferences _preferences = await SharedPreferences.getInstance();
-    _preferences.clear();
+    await _preferences.clear();
   }
 }

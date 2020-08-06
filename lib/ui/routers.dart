@@ -44,7 +44,6 @@ class RoutesUtils {
       case flutterbluePage:
         return AudioPlayDemo();
       case homePage:
-        final Map params = settings.arguments;
         return HomePage();
   
 

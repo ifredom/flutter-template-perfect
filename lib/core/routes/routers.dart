@@ -3,8 +3,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:template/ui/pages/404.dart';
 import 'package:template/ui/pages/audioplayer/audioplay.dart';
 import 'package:template/ui/pages/home/home.dart';
-import 'package:template/ui/pages/user/login.dart';
-import 'package:template/ui/pages/user/login_phone.dart';
+import 'package:template/ui/pages/login/login_view.dart';
+import 'package:template/ui/pages/login/login_phone_view.dart';
 
 /// 路由跳转使用方式
 // locator<NavigationService>().push(ViewRoutes.homePage);
@@ -32,7 +32,7 @@ class ViewRoutes {
   static Widget _generateView(RouteSettings settings) {
     switch (settings.name) {
       case homePage:
-        final post = settings.arguments;
+        // final post = settings.arguments;
         return HomePage();
       // case webViewPage:
       //   print(settings.arguments);

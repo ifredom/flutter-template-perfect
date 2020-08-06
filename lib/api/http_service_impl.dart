@@ -79,6 +79,7 @@ class HttpServiceImpl implements HttpService {
         onReceiveProgress: network_utils.showLoadingProgress,
       );
     } on DioError catch (error) {
+      _log.severe(error.toString());
       return ExceptionHandle.handleDioException(error, isNoTip);
     }
     if (response.data is DioError) {
