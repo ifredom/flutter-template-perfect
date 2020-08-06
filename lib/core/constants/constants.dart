@@ -4,7 +4,7 @@ class Constants {
 
   ///请求地址
 
-  static const String BASE_URL = 'http://test.ifredom.com/flutter/api';
+  static const String BASE_URL = 'https://easy-mock.com/mock/59f69a7f70d0b32d6619db4e/user';
 
   static const bool DEBUG = true; // 是否开启debug模式
 

@@ -10,7 +10,7 @@ abstract class AuthService {
 
   Stream<User> get user; // 使用流控制数据
   Future signUpWithAuthcode(String name, String authCode);
-  Future signUpWithAuthPassword(String mobile, String password);
+  Future signUpWithAuthPassword(String username, String password);
   Future fetchUserInfo(String id);
   Future fetchResetPassword(String vcode, String pwd);
   Future fetchIsNewUser(String mobile, String openId);

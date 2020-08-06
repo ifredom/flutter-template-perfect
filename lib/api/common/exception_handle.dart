@@ -16,8 +16,6 @@ class ExceptionHandle {
   static Future<ResultData> handleDioException(DioError error, bool isNoTip) async {
     Response errorResponse;
 
-    //
-
     // HTTP请求失败
     if (error.response != null) {
       errorResponse = error.response;

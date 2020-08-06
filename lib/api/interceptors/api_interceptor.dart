@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart' show InterceptorsWrapper, Response, RequestOptions, Headers;
+import 'package:template/core/constants/constants.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 import '../common/code.dart' show Code;
@@ -9,12 +10,24 @@ import '../apicode/whiteList.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
   Future<RequestOptions> _generateRequestParams(RequestOptions options) async {
-    // 可以做一些加密参数的操作
-    Digest d = md5.convert(Utf8Encoder().convert("secretId"));
+    // do something
+
+    // var params = json.decode(options.data);
+    // String apiCode = params.remove("apiCode"); //remove()返回删除得值
+    // options.baseUrl = Constants.BASE_URL;
+
+    // params.remove("apiCode"); //remove()返回删除得值
+    // options.queryParameters = {};
+    // options.queryParameters = params;
+    // print("查询参数");
+    // print(options.baseUrl);
+    // print(options.path);
+    // print(options.data);
+    // print(options.queryParameters);
     return options;
   }
 
-  // 在登陆时,进行token的存储
+  // set token
   _getUnWhitelistToken(String apiCode) async {
     String token = await LocalStorage.get(LocalStorageKeys.TOKEN_KEY);
     if (WhiteList.list.contains(apiCode)) {
@@ -22,7 +35,6 @@ class ApiInterceptors extends InterceptorsWrapper {
     }
     return token;
   }
-
 
   @override
   onRequest(RequestOptions options) async {

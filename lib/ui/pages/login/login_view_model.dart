@@ -35,12 +35,12 @@ class LoginViewModel extends BaseViewModel with Validators {
   bool get isBusy => _isBusy;
 
   /// 密码登录
-  Future<void> loginWithPassword(String name, String password) async {
+  Future<void> loginWithPassword(String username, String password) async {
     setBusy(true);
     try {
-      var res = await _authService.signUpWithAuthPassword(name, password);
+      var res = await _authService.signUpWithAuthPassword(username, password);
       setBusy(false);
-      await saveUserInfo(res, name);
+      await saveUserInfo(res, username);
     } on RepositoryException {
       setBusy(false);
     }

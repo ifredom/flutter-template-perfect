@@ -29,13 +29,13 @@ class AuthServiceImpl implements AuthService {
   /// 账号密码登录
   @override
   Future signUpWithAuthPassword(
-    String name,
+    String username,
     String password,
   ) async {
     try {
       return await httpService.request(ApiCode.SIGN_IN, {
-        "name": name,
-        "pwd": password,
+        "username": username,
+        "password": password,
       });
     } on Exception {
       _log.severe('AuthServiceImpl: signUpWithAuthcode Exception');
