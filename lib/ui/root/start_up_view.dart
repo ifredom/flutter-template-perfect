@@ -12,7 +12,7 @@ class StartUpView extends StatelessWidget {
     return ViewModelBuilder<StartUpViewModel>.reactive(
       viewModelBuilder: ()=>StartUpViewModel(),
       onModelReady: (model) => model.handleStartUpLogic(),
-      builder: (context, model, child) => PlatformScaffold(
+      builder: (context, model, child) => Scaffold(
         body: Center(
           child: LoadingAnimation(),
         ),

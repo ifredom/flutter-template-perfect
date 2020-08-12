@@ -20,11 +20,12 @@ class AppTheme {
     return themeMode == 'light' ? primaryMaterialTheme : darkMaterialTheme;
   }
 
-  static const Color mainBackgroundColor = Color(0xFFEDF0F2); // appbar背景
+  static const Color background = Color(0xFFF2F3F8);
   static const Color scaffoldBackgroundColor = Color(0xFFEDF0F2); // 整体的scaffold背景颜色
   static const Color iconColor = Color(0xFFEDF0F2);
   static const Color primaryIconColor = Color(0xFFEDF0F2); // 导航栏按钮颜色
 
+  static const Color nearlyDarkBlue = Color(0xFF2633C5);
   static const Color notWhite = Color(0xFFEDF0F2);
   static const Color nearlyWhite = Color(0xFFFEFEFE);
   static const Color white = Color(0xFFFFFFFF);
@@ -47,7 +48,7 @@ class AppTheme {
     // primaryIconTheme 导航栏按钮颜色
     primaryIconTheme: iconTheme,
     accentColor: Colors.grey, // 选中颜色
-    primaryColor: mainBackgroundColor,
+    primaryColor: background,
     scaffoldBackgroundColor: scaffoldBackgroundColor,
   );
 

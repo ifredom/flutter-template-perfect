@@ -1,4 +1,3 @@
-import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:template/core/enums/component_state.dart';
@@ -6,14 +5,10 @@ import 'package:template/core/model/config.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
-typedef FijkVolumeCallback = void Function(FijkVolumeEvent value);
-
 class ConfigViewModel extends BaseViewModel {
   ThemeInfo _themeInfo = ThemeInfo(isDart: false);
   String get theme => _themeInfo.theme;
 
-  FijkPlayer _audioPlayer = FijkPlayer();
-  FijkPlayer get audioPlayer => _audioPlayer;
 
   Future getTheme() async {
     String _theme = await LocalStorage.get(LocalStorageKeys.THEME);
@@ -28,23 +23,6 @@ class ConfigViewModel extends BaseViewModel {
     await LocalStorage.set(LocalStorageKeys.THEME, themeMode);
 
     notifyListeners();
-  }
-
-  Future intPlayer({String url = 'asset:///assets/audio/bgaudio.mp3'}) async {
-    audioPlayer.setDataSource(url, autoPlay: true);
-    // FijkVolumeWatcher(
-    //   watcher: (FijkVolumeEvent val) {},
-    //   child: Text('123'),
-    // );
-  }
-
-  Future setPlayerVolume({double volume}) async {
-    audioPlayer.setVolume(volume);
-  }
-
-  Future disposePlayer() async {
-    audioPlayer.stop();
-    audioPlayer.release();
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:fijkplayer/fijkplayer.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked/stacked.dart';
 import 'package:template/core/app/locator.dart';
@@ -10,21 +11,20 @@ import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
-// ViewModelProvider应该使用得是 HomeViewModel中得数据
+
+typedef FijkVolumeCallback = void Function(FijkVolumeEvent value);
 class HomeViewModel extends BaseViewModel with Validators {
   final _authService = locator<AuthService>();
   final _navigationService = locator<NavigationService>();
+
+  FijkPlayer _audioPlayer = FijkPlayer();
+  FijkPlayer get audioPlayer => _audioPlayer;
 
   // 数据从provider中取
   User get user => _authService.currentUser;
 
   bool _isNewUser = true; // 是否新用户
   bool get isNewUser => _isNewUser;
-
-  int _musicStone = 0; // 乐石
-  int get musicStone => _musicStone;
-  int _musicNote = 0; // 乐符
-  int get musicNote => _musicNote;
 
 
   // 查询用户信息
@@ -51,4 +51,20 @@ class HomeViewModel extends BaseViewModel with Validators {
     }
   }
 
+  Future intPlayer({String url = 'asset:///assets/audio/bgaudio.mp3'}) async {
+    await audioPlayer.setDataSource(url, autoPlay: true);
+    // FijkVolumeWatcher(
+    //   watcher: (FijkVolumeEvent val) {},
+    //   child: Text('123'),
+    // );
+  }
+
+  Future setPlayerVolume({double volume}) async {
+    await audioPlayer.setVolume(volume);
+  }
+
+  Future disposePlayer() async {
+    await audioPlayer.stop();
+    await audioPlayer.release();
+  }
 }

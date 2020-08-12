@@ -16,10 +16,7 @@ class SettingsView extends StatelessWidget {
     return ViewModelBuilder<SettingsViewModel>.nonReactive(
       viewModelBuilder: () => SettingsViewModel(),
       onModelReady: (model) => model.init(),
-      builder: (context, model, child) => PlatformScaffold(
-        appBar: PlatformAppBar(
-          title: Text(local.settingsViewTitle),
-        ),
+      builder: (context, model, child) => Scaffold(
         body: ListView(
           children: <Widget>[
             _AppSettingsListTile(),

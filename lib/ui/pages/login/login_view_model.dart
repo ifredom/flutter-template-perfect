@@ -36,14 +36,14 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   /// 密码登录
   Future<void> loginWithPassword(String username, String password) async {
+    _isBusy = true;
     setBusy(true);
-    try {
-      var res = await _authService.signUpWithAuthPassword(username, password);
+    Future.delayed(Duration(seconds: 4), () {
+      print('延时执行');
+      _isBusy = false;
       setBusy(false);
-      await saveUserInfo(res, username);
-    } on RepositoryException {
-      setBusy(false);
-    }
+      _navigationService.pushReplacementNamed(ViewRoutes.homePage);
+    });
   }
 
   /// 验证码登录
@@ -92,7 +92,6 @@ class LoginViewModel extends BaseViewModel with Validators {
           await _navigationService.pushReplacementNamed(ViewRoutes.adminHomePage);
         } else {
           await _navigationService.pushReplacementNamed(ViewRoutes.homePage);
-
         }
       }
     } else {

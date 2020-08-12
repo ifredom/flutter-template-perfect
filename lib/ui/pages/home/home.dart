@@ -1,100 +1,120 @@
-import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:template/core/app/locator.dart';
-import 'package:template/core/utils/res/local_storage.dart';
-import 'package:template/core/utils/res/local_storage_keys.dart';
-
-import 'package:template/ui/pages/home/config_view_model.dart';
-import 'package:template/ui/pages/home/home_view_model.dart';
+import 'package:template/core/constants/app_theme.dart';
+import 'package:template/core/constants/tab_icon_data.dart';
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/res/gaps.dart';
-
+import 'package:template/ui/pages/acomview/bottom_bar_view.dart';
+import 'package:template/ui/pages/first_view/first_view.dart';
+import 'package:template/ui/pages/home/config_view_model.dart';
+import 'package:template/ui/pages/home/home_view_model.dart';
+import 'package:template/ui/pages/second_view/second_view.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final _configViewModel = locator<ConfigViewModel>();
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  final _homeViewModel = locator<HomeViewModel>();
+
+  AnimationController animationController;
+
+  List<TabIconData> tabIconsList = TabIconData.tabIconsList;
+
+  Widget tabBody = Container(
+    color: AppTheme.background,
+  );
 
   @override
   void initState() {
-    super.initState();
+    tabIconsList.forEach((TabIconData tab) {
+      tab.isSelected = false;
+    });
+    tabIconsList[0].isSelected = true;
 
-    // _configViewModel.intPlayer(); //初始化背景音乐播放器
+    animationController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
+    tabBody = FirstScreen(animationController: animationController);
+    super.initState();
+    // _homeViewModel.intPlayer(); // 初始化背景音乐播放器
   }
 
   @override
   void dispose() {
-    _configViewModel.disposePlayer();
+    animationController.dispose();
+    // _configViewModel.disposePlayer();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.nonReactive(
-      viewModelBuilder: () => HomeViewModel(),
-      onModelReady: (model) => model.initialise(),
-      builder: (context, model, child) => PlatformScaffold(
-        body: BuildMainContent(),
-      ),
+      viewModelBuilder: () => _homeViewModel,
+      // onModelReady: (model) => model.initialise(),
+      builder: (context, model, child) => Scaffold(
+          body: Container(
+        color: AppTheme.background,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: FutureBuilder<bool>(
+            future: getData(),
+            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+              if (!snapshot.hasData) {
+                return const SizedBox();
+              } else {
+                return Stack(
+                  children: <Widget>[
+                    tabBody,
+                    bottomBar(),
+                  ],
+                );
+              }
+            },
+          ),
+        ),
+      )),
     );
   }
-}
 
-// 此模式，保证home页面不会rebuild ,或者使用consume
-class BuildMainContent extends ViewModelWidget<HomeViewModel> {
-
-  @override
-  Widget build(BuildContext context, HomeViewModel model) {
-    return Container(
-      child: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Positioned(
-            top: ScreenUtil().setSp(32),
-            left: 0,
-            right: ScreenUtil().setSp(39),
-            child: Text("topMenu"),
-          ),
-          Positioned(
-            top: ScreenUtil().setSp(235),
-            right: ScreenUtil().setSp(50),
-            child: Text("topMenu"),
-          ),
-          Positioned(
-              bottom: ScreenUtil().setSp(36),
-              right: ScreenUtil().setSp(50),
-              child: Row(
-                children: <Widget>[
-                  Text("menuOne"),
-                  Gaps.hGap10,
-                  Text("menuTwo")
-                ],
-              )),
-        ],
-      ),
-    );
+  Future<bool> getData() async {
+    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
+    return true;
   }
-}
 
-class BuildAudioPlayer extends ViewModelWidget<HomeViewModel> {
-  final String url;
-  final FijkPlayer player;
-
-  BuildAudioPlayer({
-    Key key,
-    this.url = "asset:///assets/audio/bgaudio.mp3",
-    this.player,
-  });
-
-  @override
-  Widget build(BuildContext context, HomeViewModel model) {
-    return FijkView(
-      player: player,
+  Widget bottomBar() {
+    return Column(
+      children: <Widget>[
+        const Expanded(
+          child: SizedBox(),
+        ),
+        BottomBarView(
+          tabIconsList: tabIconsList,
+          addClick: () {},
+          changeIndex: (int index) {
+            if (index == 0 || index == 2) {
+              animationController.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {
+                  tabBody = FirstScreen(animationController: animationController);
+                });
+              });
+            } else if (index == 1 || index == 3) {
+              animationController.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {
+                  tabBody = SecondScreen(animationController: animationController);
+                });
+              });
+            }
+          },
+        ),
+      ],
     );
   }
 }
