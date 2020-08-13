@@ -11,12 +11,12 @@ import 'package:template/ui/widgets/textfield/text_field.dart';
 
 import 'login_phone_view_model.dart';
 
-class LoginPhonePage extends StatefulWidget {
+class LoginPhoneView extends StatefulWidget {
   @override
-  _LoginPhonePageState createState() => _LoginPhonePageState();
+  _LoginPhoneViewState createState() => _LoginPhoneViewState();
 }
 
-class _LoginPhonePageState extends State<LoginPhonePage> {
+class _LoginPhoneViewState extends State<LoginPhoneView> {
   final formKey = GlobalKey<FormState>();
   FocusNode _loginFocus = FocusNode();
   FocusNode _pwdFocus = FocusNode();
@@ -120,7 +120,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                                 ),
                               ),
                               onTap: () {
-                                locator<NavigationService>().push(ViewRoutes.loginPage);
+                                locator<NavigationService>().push(ViewRoutes.loginView);
                               },
                             ),
                           ),

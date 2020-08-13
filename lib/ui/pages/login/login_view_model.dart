@@ -38,11 +38,11 @@ class LoginViewModel extends BaseViewModel with Validators {
   Future<void> loginWithPassword(String username, String password) async {
     _isBusy = true;
     setBusy(true);
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(Duration(seconds: 2), () {
       print('延时执行');
       _isBusy = false;
       setBusy(false);
-      _navigationService.pushReplacementNamed(ViewRoutes.homePage);
+      _navigationService.pushReplacementNamed(ViewRoutes.homeView);
     });
   }
 
@@ -86,12 +86,12 @@ class LoginViewModel extends BaseViewModel with Validators {
       bool isNewUser = await queryIsNewUser(mobile, userInfo.id);
       print("是否新用户: $isNewUser");
       if (isNewUser) {
-        await _navigationService.push(ViewRoutes.homePage);
+        await _navigationService.push(ViewRoutes.homeView);
       } else {
         if (userInfo.userType == "admin") {
-          await _navigationService.pushReplacementNamed(ViewRoutes.adminHomePage);
+          await _navigationService.pushReplacementNamed(ViewRoutes.adminHomeView);
         } else {
-          await _navigationService.pushReplacementNamed(ViewRoutes.homePage);
+          await _navigationService.pushReplacementNamed(ViewRoutes.homeView);
         }
       }
     } else {

@@ -10,12 +10,12 @@ import 'package:template/ui/pages/home/home_view/home_view_model.dart';
 import 'package:template/ui/pages/home/second_view/second_view.dart';
 import 'package:template/ui/pages/home/third_view/third_view.dart';
 
-class HomePage extends StatefulWidget {
+class HomeView extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   final _homeViewModel = locator<HomeViewModel>();
 
   AnimationController animationController;
@@ -96,6 +96,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               }
               switch (index) {
                 case 0:
+                  // 带动画
                   tabBody = FirstScreen(animationController: animationController);
                   break;
                 case 1:

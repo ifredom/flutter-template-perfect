@@ -57,7 +57,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   }) : assert(title != null);
 
   @override
-  Size get preferredSize =>  Size.fromHeight(height);
+  Size get preferredSize => Size.fromHeight(height);
 
   @override
   Widget build(BuildContext context) {
@@ -89,13 +89,13 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     if (null == _frontWidget && defaultLeft) {
       _frontWidget = this.backImageMode == BackImageMode.light
           ? Image.asset(
-              "assets/images/custom/back.png",
-              fit: BoxFit.fitWidth,
+              "assets/images/back2.png",
+              fit: BoxFit.fitHeight,
               height: this.preferredSize.height,
             )
           : Image.asset(
-              "assets/images/custom/back2.png",
-              fit: BoxFit.fitWidth,
+              "assets/images/back.png",
+              fit: BoxFit.fitHeight,
               height: this.preferredSize.height,
             );
     }
@@ -117,9 +117,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     TextStyle _textStyle = this.style ??
         TextStyle(
           fontSize: ScreenUtil().setSp(54),
-          color: this.backImageMode == BackImageMode.black
-              ? HexToColor('#ffffff')
-              : HexToColor('#5324B3'),
+          color: this.backImageMode == BackImageMode.black ? HexToColor('#ffffff') : HexToColor('#177cb0'),
           fontWeight: FontWeight.bold,
         );
     // 中间组件
@@ -151,7 +149,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                 Container(
                   width: _actionsMaxW,
                   child: GestureDetector(
-                    child: _frontWidget,
+                    child: SizedBox(width: 32, height: 32, child: _frontWidget),
                     onTap: () {
                       locator<NavigationService>().pop();
                     },
@@ -166,9 +164,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                 // 右侧视图
                 Container(
                   width: _actionsMaxW,
-                  child: (null == this.trailingWidget)
-                      ? null
-                      : this.trailingWidget,
+                  child: (null == this.trailingWidget) ? null : this.trailingWidget,
                 ),
               ],
             ),

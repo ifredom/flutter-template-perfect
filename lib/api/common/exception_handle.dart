@@ -46,7 +46,7 @@ class ExceptionHandle {
           final _navigationService = locator<NavigationService>();
           await LocalStorage.set(LocalStorageKeys.TOKEN_KEY, "");
           await _navigationService.navigatorKey.currentState
-              .pushNamedAndRemoveUntil(ViewRoutes.loginPage, ModalRoute.withName("/"));
+              .pushNamedAndRemoveUntil(ViewRoutes.loginView, ModalRoute.withName("/"));
         }
 
         return ResultData('服务器异常！', true, Code.http_error_code);

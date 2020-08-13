@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:template/core/constants/app_theme.dart';
 import 'package:template/ui/component/title_view.dart';
 
+import 'package:template/core/app/locator.dart';
+import 'package:template/core/services/navigation/navigation_service.dart';
+import 'package:template/core/routes/routes.dart';
+
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key key, this.animationController}) : super(key: key);
 
@@ -11,6 +15,7 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin {
+  final _navigationService = locator<NavigationService>();
   Animation<double> topBarAnimation;
 
   List<Widget> listViews = <Widget>[];
@@ -28,8 +33,7 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
             topBarOpacity = 1.0;
           });
         }
-      } else if (scrollController.offset <= 24 &&
-          scrollController.offset >= 0) {
+      } else if (scrollController.offset <= 24 && scrollController.offset >= 0) {
         if (topBarOpacity != scrollController.offset / 24) {
           setState(() {
             topBarOpacity = scrollController.offset / 24;
@@ -51,17 +55,23 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
     listViews.add(
       TitleView(
         titleTxt: 'First Screen 数据 1',
-        subTxt: 'Details 1',
+        subTxt: '前往详情页',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
+        callback: () {
+          Map props = Map();
+          props["title"] = "First Screen 数据 1";
+          props["description"] = "这是一条传递过来的数据";
+          _navigationService.push(ViewRoutes.productDetailView, arguments: props);
+        },
       ),
     );
 
     listViews.add(
       TitleView(
         titleTxt: 'First Screen 数据 2',
-        subTxt: 'Details 2',
+        subTxt: '详情 2',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
@@ -70,7 +80,7 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
     listViews.add(
       TitleView(
         titleTxt: 'First Screen 数据 3',
-        subTxt: 'Details 3',
+        subTxt: '详情 3',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,

@@ -41,7 +41,7 @@ class HomeViewModel extends BaseViewModel{
         setBusy(false);
       }
     } else {
-      await _navigationService.pushReplacementNamed(ViewRoutes.loginPage);
+      await _navigationService.pushReplacementNamed(ViewRoutes.loginView);
     }
   }
 }

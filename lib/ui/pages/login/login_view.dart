@@ -11,12 +11,12 @@ import 'package:template/ui/pages/login/login_view_model.dart';
 import 'package:template/ui/widgets/buttons/gradient_button.dart';
 import 'package:template/ui/widgets/textfield/text_field.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginView extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginViewState createState() => _LoginViewState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
   FocusNode _loginNameFocus = FocusNode();
   FocusNode _pwdFocus = FocusNode();
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     ),
                                     onTap: () {
-                                      locator<NavigationService>().push(ViewRoutes.loginPhonePage);
+                                      locator<NavigationService>().push(ViewRoutes.loginPhoneView);
                                     },
                                   ),
                                 ),

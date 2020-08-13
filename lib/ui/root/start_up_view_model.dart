@@ -20,13 +20,13 @@ class StartUpViewModel extends BaseViewModel {
       if (res.data["code"] == 0) {
         User userinfo = User.fromMap(res.data["data"]);
         if (userinfo.userType == "T") {
-          await _navigationService.pushReplacementNamed(ViewRoutes.adminHomePage);
+          await _navigationService.pushReplacementNamed(ViewRoutes.adminHomeView);
         } else {
-          await _navigationService.pushReplacementNamed(ViewRoutes.homePage);
+          await _navigationService.pushReplacementNamed(ViewRoutes.homeView);
         }
       }
     } else {
-      await _navigationService.pushReplacementNamed(ViewRoutes.loginPage);
+      await _navigationService.pushReplacementNamed(ViewRoutes.loginView);
     }
   }
 }

@@ -20,7 +20,7 @@ class _DrawerExampleState extends State<DrawerExample> {
         animationController: (AnimationController animationController) {
           sliderAnimationController = animationController;
         },
-        screenView: LoginPage(), //任何页面
+        screenView: LoginView(), //任何页面
       ),
     );
   }

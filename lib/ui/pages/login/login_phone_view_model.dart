@@ -26,6 +26,6 @@ class LoginPhoneViewModel extends BaseViewModel with Validators {
 
   Future<void> loginWithPassword(String mobile, String password) async {
     // var res = await _authService.signUpWithAuthPassword(mobile, password);
-    await _navigationService.pushReplacementNamed(ViewRoutes.homePage);
+    await _navigationService.pushReplacementNamed(ViewRoutes.homeView);
   }
 }
