@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/ui/root/start_up_view_model.dart';

@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
 import 'package:template/core/app/locator.dart';
 import 'package:template/core/model/userinfo/user.dart';
-import 'package:template/core/routes/routers.dart';
+import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/auth/auth_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';

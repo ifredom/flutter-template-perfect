@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:template/core/app/locator.dart';
 import 'package:template/core/constants/app_theme.dart';
 import 'package:template/core/constants/tab_icon_data.dart';
-import 'package:template/core/utils/common/ScreenUtil.dart';
-import 'package:template/core/utils/res/gaps.dart';
-import 'package:template/ui/pages/acomview/bottom_bar_view.dart';
-import 'package:template/ui/pages/first_view/first_view.dart';
-import 'package:template/ui/pages/home/config_view_model.dart';
-import 'package:template/ui/pages/home/home_view_model.dart';
-import 'package:template/ui/pages/second_view/second_view.dart';
+import 'package:template/ui/component/bottom_bar_view.dart';
+import 'package:template/ui/pages/home/first_view/first_view.dart';
+import 'package:template/ui/pages/home/forth_view/forth_view.dart';
+import 'package:template/ui/pages/home/home_view/home_view_model.dart';
+import 'package:template/ui/pages/home/second_view/second_view.dart';
+import 'package:template/ui/pages/home/third_view/third_view.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,13 +36,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     animationController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
     tabBody = FirstScreen(animationController: animationController);
     super.initState();
-    // _homeViewModel.intPlayer(); // 初始化背景音乐播放器
   }
 
   @override
   void dispose() {
     animationController.dispose();
-    // _configViewModel.disposePlayer();
     super.dispose();
   }
 
@@ -54,27 +50,28 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       viewModelBuilder: () => _homeViewModel,
       // onModelReady: (model) => model.initialise(),
       builder: (context, model, child) => Scaffold(
-          body: Container(
-        color: AppTheme.background,
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: FutureBuilder<bool>(
-            future: getData(),
-            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-              if (!snapshot.hasData) {
-                return const SizedBox();
-              } else {
-                return Stack(
-                  children: <Widget>[
-                    tabBody,
-                    bottomBar(),
-                  ],
-                );
-              }
-            },
+        body: Container(
+          color: AppTheme.background,
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: FutureBuilder<bool>(
+              future: getData(),
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                if (!snapshot.hasData) {
+                  return const SizedBox();
+                } else {
+                  return Stack(
+                    children: <Widget>[
+                      tabBody,
+                      bottomBar(),
+                    ],
+                  );
+                }
+              },
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 
@@ -93,25 +90,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           tabIconsList: tabIconsList,
           addClick: () {},
           changeIndex: (int index) {
-            if (index == 0 || index == 2) {
-              animationController.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
+            animationController.reverse().then<dynamic>((data) {
+              if (!mounted) {
+                return;
+              }
+              switch (index) {
+                case 0:
                   tabBody = FirstScreen(animationController: animationController);
-                });
-              });
-            } else if (index == 1 || index == 3) {
-              animationController.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = SecondScreen(animationController: animationController);
-                });
-              });
-            }
+                  break;
+                case 1:
+                  tabBody = SecondScreen();
+                  break;
+                case 2:
+                  tabBody = ThirdScreen();
+                  break;
+                case 3:
+                  tabBody = ForthScreen();
+                  break;
+                default:
+              }
+              setState(() {});
+            });
           },
         ),
       ],

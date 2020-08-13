@@ -15,7 +15,7 @@ import 'package:template/core/services/navigation/navigation_service_impl.dart';
 import 'package:template/core/services/snackbar/snack_bar_service.dart';
 import 'package:template/core/services/snackbar/snack_bar_service_impl.dart';
 import 'package:template/core/utils/common/file_helper.dart';
-import 'package:template/ui/pages/home/home_view_model.dart';
+import 'package:template/ui/pages/home/home_view/home_view_model.dart';
 
 GetIt locator = GetIt.instance;
 

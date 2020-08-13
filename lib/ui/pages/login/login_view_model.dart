@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:template/core/app/locator.dart';
 import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/model/userinfo/user.dart';
-import 'package:template/core/routes/routers.dart';
+import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/auth/auth_service.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/exceptions/repository_exception.dart';
@@ -86,7 +86,7 @@ class LoginViewModel extends BaseViewModel with Validators {
       bool isNewUser = await queryIsNewUser(mobile, userInfo.id);
       print("是否新用户: $isNewUser");
       if (isNewUser) {
-        await _navigationService.push(ViewRoutes.audioPlayDemoPage);
+        await _navigationService.push(ViewRoutes.homePage);
       } else {
         if (userInfo.userType == "admin") {
           await _navigationService.pushReplacementNamed(ViewRoutes.adminHomePage);

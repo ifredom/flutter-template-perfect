@@ -4,8 +4,6 @@ import 'package:template/core/enums/component_state.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/services/auth/auth_service.dart';
 import 'package:template/core/services/connectivity/connectivity_service.dart';
-import 'package:template/ui/pages/home/config_view_model.dart';
-
 import 'locator.dart';
 
 
@@ -21,7 +19,7 @@ List<SingleChildWidget> providers = [
 ];
 
 List<SingleChildWidget> independentServices = [
-  Provider(create: (_) => ConfigViewModel()),
+  // Provider(create: (_) => ConfigViewModel()),
   // Provider(create: (_) => UserModel()),
 ];
 

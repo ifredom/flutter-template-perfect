@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:template/core/app/locator.dart';
 import 'package:template/core/model/response_date/response_data.dart';
-import 'package:template/core/routes/routers.dart';
+import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';

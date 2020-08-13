@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:template/core/constants/app_theme.dart';
 import 'package:template/core/managers/core_manager.dart';
 import 'package:template/core/managers/restart_manager.dart';
-import 'package:template/core/routes/routers.dart';
+import 'package:template/core/routes/routes.dart';
 import 'package:template/core/app/locator.dart';
 import 'package:template/core/app/provider_setup.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';

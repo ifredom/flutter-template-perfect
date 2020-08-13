@@ -97,7 +97,7 @@ class _CustomTextFieldState extends State<InputField> {
 
   @override
   void dispose() {
-    _obs.cancel();
+    _obs?.cancel();
     super.dispose();
   }
 

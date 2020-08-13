@@ -38,13 +38,9 @@ dependencies:
   device_info: 0.4.2+1
   shimmer: 1.1.0
   app_settings: 4.0.0
-  flutter_platform_widgets: 0.60.1
   http_parser: 3.1.3
   mime: 0.9.6+3
-  audioplayers: 0.15.1
-  get: 2.10.1
-  # 二维码
-  barcode_scan: 2.0.1
+  get: 3.4.2
   # 动画
   flare_flutter: 2.0.6
   # 动画
@@ -57,28 +53,13 @@ dependencies:
   freezed_annotation: ^0.7.1
   json_annotation: ^3.0.0
   date_format: 1.0.8
-  flutter_inappwebview: 3.4.0+1
-  webview_flutter: 0.3.21
-  flutter_webview_plugin: 0.3.11
   flutter_local_notifications: 1.4.0
-  jaguar: 2.4.36
   flutter_picker: ^1.1.3
-  fijkplayer: 0.8.4
   numberpicker: 1.2.0
   # 日志
   logging: 0.11.4
   # 日志
   fimber: ^0.4.2
-  flutter_blue: 0.7.2
-  # 蓝牙插件
-  flutter_ble_lib: 2.2.5
-  # 蓝牙设备模拟器，仅适用于 flutter_ble_lib
-  blemulator: 1.1.3
-  # midi 要求SDK>25
-  # flutter_midi_command: 0.1.7
-  # socket两个库是一家人
-  socket_io: 0.9.4
-  socket_io_client: 0.9.10
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:template/core/app/locator.dart';
-import 'package:template/core/routes/routers.dart';
+import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/common/ScreenUtil.dart';
 import 'package:template/core/utils/common/color_utils.dart';
