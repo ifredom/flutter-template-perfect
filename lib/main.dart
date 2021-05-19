@@ -25,10 +25,10 @@ void main() async {
     await setupLocator();
 
     // 设置全屏
-    await SystemChrome.setEnabledSystemUIOverlays([]);
+    // await SystemChrome.setEnabledSystemUIOverlays([]);
 
     // 强制横屏
-    // await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
 
     runApp(RootComponent());
   }, (Object error, StackTrace stackTrace) async {
