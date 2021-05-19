@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart' show InterceptorsWrapper, RequestOptions;
+import 'package:dio/dio.dart' show InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
@@ -6,15 +6,18 @@ class TokenInterceptors extends InterceptorsWrapper {
   String _token;
 
   @override
-  onRequest(RequestOptions options) async {
+  onRequest(
+    RequestOptions requestOptions,
+    RequestInterceptorHandler handler,
+  ) async {
     if (_token == null || _token == '') {
       var authorizationCode = await getAuthorization();
       if (authorizationCode != null) {
         _token = authorizationCode;
       }
     }
-    options.headers['token'] = _token;
-    return options;
+    requestOptions.headers['token'] = _token;
+    return handler.next(requestOptions);
   }
 
   getAuthorization() async {

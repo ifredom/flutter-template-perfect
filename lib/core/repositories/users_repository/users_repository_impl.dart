@@ -2,9 +2,9 @@
 // import 'package:template/core/data_sources/users/users_remote_data_source.dart';
 import 'package:logging/logging.dart';
 import 'package:template/core/app/locator.dart';
-import 'package:template/core/exceptions/repository_exception.dart';
-import 'package:template/core/exceptions/network_exception.dart';
 import 'package:template/core/exceptions/cache_exception.dart';
+import 'package:template/core/exceptions/network_exception.dart';
+import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/services/connectivity/connectivity_service.dart';
 

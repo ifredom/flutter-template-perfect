@@ -33,7 +33,7 @@ class GradientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    final List<Color> _colors = this.colors ?? List();
+    final List<Color> _colors = this.colors ?? List.empty();
 
     Color _backgroundColors; // 单色
     LinearGradient _linearGradient; // 渐变色
@@ -62,14 +62,7 @@ class GradientButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             null == this.prefixIcon ? Gaps.empty : this.prefixIcon,
-            RaisedButton(
-              color: Colors.transparent, // 设为透明色
-              elevation: 0, // 正常时阴影隐藏
-              highlightElevation: 0, // 点击时阴影隐藏
-              //点击时，水波动画中水波的颜色
-              splashColor: Colors.black12,
-              //内边距
-              padding: EdgeInsets.zero,
+            ElevatedButton(
               onPressed: () {
                 onPressed();
               },

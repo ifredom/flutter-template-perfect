@@ -193,7 +193,7 @@ class BuildLoginButton extends ViewModelWidget<LoginViewModel> {
         //设置四周圆角 角度 这里的角度应该为 父Container height 的一半
         borderRadius: BorderRadius.all(Radius.circular(43.0)),
       ),
-      child: FlatButton(
+      child: TextButton(
         child: Text(
           '登录',
           style: TextStyle(fontSize: ScreenUtil().setSp(30), color: HexToColor('#ffffff')),

@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart' show Dio, Options, DioError, Response, Headers;
-import 'package:dio_http2_adapter/dio_http2_adapter.dart';
 import 'package:logging/logging.dart';
 import 'package:template/core/app/locator.dart';
 import 'package:template/core/utils/common/file_helper.dart';

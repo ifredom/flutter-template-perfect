@@ -62,7 +62,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     double _actionsMaxW = 94.0;
-    List _widgetColors = this.colors ?? List();
+    List _widgetColors = this.colors ?? [];
     Color _backgroundColors;
     LinearGradient _linearGradient;
 

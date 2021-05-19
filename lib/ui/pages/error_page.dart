@@ -63,16 +63,14 @@ class _ErrorPageState extends State<ErrorPage> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  FlatButton(
-                    color: Color(0xFF24292E),
+                  TextButton(
                     onPressed: _errorReport,
                     child: Text('Report'),
                   ),
                   SizedBox(
                     width: 40.0,
                   ),
-                  FlatButton(
-                    color: Colors.white,
+                  TextButton(
                     onPressed: () {
                       locator<NavigationService>().pop();
                     },

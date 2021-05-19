@@ -35,15 +35,11 @@ class ImageBackgroundButton extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fitWidth,
-          image: this.image ?? null,
+          image: this.image,
         ),
         borderRadius: borderRadius ?? BorderRadius.circular(25),
       ),
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        color: Colors.transparent, // 设为透明色
-        elevation: 0, // 正常时阴影隐藏
-        highlightElevation: 0, // 点击时阴影隐藏
+      child: TextButton(
         onPressed: () {
           onPressed();
         },

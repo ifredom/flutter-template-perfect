@@ -20,16 +20,19 @@ class ExceptionHandle {
     if (error.response != null) {
       errorResponse = error.response;
     } else {
-      errorResponse = Response(statusCode: 0);
+      errorResponse = Response(
+        requestOptions: error.response.requestOptions,
+        statusCode: 0,
+      );
     }
 
-    if (error.type == DioErrorType.CONNECT_TIMEOUT || error.type == DioErrorType.RECEIVE_TIMEOUT) {
+    if (error.type == DioErrorType.connectTimeout || error.type == DioErrorType.receiveTimeout) {
       errorResponse.statusCode = Code.timeout_error_code;
     }
 
     if (error is DioError) {
       // http网络请求成功，服务器返回的信息数据
-      if (error.type == DioErrorType.DEFAULT || error.type == DioErrorType.RESPONSE) {
+      if (error.type == DioErrorType.other || error.type == DioErrorType.response) {
         dynamic e = error.error;
 
         if (e is SocketException) {
@@ -50,11 +53,11 @@ class ExceptionHandle {
         }
 
         return ResultData('服务器异常！', true, Code.http_error_code);
-      } else if (error.type == DioErrorType.CONNECT_TIMEOUT ||
-          error.type == DioErrorType.SEND_TIMEOUT ||
-          error.type == DioErrorType.RECEIVE_TIMEOUT) {
+      } else if (error.type == DioErrorType.connectTimeout ||
+          error.type == DioErrorType.sendTimeout ||
+          error.type == DioErrorType.receiveTimeout) {
         return ResultData('连接超时！', false, Code.timeout_error_code);
-      } else if (error.type == DioErrorType.CANCEL) {
+      } else if (error.type == DioErrorType.cancel) {
         return ResultData('取消请求', false, Code.cancel_error_code);
       } else {
         return ResultData('未知异常', false, Code.unknown_error_code);

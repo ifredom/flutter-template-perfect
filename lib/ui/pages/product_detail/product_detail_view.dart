@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/constants/app_theme.dart';
-import 'package:template/core/utils/res/gaps.dart';
 import 'package:template/core/utils/common/color_utils.dart';
+import 'package:template/core/utils/res/gaps.dart';
 import 'package:template/ui/widgets/appbar/custom_appbar.dart';
 
 class ProductDetailView extends StatefulWidget {

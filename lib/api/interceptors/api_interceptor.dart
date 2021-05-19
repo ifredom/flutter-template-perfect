@@ -1,32 +1,13 @@
-import 'dart:convert';
-import 'package:crypto/crypto.dart';
-import 'package:dio/dio.dart' show InterceptorsWrapper, Response, RequestOptions, Headers;
-import 'package:template/core/constants/constants.dart';
+import 'package:dio/dio.dart'
+    show Headers, InterceptorsWrapper, RequestInterceptorHandler, RequestOptions, Response, ResponseInterceptorHandler;
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
+
+import '../apicode/whiteList.dart';
 import '../common/code.dart' show Code;
 import '../common/result_data.dart';
-import '../apicode/whiteList.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
-  Future<RequestOptions> _generateRequestParams(RequestOptions options) async {
-    // do something
-
-    // var params = json.decode(options.data);
-    // String apiCode = params.remove("apiCode"); //remove()返回删除得值
-    // options.baseUrl = Constants.BASE_URL;
-
-    // params.remove("apiCode"); //remove()返回删除得值
-    // options.queryParameters = {};
-    // options.queryParameters = params;
-    // print("查询参数");
-    // print(options.baseUrl);
-    // print(options.path);
-    // print(options.data);
-    // print(options.queryParameters);
-    return options;
-  }
-
   // set token
   _getUnWhitelistToken(String apiCode) async {
     String token = await LocalStorage.get(LocalStorageKeys.TOKEN_KEY);
@@ -37,13 +18,19 @@ class ApiInterceptors extends InterceptorsWrapper {
   }
 
   @override
-  onRequest(RequestOptions options) async {
-    return _generateRequestParams(options);
+  onRequest(
+    RequestOptions requestOptions,
+    RequestInterceptorHandler handler,
+  ) async {
+    handler.next(requestOptions);
   }
 
   @override
-  onResponse(Response response) async {
-    RequestOptions options = response.request;
+  onResponse(
+    Response response,
+    ResponseInterceptorHandler handler,
+  ) async {
+    RequestOptions options = response.requestOptions;
     var value;
     try {
       var header = response.headers[Headers.contentTypeHeader];

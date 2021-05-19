@@ -28,6 +28,8 @@ void main() async {
     await SystemChrome.setEnabledSystemUIOverlays([]);
 
     // 强制横屏
+    // await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+
     runApp(RootComponent());
   }, (Object error, StackTrace stackTrace) async {
     // Zone中未捕获异常处理回调
@@ -35,8 +37,9 @@ void main() async {
   });
 }
 
+/// 可以在这里将App内所有捕获的异常发送到服务器，编译统计分析异常发生频率及情况。
 /// Reports [error] along with its [stackTrace] to server.
-// https://github.com/flutter/crashy/blob/master/lib/main.dart
+/// https://github.com/flutter/crashy/blob/master/lib/main.dart
 Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
   print('异常捕获: $error');
   if (Constants.DEBUG) {

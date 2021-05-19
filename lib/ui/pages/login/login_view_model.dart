@@ -52,7 +52,7 @@ class LoginViewModel extends BaseViewModel with Validators {
     try {
       var res = await _authService.signUpWithAuthcode(mobile, authCode);
       setBusy(false);
-      saveUserInfo(res, mobile);
+      await saveUserInfo(res, mobile);
     } on RepositoryException {
       setBusy(false);
     }
