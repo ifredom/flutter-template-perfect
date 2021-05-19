@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import '../common/ScreenUtil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './resources.dart';
 
 /// 间隔

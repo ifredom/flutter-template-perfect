@@ -17,6 +17,8 @@ dependencies:
   dio: 4.0.0
   # https请求
   dio_http2_adapter: 2.0.0
+  # 适配屏幕
+  flutter_screenutil: 5.0.0
   # App打开url
   url_launcher: 6.0.3
   # 本地存储

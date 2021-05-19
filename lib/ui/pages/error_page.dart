@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/app/locator.dart';
+import 'package:template/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 
 class ErrorPage extends StatefulWidget {

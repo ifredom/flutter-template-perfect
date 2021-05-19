@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:template/core/app/locator.dart';
-
-import '../services/connectivity/connectivity_service.dart';
-import '../services/stoppable_service.dart';
+import 'package:template/locator.dart';
+import 'package:template/core/services/connectivity/connectivity_service.dart';
+import 'package:template/core/services/stoppable_service.dart';
 
 /// A manager to start/stop [StoppableService]s when the app goes/returns into/from the background
 class LifeCycleManager extends StatefulWidget {

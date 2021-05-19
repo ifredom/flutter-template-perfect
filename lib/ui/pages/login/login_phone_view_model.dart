@@ -1,6 +1,6 @@
 import 'package:stacked/stacked.dart';
-import 'package:template/core/app/locator.dart';
-import 'package:template/core/mixins/validators.dart';
+import 'package:template/locator.dart';
+import 'package:template/core/utils/common/validators_helper.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 

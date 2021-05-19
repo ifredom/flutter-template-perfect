@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/utils/common/color_utils.dart';
+import 'package:template/core/utils/common/color_helper.dart';
 
 import 'base_slider.dart';
 

@@ -15,9 +15,6 @@ class FocusDetectorManager extends StatelessWidget {
   Widget build(BuildContext context) {
     return FocusDetector(
       key: UniqueKey(),
-
-      // child:child,
-
       child: Scaffold(
         appBar: AppBar(
           title: Text('FocusDetector 示例'),

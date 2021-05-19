@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:template/core/app/locator.dart';
+import 'package:template/locator.dart';
 import 'package:template/core/constants/app_theme.dart';
 import 'package:template/core/constants/tab_icon_data.dart';
 import 'package:template/ui/component/bottom_bar_view.dart';

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:logging/logging.dart';
 import 'package:template/api/apicode/api.dart';
 import 'package:template/api/http_service_impl.dart';
-import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
@@ -39,7 +38,7 @@ class AuthServiceImpl implements AuthService {
       });
     } on Exception {
       _log.severe('AuthServiceImpl: signUpWithAuthcode Exception');
-      throw RepositoryException('signUpWithAuthcode Exception');
+      throw Exception('signUpWithAuthcode Exception');
     }
   }
 
@@ -56,7 +55,7 @@ class AuthServiceImpl implements AuthService {
       });
     } on Exception {
       _log.severe('AuthServiceImpl: signUpWithAuthcode Exception');
-      throw RepositoryException('signUpWithAuthcode Exception');
+      throw Exception('signUpWithAuthcode Exception');
     }
   }
 
@@ -69,7 +68,7 @@ class AuthServiceImpl implements AuthService {
       return await httpService.request(ApiCode.CHECK_USERINFO, {"id": id});
     } on Exception {
       _log.severe('AuthServiceImpl: fetchUserInfo Exception');
-      throw RepositoryException('fetchUserInfo Exception');
+      throw Exception('fetchUserInfo Exception');
     }
   }
 
@@ -83,7 +82,7 @@ class AuthServiceImpl implements AuthService {
           .request(ApiCode.RESET_PASSWORD, {"code": vcode, "pwd": pwd});
     } on Exception {
       _log.severe('AuthServiceImpl: fetchResetPassword Exception');
-      throw RepositoryException('fetchResetPassword Exception');
+      throw Exception('fetchResetPassword Exception');
     }
   }
 
@@ -97,7 +96,7 @@ class AuthServiceImpl implements AuthService {
           .request(ApiCode.ISNEW_USER, {"mobile": mobile, "openId": openId});
     } on Exception {
       _log.severe('AuthServiceImpl: fetchResetPassword Exception');
-      throw RepositoryException('fetchResetPassword Exception');
+      throw Exception('fetchResetPassword Exception');
     }
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:template/core/constants/app_theme.dart';
 import 'package:template/ui/component/title_view.dart';
 
-import 'package:template/core/app/locator.dart';
+import 'package:template/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/routes/routes.dart';
 

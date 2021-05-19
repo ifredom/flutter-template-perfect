@@ -2,35 +2,36 @@ import 'package:dio/dio.dart' show InterceptorsWrapper, RequestInterceptorHandle
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
+
+const _authHeaderToekn = 'token';
+
 class TokenInterceptors extends InterceptorsWrapper {
   String _token;
 
   @override
-  onRequest(
-    RequestOptions requestOptions,
-    RequestInterceptorHandler handler,
-  ) async {
-    if (_token == null || _token == '') {
+  onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    if (_token == null || _token == '' || _token == LocalStorageKeys.DEFAULT_TOKEN) {
       var authorizationCode = await getAuthorization();
       if (authorizationCode != null) {
         _token = authorizationCode;
       }
     }
-    requestOptions.headers['token'] = _token;
-    return handler.next(requestOptions);
+    // handler.reject(DioError(
+    //   error: Error(error),
+    //   requestOptions: options,
+    // ));
+    options.headers[_authHeaderToekn] = _token;
+    return super.onRequest(options, handler);
   }
 
   getAuthorization() async {
     String token = await LocalStorage.get(LocalStorageKeys.TOKEN_KEY);
-    String result = '';
-
-    if (token == null) {
-      result = LocalStorageKeys.DEFAULT_TOKEN;
+    if (token == null || token == '') {
+      token = LocalStorageKeys.DEFAULT_TOKEN;
     } else {
       this._token = token;
-      result = token;
     }
-    return result;
+    return token;
   }
 
   clearAuthorization() {

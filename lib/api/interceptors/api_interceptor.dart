@@ -1,58 +1,29 @@
-import 'package:dio/dio.dart'
-    show Headers, InterceptorsWrapper, RequestInterceptorHandler, RequestOptions, Response, ResponseInterceptorHandler;
-import 'package:template/core/utils/res/local_storage.dart';
+import 'package:dio/dio.dart' show InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
 import '../apicode/whiteList.dart';
-import '../common/code.dart' show Code;
-import '../common/result_data.dart';
+
+import 'token_interceptor.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
-  // set token
+  @override
+  onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    await _generateRequestParams(options);
+    return super.onRequest(options, handler);
+  }
+
+  Future<RequestOptions> _generateRequestParams(RequestOptions options) async {
+    // 在这里可以对请求参数做额外处理，例如对参数加密
+    return options;
+  }
+
+  // 非白名单Apicode都需要token。在登陆时,进行token的存储
   _getUnWhitelistToken(String apiCode) async {
-    String token = await LocalStorage.get(LocalStorageKeys.TOKEN_KEY);
+    TokenInterceptors tokenInterceptors = TokenInterceptors();
+    var token = await tokenInterceptors.getAuthorization();
     if (WhiteList.list.contains(apiCode)) {
       token = LocalStorageKeys.DEFAULT_TOKEN;
     }
     return token;
-  }
-
-  @override
-  onRequest(
-    RequestOptions requestOptions,
-    RequestInterceptorHandler handler,
-  ) async {
-    handler.next(requestOptions);
-  }
-
-  @override
-  onResponse(
-    Response response,
-    ResponseInterceptorHandler handler,
-  ) async {
-    RequestOptions options = response.requestOptions;
-    var value;
-    try {
-      var header = response.headers[Headers.contentTypeHeader];
-      if (header != null && header.toString().contains('text')) {
-        value = ResultData(response.data, true, Code.success);
-      } else if (response.statusCode >= 200 && response.statusCode < 300) {
-        value = ResultData(
-          response.data,
-          true,
-          Code.success,
-          headers: response.headers,
-        );
-      }
-    } catch (error) {
-      print('onResponse error：${options.path}\n ${error.toString()}');
-      value = ResultData(
-        response.data,
-        false,
-        response.statusCode,
-        headers: response.headers,
-      );
-    }
-    return Future.value(value);
   }
 }

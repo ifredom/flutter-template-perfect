@@ -1,11 +1,10 @@
 import 'dart:convert' as convert;
 
 import 'package:dio/dio.dart';
-import 'package:template/core/exceptions/network_exception.dart';
 
 void checkForNetworkExceptions(Response response) {
   if (response.statusCode != 200) {
-    throw NetworkException('Failed to connect to internet');
+    throw Exception('Failed to connect to internet');
   }
 }
 
@@ -21,6 +20,6 @@ dynamic decodeResponseBodyToJson(String body) {
     return data;
   } on FormatException catch (e) {
     print('Network Utils: Failed to decode response body ${e.message}');
-    throw NetworkException(e.message);
+    throw Exception(e.message);
   }
 }

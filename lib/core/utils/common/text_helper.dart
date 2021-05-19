@@ -4,8 +4,8 @@
  * @Description: Text Util.
  */
 
-/// TextUtil.
-class TextUtil {
+/// TextHelper.
+class TextHelper {
   /// isEmpty
   static bool isEmpty(String text) {
     return text == null || text.isEmpty;

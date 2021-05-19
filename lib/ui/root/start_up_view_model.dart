@@ -1,5 +1,5 @@
 import 'package:stacked/stacked.dart';
-import 'package:template/core/app/locator.dart';
+import 'package:template/locator.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/auth/auth_service.dart';
@@ -13,7 +13,7 @@ class StartUpViewModel extends BaseViewModel {
 
   Future handleStartUpLogic() async {
     final hasLoggedInUser = await _authService.isUserLoggedIn();
-
+    print(hasLoggedInUser);
     if (hasLoggedInUser) {
       String id = await LocalStorage.get(LocalStorageKeys.USER_ID);
       var res = await _authService.fetchUserInfo(id);

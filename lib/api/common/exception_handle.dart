@@ -1,35 +1,19 @@
 import 'dart:io';
-
-import 'package:dio/dio.dart' show DioError, Response, DioErrorType;
+import 'package:dio/dio.dart' show DioError, DioErrorType;
 import 'package:flutter/widgets.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:template/core/app/locator.dart';
+import 'package:template/locator.dart';
 import 'package:template/core/model/response_date/response_data.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
+
 import 'code.dart';
 import 'result_data.dart';
 
 class ExceptionHandle {
   static Future<ResultData> handleDioException(DioError error, bool isNoTip) async {
-    Response errorResponse;
-
-    // HTTP请求失败
-    if (error.response != null) {
-      errorResponse = error.response;
-    } else {
-      errorResponse = Response(
-        requestOptions: error.response.requestOptions,
-        statusCode: 0,
-      );
-    }
-
-    if (error.type == DioErrorType.connectTimeout || error.type == DioErrorType.receiveTimeout) {
-      errorResponse.statusCode = Code.timeout_error_code;
-    }
-
     if (error is DioError) {
       // http网络请求成功，服务器返回的信息数据
       if (error.type == DioErrorType.other || error.type == DioErrorType.response) {
@@ -56,7 +40,7 @@ class ExceptionHandle {
       } else if (error.type == DioErrorType.connectTimeout ||
           error.type == DioErrorType.sendTimeout ||
           error.type == DioErrorType.receiveTimeout) {
-        return ResultData('连接超时！', false, Code.timeout_error_code);
+        return ResultData('连接超时！', false, Code.connect_timeout_code);
       } else if (error.type == DioErrorType.cancel) {
         return ResultData('取消请求', false, Code.cancel_error_code);
       } else {

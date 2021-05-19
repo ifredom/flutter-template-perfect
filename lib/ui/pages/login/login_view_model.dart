@@ -1,12 +1,11 @@
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked/stacked.dart';
-import 'package:template/core/app/locator.dart';
-import 'package:template/core/mixins/validators.dart';
+import 'package:template/locator.dart';
+import 'package:template/core/utils/common/validators_helper.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/auth/auth_service.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
@@ -39,7 +38,7 @@ class LoginViewModel extends BaseViewModel with Validators {
     _isBusy = true;
     setBusy(true);
     Future.delayed(Duration(seconds: 2), () {
-      print('延时执行');
+      print('正在登陆中');
       _isBusy = false;
       setBusy(false);
       _navigationService.pushReplacementNamed(ViewRoutes.homeView);
@@ -53,7 +52,7 @@ class LoginViewModel extends BaseViewModel with Validators {
       var res = await _authService.signUpWithAuthcode(mobile, authCode);
       setBusy(false);
       await saveUserInfo(res, mobile);
-    } on RepositoryException {
+    } on Exception {
       setBusy(false);
     }
   }
@@ -70,7 +69,7 @@ class LoginViewModel extends BaseViewModel with Validators {
         setBusy(false);
         showToast(res.data["msg"]);
       }
-    } on RepositoryException {
+    } on Exception {
       setBusy(false);
     }
   }

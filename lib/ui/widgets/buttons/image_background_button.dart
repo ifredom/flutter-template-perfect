@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/utils/common/ScreenUtil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //自定义按钮
 class ImageBackgroundButton extends StatelessWidget {

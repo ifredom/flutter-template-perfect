@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'core/app/locator.dart';
-import 'core/app/logger.dart';
+import 'locator.dart';
+import 'core/utils/logger.dart';
 
 import './core/Constants/Constants.dart';
 import './ui/root/root_component.dart';
@@ -37,7 +37,7 @@ void main() async {
   });
 }
 
-/// 可以在这里将App内所有捕获的异常发送到服务器，编译统计分析异常发生频率及情况。
+/// 可以在这里将应用内所有捕获的异常发送到服务器，用于统计分析应用异常发生频率及情况。
 /// Reports [error] along with its [stackTrace] to server.
 /// https://github.com/flutter/crashy/blob/master/lib/main.dart
 Future<Null> _reportError(dynamic error, dynamic stackTrace) async {

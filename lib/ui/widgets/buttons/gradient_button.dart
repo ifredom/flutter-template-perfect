@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/utils/common/ScreenUtil.dart';
-import 'package:template/core/utils/res/gaps.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //自定义按钮
 class GradientButton extends StatelessWidget {
@@ -49,9 +48,25 @@ class GradientButton extends StatelessWidget {
       _linearGradient = LinearGradient(colors: _colors);
     }
 
+    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+      // onPrimary: Colors.transparent,
+      primary: Colors.transparent, // transparent
+      padding: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25)),
+      ),
+    ).merge(
+      ButtonStyle(
+        overlayColor: MaterialStateProperty.resolveWith((states) {
+          return states.contains(MaterialState.pressed) ? Colors.transparent : null; //点击时，水波动画中水波的颜色
+        }),
+        elevation: MaterialStateProperty.resolveWith((states) => 0),
+      ),
+    );
+
     return Container(
-        width: this.width ?? ScreenUtil().setWidth(180),
-        height: this.height ?? ScreenUtil().setWidth(72),
+        width: this.width ?? 64,
+        height: this.height ?? 36,
         decoration: BoxDecoration(
           color: _backgroundColors,
           gradient: _linearGradient,
@@ -61,8 +76,9 @@ class GradientButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            null == this.prefixIcon ? Gaps.empty : this.prefixIcon,
+            null == this.prefixIcon ? SizedBox() : this.prefixIcon,
             ElevatedButton(
+              style: raisedButtonStyle,
               onPressed: () {
                 onPressed();
               },
@@ -73,7 +89,7 @@ class GradientButton extends StatelessWidget {
                   style: style ??
                       TextStyle(
                         color: Colors.white,
-                        fontSize: ScreenUtil().setSp(30.0),
+                        fontSize: 15,
                       ),
                 ),
               ),

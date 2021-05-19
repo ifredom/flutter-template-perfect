@@ -10,47 +10,36 @@ import 'package:dio/dio.dart'
 import 'package:logging/logging.dart';
 import 'package:template/core/constants/constants.dart';
 
+bool openDebug = Constants.DEBUG;
+
 class LogsInterceptors extends InterceptorsWrapper {
   final _log = Logger('Api - LogsInterceptors');
-  // static List
+
   @override
-  onRequest(
-    RequestOptions requestOptions,
-    RequestInterceptorHandler handler,
-  ) async {
-    if (Constants.DEBUG) {
-      _log.info('request url: ${requestOptions.path}');
-      _log.info('request header: ${requestOptions.headers.toString()}');
-      if (requestOptions.data != null) {
-        _log.info('request params: ${requestOptions.data.toString()}');
+  onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    if (openDebug) {
+      if (options.data != null) {
+        _log.info('request params: ${options.data.toString()} \r\n');
       }
-      print('\r\n');
     }
-    return handler.next(requestOptions);
+    return super.onRequest(options, handler);
   }
 
   @override
-  onResponse(
-    Response response,
-    ResponseInterceptorHandler handler,
-  ) async {
-    if (Constants.DEBUG) {
+  onResponse(Response response, ResponseInterceptorHandler handler) async {
+    if (openDebug) {
       if (response != null) {
-        _log.info('response: ${response.toString()}');
-        print('\r\n');
+        _log.info('response: ${response.toString()} \r\n');
       }
     }
-    return Future.value(response);
+    return super.onResponse(response, handler);
   }
 
   @override
-  onError(
-    DioError error,
-    ErrorInterceptorHandler handler,
-  ) async {
-    if (Constants.DEBUG) {
-      _log.severe('request error info: ${error.response?.toString() ?? ""}');
+  onError(DioError err, ErrorInterceptorHandler handler) async {
+    if (openDebug) {
+      _log.severe('request error info: ${err.response?.toString() ?? ""}');
     }
-    handler.next(error);
+    return super.onError(err, handler);
   }
 }

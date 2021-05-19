@@ -35,23 +35,22 @@ Future<void> setupLocator({bool test = false}) async {
   locator.registerLazySingleton<DialogService>(() => DialogServiceImpl());
   locator.registerLazySingleton<SnackBarService>(() => SnackBarServiceImpl());
 
-  // http data sources
+  // http数据
+  // 用户信息
   locator.registerLazySingleton<AuthService>(() => AuthServiceImpl());
 
-  // Home page data
+  // 主页数据
   locator.registerLazySingleton<HomeViewModel>(() => HomeViewModel());
 
-
-  // Repositories
 
   if (!test) {
     await _setupSharedPreferences();
   }
 
-  // Utils
+  // Utils工具
   locator.registerLazySingleton<FileHelper>(() => FileHelperImpl());
 
-  // External
+  // External 其他工具
   locator.registerLazySingleton<HiveInterface>(() => Hive);
 }
 

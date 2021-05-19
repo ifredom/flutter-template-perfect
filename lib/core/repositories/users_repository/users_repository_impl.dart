@@ -1,14 +1,27 @@
 // import 'package:template/core/data_sources/users/users_local_data_source.dart';
 // import 'package:template/core/data_sources/users/users_remote_data_source.dart';
 import 'package:logging/logging.dart';
-import 'package:template/core/app/locator.dart';
-import 'package:template/core/exceptions/cache_exception.dart';
-import 'package:template/core/exceptions/network_exception.dart';
-import 'package:template/core/exceptions/repository_exception.dart';
+import 'package:template/locator.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/services/connectivity/connectivity_service.dart';
 
 import 'users_repository.dart';
+
+class CacheException implements Exception {
+  final String message;
+  const CacheException(this.message);
+}
+class NetworkException implements Exception {
+  final String message;
+  const NetworkException(this.message);
+}
+
+class RepositoryException implements Exception {
+  final String message;
+
+  const RepositoryException(this.message);
+}
+
 
 class UsersRepositoryImpl implements UsersRepository {
   // final remoteDataSource = locator<UsersRemoteDataSource>();

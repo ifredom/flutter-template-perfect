@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:template/core/app/locator.dart';
+import 'package:template/locator.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/core/utils/common/ScreenUtil.dart';
-import 'package:template/core/utils/common/color_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:template/core/utils/common/color_helper.dart';
 import 'package:template/core/utils/res/gaps.dart';
 import 'package:template/ui/widgets/buttons/gradient_button.dart';
 import 'package:template/ui/widgets/textfield/text_field.dart';
@@ -53,14 +53,14 @@ class _LoginPhoneViewState extends State<LoginPhoneView> {
           child: IgnorePointer(
             ignoring: model.isBusy,
             child: Container(
-              width: ScreenUtil.screenWidth,
-              height: ScreenUtil.screenHeight,
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
               decoration: BoxDecoration(
                 color: HexToColor("#e9f1f6"),
               ),
               child: SingleChildScrollView(
                 child: Container(
-                  width: ScreenUtil.screenWidth * 0.638,
+                  width: ScreenUtil().screenWidth * 0.638,
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
