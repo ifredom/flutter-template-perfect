@@ -7,14 +7,15 @@ import 'package:focus_detector/focus_detector.dart';
 class FocusDetectorManager extends StatelessWidget {
   final Widget child;
 
-  const FocusDetectorManager({Key key, @required this.child})
-      : assert(child != null),
-        super(key: key);
+  const FocusDetectorManager({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FocusDetector(
       key: UniqueKey(),
+
+      // child:child,
+
       child: Scaffold(
         appBar: AppBar(
           title: Text('FocusDetector 示例'),

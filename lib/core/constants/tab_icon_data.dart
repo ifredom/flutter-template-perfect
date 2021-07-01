@@ -6,7 +6,7 @@ class TabIconData {
     this.index = 0,
     this.selectedImagePath = '',
     this.isSelected = false,
-    this.animationController,
+    required this.animationController
   });
 
   String imagePath;
@@ -14,7 +14,7 @@ class TabIconData {
   bool isSelected;
   int index;
 
-  AnimationController animationController;
+  AnimationController animationController = AnimationController(vsync:);
 
   static List<TabIconData> tabIconsList = <TabIconData>[
     TabIconData(
@@ -22,28 +22,32 @@ class TabIconData {
       selectedImagePath: 'assets/images/tab_1s.png',
       index: 0,
       isSelected: true,
-      animationController: null,
+      animationController: animationController,
     ),
     TabIconData(
       imagePath: 'assets/images/tab_2.png',
       selectedImagePath: 'assets/images/tab_2s.png',
       index: 1,
       isSelected: false,
-      animationController: null,
+      // animationController: null,
     ),
     TabIconData(
       imagePath: 'assets/images/tab_3.png',
       selectedImagePath: 'assets/images/tab_3s.png',
       index: 2,
       isSelected: false,
-      animationController: null,
+      // animationController: null,
     ),
     TabIconData(
       imagePath: 'assets/images/tab_4.png',
       selectedImagePath: 'assets/images/tab_4s.png',
       index: 3,
       isSelected: false,
-      animationController: null,
+      // animationController: null,
     ),
   ];
+
+  get animationController => null;
+
+  set animationController(AnimationController animationController) {}
 }

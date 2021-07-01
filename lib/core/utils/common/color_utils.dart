@@ -16,4 +16,4 @@ class HexToColor extends Color {
   HexToColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
-/// 如何使用： HexToColor("#333333")
+/// 使用： HexToColor("#333333")

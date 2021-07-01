@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:provider/provider.dart';
 import 'package:template/core/constants/app_theme.dart';
-
+import 'package:template/core/managers/core_manager.dart';
+import 'package:template/core/managers/restart_manager.dart';
 import 'package:template/core/routes/routes.dart';
-import 'package:template/locator.dart';
+import 'package:template/core/app/locator.dart';
+import 'package:template/core/app/provider_setup.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 
 import './start_up_view.dart';
-import './managers/core_manager.dart';
-import './managers/restart_manager.dart';
+
 class RootComponent extends StatefulWidget {
   @override
   _RootComponentState createState() => _RootComponentState();
@@ -20,20 +22,22 @@ class _RootComponentState extends State<RootComponent> {
   @override
   Widget build(BuildContext context) {
     return RestartManager(
-      child: CoreManager(
-        child: OKToast(
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            // 需要多语言功能时开启
-            // localizationsDelegates: localizationsDelegates,
-            // supportedLocales: supportedLocales,
-            // localeResolutionCallback: loadSupportedLocals,
-            title: 'flutterApp',
-            theme: AppTheme.themData,
-            navigatorKey: navigationService.navigatorKey,
-            navigatorObservers: [CustomNavigatorObserver.routeObserver],
-            onGenerateRoute: (settings) => ViewRoutes.generateRoute(context, settings),
-            home: StartUpView(),
+      child: MultiProvider(
+        providers: providers,
+        child: CoreManager(
+          child: OKToast(
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              // localizationsDelegates: localizationsDelegates,
+              // supportedLocales: supportedLocales,
+              // localeResolutionCallback: loadSupportedLocals,
+              title: 'flutterApp',
+              theme: AppTheme.themData,
+              navigatorKey: navigationService.navigatorKey,
+              navigatorObservers: [CustomNavigatorObserver.routeObserver],
+              onGenerateRoute: (settings) => ViewRoutes.generateRoute(context, settings),
+              home: StartUpView(),
+            ),
           ),
         ),
       ),
@@ -41,26 +45,22 @@ class _RootComponentState extends State<RootComponent> {
   }
 }
 
+
 /// 路由监听
 // 使用: navigatorObservers: <NavigatorObserver>[CustomNavigatorObserver()],
 class CustomNavigatorObserver extends NavigatorObserver {
-  static CustomNavigatorObserver _instance;
+  static CustomNavigatorObserver _instance=CustomNavigatorObserver();
   static final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
-  static CustomNavigatorObserver getInstance() {
-    if (_instance == null) {
-      _instance = CustomNavigatorObserver();
-    }
-    return _instance;
-  }
+  static CustomNavigatorObserver getInstance() => _instance;
 
-  static observer({Routing routing}) {
+  static observer({Routing? routing}) {
     print(_instance);
   }
 
   // https://juejin.im/post/6844903798398255111
   @override
-  void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     if ((previousRoute is TransitionRoute) && previousRoute.opaque) {
       //全屏不透明，通常是一个page
       print("监控到");

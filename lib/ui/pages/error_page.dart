@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:template/locator.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
+import 'package:template/core/utils/res/resources.dart';
 
 class ErrorPage extends StatefulWidget {
   final FlutterErrorDetails details;
@@ -64,6 +65,11 @@ class _ErrorPageState extends State<ErrorPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   TextButton(
+                    style: ButtonStyle(
+                      textStyle: MaterialStateProperty.all(TextStyle(
+                        color: Color(0xFF24292E),
+                      )),
+                    ),
                     onPressed: _errorReport,
                     child: Text('Report'),
                   ),
@@ -71,6 +77,11 @@ class _ErrorPageState extends State<ErrorPage> {
                     width: 40.0,
                   ),
                   TextButton(
+                    style: ButtonStyle(
+                      textStyle: MaterialStateProperty.all(TextStyle(
+                        color: Colors.white,
+                      )),
+                    ),
                     onPressed: () {
                       locator<NavigationService>().pop();
                     },

@@ -7,9 +7,7 @@ import 'lifecycle_manager.dart';
 class CoreManager extends StatelessWidget {
   final Widget child;
 
-  const CoreManager({Key key, @required this.child})
-      : assert(child != null),
-        super(key: key);
+  const CoreManager({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

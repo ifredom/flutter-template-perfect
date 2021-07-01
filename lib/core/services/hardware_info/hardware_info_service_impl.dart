@@ -7,9 +7,9 @@ import 'hardware_info_service.dart';
 /// Service that is responsible for getting hardware device info
 class HardwareInfoServiceImpl implements HardwareInfoService {
   final _log = Logger("HardwareInfoServiceImpl");
-  String _operatingSystem;
-  String _device;
-  String _udid;
+  String _operatingSystem = '';
+  String _device = '';
+  String _udid = '';
 
   @override
   String get operatingSystem => _operatingSystem;

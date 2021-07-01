@@ -12,11 +12,11 @@ class StartUpView extends StatelessWidget {
         maxWidth: MediaQuery.of(context).size.width,
         maxHeight: MediaQuery.of(context).size.height,
       ),
-      designSize: Size(750, 1334), /// iphone size
-      orientation: Orientation.landscape,
+      designSize: Size(1080, 1920),
+      orientation: Orientation.portrait,
     );
     return ViewModelBuilder<StartUpViewModel>.reactive(
-      viewModelBuilder: ()=>StartUpViewModel(),
+      viewModelBuilder: () => StartUpViewModel(),
       onModelReady: (model) => model.handleStartUpLogic(),
       builder: (context, model, child) => Scaffold(
         body: Center(

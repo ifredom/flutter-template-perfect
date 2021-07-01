@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:template/core/constants/app_theme.dart';
+import 'package:template/ui/component/title_view.dart';
 
 class ForthScreen extends StatefulWidget {
   @override
@@ -12,10 +13,9 @@ class _ForthScreenState extends State<ForthScreen> with TickerProviderStateMixin
     return Container(
       color: AppTheme.background,
       child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Container(
-            child: Text("Forth Screen"),
-          )),
+        backgroundColor: Colors.transparent,
+        body: Container(child: Text("Forth Screen"),)
+      ),
     );
   }
 }

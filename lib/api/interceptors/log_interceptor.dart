@@ -1,12 +1,4 @@
-import 'package:dio/dio.dart'
-    show
-        DioError,
-        ErrorInterceptorHandler,
-        InterceptorsWrapper,
-        RequestInterceptorHandler,
-        RequestOptions,
-        Response,
-        ResponseInterceptorHandler;
+import 'package:dio/dio.dart' show DioError, ErrorInterceptorHandler, InterceptorsWrapper, RequestInterceptorHandler, RequestOptions, Response, ResponseInterceptorHandler;
 import 'package:logging/logging.dart';
 import 'package:template/core/constants/constants.dart';
 

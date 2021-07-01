@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 //自定义按钮
 class ImageBackgroundButton extends StatelessWidget {
@@ -35,11 +35,15 @@ class ImageBackgroundButton extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fitWidth,
-          image: this.image,
+          image: this.image ?? null,
         ),
         borderRadius: borderRadius ?? BorderRadius.circular(25),
       ),
-      child: TextButton(
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        color: Colors.transparent, // 设为透明色
+        elevation: 0, // 正常时阴影隐藏
+        highlightElevation: 0, // 点击时阴影隐藏
         onPressed: () {
           onPressed();
         },

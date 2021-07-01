@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/utils/common/color_helper.dart';
+import 'package:template/core/constants/app_theme.dart';
 import 'package:template/core/utils/res/gaps.dart';
+import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/ui/widgets/appbar/custom_appbar.dart';
 
 class ProductDetailView extends StatefulWidget {
   final post;
-  ProductDetailView(this.post, {Key key}) : super(key: key);
+  ProductDetailView(this.post, {Key? key}) : super(key: key);
   @override
   _ProductDetailViewState createState() => _ProductDetailViewState();
 }

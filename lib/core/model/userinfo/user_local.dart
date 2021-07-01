@@ -27,12 +27,12 @@ class UserLocal extends HiveObject {
   final String website;
 
   UserLocal({
-    this.id,
-    this.name,
-    this.username,
-    this.mobile,
-    this.email,
-    this.website,
+    this.id='',
+    this.name='',
+    this.username='',
+    this.mobile='',
+    this.email='',
+    this.website='',
   });
 
   factory UserLocal.fromUser(User user) {

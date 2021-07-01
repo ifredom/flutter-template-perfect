@@ -1,16 +1,13 @@
 # template(模板)
 
-* A Flutter mvvm template (flutter MVVM 模板).
-* [core package(核心架构库：stacked)](https://pub.flutter-io.cn/packages/stacked) - anthor: FilledStacks
+A new Flutter project template(flutter完整商用项目模板).
+
+* flutter version: 2.2.0
+
 ## Getting Starter(开始)
 
 > flutter run
-> 
-> flutter build apk
 
-## 结构
-
-> RootComponent(根组件) -> StartUpView(启动) -> HomeView(主页)
 ## Features(演示功能)
 
 * 蓝牙搜索，连接硬件设备，互传数据 (Bluetooth)

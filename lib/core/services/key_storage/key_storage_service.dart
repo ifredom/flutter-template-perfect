@@ -1,3 +1,3 @@
 abstract class KeyStorageService {
-  bool hasNotificationsEnabled;
+  bool hasNotificationsEnabled = false;
 }

@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:template/locator.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template/core/utils/common/color_helper.dart';
+
+import 'package:template/core/utils/common/color_utils.dart';
 
 enum BackImageMode { light, black }
 
@@ -20,11 +20,11 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   // 默认显示左侧按钮
   final bool defaultLeft;
   // 左侧widget
-  final Widget frontWidget;
+  final Widget? frontWidget;
   // 右侧widget
-  final Widget trailingWidget;
+  final Widget? trailingWidget;
   // 标题颜色
-  final TextStyle style;
+  final TextStyle? style;
   // 背景模式，默认有两种
   final BackImageMode backImageMode;
   //透明度
@@ -32,17 +32,17 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   // 中间，标题文字
   final String title;
   //中间视图
-  final Widget middle;
+  final Widget? middle;
   // 背景视图
-  final Widget background;
+  final Widget? background;
   // 背景颜色数组,支持渐变色
-  final List<Color> colors;
+  final List<Color>? colors;
 
   //默认 _actionW * count 如果超过需要设置
-  final double actionsMaxW;
+  final double? actionsMaxW;
 
   CustomAppbar({
-    @required this.title,
+    required this.title,
     this.height = 50,
     this.opacity = 1.0,
     this.colors,
@@ -54,7 +54,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.trailingWidget,
     this.actionsMaxW,
     this.backImageMode = BackImageMode.light,
-  }) : assert(title != null);
+  });
 
   @override
   Size get preferredSize => Size.fromHeight(height);
@@ -62,7 +62,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     double _actionsMaxW = 94.0;
-    List _widgetColors = this.colors ?? [];
+    List<Color> _widgetColors = this.colors ?? [];
     Color _backgroundColors;
     LinearGradient _linearGradient;
 
@@ -73,19 +73,19 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     if (_widgetColors.isEmpty) {
       // 默认背景色
       _backgroundColors = HexToColor("#F7F2FF");
-      _linearGradient = null;
+      _linearGradient = LinearGradient(colors: []);
     } else if (_widgetColors.length == 1) {
       // 背景单色
       _backgroundColors = _widgetColors[0];
-      _linearGradient = null;
+      _linearGradient = LinearGradient(colors: []);
     } else {
       // 背景渐变色
-      _backgroundColors = null;
+      _backgroundColors = HexToColor("#F7F2FF");
       _linearGradient = LinearGradient(colors: _widgetColors);
     }
 
     // 左侧组件
-    Widget _frontWidget = this.frontWidget;
+    Widget? _frontWidget = this.frontWidget;
     if (null == _frontWidget && defaultLeft) {
       _frontWidget = this.backImageMode == BackImageMode.light
           ? Image.asset(
@@ -102,7 +102,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
     //数据处理
     //背景视图
-    Widget _background = this.background;
+    Widget? _background = this.background;
     if (_background == null) {
       _background = Container(
         decoration: BoxDecoration(

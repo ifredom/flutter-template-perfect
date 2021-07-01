@@ -33,7 +33,7 @@ class FileHelperImpl implements FileHelper {
   @override
   Future<MultipartFile> convertFileToMultipartFile(File file) async {
     final fileBaseName = basename(file.path);
-    final mimeType = lookupMimeType(fileBaseName);
+    final mimeType = lookupMimeType(fileBaseName) ?? '';
     final contentType = MediaType.parse(mimeType);
 
     return MultipartFile.fromFileSync(

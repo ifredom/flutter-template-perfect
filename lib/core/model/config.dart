@@ -1,5 +1,5 @@
 class ThemeInfo {
   bool isDart;
-  String theme = 'white';
-  ThemeInfo({this.isDart, this.theme});
+  String theme;
+  ThemeInfo({this.isDart = false, this.theme = 'white'});
 }

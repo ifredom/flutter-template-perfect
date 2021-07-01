@@ -17,14 +17,14 @@ class Validators {
   RegExp postalCode = RegExp(
       r'^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|[Xx])$');
 
-  String validateEmail(String value) {
+  String? validateEmail(String value) {
     if (!emailRegExp.hasMatch(value.trim())) {
       return LocalKeys.invalid_email;
     }
     return null;
   }
 
-  String validatePhoneNumber(String value) {
+  String? validatePhoneNumber(String value) {
     if (phoneNumberRegExp.hasMatch(value.trim())) {
       return null;
     } else {
@@ -32,7 +32,7 @@ class Validators {
     }
   }
 
-  String validatePassword(String value) {
+  String? validatePassword(String value) {
     if (value.trim().isEmpty) {
       return LocalKeys.password_empty;
     } else if (!passwordRegExp.hasMatch(value.trim())) {
@@ -41,7 +41,7 @@ class Validators {
     return null;
   }
 
-  String validatePostalcode(String value) {
+  String? validatePostalcode(String value) {
     if (value.length != 18) {
       return LocalKeys.invalid_postal_idcard; // 位数不够
     }

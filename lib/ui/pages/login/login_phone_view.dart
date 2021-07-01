@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:template/locator.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template/core/utils/common/color_helper.dart';
+
+import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/core/utils/res/gaps.dart';
 import 'package:template/ui/widgets/buttons/gradient_button.dart';
 import 'package:template/ui/widgets/textfield/text_field.dart';
@@ -104,7 +105,7 @@ class _LoginPhoneViewState extends State<LoginPhoneView> {
                               ),
                               colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
                               onPressed: () {
-                                if (!formKey.currentState.validate()) return;
+                                if (!formKey.currentState!.validate()) return;
                                 model.loginWithPassword(loginPhoneController.text, pwdController.text);
                               },
                             ),
@@ -145,10 +146,10 @@ class BuildLoginButton extends ViewModelWidget<LoginPhoneViewModel> {
   final String password;
 
   BuildLoginButton({
-    Key key,
-    @required this.formKey,
-    @required this.phone,
-    @required this.password,
+    Key? key,
+    required this.formKey,
+    required this.phone,
+    required this.password,
   });
 
   @override
@@ -169,7 +170,7 @@ class BuildLoginButton extends ViewModelWidget<LoginPhoneViewModel> {
         ),
         onPressed: () {
           print("$phone  $password");
-          if (!formKey.currentState.validate()) return;
+          if (!formKey.currentState!.validate()) return;
           model.loginWithPassword(phone, password);
         },
       ),

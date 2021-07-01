@@ -1,16 +1,16 @@
 import 'dart:async' show Future;
 import 'dart:collection' show HashMap;
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart' show Dio, Options, DioError, Response, Headers;
 import 'package:logging/logging.dart';
-import 'package:template/locator.dart';
-import 'package:template/core/constants/constants.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/utils/common/file_helper.dart';
-import 'package:template/core/utils/common/network_helper.dart' as network_helper;
-import 'common/code.dart';
+
+import '../core/constants/constants.dart';
+import '../core/utils/common/network_utils.dart' as network_utils;
 import 'common/exception_handle.dart' show ExceptionHandle;
-import 'common/result_data.dart';
 import 'http_service.dart';
 import 'interceptors/api_interceptor.dart' show ApiInterceptors;
 import 'interceptors/error_interceptor.dart' show ErrorInterceptors;
@@ -18,21 +18,16 @@ import 'interceptors/header_interceptor.dart' show HeaderInterceptors;
 import 'interceptors/log_interceptor.dart' show LogsInterceptors;
 import 'interceptors/token_interceptor.dart' show TokenInterceptors;
 
+/// 请求实体类
 class HttpServiceImpl implements HttpService {
   static const CONTENT_TYPE_JSON = Headers.jsonContentType;
   static const CONTENT_TYPE_FROM = Headers.formUrlEncodedContentType;
 
-  static HttpServiceImpl instance;
+  static HttpServiceImpl instance = HttpServiceImpl();
 
-  static HttpServiceImpl getInstance() {
-    if (instance != null) {
-      return instance;
-    }
-    instance = HttpServiceImpl();
-    return instance;
-  }
+  static HttpServiceImpl getInstance() => instance;
 
-  static TokenInterceptors tokenInterceptors = TokenInterceptors();
+  static TokenInterceptors _tokenInterceptors = TokenInterceptors();
 
   final _log = Logger('HttpServiceImpl');
   final _fileHelper = locator<FileHelper>();
@@ -41,31 +36,20 @@ class HttpServiceImpl implements HttpService {
   HttpServiceImpl() {
     _dio.interceptors.add(LogsInterceptors());
     _dio.interceptors.add(HeaderInterceptors());
-    _dio.interceptors.add(tokenInterceptors);
+    _dio.interceptors.add(_tokenInterceptors);
     _dio.interceptors.add(ApiInterceptors());
     _dio.interceptors.add(ErrorInterceptors(_dio));
   }
 
   @override
-  Future<ResultData> request(
+  Future<dynamic> request(
     String apiCode,
     Map params, {
-    Map<String, dynamic> headers,
-    Options options,
-    isNoTip = false,
+    Map<String, dynamic>? headers,
+    Options? options,
+    bool isNoTip = false,
   }) async {
-    // if (Constants.useProxy) {
-    // final adapter =
-    //     Request.dioClient.httpClientAdapter as DefaultHttpClientAdapter;
-    // adapter.onHttpClientCreate = (client) {
-    //   // 设置Http代理
-    //   client.findProxy = (uri) {
-    //     return "PROXY ${Constants.proxyAddress}";
-    //   };
-    //   // https证书校验
-    //   client.badCertificateCallback = (cert, host, port) => true;
-    // };
-    // }
+    _dio.options.baseUrl = Constants.BASE_URL;
 
     Map<String, dynamic> _headers = HashMap();
     if (headers != null) {
@@ -75,19 +59,19 @@ class HttpServiceImpl implements HttpService {
     if (options != null) {
       options.headers = _headers;
     } else {
-      options = Options(method: 'post', contentType: 'application/json'); // 默认为post请求
+      options = Options(method: 'post', contentType: 'application/json'); // 默认所有的请求为post请求
       options.headers = _headers;
     }
 
     Response response;
     try {
-      params["apiCode"] = apiCode;
+      // params["apiCode"] = apiCode;
       response = await _dio.request(
-        Constants.BASE_URL,
-        data: params, // 注意，所有data数据都要encode变为json字符串.
+        Constants.BASE_URL + apiCode,
+        data: json.encode(params), // 注意，所有data数据都要encode变为json字符串.
         options: options,
-        onSendProgress: network_helper.showLoadingProgress,
-        onReceiveProgress: network_helper.showLoadingProgress,
+        onSendProgress: network_utils.showLoadingProgress,
+        onReceiveProgress: network_utils.showLoadingProgress,
       );
     } on DioError catch (error) {
       _log.severe(error.toString());
@@ -96,14 +80,7 @@ class HttpServiceImpl implements HttpService {
     if (response.data is DioError) {
       return ExceptionHandle.handleDioException(response.data, isNoTip);
     }
-
-    ResultData result = ResultData(
-      response.data,
-      true,
-      Code.success
-    );
-
-    return result;
+    return response.data;
   }
 
   @override
@@ -116,13 +93,13 @@ class HttpServiceImpl implements HttpService {
       response = await _dio.download(
         fileUrl,
         file.path,
-        onReceiveProgress: network_helper.showLoadingProgress,
+        onReceiveProgress: network_utils.showLoadingProgress,
       );
     } on DioError catch (e) {
       throw ExceptionHandle.handleDioException(e, false);
     }
 
-    network_helper.checkForNetworkExceptions(response);
+    network_utils.checkForNetworkExceptions(response);
 
     return file;
   }

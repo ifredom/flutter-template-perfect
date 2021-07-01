@@ -2,7 +2,7 @@
  * 状态码
  */
 class Code {
-  // HTTP错误码
+  // HTTP状态码
   static const int success = 200;
   static const int success_not_content = 204;
   static const int unauthorized = 401;
@@ -21,11 +21,11 @@ class Code {
   static const int socket_error_code = 1002; // 连接失败
   static const int http_error_code = 1003; // 网络错误
   static const int send_timeout_code = 1004; // 请求超时
-  static const int connect_timeout_code= 1005; // 连接超时
-  static const int receive_timeout_code= 1006; // 响应超时
-  static const int unknow_host_code= 1007; // 未知主机
-  static const int cancel_error_code= 1008; // 取消请求
-  static const int unknown_error_code = 9999;  // 未知错误代码
+  static const int connect_timeout_code = 1005; // 连接超时
+  static const int receive_timeout_code = 1006; // 响应超时
+  static const int unknow_host_code = 1007; // 未知主机
+  static const int cancel_error_code = 1008; // 取消请求
+  static const int unknown_error_code = 9999; // 未知错误代码
 
   static const String net_error_message = "网络异常";
   static const String socket_error_message = "Socket Exception，检查网络！";

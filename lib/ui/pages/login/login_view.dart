@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
-import 'package:template/locator.dart';
+import 'package:template/core/app/locator.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:template/core/utils/common/color_helper.dart';
+
+import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/core/utils/res/gaps.dart';
 import 'package:template/ui/pages/login/login_view_model.dart';
 import 'package:template/ui/widgets/buttons/gradient_button.dart';
@@ -48,110 +49,119 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.nonReactive(
       viewModelBuilder: () => LoginViewModel(),
-      builder: (context, model, child) => SafeArea(
-        child: Scaffold(
-          body: Form(
-            key: formKey,
-            child: IgnorePointer(
-              ignoring: model.isBusy,
-              child: Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.topCenter,
-                fit: StackFit.loose,
-                children: <Widget>[
-                  Positioned(
-                    top: 0,
-                    child: Container(
-                      width: ScreenUtil().screenWidth,
-                      height: ScreenUtil().screenHeight,
-                      child: Lottie.asset('assets/animations/lottie/18582-as-the-waters-rise.json'),
-                    ),
+      builder: (context, model, child) => Scaffold(
+        body: Form(
+          key: formKey,
+          child: IgnorePointer(
+            ignoring: model.isBusy,
+            child: Container(
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    "assets/images/loginbg.png",
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: SingleChildScrollView(
-                      child: Center(
-                        child: Container(
-                          width: ScreenUtil().screenWidth * 0.68,
-                          // height: ScreenUtil().screenHeight * 0.75,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: ScreenUtil().setWidth(60),
-                            vertical: ScreenUtil().setHeight(60),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              InputField(
-                                focusNode: _loginNameFocus,
-                                nextFocusNode: _pwdFocus,
-                                roundBox: true,
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15.0,
-                                  textBaseline: TextBaseline.alphabetic,
-                                ),
-                                hintText: "请输入账号",
-                                hintStyle: TextStyle(color: HexToColor("#FFFFFF")),
-                                controller: loginNameController,
-                                borderColor: HexToColor("#CBAEFA"),
-                              ),
-                              Gaps.vGap40,
-                              InputField(
-                                focusNode: _pwdFocus,
-                                roundBox: true,
-                                obscureText: true,
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15.0,
-                                  textBaseline: TextBaseline.alphabetic,
-                                ),
-                                hintText: "请输入登陆密码",
-                                hintStyle: TextStyle(color: HexToColor("#FFFFFF")),
-                                controller: pwdController,
-                                borderColor: HexToColor("#CBAEFA"),
-                              ),
-                              Gaps.vGap40,
-                              Center(
-                                  child: Container(
-                                height: ScreenUtil().setHeight(86.0),
-                                decoration: BoxDecoration(
-                                  //背景
-                                  color: HexToColor('#A061FD'),
-                                  //设置四周圆角 角度 这里的角度应该为 父Container height 的一半
-                                  borderRadius: BorderRadius.all(Radius.circular(43.0)),
-                                ),
-                                child: GradientButton(
-                                  text: '登录',
-                                  colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
-                                  onPressed: () {
-                                    model.loginWithPassword(loginNameController.text, pwdController.text);
-                                  },
-                                ),
-                              )),
-                              Gaps.vGap30,
-                              Center(
-                                child: GestureDetector(
-                                  child: Text(
-                                    "手机验证码登录",
-                                    style: TextStyle(
-                                      color: HexToColor("#FF696A"),
-                                      fontSize: ScreenUtil().setSp(30),
-                                    ),
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Container(
+                  width: ScreenUtil().screenWidth * 0.638,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Lottie.asset('assets/animations/lottie/18582-as-the-waters-rise.json'),
+                      Center(
+                        child: SingleChildScrollView(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: ScreenUtil().setWidth(60),
+                              vertical: ScreenUtil().setHeight(60),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                InputField(
+                                  focusNode: _loginNameFocus,
+                                  nextFocusNode: _pwdFocus,
+                                  roundBox: true,
+                                  textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15.0,
+                                    textBaseline: TextBaseline.alphabetic,
                                   ),
-                                  onTap: () {
-                                    locator<NavigationService>().push(ViewRoutes.loginPhoneView);
-                                  },
+                                  hintText: "请输入账号",
+                                  hintStyle: TextStyle(color: HexToColor("#FFFFFF")),
+                                  controller: loginNameController,
+                                  borderColor: HexToColor("#CBAEFA"),
                                 ),
-                              ),
-                              Gaps.vGap40,
-                            ],
+                                Gaps.vGap40,
+                                InputField(
+                                  focusNode: _pwdFocus,
+                                  roundBox: true,
+                                  obscureText: true,
+                                  textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15.0,
+                                    textBaseline: TextBaseline.alphabetic,
+                                  ),
+                                  hintText: "请输入登陆密码",
+                                  hintStyle: TextStyle(color: HexToColor("#FFFFFF")),
+                                  controller: pwdController,
+                                  borderColor: HexToColor("#CBAEFA"),
+                                ),
+                                Gaps.vGap40,
+                                Center(
+                                    child: Container(
+                                  width: MediaQuery.of(context).size.width * 0.2739,
+                                  height: ScreenUtil().setHeight(86.0),
+                                  decoration: BoxDecoration(
+                                    //背景
+                                    color: HexToColor('#A061FD'),
+                                    //设置四周圆角 角度 这里的角度应该为 父Container height 的一半
+                                    borderRadius: BorderRadius.all(Radius.circular(43.0)),
+                                  ),
+                                  child: GradientButton(
+                                    text: '登录',
+                                    width: ScreenUtil().setWidth(320.0),
+                                    height: ScreenUtil().setWidth(88.0),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: ScreenUtil().setSp(34.0),
+                                    ),
+                                    colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
+                                    onPressed: () {
+                                      model.loginWithPassword(loginNameController.text, pwdController.text);
+                                    },
+                                  ),
+                                )),
+                                Gaps.vGap30,
+                                Center(
+                                  child: GestureDetector(
+                                    child: Text(
+                                      "手机验证码登录",
+                                      style: TextStyle(
+                                        color: HexToColor("#FF696A"),
+                                        fontSize: ScreenUtil().setSp(30),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      locator<NavigationService>().push(ViewRoutes.loginPhoneView);
+                                    },
+                                  ),
+                                ),
+                                Gaps.vGap40,
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                      Gaps.empty
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
@@ -167,10 +177,10 @@ class BuildLoginButton extends ViewModelWidget<LoginViewModel> {
   final String password;
 
   BuildLoginButton({
-    Key key,
-    @required this.formKey,
-    @required this.phone,
-    @required this.password,
+    Key? key,
+    required this.formKey,
+    required this.phone,
+    required this.password,
   });
 
   @override
@@ -191,7 +201,7 @@ class BuildLoginButton extends ViewModelWidget<LoginViewModel> {
         ),
         onPressed: () {
           print("$phone  $password");
-          if (!formKey.currentState.validate()) return;
+          if (!formKey.currentState!.validate()) return;
           model.loginWithPassword(phone, password);
         },
       ),

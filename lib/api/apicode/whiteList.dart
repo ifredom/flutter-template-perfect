@@ -4,6 +4,6 @@ import 'api.dart';
 class WhiteList {
   static List list = const <String>[
     ApiCode.SIGN_IN,
-    ApiCode.GET_CODE
+    ApiCode.GET_CODE,
   ];
 }

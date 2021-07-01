@@ -4,8 +4,8 @@
  * @Description: Text Util.
  */
 
-/// TextHelper.
-class TextHelper {
+/// TextUtil.
+class TextUtil {
   /// isEmpty
   static bool isEmpty(String text) {
     return text == null || text.isEmpty;
@@ -13,10 +13,10 @@ class TextHelper {
 
   /// 每隔 x位 加 pattern
   static String formatDigitPattern(String text, {int digit = 4, String pattern = ' '}) {
-    text = text?.replaceAllMapped(RegExp("(.{$digit})"), (Match match) {
+    text = text.replaceAllMapped(RegExp("(.{$digit})"), (Match match) {
       return "${match.group(0)}$pattern";
     });
-    if (text != null && text.endsWith(pattern)) {
+    if ( text.endsWith(pattern)) {
       text = text.substring(0, text.length - 1);
     }
     return text;
@@ -38,23 +38,23 @@ class TextHelper {
   /// 每隔3三位加逗号
   /// num 数字或数字字符串。int型。
   static String formatComma3(Object num) {
-    return formatDigitPatternEnd(num?.toString(), digit: 3, pattern: ',');
+    return formatDigitPatternEnd(num.toString(), digit: 3, pattern: ',');
   }
 
   /// hideNumber
   static String hideNumber(String phoneNo, {int start = 3, int end = 7, String replacement = '****'}) {
-    return phoneNo?.replaceRange(start, end, replacement);
+    return phoneNo.replaceRange(start, end, replacement);
   }
 
   /// replace
   static String replace(String text, Pattern from, String replace) {
-    return text?.replaceAll(from, replace);
+    return text.replaceAll(from, replace);
   }
 
   /// split
   static List<String> split(String text, Pattern pattern, {List<String> defValue = const []}) {
-    List<String> list = text?.split(pattern);
-    return list ?? defValue;
+    List<String> list = text.split(pattern);
+    return list;
   }
 
   /// reverse

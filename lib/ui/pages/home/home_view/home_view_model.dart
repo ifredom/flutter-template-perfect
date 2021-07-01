@@ -1,7 +1,8 @@
 
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked/stacked.dart';
-import 'package:template/locator.dart';
+import 'package:template/core/app/locator.dart';
+import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/auth/auth_service.dart';
@@ -36,7 +37,7 @@ class HomeViewModel extends BaseViewModel{
         } else {
           showToast(res.data["msg"]);
         }
-      } on Exception {
+      } on RepositoryException {
         setBusy(false);
       }
     } else {

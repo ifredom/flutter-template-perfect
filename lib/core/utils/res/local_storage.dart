@@ -49,7 +49,7 @@ class LocalStorage {
 
   static getMap(String key) async {
     SharedPreferences _preferences = await SharedPreferences.getInstance();
-    return json.decode(_preferences.get(key));
+    return json.decode(_preferences.get(key).toString());
   }
 
   static getListStr(String key) async {

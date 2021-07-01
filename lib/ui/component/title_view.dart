@@ -5,11 +5,11 @@ typedef CallbackFunction = void Function();
 class TitleView extends StatelessWidget {
   final String titleTxt;
   final String subTxt;
-  final CallbackFunction callback;
-  final AnimationController animationController;
-  final Animation animation;
+  final CallbackFunction? callback;
+  final AnimationController? animationController;
+  final Animation? animation;
   const TitleView(
-      {Key key, this.titleTxt = "", this.subTxt = "", this.callback, this.animationController, this.animation})
+      {Key? key, this.titleTxt = "", this.subTxt = "", this.callback, this.animationController, this.animation})
       : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class TitleView extends StatelessWidget {
               highlightColor: Colors.transparent,
               borderRadius: BorderRadius.all(Radius.circular(4.0)),
               onTap: () {
-                this.callback();
+                this.callback!();
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),

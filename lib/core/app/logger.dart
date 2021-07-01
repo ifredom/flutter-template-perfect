@@ -35,6 +35,6 @@ class _SimpleLogPrinter extends fancy.LogPrinter {
   List<String> log(fancy.LogEvent event) {
     var color = fancy.PrettyPrinter.levelColors[event.level];
     var emoji = fancy.PrettyPrinter.levelEmojis[event.level];
-    return [color('$emoji: ${event.message}')];
+    return [color!('$emoji: ${event.message}')];
   }
 }

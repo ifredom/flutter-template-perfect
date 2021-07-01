@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:template/core/utils/common/color_helper.dart';
+
+import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/core/utils/res/gaps.dart';
 
 // 使用原textfield的属性，进行扩展
@@ -199,7 +200,7 @@ class BuildTextfieldWrapper extends StatelessWidget {
           );
 
     EdgeInsetsGeometry _padding =
-        widget.padding ?? EdgeInsets.fromLTRB(10, 0, 10, 0);
+        widget.padding ?? EdgeInsets.fromLTRB(ScreenUtil().setWidth(32), 0, ScreenUtil().setWidth(32), 0);
 
     return Container(
       padding: _padding,
@@ -221,15 +222,15 @@ class BuildTextfieldWrapper extends StatelessWidget {
               : Row(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    SizedBox(width: 16),
+                    SizedBox(width: ScreenUtil().setWidth(32)),
                     SizedBox(
                       width: 1,
-                      height: 24,
+                      height: ScreenUtil().setWidth(48),
                       child: Container(
                         color: HexToColor('#767680'),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    SizedBox(width: ScreenUtil().setWidth(32)),
                     GestureDetector(
                       // padding: EdgeInsets.symmetric(vertical: 0),
                       child: Text(

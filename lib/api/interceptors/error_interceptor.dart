@@ -8,7 +8,6 @@ class ErrorInterceptors extends InterceptorsWrapper {
 
   ErrorInterceptors(this._dio);
 
-  // https://github.com/flutterchina/dio/blob/master/README-ZH.md
   @override
   onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     var connectivityResult = await (Connectivity().checkConnectivity());

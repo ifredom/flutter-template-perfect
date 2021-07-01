@@ -1,10 +1,12 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:template/core/constants/app_theme.dart';
 import 'package:template/core/constants/tab_icon_data.dart';
-import 'package:template/core/utils/common/color_helper.dart';
+import 'package:template/core/utils/common/color_utils.dart';
 
 class BottomBarView extends StatefulWidget {
-  const BottomBarView({Key key, this.tabIconsList, this.changeIndex, this.addClick}) : super(key: key);
+  const BottomBarView({Key? key, required this.tabIconsList, required this.changeIndex, required this.addClick})
+      : super(key: key);
 
   final Function(int index) changeIndex;
   final Function addClick;
@@ -13,16 +15,14 @@ class BottomBarView extends StatefulWidget {
   _BottomBarViewState createState() => _BottomBarViewState();
 }
 
-class _BottomBarViewState extends State<BottomBarView> with TickerProviderStateMixin {
-  AnimationController animationController;
+class _BottomBarViewState extends State<BottomBarView> with SingleTickerProviderStateMixin {
+  late AnimationController animationController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1000),
+  )..forward();
 
   @override
   void initState() {
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    );
-    animationController.forward();
     super.initState();
   }
 
@@ -160,10 +160,10 @@ class _BottomBarViewState extends State<BottomBarView> with TickerProviderStateM
 }
 
 class TabIcons extends StatefulWidget {
-  const TabIcons({Key key, this.tabIconData, this.removeAllSelect}) : super(key: key);
-
   final TabIconData tabIconData;
   final Function removeAllSelect;
+  TabIcons({Key? key, required this.tabIconData, required this.removeAllSelect}) : super(key: key);
+
   @override
   _TabIconsState createState() => _TabIconsState();
 }

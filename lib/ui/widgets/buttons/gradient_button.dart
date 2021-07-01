@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:template/core/utils/res/gaps.dart';
 
 //自定义按钮
 class GradientButton extends StatelessWidget {
@@ -33,7 +33,7 @@ class GradientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    final List<Color> _colors = this.colors ?? List.empty();
+    final List<Color> _colors = this.colors ?? List();
 
     Color _backgroundColors; // 单色
     LinearGradient _linearGradient; // 渐变色
@@ -49,25 +49,9 @@ class GradientButton extends StatelessWidget {
       _linearGradient = LinearGradient(colors: _colors);
     }
 
-    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      // onPrimary: Colors.transparent,
-      primary: Colors.transparent, // transparent
-      padding: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(25)),
-      ),
-    ).merge(
-      ButtonStyle(
-        overlayColor: MaterialStateProperty.resolveWith((states) {
-          return states.contains(MaterialState.pressed) ? Colors.transparent : null; //点击时，水波动画中水波的颜色
-        }),
-        elevation: MaterialStateProperty.resolveWith((states) => 0),
-      ),
-    );
-
     return Container(
-        width: this.width ?? 64,
-        height: this.height ?? 36,
+        width: this.width ?? ScreenUtil().setWidth(180),
+        height: this.height ?? ScreenUtil().setWidth(72),
         decoration: BoxDecoration(
           color: _backgroundColors,
           gradient: _linearGradient,
@@ -77,9 +61,15 @@ class GradientButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            null == this.prefixIcon ? SizedBox() : this.prefixIcon,
-            ElevatedButton(
-              style: raisedButtonStyle,
+            null == this.prefixIcon ? Gaps.empty : this.prefixIcon,
+            RaisedButton(
+              color: Colors.transparent, // 设为透明色
+              elevation: 0, // 正常时阴影隐藏
+              highlightElevation: 0, // 点击时阴影隐藏
+              //点击时，水波动画中水波的颜色
+              splashColor: Colors.black12,
+              //内边距
+              padding: EdgeInsets.zero,
               onPressed: () {
                 onPressed();
               },
@@ -90,7 +80,7 @@ class GradientButton extends StatelessWidget {
                   style: style ??
                       TextStyle(
                         color: Colors.white,
-                        fontSize: ScreenUtil().setSp(32),
+                        fontSize: ScreenUtil().setSp(30.0),
                       ),
                 ),
               ),
