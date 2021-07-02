@@ -10,7 +10,7 @@ class DrawerExample extends StatefulWidget {
 }
 
 class _DrawerExampleState extends State<DrawerExample> {
-  AnimationController sliderAnimationController;
+  late AnimationController sliderAnimationController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

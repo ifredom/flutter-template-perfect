@@ -10,18 +10,15 @@ class ConnectivityServiceImpl implements ConnectivityService {
   final _connectivityResultController = StreamController<ConnectivityStatus>();
   final _connectivity = Connectivity();
 
-  StreamSubscription<ConnectivityResult> _subscription;
-  ConnectivityResult _lastResult;
+  ConnectivityResult _lastResult = ConnectivityResult.none;
+  late StreamSubscription<ConnectivityResult> _subscription =
+      _connectivity.onConnectivityChanged.listen(_emitConnectivity);
   bool _serviceStopped = false;
 
   @override
   Stream<ConnectivityStatus> get connectivity$ => _connectivityResultController.stream;
 
   bool get serviceStopped => _serviceStopped;
-
-  ConnectivityServiceImpl() {
-    _subscription = _connectivity.onConnectivityChanged.listen(_emitConnectivity);
-  }
 
   Future<bool> get isConnected async {
     final result = await _connectivity.checkConnectivity();

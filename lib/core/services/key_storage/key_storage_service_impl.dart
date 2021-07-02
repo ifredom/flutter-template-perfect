@@ -9,19 +9,14 @@ class KeyStorageServiceImpl implements KeyStorageService {
   final _log = Logger("KeyStorageServiceImpl");
   static const notifications_key = 'notifications_key';
 
-  static KeyStorageServiceImpl _instance;
-  static SharedPreferences _preferences;
+  static KeyStorageServiceImpl _instance = KeyStorageServiceImpl();
+  static SharedPreferences _preferences = SharedPreferences.getInstance() as SharedPreferences;
 
-  static Future<KeyStorageServiceImpl> getInstance() async {
-    _instance ??= KeyStorageServiceImpl();
-
-    _preferences ??= await SharedPreferences.getInstance();
-
-    return _instance;
-  }
+  static Future<KeyStorageServiceImpl> getInstance() => Future.value(_instance);
 
   @override
   bool get hasNotificationsEnabled => _getFromDisk(notifications_key) ?? false;
+
   set hasNotificationsEnabled(bool value) => _saveToDisk(notifications_key, value);
 
   dynamic _getFromDisk(String key) {

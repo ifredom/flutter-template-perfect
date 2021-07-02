@@ -1,14 +1,13 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart' show DioError, Response, DioErrorType;
+import 'package:dio/dio.dart' show DioError, DioErrorType;
 import 'package:flutter/widgets.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:template/core/app/locator.dart';
-import 'package:template/core/model/response_date/response_data.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:template/core/routes/routes.dart';
-import 'package:template/core/services/navigation/navigation_service.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
+
 import 'code.dart';
 import 'result_data.dart';
 
@@ -26,14 +25,14 @@ class ExceptionHandle {
         if (e is HttpException) {
           return ResultData('服务器异常！', true, Code.http_error_code);
         }
-        ResponseData res = ResponseData.fromMap(error.response?.data);
+        var res = error.response?.data;
         showToast(res.msg.toString());
 
         /// 后台接口，登录失效，跳转到登录 ,https://www.jianshu.com/p/bd6157914c2d
         if (res.code == 10000) {
-          final _navigationService = locator<NavigationService>();
+
           await LocalStorage.set(LocalStorageKeys.TOKEN_KEY, "");
-          await _navigationService.navigatorKey.currentState?.pushNamedAndRemoveUntil(ViewRoutes.loginView, ModalRoute.withName("/"));
+          await StackedService.navigatorKey!.currentState!.pushNamedAndRemoveUntil(ViewRoutes.loginView, ModalRoute.withName("/"));
         }
 
         return ResultData('服务器异常！', true, Code.http_error_code);

@@ -20,10 +20,10 @@ class AuthServiceImpl implements AuthService {
   StreamController<User> _userController = StreamController<User>();
   Stream<User> get user => _userController.stream;
 
-  String _userType ='';
+  String _userType = '';
   String get userType => _userType;
 
-  String _invitationCode='';
+  String _invitationCode = '';
   String get invitationCode => _invitationCode;
 
   /// 账号密码登录
@@ -160,6 +160,6 @@ class AuthServiceImpl implements AuthService {
   Future<bool> isUserLoggedIn() async {
     // await Future.delayed(Duration(milliseconds: 3000));
     String token = await LocalStorage.get(LocalStorageKeys.TOKEN_KEY);
-    return token != null;
+    return token != '';
   }
 }

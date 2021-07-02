@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ScaleAnimatedSwitcher extends StatelessWidget {
   final Widget child;
 
-  ScaleAnimatedSwitcher({this.child});
+  ScaleAnimatedSwitcher({required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class EmptyAnimatedSwitcher extends StatelessWidget {
   final bool display;
   final Widget child;
 
-  EmptyAnimatedSwitcher({this.display = true, this.child});
+  EmptyAnimatedSwitcher({this.display = true, required this.child});
 
   @override
   Widget build(BuildContext context) {

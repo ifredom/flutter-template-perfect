@@ -1,12 +1,13 @@
 
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:template/core/app/locator.dart';
 import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/auth/auth_service.dart';
-import 'package:template/core/services/navigation/navigation_service.dart';
+
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
@@ -41,7 +42,7 @@ class HomeViewModel extends BaseViewModel{
         setBusy(false);
       }
     } else {
-      await _navigationService.pushReplacementNamed(ViewRoutes.loginView);
+      await _navigationService.replaceWith(ViewRoutes.loginView);
     }
   }
 }

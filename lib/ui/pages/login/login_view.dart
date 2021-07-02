@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:template/core/app/locator.dart';
 import 'package:template/core/routes/routes.dart';
-import 'package:template/core/services/navigation/navigation_service.dart';
+
 
 import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/core/utils/res/gaps.dart';
@@ -148,7 +149,7 @@ class _LoginViewState extends State<LoginView> {
                                       ),
                                     ),
                                     onTap: () {
-                                      locator<NavigationService>().push(ViewRoutes.loginPhoneView);
+                                      locator<NavigationService>().navigateTo(ViewRoutes.loginPhoneView);
                                     },
                                   ),
                                 ),

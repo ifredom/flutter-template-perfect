@@ -10,11 +10,9 @@ class RestartManager extends StatefulWidget {
   static restartApp(BuildContext context) {
     // https://stackoverflow.com/questions/59448102/ancestorstateoftype-is-deprecated-use-findancestorstateoftype-instead
 
-    final _RestartWidgetState state = context.findAncestorStateOfType<State<RestartManager>>();
-      // final _RestartWidgetState state  = context.ancestorStateOfType(const RestartManager());
+    final _RestartWidgetState? state = context.findAncestorStateOfType<_RestartWidgetState>();
 
-
-    state.restartApp();
+    state?.restartApp();
   }
 
   @override

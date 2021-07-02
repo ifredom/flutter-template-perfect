@@ -1,12 +1,12 @@
 import 'package:connectivity/connectivity.dart' show Connectivity, ConnectivityResult;
-import 'package:dio/dio.dart' show Dio, DioError, InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
+import 'package:dio/dio.dart' show DioError, InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
+import 'package:dio/src/dio.dart';
 import 'package:logging/logging.dart';
 
 class ErrorInterceptors extends InterceptorsWrapper {
-  final Dio _dio;
   final _log = Logger('Api - Interceptor - ErrorInterceptors');
 
-  ErrorInterceptors(this._dio);
+  ErrorInterceptors(Dio dio);
 
   @override
   onRequest(RequestOptions options, RequestInterceptorHandler handler) async {

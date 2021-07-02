@@ -1,14 +1,11 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:template/core/app/locator.dart';
-import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/routes/routes.dart';
-import 'package:template/core/services/auth/auth_service.dart';
-import 'package:template/core/services/navigation/navigation_service.dart';
 
 // ViewModelProvider应该使用得是 LoginViewModel中得数据
 class LoginPhoneViewModel extends BaseViewModel with Validators {
-  final _authService = locator<AuthService>();
   final _navigationService = locator<NavigationService>();
   bool _isBusy = false;
 
@@ -25,7 +22,6 @@ class LoginPhoneViewModel extends BaseViewModel with Validators {
   }
 
   Future<void> loginWithPassword(String mobile, String password) async {
-    // var res = await _authService.signUpWithAuthPassword(mobile, password);
-    await _navigationService.pushReplacementNamed(ViewRoutes.homeView);
+    await _navigationService.replaceWith(ViewRoutes.homeView);
   }
 }

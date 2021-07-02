@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:template/core/utils/res/gaps.dart';
 
@@ -12,34 +13,34 @@ class GradientButton extends StatelessWidget {
     this.prefixIcon,
     this.onPressed,
     this.borderRadius,
-    @required this.text,
+    required this.text,
   });
 
   // 渐变色数组
-  final List<Color> colors;
+  final List<Color>? colors;
 
   // 按钮宽高
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   final String text;
-  final TextStyle style;
-  final Widget prefixIcon;
-  final BorderRadius borderRadius;
+  final TextStyle? style;
+  final Widget? prefixIcon;
+  final BorderRadius? borderRadius;
 
   //点击回调
-  final GestureTapCallback onPressed;
+  final GestureTapCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    final List<Color> _colors = this.colors ?? List();
+    final List<Color> _colors = this.colors ?? [];
 
     Color _backgroundColors; // 单色
     LinearGradient _linearGradient; // 渐变色
 
     if (_colors.isEmpty) {
-      _backgroundColors = theme.primaryColorDark ?? theme.primaryColor;
+      _backgroundColors = theme.primaryColorDark;
       _linearGradient = null;
     } else if (_colors.length == 1) {
       _backgroundColors = _colors[0];
@@ -61,17 +62,17 @@ class GradientButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            null == this.prefixIcon ? Gaps.empty : this.prefixIcon,
-            RaisedButton(
-              color: Colors.transparent, // 设为透明色
-              elevation: 0, // 正常时阴影隐藏
-              highlightElevation: 0, // 点击时阴影隐藏
-              //点击时，水波动画中水波的颜色
-              splashColor: Colors.black12,
-              //内边距
-              padding: EdgeInsets.zero,
+            this.prefixIcon,
+            ElevatedButton(
+              // color: Colors.transparent, // 设为透明色
+              // elevation: 0, // 正常时阴影隐藏
+              // highlightElevation: 0, // 点击时阴影隐藏
+              // //点击时，水波动画中水波的颜色
+              // splashColor: Colors.black12,
+              // //内边距
+              // padding: EdgeInsets.zero,
               onPressed: () {
-                onPressed();
+                onPressed!();
               },
               child: Container(
                 alignment: Alignment.center,

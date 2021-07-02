@@ -1,5 +1,4 @@
-
-import 'package:dio/dio.dart' show Headers, InterceptorsWrapper, RequestInterceptorHandler, RequestOptions, Response, ResponseInterceptorHandler;
+import 'package:dio/dio.dart' show InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
 
@@ -7,6 +6,7 @@ import '../apicode/whiteList.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
   // 白名单
+  // ignore: unused_element
   _getUnWhitelistToken(String apiCode) async {
     String token = await LocalStorage.get(LocalStorageKeys.TOKEN_KEY);
     if (WhiteList.list.contains(apiCode)) {
@@ -20,5 +20,4 @@ class ApiInterceptors extends InterceptorsWrapper {
     // 请求前，对参数进行额外设置
     return super.onRequest(options, handler);
   }
-
 }

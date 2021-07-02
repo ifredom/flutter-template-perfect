@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:template/core/constants/app_theme.dart';
-import 'package:template/ui/component/title_view.dart';
 
 class ForthScreen extends StatefulWidget {
   @override

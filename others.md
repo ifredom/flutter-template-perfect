@@ -49,4 +49,38 @@ void calculate({int factor = 42}) {
   // ...
 }
 ```
+
 1. 解决方法四，位置参数
+
+### 特殊类型空安全处理
+
+> 动画类 AnimationController ：在 StatefulWidget 中，使用 late 关键字
+
+```dart
+class DrawerExample extends StatefulWidget {
+  @override
+  _DrawerExampleState createState() => _DrawerExampleState();
+}
+
+class _DrawerExampleState extends State<DrawerExample> {
+  late AnimationController sliderAnimationController;  // StatefulWidget 延迟定义  AnimationController
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: DrawerUserController(
+        screenIndex: DrawerIndex.HOME,
+        drawerWidth: MediaQuery.of(context).size.width * 0.75,
+        animationController: (AnimationController animationController) {
+          sliderAnimationController = animationController;  
+        },
+        screenView: LoginView(), //任何页面
+      ),
+    );
+  }
+}
+```
+
+> 使用 late 关键字 StreamSubscription<ConnectivityResult> \_subscription;
+> Non-nullable instance field '\_subscription' must be initialized.
+
+The argument type 'Function?' can't be assigned to the parameter type 'void Function()?'.

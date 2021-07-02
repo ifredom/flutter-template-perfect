@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 
 class RoundSliderTrackShape extends SliderTrackShape {
-  const RoundSliderTrackShape(
-      {this.disabledThumbGapWidth = 2.0, this.radius = 0});
+  const RoundSliderTrackShape({this.disabledThumbGapWidth = 2.0, this.radius = 0});
 
   final double disabledThumbGapWidth;
   final double radius;
 
   @override
   Rect getPreferredRect({
-    RenderBox parentBox,
+    required RenderBox parentBox,
     Offset offset = Offset.zero,
-    SliderThemeData sliderTheme,
-    bool isEnabled,
-    bool isDiscrete,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = true,
+    bool isDiscrete = false,
   }) {
-    final double overlayWidth =
-        sliderTheme.overlayShape.getPreferredSize(isEnabled, isDiscrete).width;
-    final double trackHeight = sliderTheme.trackHeight;
+    final double overlayWidth = sliderTheme.overlayShape!.getPreferredSize(isEnabled, isDiscrete).width;
+    final double? trackHeight = sliderTheme.trackHeight;
     assert(overlayWidth >= 0);
-    assert(trackHeight >= 0);
+    assert(trackHeight! >= 0);
     assert(parentBox.size.width >= overlayWidth);
-    assert(parentBox.size.height >= trackHeight);
+    assert(parentBox.size.height >= trackHeight!);
 
     final double trackLeft = offset.dx + overlayWidth / 2;
-    final double trackTop =
-        offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackTop = offset.dy + (parentBox.size.height - trackHeight!) / 2;
 
     final double trackWidth = parentBox.size.width - overlayWidth;
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
@@ -35,8 +32,8 @@ class RoundSliderTrackShape extends SliderTrackShape {
   void paint(
     PaintingContext context,
     Offset offset, {
-    RenderBox parentBox,
-    SliderThemeData sliderTheme,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
     Animation<double> enableAnimation,
     TextDirection textDirection,
     Offset thumbCenter,
@@ -47,16 +44,12 @@ class RoundSliderTrackShape extends SliderTrackShape {
       return;
     }
 
-    final ColorTween activeTrackColorTween = ColorTween(
-        begin: sliderTheme.disabledActiveTrackColor,
-        end: sliderTheme.activeTrackColor);
-    final ColorTween inactiveTrackColorTween = ColorTween(
-        begin: sliderTheme.disabledInactiveTrackColor,
-        end: sliderTheme.inactiveTrackColor);
-    final Paint activePaint = Paint()
-      ..color = activeTrackColorTween.evaluate(enableAnimation);
-    final Paint inactivePaint = Paint()
-      ..color = inactiveTrackColorTween.evaluate(enableAnimation);
+    final ColorTween activeTrackColorTween =
+        ColorTween(begin: sliderTheme.disabledActiveTrackColor, end: sliderTheme.activeTrackColor);
+    final ColorTween inactiveTrackColorTween =
+        ColorTween(begin: sliderTheme.disabledInactiveTrackColor, end: sliderTheme.inactiveTrackColor);
+    final Paint activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation);
+    final Paint inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation);
     Paint leftTrackPaint;
     Paint rightTrackPaint;
     switch (textDirection) {
@@ -72,9 +65,7 @@ class RoundSliderTrackShape extends SliderTrackShape {
 
     double horizontalAdjustment = 0.0;
     if (!isEnabled) {
-      final double disabledThumbRadius =
-          sliderTheme.thumbShape.getPreferredSize(false, isDiscrete).width /
-              2.0;
+      final double disabledThumbRadius = sliderTheme.thumbShape!.getPreferredSize(false, isDiscrete).width / 2.0;
       final double gap = disabledThumbGapWidth * (1.0 - enableAnimation.value);
       horizontalAdjustment = disabledThumbRadius + gap;
     }
@@ -88,19 +79,11 @@ class RoundSliderTrackShape extends SliderTrackShape {
     );
 
     //进度条两头圆角
-    final RRect leftTrackSegment = RRect.fromLTRBR(
-        trackRect.left,
-        trackRect.top,
-        thumbCenter.dx - horizontalAdjustment,
-        trackRect.bottom,
-        Radius.circular(radius));
+    final RRect leftTrackSegment = RRect.fromLTRBR(trackRect.left, trackRect.top, thumbCenter.dx - horizontalAdjustment,
+        trackRect.bottom, Radius.circular(radius));
     context.canvas.drawRRect(leftTrackSegment, leftTrackPaint);
-    final RRect rightTrackSegment = RRect.fromLTRBR(
-        thumbCenter.dx + horizontalAdjustment,
-        trackRect.top,
-        trackRect.right,
-        trackRect.bottom,
-        Radius.circular(radius));
+    final RRect rightTrackSegment = RRect.fromLTRBR(thumbCenter.dx + horizontalAdjustment, trackRect.top,
+        trackRect.right, trackRect.bottom, Radius.circular(radius));
     context.canvas.drawRRect(rightTrackSegment, rightTrackPaint);
   }
 }

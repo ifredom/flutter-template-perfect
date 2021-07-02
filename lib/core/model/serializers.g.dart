@@ -7,7 +7,6 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
-      ..add(ResponseData.serializer)
       ..add(User.serializer))
     .build();
 

@@ -6,8 +6,6 @@ import 'package:built_value/standard_json_plugin.dart';
 
 import 'alert_request/confirm_alert_request.dart';
 import 'alert_response/confirm_alert_response.dart';
-import 'response_date/response_data.dart';
-import 'snack_bar_request/confirm_snack_bar_request.dart';
 import 'snack_bar_response/confirm_snack_bar_response.dart';
 import 'userinfo/user.dart';
 
@@ -19,9 +17,7 @@ part 'serializers.g.dart';
   User,
   ConfirmAlertRequest,
   ConfirmAlertResponse,
-  ConfirmSnackBarRequest,
-  ConfirmSnackBarResponse,
-  ResponseData,
+  ConfirmSnackBarResponse
 ])
 
 /// Can add additional plugins that will serialize types like [DateTime]

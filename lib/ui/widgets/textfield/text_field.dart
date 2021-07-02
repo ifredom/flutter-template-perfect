@@ -1,43 +1,46 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:template/core/utils/common/color_utils.dart';
 import 'package:template/core/utils/res/gaps.dart';
+
+typedef validatorT = String? Function(String?);
 
 // 使用原textfield的属性，进行扩展
 // 参考项目 auctionesia_pengguna-master，可以优化
 class InputField extends StatefulWidget {
   final bool isReadOnly;
-  final int maxLength;
-  final int maxLines;
-  final TextStyle textStyle;
-  final String hintText;
-  final String labelText;
-  final TextStyle hintStyle;
-  final EdgeInsetsGeometry padding;
-  final Color borderColor;
-  final Widget prefixIcon;
-  final Widget suffixIcon;
+  final int? maxLength;
+  final int? maxLines;
+  final TextStyle? textStyle;
+  final String? hintText;
+  final String? labelText;
+  final TextStyle? hintStyle;
+  final EdgeInsetsGeometry? padding;
+  final Color? borderColor;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final bool autofocus;
   final bool roundBox;
-  final int roundBoxRadius;
+  final int? roundBoxRadius;
   final bool obscureText;
-  final TextEditingController controller;
-  final Function validator;
-  final ValueChanged<String> onChanged;
-  final FocusNode focusNode;
-  final FocusNode nextFocusNode;
-  final TextInputType keyboardType;
-  final Function onFieldSubmitted;
-  final RegExp formatter;
-  final Future<bool> Function() getVCode;
+  final TextEditingController? controller;
+  final validatorT? validator;
+  final ValueChanged<String>? onChanged;
+  final FocusNode? focusNode;
+  final FocusNode? nextFocusNode;
+  final TextInputType? keyboardType;
+  final Function? onFieldSubmitted;
+  final RegExp? formatter;
+  final Future<bool> Function()? getVCode;
 
   const InputField({
-    Key key,
+    Key? key,
     this.isReadOnly = false,
     this.maxLength,
-    this.maxLines,
+    this.maxLines = 1,
     this.textStyle,
     this.hintText = "",
     this.labelText,
@@ -71,17 +74,17 @@ class _CustomTextFieldState extends State<InputField> {
   final int second = 20;
 
   /// 当前秒数
-  int currentSecond;
-  StreamSubscription _obs;
+  int currentSecond = 0;
+  late StreamSubscription _obs;
 
-  fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
+  fieldFocusChange(BuildContext context, FocusNode? currentFocus, FocusNode? nextFocus) {
+    currentFocus!.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
 
-  void _getVCode() async {
-    bool isSuccess = await widget.getVCode();
-    if (isSuccess != null && isSuccess) {
+  _getVCode() async {
+    bool isSuccess = await widget.getVCode!();
+    if (isSuccess) {
       setState(() {
         currentSecond = second;
         _isClick = false;
@@ -97,7 +100,7 @@ class _CustomTextFieldState extends State<InputField> {
 
   @override
   void dispose() {
-    _obs?.cancel();
+    _obs.cancel();
     super.dispose();
   }
 
@@ -107,16 +110,16 @@ class _CustomTextFieldState extends State<InputField> {
       if (widget.keyboardType == TextInputType.number || widget.keyboardType == TextInputType.phone) {
         textInputFormatter = [FilteringTextInputFormatter.allow(RegExp("[0-9]"))];
       } else {
-        textInputFormatter = null;
+        textInputFormatter = [];
       }
     } else {
-      textInputFormatter = [FilteringTextInputFormatter.allow(widget.formatter)];
+      textInputFormatter = [FilteringTextInputFormatter.allow(widget.formatter ?? '')];
     }
 
     return TextFormField(
       readOnly: widget.isReadOnly,
       maxLength: widget.maxLength,
-      maxLines: widget.maxLines ?? 1,
+      maxLines: widget.maxLines,
       controller: widget.controller,
       validator: widget.validator,
       autofocus: widget.autofocus,
@@ -127,7 +130,7 @@ class _CustomTextFieldState extends State<InputField> {
                 widget.focusNode,
                 widget.nextFocusNode,
               )
-          : (_) => widget.focusNode.unfocus(),
+          : (_) => widget.focusNode!.unfocus(),
       keyboardType: widget.keyboardType,
       // 是否隐藏输入得内容，用于输入密码时
       obscureText: widget.obscureText,
@@ -136,12 +139,7 @@ class _CustomTextFieldState extends State<InputField> {
       // 数字、手机号限制格式为0到9(白名单)， 密码限制不包含汉字（黑名单）
       // 白名单: WhitelistingTextInputFormatter， 黑名单: BlacklistingTextInputFormatter
       inputFormatters: textInputFormatter,
-      style: widget.textStyle ??
-          TextStyle(
-            color: Colors.black,
-            fontSize: 15.0,
-            textBaseline: TextBaseline.alphabetic,
-          ),
+      style: widget.textStyle,
       decoration: InputDecoration(
         isDense: true,
         labelText: widget.labelText,
@@ -157,14 +155,13 @@ class _CustomTextFieldState extends State<InputField> {
         //计算数字
         counterText: "",
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle ?? TextStyle(),
+        hintStyle: widget.hintStyle,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    // return _createTextField();
     return BuildTextfieldWrapper(
       _createTextField(),
       widget,
@@ -179,8 +176,8 @@ class BuildTextfieldWrapper extends StatelessWidget {
   final Widget child;
   final widget;
   final bool _isClick;
-  final Function getVCodeCallback;
-  final String second;
+  final Function? getVCodeCallback;
+  final String? second;
   BuildTextfieldWrapper(this.child, this.widget, this._isClick, {this.getVCodeCallback, this.second});
 
   @override
@@ -237,7 +234,7 @@ class BuildTextfieldWrapper extends StatelessWidget {
                         _isClick ? "获取验证码" : "$second秒后重发",
                         style: TextStyle(color: HexToColor('#A061FD')),
                       ),
-                      onTap: _isClick ? getVCodeCallback : null,
+                      onTap: _isClick ? getVCodeCallback!() : null,
                     ),
                   ],
                 ),

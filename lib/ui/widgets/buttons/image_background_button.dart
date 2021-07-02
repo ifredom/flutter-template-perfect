@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 //自定义按钮
 class ImageBackgroundButton extends StatelessWidget {
   ImageBackgroundButton({
-    this.image,
+    required this.image,
+    required this.text,
     this.width,
     this.height,
     this.style,
     this.onPressed,
     this.borderRadius,
-    @required this.text,
   });
 
   // 渐变色数组
   final ImageProvider image;
 
   // 按钮宽高
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   final String text;
-  final TextStyle style;
-  final BorderRadius borderRadius;
+  final TextStyle? style;
+  final BorderRadius? borderRadius;
 
   //点击回调
-  final GestureTapCallback onPressed;
+  final GestureTapCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +36,17 @@ class ImageBackgroundButton extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fitWidth,
-          image: this.image ?? null,
+          image: this.image,
         ),
         borderRadius: borderRadius ?? BorderRadius.circular(25),
       ),
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        color: Colors.transparent, // 设为透明色
-        elevation: 0, // 正常时阴影隐藏
-        highlightElevation: 0, // 点击时阴影隐藏
+      child: ElevatedButton(
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        // color: Colors.transparent, // 设为透明色
+        // elevation: 0, // 正常时阴影隐藏
+        // highlightElevation: 0, // 点击时阴影隐藏
         onPressed: () {
-          onPressed();
+          onPressed!();
         },
         child: Container(
           alignment: Alignment.center,

@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:template/core/app/locator.dart';
-import 'package:template/core/services/navigation/navigation_service.dart';
+
 
 
 import 'package:template/core/utils/common/color_utils.dart';
@@ -106,7 +108,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     if (_background == null) {
       _background = Container(
         decoration: BoxDecoration(
-          color: _backgroundColors ?? HexToColor('#F7F2FF'),
+          color: _backgroundColors,
           gradient: _linearGradient,
         ),
         child: null,
@@ -121,7 +123,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
           fontWeight: FontWeight.bold,
         );
     // 中间组件
-    Widget _middle = this.middle;
+    Widget? _middle = this.middle;
     print(null == _middle);
     if (null == _middle) {
       _middle = Container(
@@ -151,7 +153,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                   child: GestureDetector(
                     child: SizedBox(width: 32, height: 32, child: _frontWidget),
                     onTap: () {
-                      locator<NavigationService>().pop();
+                      locator<NavigationService>().back();
                     },
                   ),
                 ),

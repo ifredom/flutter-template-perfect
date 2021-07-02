@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:template/core/constants/app_theme.dart';
 import 'package:template/core/managers/core_manager.dart';
 import 'package:template/core/managers/restart_manager.dart';
 import 'package:template/core/routes/routes.dart';
-import 'package:template/core/app/locator.dart';
 import 'package:template/core/app/provider_setup.dart';
-import 'package:template/core/services/navigation/navigation_service.dart';
 
 import './start_up_view.dart';
 
@@ -18,7 +17,6 @@ class RootComponent extends StatefulWidget {
 }
 
 class _RootComponentState extends State<RootComponent> {
-  final navigationService = locator<NavigationService>();
   @override
   Widget build(BuildContext context) {
     return RestartManager(
@@ -33,7 +31,7 @@ class _RootComponentState extends State<RootComponent> {
               // localeResolutionCallback: loadSupportedLocals,
               title: 'flutterApp',
               theme: AppTheme.themData,
-              navigatorKey: navigationService.navigatorKey,
+              navigatorKey: StackedService.navigatorKey,
               navigatorObservers: [CustomNavigatorObserver.routeObserver],
               onGenerateRoute: (settings) => ViewRoutes.generateRoute(context, settings),
               home: StartUpView(),

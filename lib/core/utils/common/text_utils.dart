@@ -8,7 +8,7 @@
 class TextUtil {
   /// isEmpty
   static bool isEmpty(String text) {
-    return text == null || text.isEmpty;
+    return text == '' || text.isEmpty;
   }
 
   /// 每隔 x位 加 pattern
@@ -16,7 +16,7 @@ class TextUtil {
     text = text.replaceAllMapped(RegExp("(.{$digit})"), (Match match) {
       return "${match.group(0)}$pattern";
     });
-    if ( text.endsWith(pattern)) {
+    if (text.endsWith(pattern)) {
       text = text.substring(0, text.length - 1);
     }
     return text;

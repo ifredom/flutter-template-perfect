@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:template/core/app/locator.dart';
-import 'package:template/core/services/navigation/navigation_service.dart';
-import 'package:template/core/utils/res/resources.dart';
 
 class ErrorPage extends StatefulWidget {
   final FlutterErrorDetails details;
@@ -83,7 +82,7 @@ class _ErrorPageState extends State<ErrorPage> {
                       )),
                     ),
                     onPressed: () {
-                      locator<NavigationService>().pop();
+                      locator<NavigationService>().back();
                     },
                     child: Text('Back'),
                   )

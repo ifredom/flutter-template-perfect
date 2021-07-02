@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:template/core/constants/app_theme.dart';
 import 'package:template/ui/component/title_view.dart';
 
 import 'package:template/core/app/locator.dart';
-import 'package:template/core/services/navigation/navigation_service.dart';
+
 import 'package:template/core/routes/routes.dart';
 
 class FirstScreen extends StatefulWidget {
-  const FirstScreen({Key? key, this.animationController}) : super(key: key);
+  const FirstScreen({Key? key, required this.animationController}) : super(key: key);
 
   final AnimationController animationController;
   @override
@@ -16,7 +17,7 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin {
   final _navigationService = locator<NavigationService>();
-  Animation<double> topBarAnimation;
+  late Animation<double> topBarAnimation;
 
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
@@ -63,7 +64,7 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
           Map props = Map();
           props["title"] = "First Screen 数据 1";
           props["description"] = "这是一条传递过来的数据";
-          _navigationService.push(ViewRoutes.productDetailView, arguments: props);
+          _navigationService.navigateTo(ViewRoutes.productDetailView, arguments: props);
         },
       ),
     );

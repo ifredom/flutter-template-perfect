@@ -1,11 +1,12 @@
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:template/core/app/locator.dart';
 import 'package:template/core/mixins/validators.dart';
 import 'package:template/core/model/userinfo/user.dart';
 import 'package:template/core/routes/routes.dart';
 import 'package:template/core/services/auth/auth_service.dart';
-import 'package:template/core/services/navigation/navigation_service.dart';
+
 import 'package:template/core/exceptions/repository_exception.dart';
 import 'package:template/core/utils/res/local_storage.dart';
 import 'package:template/core/utils/res/local_storage_keys.dart';
@@ -15,8 +16,6 @@ class LoginViewModel extends BaseViewModel with Validators {
   final _authService = locator<AuthService>();
   final _navigationService = locator<NavigationService>();
 
-  /// 必须实例化用户
-  User _user= User();
   // 数据从provider中取
   User get user => _authService.currentUser;
 
@@ -42,7 +41,7 @@ class LoginViewModel extends BaseViewModel with Validators {
       print('延时执行');
       _isBusy = false;
       setBusy(false);
-      _navigationService.pushReplacementNamed(ViewRoutes.homeView);
+      _navigationService.replaceWith(ViewRoutes.homeView);
     });
   }
 
@@ -86,12 +85,12 @@ class LoginViewModel extends BaseViewModel with Validators {
       bool isNewUser = await queryIsNewUser(mobile, userInfo.id);
       print("是否新用户: $isNewUser");
       if (isNewUser) {
-        await _navigationService.push(ViewRoutes.homeView);
+        await _navigationService.navigateTo(ViewRoutes.homeView);
       } else {
         if (userInfo.userType == "admin") {
-          await _navigationService.pushReplacementNamed(ViewRoutes.adminHomeView);
+          await _navigationService.replaceWith(ViewRoutes.adminHomeView);
         } else {
-          await _navigationService.pushReplacementNamed(ViewRoutes.homeView);
+          await _navigationService.replaceWith(ViewRoutes.homeView);
         }
       }
     } else {
