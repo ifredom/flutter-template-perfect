@@ -28,17 +28,27 @@ class RoundSliderTrackShape extends SliderTrackShape {
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 
+  // PaintingContext context,
+  // Offset offset, {
+  // required RenderBox parentBox,
+  // required SliderThemeData sliderTheme,
+  // required Animation<double> enableAnimation,
+  // required Offset thumbCenter,
+  // bool isEnabled,
+  // bool isDiscrete,
+  // required TextDirection textDirection,
+
   @override
   void paint(
     PaintingContext context,
     Offset offset, {
     required RenderBox parentBox,
     required SliderThemeData sliderTheme,
-    Animation<double> enableAnimation,
-    TextDirection textDirection,
-    Offset thumbCenter,
-    bool isDiscrete,
-    bool isEnabled,
+    required Animation<double> enableAnimation,
+    required TextDirection textDirection,
+    required Offset thumbCenter,
+    bool isDiscrete = false,
+    bool isEnabled = false,
   }) {
     if (sliderTheme.trackHeight == 0) {
       return;
@@ -48,8 +58,9 @@ class RoundSliderTrackShape extends SliderTrackShape {
         ColorTween(begin: sliderTheme.disabledActiveTrackColor, end: sliderTheme.activeTrackColor);
     final ColorTween inactiveTrackColorTween =
         ColorTween(begin: sliderTheme.disabledInactiveTrackColor, end: sliderTheme.inactiveTrackColor);
-    final Paint activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation);
-    final Paint inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation);
+
+    final Paint activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation)!;
+    final Paint inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
     Paint leftTrackPaint;
     Paint rightTrackPaint;
     switch (textDirection) {

@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'home_drawer.dart';
 
 class DrawerUserController extends StatefulWidget {
-  const DrawerUserController({
+  final double drawerWidth;
+  final Function(DrawerIndex)? onDrawerCall;
+  final Widget? screenView;
+  final Function(AnimationController)? animationController;
+  final Function(bool)? drawerIsOpen;
+  final AnimatedIconData animatedIconData;
+  final Widget? menuView;
+  final DrawerIndex screenIndex;
+
+  DrawerUserController({
     Key? key,
     this.drawerWidth = 250,
     this.onDrawerCall,
@@ -11,17 +20,8 @@ class DrawerUserController extends StatefulWidget {
     this.animatedIconData = AnimatedIcons.arrow_menu,
     this.menuView,
     this.drawerIsOpen,
-    this.screenIndex,
+    this.screenIndex = DrawerIndex.HOME,
   }) : super(key: key);
-
-  final double drawerWidth;
-  final Function(DrawerIndex)? onDrawerCall;
-  final Widget? screenView;
-  final Function(AnimationController)? animationController;
-  final Function(bool)? drawerIsOpen;
-  final AnimatedIconData animatedIconData;
-  final Widget? menuView;
-  final DrawerIndex? screenIndex;
 
   @override
   _DrawerUserControllerState createState() => _DrawerUserControllerState();
@@ -116,7 +116,7 @@ class _DrawerUserControllerState extends State<DrawerUserController> with Ticker
                           height: MediaQuery.of(context).size.height,
                           width: widget.drawerWidth,
                           child: HomeDrawer(
-                            screenIndex: widget.screenIndex == null ? DrawerIndex.HOME : widget.screenIndex,
+                            screenIndex: widget.screenIndex,
                             iconAnimationController: iconAnimationController,
                             callBackIndex: (DrawerIndex indexType) {
                               onDrawerClick();

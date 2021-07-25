@@ -41,12 +41,12 @@ class GradientButton extends StatelessWidget {
 
     if (_colors.isEmpty) {
       _backgroundColors = theme.primaryColorDark;
-      _linearGradient = null;
+      _linearGradient = LinearGradient(colors: []);
     } else if (_colors.length == 1) {
       _backgroundColors = _colors[0];
-      _linearGradient = null;
+      _linearGradient = LinearGradient(colors: []);
     } else {
-      _backgroundColors = null;
+      _backgroundColors = Colors.white;
       _linearGradient = LinearGradient(colors: _colors);
     }
 
@@ -62,7 +62,7 @@ class GradientButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            this.prefixIcon,
+            this.prefixIcon ?? Gaps.empty,
             ElevatedButton(
               // color: Colors.transparent, // 设为透明色
               // elevation: 0, // 正常时阴影隐藏
