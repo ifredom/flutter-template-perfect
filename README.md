@@ -25,6 +25,7 @@ A new Flutter project template(flutter完整商用项目模板).
 * Executive order(执行命令)
 
 [Model example(模型示例)](https://www.stacksecrets.com/flutter/how-to-use-built_value-library)
+[built_value's object setter](https://stackoverflow.com/questions/51556540/whats-the-setter-of-a-built-values-object)
 
 ```dash
 
@@ -53,6 +54,6 @@ abstract class Testmode implements Built<Testmode, TestmodeBuilder> {
 
 <!-- other parameter(其他参数)：  --delete-conflicting-outputs -->
 
+## 适配方法介绍
 
-
-Verovio
+<https://juejin.cn/post/6844904176489594893>
