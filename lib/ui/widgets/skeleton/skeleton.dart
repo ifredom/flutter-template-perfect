@@ -49,16 +49,16 @@ class SkeletonList extends StatelessWidget {
     var theme = Theme.of(context);
     bool isDark = theme.brightness == Brightness.dark;
 
-//    var highlightColor = isDark
-//        ? Colors.grey[500]
-//        : Color.alphaBlend(theme.accentColor.withAlpha(20), Colors.grey[100]);
+    var _baseColor = isDark ? Color(0xFF616161) : Color(0xFFD6D6D6);
+    var highlightColor =
+        isDark ? Color(0xFF9E9E9E) : Color.alphaBlend(theme.accentColor.withAlpha(20), Color(0xFFF5F5F5));
 
     return SingleChildScrollView(
       physics: NeverScrollableScrollPhysics(),
       child: Shimmer.fromColors(
           period: Duration(milliseconds: 1200),
-          baseColor: isDark ? Colors.grey[700] : Colors.grey[350],
-          highlightColor: isDark ? Colors.grey[500] : Colors.grey[200],
+          baseColor: _baseColor,
+          highlightColor: highlightColor,
           child: Padding(
               padding: padding,
               child: Column(

@@ -17,7 +17,7 @@ void main() async {
       if (Constants.DEBUG) {
         FlutterError.dumpErrorToConsole(details);
       } else {
-        Zone.current.handleUncaughtError(details.exception, details.stack);
+        Zone.current.handleUncaughtError(details.exception, details.stack as StackTrace);
       }
 
       return ErrorPage(details);

@@ -71,15 +71,16 @@ class TitleView extends StatelessWidget {
         ),
       ),
     );
+
     // 是否运用动画
-    if (animationController != null && animation != null) {
+    if (animation != null) {
       resultBuilder = AnimatedBuilder(
-        animation: animationController,
-        builder: (BuildContext context, Widget child) {
+        animation: animationController as AnimationController,
+        builder: (BuildContext context, Widget? child) {
           return FadeTransition(
-            opacity: animation,
+            opacity: animation as Animation<double>,
             child: Transform(
-                transform: Matrix4.translationValues(0.0, 30 * (1.0 - animation.value), 0.0), child: contentBuilder),
+                transform: Matrix4.translationValues(0.0, 30 * (1.0 - animation?.value), 0.0), child: contentBuilder),
           );
         },
       );
