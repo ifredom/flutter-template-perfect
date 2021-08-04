@@ -12,7 +12,7 @@ class RestartManager extends StatefulWidget {
 
     final _RestartWidgetState? state = context.findAncestorStateOfType<_RestartWidgetState>();
 
-    state?.restartApp();
+    state!.restartApp();
   }
 
   @override

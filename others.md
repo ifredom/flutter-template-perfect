@@ -1,6 +1,6 @@
 # issues
 
-## Try adding either an explicit non-'null' default value or the 'required' modifier.
+## Try adding either an explicit non-'null' default value or the 'required' modifier
 
 解决： 如何创建一个空安全构造函数
 
@@ -71,7 +71,7 @@ class _DrawerExampleState extends State<DrawerExample> {
         screenIndex: DrawerIndex.HOME,
         drawerWidth: MediaQuery.of(context).size.width * 0.75,
         animationController: (AnimationController animationController) {
-          sliderAnimationController = animationController;  
+          sliderAnimationController = animationController;
         },
         screenView: LoginView(), //任何页面
       ),
@@ -84,3 +84,8 @@ class _DrawerExampleState extends State<DrawerExample> {
 > Non-nullable instance field '\_subscription' must be initialized.
 
 The argument type 'Function?' can't be assigned to the parameter type 'void Function()?'.
+
+## [null-safety 操作符](https://gitchat.csdn.net/columnTopic/5e9d22812b34772795872415)
+
+- 空类型声明符 ? 可空类型变量 name，在它使用之前没有被初始化，那么它会被默认初始化为 null。
+- 非空断言 ! 使用非空断言 !，强行告诉编译器这是一个不为空的变量。
