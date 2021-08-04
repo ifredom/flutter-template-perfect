@@ -89,3 +89,7 @@ The argument type 'Function?' can't be assigned to the parameter type 'void Func
 
 - 空类型声明符 ? 可空类型变量 name，在它使用之前没有被初始化，那么它会被默认初始化为 null。
 - 非空断言 ! 使用非空断言 !，强行告诉编译器这是一个不为空的变量。
+
+### Null check operator used on a null value
+
+### 异常捕获: type 'Null' is not a subtype of type 'String'
