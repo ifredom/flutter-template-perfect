@@ -112,21 +112,21 @@ abstract class User implements Built<User, UserBuilder> {
   }
 
   Map<String, dynamic> toMap() {
-    return serializers.serializeWith(User.serializer, this);
+    return serializers.serializeWith(User.serializer, this) as Map<String, dynamic>;
   }
 
   factory User.fromJson(String jsonString) {
     return serializers.deserializeWith(
       User.serializer,
       json.decode(jsonString),
-    );
+    ) as User;
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return serializers.deserializeWith(
       User.serializer,
       map,
-    );
+    ) as User;
   }
 
   User._();

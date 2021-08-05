@@ -1,10 +1,9 @@
 name: template
 description: A new Flutter project.
 
-
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -26,12 +25,12 @@ dependencies:
   rxdart: ^0.26.0
   provider: 5.0.0
   # 核心MMVM框架
-  stacked: 2.1.9  
+  stacked: 2.1.9
   stacked_hooks: 0.2.1
   stacked_services: 0.8.8
 
   flutter_screenutil: ^5.0.0
-  oktoast: 3.0.0
+  oktoast: 3.1.1
   flutter_inner_drawer: 1.0.0+1
   flutter_swiper: 1.1.6
   city_pickers: 1.0.1
@@ -52,7 +51,7 @@ dependencies:
   # 动画
   flare_flutter: 3.0.1
   # 动画
-  lottie: 1.0.1
+  lottie: 1.1.0
   qr_flutter: 4.0.0
   web_socket_channel: 2.1.0
   protobuf: 2.0.0
@@ -102,7 +101,6 @@ flutter:
     - assets/animations/
     - assets/animations/lottie/
     - assets/images/
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
