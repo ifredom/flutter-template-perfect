@@ -33,24 +33,29 @@ class GradientButton extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     final List<Color> _colors = this.colors ?? [];
+    num colorMode = 0;
 
-    Color _backgroundColors; // 单色
+    Color? _backgroundColors; // 单色
     LinearGradient _linearGradient; // 渐变色
 
+    print(_colors);
     if (_colors.isEmpty) {
       _backgroundColors = theme.primaryColorDark;
       _linearGradient = LinearGradient(colors: []);
+      colorMode = 0;
     } else if (_colors.length == 1) {
       _backgroundColors = _colors[0];
       _linearGradient = LinearGradient(colors: []);
+      colorMode = 1;
     } else {
       _backgroundColors = Colors.transparent;
       _linearGradient = LinearGradient(colors: _colors);
+      colorMode = 2;
     }
 
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       // onPrimary: Colors.transparent,
-      primary: Colors.transparent, // transparent
+      // primary: Colors.transparent, // transparent
       padding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -65,19 +70,19 @@ class GradientButton extends StatelessWidget {
     );
 
     return Container(
-        width: this.width ?? 60.w,
-        height: this.height ?? 42.w,
+        width: this.width ?? 128,
+        height: this.height ?? 44,
         decoration: BoxDecoration(
-          color: _backgroundColors,
-          gradient: _linearGradient,
-          borderRadius: borderRadius ?? BorderRadius.circular(25),
+          color: colorMode == 1 ? _backgroundColors : null,
+          gradient: colorMode == 2 ? _linearGradient : null,
+          borderRadius: borderRadius ?? BorderRadius.circular(24),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             this.prefixIcon ?? SizedBox(),
-            ElevatedButton(
+            TextButton(
               style: raisedButtonStyle,
               onPressed: () {
                 onPressed!();

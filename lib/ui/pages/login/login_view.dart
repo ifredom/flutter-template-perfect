@@ -67,7 +67,7 @@ class _LoginViewState extends State<LoginView> {
               ),
               child: SingleChildScrollView(
                 child: Container(
-                  width: ScreenUtil().screenWidth * 0.638,
+                  // width: ScreenUtil().screenWidth * 0.638,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -127,11 +127,13 @@ class _LoginViewState extends State<LoginView> {
                               Gaps.vGap20,
                               Center(
                                 child: GestureDetector(
-                                  child: Text(
-                                    "手机验证码登录",
-                                    style: TextStyle(
-                                      color: HexToColor("#FF696A"),
-                                      fontSize: 15,
+                                  child: FittedBox(
+                                    child: Text(
+                                      "手机验证码登录",
+                                      style: TextStyle(
+                                        color: HexToColor("#FF696A"),
+                                        fontSize: 15,
+                                      ),
                                     ),
                                   ),
                                   onTap: () {
