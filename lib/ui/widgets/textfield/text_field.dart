@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:template/core/utils/common/color_utils.dart';
-import 'package:template/core/utils/res/gaps.dart';
+import 'package:fluter_template_perfect/core/utils/common/color_utils.dart';
+import 'package:fluter_template_perfect/core/utils/res/gaps.dart';
 
 typedef validatorT = String? Function(String?);
 
@@ -75,7 +75,7 @@ class _CustomTextFieldState extends State<InputField> {
 
   /// 当前秒数
   int currentSecond = 0;
-  late StreamSubscription _obs;
+  StreamSubscription? _obs;
 
   fieldFocusChange(BuildContext context, FocusNode? currentFocus, FocusNode? nextFocus) {
     currentFocus!.unfocus();
@@ -100,7 +100,7 @@ class _CustomTextFieldState extends State<InputField> {
 
   @override
   void dispose() {
-    _obs.cancel();
+    _obs?.cancel();
     super.dispose();
   }
 

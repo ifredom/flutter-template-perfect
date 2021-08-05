@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:template/core/constants/app_theme.dart';
-import 'package:template/ui/component/title_view.dart';
+import 'package:fluter_template_perfect/core/constants/app_theme.dart';
+import 'package:fluter_template_perfect/ui/pages/home/first_view/title_view.dart';
 
-import 'package:template/core/app/locator.dart';
+import 'package:fluter_template_perfect/core/app/locator.dart';
 
-import 'package:template/core/routes/routes.dart';
+import 'package:fluter_template_perfect/core/routes/routes.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key, required this.animationController}) : super(key: key);
@@ -55,8 +55,8 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
     const int count = 5;
     listViews.add(
       TitleView(
-        titleTxt: 'First Screen 数据 1',
-        subTxt: '前往详情页',
+        titleTxt: '油闷大虾',
+        subTxt: '七星酒店',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
@@ -71,8 +71,8 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
 
     listViews.add(
       TitleView(
-        titleTxt: 'First Screen 数据 2',
-        subTxt: '详情 2',
+        titleTxt: '水煮肉片',
+        subTxt: '苍蝇馆',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
@@ -80,8 +80,8 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
     );
     listViews.add(
       TitleView(
-        titleTxt: 'First Screen 数据 3',
-        subTxt: '详情 3',
+        titleTxt: '啤酒鸭',
+        subTxt: '宿舍',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
@@ -91,7 +91,7 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
 
   Future<bool> getData() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 50));
-    return true;
+    return Future.value(true);
   }
 
   @override

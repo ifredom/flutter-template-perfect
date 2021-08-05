@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/constants/app_theme.dart';
+import 'package:fluter_template_perfect/core/constants/app_theme.dart';
 
 typedef CallbackFunction = void Function();
 

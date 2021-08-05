@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:template/core/app/locator.dart';
+import 'package:fluter_template_perfect/core/app/locator.dart';
 
 class ErrorPage extends StatefulWidget {
   final FlutterErrorDetails details;

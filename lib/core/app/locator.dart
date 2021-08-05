@@ -1,16 +1,16 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:template/core/services/auth/auth_service.dart';
-import 'package:template/core/services/auth/auth_service_impl.dart';
-import 'package:template/core/services/connectivity/connectivity_service.dart';
-import 'package:template/core/services/connectivity/connectivity_service_impl.dart';
-import 'package:template/core/services/hardware_info/hardware_info_service.dart';
-import 'package:template/core/services/hardware_info/hardware_info_service_impl.dart';
-import 'package:template/core/services/key_storage/key_storage_service.dart';
-import 'package:template/core/services/key_storage/key_storage_service_impl.dart';
-import 'package:template/core/utils/common/file_helper.dart';
-import 'package:template/ui/pages/home/home_view/home_view_model.dart';
+import 'package:fluter_template_perfect/core/services/auth/auth_service.dart';
+import 'package:fluter_template_perfect/core/services/auth/auth_service_impl.dart';
+import 'package:fluter_template_perfect/core/services/connectivity/connectivity_service.dart';
+import 'package:fluter_template_perfect/core/services/connectivity/connectivity_service_impl.dart';
+import 'package:fluter_template_perfect/core/services/hardware_info/hardware_info_service.dart';
+import 'package:fluter_template_perfect/core/services/hardware_info/hardware_info_service_impl.dart';
+import 'package:fluter_template_perfect/core/services/key_storage/key_storage_service.dart';
+import 'package:fluter_template_perfect/core/services/key_storage/key_storage_service_impl.dart';
+import 'package:fluter_template_perfect/core/utils/common/file_helper.dart';
+import 'package:fluter_template_perfect/ui/pages/home/home_view/home_view_model.dart';
 
 GetIt locator = GetIt.instance;
 

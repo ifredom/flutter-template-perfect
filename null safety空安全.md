@@ -80,10 +80,16 @@ class _DrawerExampleState extends State<DrawerExample> {
 }
 ```
 
-> 使用 late 关键字 StreamSubscription<ConnectivityResult> \_subscription;
-> Non-nullable instance field '\_subscription' must be initialized.
+> 使用 late 关键字
+
+```bash
+StreamSubscription<ConnectivityResult> \_subscription;
+Non-nullable instance field '\_subscription' must be initialized.
+```
 
 The argument type 'Function?' can't be assigned to the parameter type 'void Function()?'.
+
+## 对于 StreamSubscription 空安全检测，text_field.dart 中有示例
 
 ## [空安全定义自己的 model](https://www.raywenderlich.com/21955673-non-nullable-dart-understanding-null-safety)
 

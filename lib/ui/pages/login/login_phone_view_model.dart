@@ -1,8 +1,8 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:template/core/app/locator.dart';
-import 'package:template/core/mixins/validators.dart';
-import 'package:template/core/routes/routes.dart';
+import 'package:fluter_template_perfect/core/app/locator.dart';
+import 'package:fluter_template_perfect/core/mixins/validators.dart';
+import 'package:fluter_template_perfect/core/routes/routes.dart';
 
 // ViewModelProvider应该使用得是 LoginViewModel中得数据
 class LoginPhoneViewModel extends BaseViewModel with Validators {

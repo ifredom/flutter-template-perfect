@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:template/core/app/locator.dart';
-import 'package:template/core/routes/routes.dart';
+import 'package:fluter_template_perfect/core/app/locator.dart';
+import 'package:fluter_template_perfect/core/routes/routes.dart';
 
-
-import 'package:template/core/utils/common/color_utils.dart';
-import 'package:template/core/utils/res/gaps.dart';
-import 'package:template/ui/widgets/buttons/gradient_button.dart';
-import 'package:template/ui/widgets/textfield/text_field.dart';
+import 'package:fluter_template_perfect/core/utils/common/color_utils.dart';
+import 'package:fluter_template_perfect/core/utils/res/gaps.dart';
+import 'package:fluter_template_perfect/ui/widgets/buttons/gradient_button.dart';
+import 'package:fluter_template_perfect/ui/widgets/textfield/text_field.dart';
 
 import 'login_phone_view_model.dart';
 

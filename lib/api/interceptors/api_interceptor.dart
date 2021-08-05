@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart' show InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
-import 'package:template/core/utils/res/local_storage.dart';
-import 'package:template/core/utils/res/local_storage_keys.dart';
+import 'package:fluter_template_perfect/core/utils/res/local_storage.dart';
+import 'package:fluter_template_perfect/core/utils/res/local_storage_keys.dart';
 
 import '../apicode/whiteList.dart';
 

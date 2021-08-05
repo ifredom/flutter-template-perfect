@@ -17,9 +17,10 @@ class LocalStorage {
     }
   }
 
-  static dynamic get(String key) async {
+  // 注意：返回值是dynamic，允许为空！
+  static dynamic get<T>(String key) async {
     SharedPreferences _preferences = await SharedPreferences.getInstance();
-    var value = _preferences.get(key);
+    dynamic value = _preferences.get(key);
     return value;
   }
 

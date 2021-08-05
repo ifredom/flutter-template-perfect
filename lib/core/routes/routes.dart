@@ -1,19 +1,20 @@
+import 'package:fluter_template_perfect/ui/pages/register/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:template/ui/pages/404.dart';
-import 'package:template/ui/pages/home/home_view/home.dart';
-import 'package:template/ui/pages/login/login_view.dart';
-import 'package:template/ui/pages/login/login_phone_view.dart';
-import 'package:template/ui/pages/product_detail/product_detail_view.dart';
+import 'package:fluter_template_perfect/ui/pages/404.dart';
+import 'package:fluter_template_perfect/ui/pages/home/home_view/home.dart';
+import 'package:fluter_template_perfect/ui/pages/login/login_view.dart';
+import 'package:fluter_template_perfect/ui/pages/login/login_phone_view.dart';
+import 'package:fluter_template_perfect/ui/pages/product_detail/product_detail_view.dart';
 
 /// 路由跳转使用方式
 // locator<NavigationService>().push(ViewRoutes.homePage);
 
 class ViewRoutes {
   static const String homeView = 'app://';
-  static const String adminHomeView = 'app://adminHomeView';
   static const String loginView = "app://loginView";
   static const String loginPhoneView = "app://loginPhoneView";
+  static const String registerView = "app://registerView";
   static const String productDetailView = "app://ProductDetailView";
 
   static Route<dynamic> generateRoute(BuildContext context, RouteSettings settings) {
@@ -34,10 +35,12 @@ class ViewRoutes {
 
       case loginPhoneView:
         return LoginPhoneView();
+      case registerView:
+        return RegisterView();
 
       case productDetailView:
         // 路由传递参数
-        final post = settings.arguments;
+        final Map post = settings.arguments as Map;
         return ProductDetailView(post);
 
       default:

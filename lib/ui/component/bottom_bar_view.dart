@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/constants/app_theme.dart';
-import 'package:template/core/constants/tab_icon_data.dart';
-import 'package:template/core/utils/common/color_utils.dart';
+import 'package:fluter_template_perfect/core/constants/app_theme.dart';
+import 'package:fluter_template_perfect/core/constants/tab_icon_data.dart';
+import 'package:fluter_template_perfect/core/utils/common/color_utils.dart';
 
 class BottomBarView extends StatefulWidget {
   const BottomBarView({Key? key, required this.tabIconsList, required this.changeIndex, required this.addClick})

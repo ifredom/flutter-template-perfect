@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:logging/logging.dart';
-import 'package:template/core/enums/component_state.dart';
+import 'package:fluter_template_perfect/core/enums/component_state.dart';
 import 'connectivity_service.dart';
 
 class ConnectivityServiceImpl implements ConnectivityService {

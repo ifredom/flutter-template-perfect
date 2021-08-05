@@ -1,7 +1,7 @@
 import 'dart:convert' as convert;
 
 import 'package:dio/dio.dart';
-import 'package:template/core/exceptions/network_exception.dart';
+import 'package:fluter_template_perfect/core/exceptions/network_exception.dart';
 
 void checkForNetworkExceptions(Response response) {
   if (response.statusCode != 200) {

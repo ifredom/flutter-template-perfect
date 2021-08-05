@@ -1,4 +1,4 @@
-import 'package:template/core/enums/component_state.dart';
+import 'package:fluter_template_perfect/core/enums/component_state.dart';
 import '../stoppable_service.dart';
 
 abstract class ConnectivityService implements StoppableService {

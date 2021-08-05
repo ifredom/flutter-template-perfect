@@ -1,13 +1,11 @@
+import 'package:fluter_template_perfect/core/constants/app_theme.dart';
+import 'package:fluter_template_perfect/core/managers/core_manager.dart';
+import 'package:fluter_template_perfect/core/managers/restart_manager.dart';
+import 'package:fluter_template_perfect/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:template/core/constants/app_theme.dart';
-import 'package:template/core/managers/core_manager.dart';
-import 'package:template/core/managers/restart_manager.dart';
-import 'package:template/core/routes/routes.dart';
-import 'package:template/core/app/provider_setup.dart';
 
 import './start_up_view.dart';
 
@@ -20,22 +18,19 @@ class _RootComponentState extends State<RootComponent> {
   @override
   Widget build(BuildContext context) {
     return RestartManager(
-      child: MultiProvider(
-        providers: providers,
-        child: CoreManager(
-          child: OKToast(
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              // localizationsDelegates: localizationsDelegates,
-              // supportedLocales: supportedLocales,
-              // localeResolutionCallback: loadSupportedLocals,
-              title: 'flutterApp',
-              theme: AppTheme.themData,
-              navigatorKey: StackedService.navigatorKey,
-              navigatorObservers: [CustomNavigatorObserver.routeObserver],
-              onGenerateRoute: (settings) => ViewRoutes.generateRoute(context, settings),
-              home: StartUpView(),
-            ),
+      child: CoreManager(
+        child: OKToast(
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            // localizationsDelegates: localizationsDelegates,
+            // supportedLocales: supportedLocales,
+            // localeResolutionCallback: loadSupportedLocals,
+            title: 'flutterApp',
+            theme: AppTheme.themData,
+            navigatorKey: StackedService.navigatorKey,
+            navigatorObservers: [CustomNavigatorObserver.routeObserver],
+            onGenerateRoute: (settings) => ViewRoutes.generateRoute(context, settings),
+            home: StartUpView(),
           ),
         ),
       ),
@@ -43,11 +38,10 @@ class _RootComponentState extends State<RootComponent> {
   }
 }
 
-
 /// 路由监听
 // 使用: navigatorObservers: <NavigatorObserver>[CustomNavigatorObserver()],
 class CustomNavigatorObserver extends NavigatorObserver {
-  static CustomNavigatorObserver _instance=CustomNavigatorObserver();
+  static CustomNavigatorObserver _instance = CustomNavigatorObserver();
   static final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
   static CustomNavigatorObserver getInstance() => _instance;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/constants/app_theme.dart';
-import 'package:template/ui/component/title_view.dart';
+import 'package:fluter_template_perfect/core/constants/app_theme.dart';
+import 'package:fluter_template_perfect/ui/pages/home/first_view/title_view.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -14,13 +14,11 @@ class _SecondScreenState extends State<SecondScreen> with TickerProviderStateMix
 
   @override
   void initState() {
-
     addAllListData();
     super.initState();
   }
 
   void addAllListData() {
-
     listViews.add(
       TitleView(titleTxt: 'Second Screen 数据 1', subTxt: 'Details 1'),
     );

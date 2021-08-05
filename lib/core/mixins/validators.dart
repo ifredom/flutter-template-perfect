@@ -1,10 +1,9 @@
-import 'package:template/core/utils/res/local_keys.dart';
+import 'package:fluter_template_perfect/core/utils/res/local_keys.dart';
 
 /// 要使用 Validators验证类，使用 with 将其混入
 class Validators {
   /// 手机号验证
-  final phoneNumberRegExp = RegExp(
-      r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
+  final phoneNumberRegExp = RegExp(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
 
   /// 邮箱验证
   final emailRegExp = RegExp(
@@ -14,8 +13,7 @@ class Validators {
   final passwordRegExp = RegExp(r"(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");
 
   /// 身份证号码
-  RegExp postalCode = RegExp(
-      r'^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|[Xx])$');
+  RegExp postalCode = RegExp(r'^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|[Xx])$');
 
   String? validateEmail(String value) {
     if (!emailRegExp.hasMatch(value.trim())) {
@@ -46,46 +44,15 @@ class Validators {
       return LocalKeys.invalid_postal_idcard; // 位数不够
     }
     // 身份证号码正则
-    RegExp postalCode = RegExp(
-        r'^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|[Xx])$');
+    RegExp postalCode = RegExp(r'^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|[Xx])$');
     // 通过验证，说明格式正确，但仍需计算准确性
     if (!postalCode.hasMatch(value)) {
       return LocalKeys.invalid_postal_idcard;
     }
     //将前17位加权因子保存在数组里
-    final List idCardList = [
-      "7",
-      "9",
-      "10",
-      "5",
-      "8",
-      "4",
-      "2",
-      "1",
-      "6",
-      "3",
-      "7",
-      "9",
-      "10",
-      "5",
-      "8",
-      "4",
-      "2"
-    ];
+    final List idCardList = ["7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7", "9", "10", "5", "8", "4", "2"];
     //这是除以11后，可能产生的11位余数、验证码，也保存成数组
-    final List idCardYArray = [
-      '1',
-      '0',
-      '10',
-      '9',
-      '8',
-      '7',
-      '6',
-      '5',
-      '4',
-      '3',
-      '2'
-    ];
+    final List idCardYArray = ['1', '0', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
     // 前17位各自乖以加权因子后的总和
     int idCardWiSum = 0;
 

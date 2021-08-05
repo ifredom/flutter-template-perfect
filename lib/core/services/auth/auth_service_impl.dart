@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'package:logging/logging.dart';
-import 'package:template/api/apicode/api.dart';
-import 'package:template/api/http_service_impl.dart';
-import 'package:template/core/exceptions/repository_exception.dart';
-import 'package:template/core/model/userinfo/user.dart';
-import 'package:template/core/utils/res/local_storage.dart';
-import 'package:template/core/utils/res/local_storage_keys.dart';
+import 'package:fluter_template_perfect/api/apicode/api.dart';
+import 'package:fluter_template_perfect/api/http_service_impl.dart';
+import 'package:fluter_template_perfect/core/exceptions/repository_exception.dart';
+import 'package:fluter_template_perfect/core/model/userinfo/user.dart';
+import 'package:fluter_template_perfect/core/utils/res/local_storage.dart';
+import 'package:fluter_template_perfect/core/utils/res/local_storage_keys.dart';
 
 import 'auth_service.dart';
 
 // 定义异步接口请求
 class AuthServiceImpl implements AuthService {
   final _log = Logger("AuthServiceImpl");
-  User _currentUser = User();
+  late User _currentUser;
   User get currentUser => _currentUser;
 
   // 使用stream数据传输通信, 入口sink,出口stream
@@ -120,13 +120,15 @@ class AuthServiceImpl implements AuthService {
   @override
   Future<void> signOut() async {
     await LocalStorage.clear();
-    _currentUser = User();
+    _currentUser = User((u) => u
+      ..id = ""
+      ..token = "");
   }
 
   @override
   Future<bool> isUserLoggedIn() async {
     // await Future.delayed(Duration(milliseconds: 3000));
-    String token = await LocalStorage.get(LocalStorageKeys.TOKEN_KEY);
-    return token != '';
+    String token = (await LocalStorage.get(LocalStorageKeys.TOKEN_KEY)) ?? '';
+    return Future.value(token != '');
   }
 }

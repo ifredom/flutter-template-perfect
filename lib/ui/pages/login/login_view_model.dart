@@ -1,15 +1,15 @@
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:template/core/app/locator.dart';
-import 'package:template/core/mixins/validators.dart';
-import 'package:template/core/model/userinfo/user.dart';
-import 'package:template/core/routes/routes.dart';
-import 'package:template/core/services/auth/auth_service.dart';
+import 'package:fluter_template_perfect/core/app/locator.dart';
+import 'package:fluter_template_perfect/core/mixins/validators.dart';
+import 'package:fluter_template_perfect/core/model/userinfo/user.dart';
+import 'package:fluter_template_perfect/core/routes/routes.dart';
+import 'package:fluter_template_perfect/core/services/auth/auth_service.dart';
 
-import 'package:template/core/exceptions/repository_exception.dart';
-import 'package:template/core/utils/res/local_storage.dart';
-import 'package:template/core/utils/res/local_storage_keys.dart';
+import 'package:fluter_template_perfect/core/exceptions/repository_exception.dart';
+import 'package:fluter_template_perfect/core/utils/res/local_storage.dart';
+import 'package:fluter_template_perfect/core/utils/res/local_storage_keys.dart';
 
 // ViewModelProvider应该使用得是 LoginViewModel中得数据
 class LoginViewModel extends BaseViewModel with Validators {
@@ -81,9 +81,9 @@ class LoginViewModel extends BaseViewModel with Validators {
       bool isNewUser = await queryIsNewUser(mobile, userInfo.id);
       print("是否新用户: $isNewUser");
       if (isNewUser) {
-        await _navigationService.navigateTo(ViewRoutes.homeView);
+        await _navigationService.navigateTo(ViewRoutes.registerView);
       } else {
-        await _navigationService.replaceWith(ViewRoutes.adminHomeView);
+        await _navigationService.replaceWith(ViewRoutes.homeView);
       }
     } else {
       showToast(res.data["msg"]);

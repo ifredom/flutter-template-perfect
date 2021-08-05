@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:template/core/model/userinfo/user.dart';
+import 'package:fluter_template_perfect/core/model/userinfo/user.dart';
 
 abstract class AuthService {
   User get currentUser;
