@@ -52,24 +52,20 @@ class HttpServiceImpl implements HttpService {
     _dio.options.baseUrl = Constants.BASE_URL;
 
     Map<String, dynamic> _headers = HashMap();
+
     if (headers != null) {
       _headers.addAll(headers);
     }
 
-    if (options != null) {
-      options.headers = _headers;
-    } else {
-      options = Options(method: 'post', contentType: 'application/json'); // 默认所有的请求为post请求
-      options.headers = _headers;
-    }
+    Options _options = Options(method: 'post', contentType: 'application/json');
+    _options.headers = _headers;
 
     Response response;
     try {
-      // params["apiCode"] = apiCode;
       response = await _dio.request(
         Constants.BASE_URL + apiCode,
         data: json.encode(params), // 注意，所有data数据都要encode变为json字符串.
-        options: options,
+        options: _options,
         onSendProgress: network_utils.showLoadingProgress,
         onReceiveProgress: network_utils.showLoadingProgress,
       );
