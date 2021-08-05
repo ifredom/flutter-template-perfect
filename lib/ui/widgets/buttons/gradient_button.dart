@@ -54,8 +54,8 @@ class GradientButton extends StatelessWidget {
     }
 
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      // onPrimary: Colors.transparent,
-      // primary: Colors.transparent, // transparent
+      onPrimary: Colors.transparent,
+      primary: Colors.transparent, // transparent
       padding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(25)),
