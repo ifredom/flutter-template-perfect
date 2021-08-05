@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:template/core/app/locator.dart';
-import 'package:template/core/constants/app_theme.dart';
-import 'package:template/core/constants/tab_icon_data.dart';
-import 'package:template/ui/component/bottom_bar_view.dart';
-import 'package:template/ui/pages/home/first_view/first_view.dart';
-import 'package:template/ui/pages/home/forth_view/forth_view.dart';
-import 'package:template/ui/pages/home/home_view/home_view_model.dart';
-import 'package:template/ui/pages/home/second_view/second_view.dart';
-import 'package:template/ui/pages/home/third_view/third_view.dart';
+import 'package:fluter_template_perfect/core/app/locator.dart';
+import 'package:fluter_template_perfect/core/constants/app_theme.dart';
+import 'package:fluter_template_perfect/core/constants/tab_icon_data.dart';
+import 'package:fluter_template_perfect/ui/component/bottom_bar_view.dart';
+import 'package:fluter_template_perfect/ui/pages/home/first_view/first_view.dart';
+import 'package:fluter_template_perfect/ui/pages/home/forth_view/forth_view.dart';
+import 'package:fluter_template_perfect/ui/pages/home/home_view/home_view_model.dart';
+import 'package:fluter_template_perfect/ui/pages/home/second_view/second_view.dart';
+import 'package:fluter_template_perfect/ui/pages/home/third_view/third_view.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -18,9 +18,9 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   final _homeViewModel = locator<HomeViewModel>();
 
-  late AnimationController animationController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
+  late AnimationController animationController;
 
-  List<TabIconData> tabIconsList = TabIconData.tabIconsList;
+  late List<TabIconData> tabIconsList;
 
   Widget tabBody = Container(
     color: AppTheme.background,
@@ -28,6 +28,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    animationController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
+
+    tabIconsList = TabIconData.tabIconsList;
+
     tabIconsList.forEach((TabIconData tab) {
       tab.isSelected = false;
     });
@@ -47,7 +51,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       viewModelBuilder: () => _homeViewModel,
-      // onModelReady: (model) => model.initialise(),
+      onModelReady: (model) => model.initialise(),
       builder: (context, model, child) => Scaffold(
         body: Container(
           color: AppTheme.background,
@@ -75,8 +79,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   }
 
   Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    return true;
+    return Future<dynamic>.delayed(const Duration(milliseconds: 200)).then((value) => true);
   }
 
   Widget bottomBar() {
@@ -95,7 +98,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               }
               switch (index) {
                 case 0:
-                  // 带动画
                   tabBody = FirstScreen(animationController: animationController);
                   break;
                 case 1:
