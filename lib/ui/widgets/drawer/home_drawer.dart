@@ -210,7 +210,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                       return Transform(
                         transform: Matrix4.translationValues(
                             (MediaQuery.of(context).size.width * 0.75 - 64) *
-                                (1.0 - widget.iconAnimationController!.value - 1.0),
+                                (1.0 - widget.iconAnimationController.value - 1.0),
                             0.0,
                             0.0),
                         child: Padding(

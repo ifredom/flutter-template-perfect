@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
+
 import '../custom/base_dialog_wrapper.dart';
 
 class ConfirmDialog extends StatelessWidget {

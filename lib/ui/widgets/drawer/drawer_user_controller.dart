@@ -170,11 +170,7 @@ class _DrawerUserControllerState extends State<DrawerUserController> with Ticker
                                 child: Center(
                                   child: widget.menuView != null
                                       ? widget.menuView
-                                      : AnimatedIcon(
-                                          icon: widget.animatedIconData != null
-                                              ? widget.animatedIconData
-                                              : AnimatedIcons.arrow_menu,
-                                          progress: iconAnimationController),
+                                      : AnimatedIcon(icon: widget.animatedIconData, progress: iconAnimationController),
                                 ),
                                 onTap: () {
                                   FocusScope.of(context).requestFocus(FocusNode());

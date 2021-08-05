@@ -23,11 +23,7 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   bool _isBusy = false;
 
-  String get nickName => user.nickName;
-  int get gender => user.gender;
-  String get firstTeachingDate => user.firstTeachingDate;
-  String get detailAddress => user.detailAddress;
-  String get description => user.description;
+  String get mobile => user.mobile ?? '';
 
   bool get isNewUser => _isNewUser;
 
@@ -87,11 +83,7 @@ class LoginViewModel extends BaseViewModel with Validators {
       if (isNewUser) {
         await _navigationService.navigateTo(ViewRoutes.homeView);
       } else {
-        if (userInfo.userType == "admin") {
-          await _navigationService.replaceWith(ViewRoutes.adminHomeView);
-        } else {
-          await _navigationService.replaceWith(ViewRoutes.homeView);
-        }
+        await _navigationService.replaceWith(ViewRoutes.adminHomeView);
       }
     } else {
       showToast(res.data["msg"]);

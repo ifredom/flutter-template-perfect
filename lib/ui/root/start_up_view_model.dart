@@ -19,7 +19,7 @@ class StartUpViewModel extends BaseViewModel {
       var res = await _authService.fetchUserInfo(id);
       if (res.data["code"] == 0) {
         User userinfo = User.fromMap(res.data["data"]);
-        if (userinfo.userType == "T") {
+        if (userinfo.age! > 18) {
           await _navigationService.replaceWith(ViewRoutes.adminHomeView);
         } else {
           await _navigationService.replaceWith(ViewRoutes.homeView);

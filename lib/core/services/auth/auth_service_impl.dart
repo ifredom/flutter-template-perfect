@@ -20,11 +20,8 @@ class AuthServiceImpl implements AuthService {
   StreamController<User> _userController = StreamController<User>();
   Stream<User> get user => _userController.stream;
 
-  String _userType = '';
-  String get userType => _userType;
-
-  String _invitationCode = '';
-  String get invitationCode => _invitationCode;
+  int _age = 0;
+  int get age => _age;
 
   /// 账号密码登录
   @override
@@ -99,55 +96,25 @@ class AuthServiceImpl implements AuthService {
     }
   }
 
-  // 更新用户信息
+  // 更新整个User model：更新用户多条信息
   @override
   Future<void> updateCurrentUser(User userinfo) async {
     _currentUser = User((u) => u
       ..id = userinfo.id
       ..token = userinfo.token
       ..mobile = userinfo.mobile
-      ..gender = userinfo.gender
-      ..nickName = userinfo.nickName
-      ..detailAddress = userinfo.detailAddress
-      ..description = userinfo.description
-      ..userType = userinfo.userType
-      ..validFlag = userinfo.validFlag);
+      ..age = userinfo.age);
   }
 
-  // 更新用户类型
+  // 更新User model某一项：更新用户单条信息
   @override
-  Future<void> updateUserType(String userType) async {
+  Future<void> updateUserAge(int age) async {
     // 写法二
     // p = (p.toBuilder().type = 'hello world').build();
     // 写法一
-    _currentUser = _currentUser.rebuild((u) => u..userType = userType);
+    _currentUser = _currentUser.rebuild((u) => u..age = age);
 
-    _userType = userType;
-  }
-
-  @override
-  Future<void> updateUserInvitationCode(String invitationCode) async {
-    _invitationCode = invitationCode;
-  }
-
-  @override
-  Future<void> updateUserNiceName(String nickName) async {
-    _currentUser = _currentUser.rebuild((u) => u..nickName = nickName);
-  }
-
-  @override
-  Future<void> updateUserAddress(String detailAddress) async {
-    _currentUser = _currentUser.rebuild((u) => u..detailAddress = detailAddress);
-  }
-
-  @override
-  Future<void> updateUserDescription(String description) async {
-    _currentUser = _currentUser.rebuild((u) => u..description = description);
-  }
-
-  @override
-  Future<void> updateUserSex(int sex) async {
-    _currentUser = _currentUser.rebuild((u) => u..gender = sex);
+    _age = age;
   }
 
   @override

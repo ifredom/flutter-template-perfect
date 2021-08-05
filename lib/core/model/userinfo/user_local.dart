@@ -27,18 +27,18 @@ class UserLocal extends HiveObject {
   final String website;
 
   UserLocal({
-    this.id='',
-    this.name='',
-    this.username='',
-    this.mobile='',
-    this.email='',
-    this.website='',
+    this.id = '',
+    this.name = '',
+    this.username = '',
+    this.mobile = '',
+    this.email = '',
+    this.website = '',
   });
 
   factory UserLocal.fromUser(User user) {
     return UserLocal(
       id: user.id,
-      mobile: user.mobile,
+      mobile: user.mobile ?? '',
     );
   }
 
@@ -59,8 +59,5 @@ class UserLocal extends HiveObject {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserLocal &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          mobile == other.mobile;
+      other is UserLocal && runtimeType == other.runtimeType && id == other.id && mobile == other.mobile;
 }

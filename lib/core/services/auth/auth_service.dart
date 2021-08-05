@@ -4,11 +4,9 @@ import 'package:template/core/model/userinfo/user.dart';
 
 abstract class AuthService {
   User get currentUser;
-  String get invitationCode;
-  String get userType;
   Future<void> updateCurrentUser(User userinfo);
+  Stream<User> get user; //  use stream fwith `User`
 
-  Stream<User> get user; // 使用流控制数据
   Future signUpWithAuthcode(String name, String authCode);
   Future signUpWithAuthPassword(String username, String password);
   Future fetchUserInfo(String id);
@@ -17,10 +15,5 @@ abstract class AuthService {
 
   Future<void> signOut();
   Future<bool> isUserLoggedIn();
-  Future<void> updateUserType(String type);
-  Future<void> updateUserInvitationCode(String invitationCode);
-  Future<void> updateUserNiceName(String name);
-  Future<void> updateUserAddress(String name);
-  Future<void> updateUserDescription(String name);
-  Future<void> updateUserSex(int sex);
+  Future<void> updateUserAge(int age);
 }
