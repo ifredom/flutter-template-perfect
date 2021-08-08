@@ -89,6 +89,17 @@ Non-nullable instance field '\_subscription' must be initialized.
 
 The argument type 'Function?' can't be assigned to the parameter type 'void Function()?'.
 
+> 构造方法给 List 设置默认值，使用const
+
+```dart
+ class NewstStyle extends StatelessWidget {
+   final List<DkCenterUpload> upload;
+   const NewstStyle({
+     Key key,
+     this.upload: const [],
+   }) : super(key: key);
+```
+
 ## 对于 StreamSubscription 空安全检测，text_field.dart 中有示例
 
 ## [空安全定义自己的 model](https://www.raywenderlich.com/21955673-non-nullable-dart-understanding-null-safety)
