@@ -1,12 +1,12 @@
 import 'dart:async';
+import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
+import 'package:fluter_template_perfect/core/setup/setup_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'core/app/locator.dart';
-import 'core/app/logger.dart';
 
 import './core/Constants/Constants.dart';
-import './ui/root/root_component.dart';
-import './ui/pages/error_page.dart';
+import 'ui/views/root_component.dart';
+import 'ui/views/error_page.dart';
 
 void main() async {
   // 初始化 访问二进制文件/初始化插件
@@ -40,12 +40,10 @@ void main() async {
   });
 }
 
-/// Reports [error] along with its [stackTrace] to server.
-/// https://github.com/flutter/crashy/blob/master/lib/main.dart
+// 上传应用异常信息到服务器！
 Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
-  print('异常捕获: $error');
   if (Constants.DEBUG) {
-    print('异常处理: 开发模式, 不收集错误，不发送到服务端. $stackTrace');
+    print('开发模式, 不发送异常到服务端. $stackTrace');
     return;
   }
   print('发送异常信息到服务器 ...');

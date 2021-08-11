@@ -1,6 +1,6 @@
+import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:fluter_template_perfect/core/app/locator.dart';
 
 import '../services/connectivity/connectivity_service.dart';
 import '../services/stoppable_service.dart';
