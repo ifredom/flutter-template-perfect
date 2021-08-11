@@ -1,4 +1,5 @@
 class Dimens {
+  // px 像素字体尺寸
   static const double font_sp10 = 10;
   static const double font_sp12 = 12;
   static const double font_sp13 = 13;
@@ -8,7 +9,7 @@ class Dimens {
   static const double font_sp18 = 18;
   static const double font_sp20 = 20;
 
-  // 像素距离
+  // px 像素距离
   static const double gap_dp5 = 5;
   static const double gap_dp10 = 10;
   static const double gap_dp12 = 12;

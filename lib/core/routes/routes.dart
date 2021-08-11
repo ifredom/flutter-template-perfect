@@ -1,21 +1,20 @@
+import 'package:fluter_template_perfect/ui/views/404.dart';
+import 'package:fluter_template_perfect/ui/views/home/home_view/home.dart';
+import 'package:fluter_template_perfect/ui/views/login/login_phone_view.dart';
+import 'package:fluter_template_perfect/ui/views/login/login_view.dart';
+import 'package:fluter_template_perfect/ui/views/product_detail/product_detail_view.dart';
 import 'package:fluter_template_perfect/ui/views/register/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:fluter_template_perfect/ui/views/404.dart';
-import 'package:fluter_template_perfect/ui/views/home/home_view/home.dart';
-import 'package:fluter_template_perfect/ui/views/login/login_view.dart';
-import 'package:fluter_template_perfect/ui/views/login/login_phone_view.dart';
-import 'package:fluter_template_perfect/ui/views/product_detail/product_detail_view.dart';
 
 /// 路由跳转使用方式
 // locator<NavigationService>().push(ViewRoutes.homePage);
-
 class ViewRoutes {
   static const String homeView = 'app://';
-  static const String loginView = "app://loginView";
-  static const String loginPhoneView = "app://loginPhoneView";
-  static const String registerView = "app://registerView";
-  static const String productDetailView = "app://ProductDetailView";
+  static const String loginView = "app://login";
+  static const String loginPhoneView = "app://loginPhone";
+  static const String registerView = "app://register";
+  static const String productDetailView = "app://productDetail";
 
   static Route<dynamic> generateRoute(BuildContext context, RouteSettings settings) {
     return GetPageRoute(
@@ -53,4 +52,12 @@ class ViewRoutes {
     // Routes.route_1,
     // Routes.route_2,
   ];
+
+  // 路由监听
+  static routingCallback(Routing? routing) {
+    if (routing!.current == ViewRoutes.homeView) {
+      print("watch route event，navigatorTo homeview");
+      Get.snackbar("观察", "You are on second route");
+    }
+  }
 }

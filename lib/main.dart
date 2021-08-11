@@ -9,17 +9,17 @@ import 'ui/views/root_component.dart';
 import 'ui/views/error_page.dart';
 
 void main() async {
-  // 初始化 访问二进制文件/初始化插件
+  // 应用初始化
   WidgetsFlutterBinding.ensureInitialized();
 
   await runZonedGuarded<Future<void>>(() async {
+    // 程序异常时，不退出应用，仅仅捕捉异常信息并在控制台打印。
     ErrorWidget.builder = (FlutterErrorDetails details) {
       if (Constants.DEBUG) {
         FlutterError.dumpErrorToConsole(details);
       } else {
         Zone.current.handleUncaughtError(details.exception, details.stack as StackTrace);
       }
-
       return ErrorPage(details);
     };
 

@@ -1,14 +1,16 @@
 import 'dart:async';
+import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
 import 'package:logging/logging.dart';
 import 'package:fluter_template_perfect/core/api/apicode/api.dart';
 import 'package:fluter_template_perfect/core/api/http_service_impl.dart';
 import 'package:fluter_template_perfect/core/exceptions/repository_exception.dart';
 import 'package:fluter_template_perfect/core/model/userinfo/user.dart';
-import 'package:fluter_template_perfect/core/utils/res/local_storage.dart';
+import 'package:fluter_template_perfect/core/services/local_storage/local_storage_service.dart';
 import 'package:fluter_template_perfect/core/utils/res/local_storage_keys.dart';
 
 // 定义异步接口请求
 class AuthService {
+  final _localStorageService = locator<LocalStorageService>();
   final _log = Logger("AuthServiceImpl");
   late User _currentUser;
   User get currentUser => _currentUser;
@@ -110,7 +112,7 @@ class AuthService {
   }
 
   Future<void> signOut() async {
-    await LocalStorage.clear();
+    await _localStorageService.clear();
     _currentUser = User((u) => u
       ..id = ""
       ..token = "");
@@ -118,7 +120,7 @@ class AuthService {
 
   Future<bool> isUserLoggedIn() async {
     // await Future.delayed(Duration(milliseconds: 3000));
-    String token = (await LocalStorage.get(LocalStorageKeys.TOKEN_KEY)) ?? '';
+    String token = (await _localStorageService.get(LocalStorageKeys.TOKEN_KEY)) ?? '';
     return Future.value(token != '');
   }
 }

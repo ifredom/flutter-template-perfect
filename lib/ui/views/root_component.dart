@@ -25,7 +25,7 @@ class _RootComponentState extends State<RootComponent> {
         child: OKToast(
           child: BetterFeedback(
             child: FeatureDiscovery(
-              child: MaterialApp(
+              child: GetMaterialApp(
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: localizationsDelegates,
                 supportedLocales: supportedLocales,
@@ -37,6 +37,7 @@ class _RootComponentState extends State<RootComponent> {
                 navigatorObservers: [CustomNavigatorObserver.routeObserver],
                 onGenerateRoute: (settings) => ViewRoutes.generateRoute(context, settings),
                 home: StartUpView(),
+                routingCallback: ViewRoutes.routingCallback,
               ),
             ),
           ),
@@ -66,16 +67,6 @@ class CustomNavigatorObserver extends NavigatorObserver {
       print("监控到");
     } else {
       //全屏透明，通常是一个弹窗
-    }
-  }
-}
-
-// Get 路由监听，第二个
-// 使用: navigatorObservers: [GetObserver(MiddleWare.observer)],
-class MiddleWare {
-  static observer(Routing routing) {
-    if (routing.current == 'app://homeworkIndexPage') {
-      print('监控到 app://homeworkIndexPage 页面');
     }
   }
 }

@@ -8,13 +8,14 @@ import 'package:fluter_template_perfect/core/routes/routes.dart';
 import 'package:fluter_template_perfect/core/services/auth/auth_service.dart';
 
 import 'package:fluter_template_perfect/core/exceptions/repository_exception.dart';
-import 'package:fluter_template_perfect/core/utils/res/local_storage.dart';
+import 'package:fluter_template_perfect/core/services/local_storage/local_storage_service.dart';
 import 'package:fluter_template_perfect/core/utils/res/local_storage_keys.dart';
 
 // ViewModelProvider应该使用得是 LoginViewModel中得数据
 class LoginViewModel extends BaseViewModel with Validators {
   final _authService = locator<AuthService>();
   final _navigationService = locator<NavigationService>();
+  final _localStorageService = locator<LocalStorageService>();
 
   // 数据从provider中取
   User get user => _authService.currentUser;
@@ -73,8 +74,8 @@ class LoginViewModel extends BaseViewModel with Validators {
   Future saveUserInfo(dynamic res, String mobile) async {
     if (res.data["code"] == 0) {
       User userInfo = User.fromMap(res.data["data"]);
-      LocalStorage.set<String>(LocalStorageKeys.TOKEN_KEY, userInfo.token);
-      LocalStorage.set<bool>(LocalStorageKeys.HAS_LOGIN, true);
+      await _localStorageService.set<String>(LocalStorageKeys.TOKEN_KEY, userInfo.token);
+      await _localStorageService.set<bool>(LocalStorageKeys.HAS_LOGIN_KEY, true);
 
       await _authService.updateCurrentUser(userInfo);
 

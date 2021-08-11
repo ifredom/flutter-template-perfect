@@ -4,7 +4,7 @@ import 'package:fluter_template_perfect/core/setup/setup_local.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
-import 'package:fluter_template_perfect/core/utils/res/local_keys.dart';
+import 'package:fluter_template_perfect/core/utils/res/locale_keys.dart';
 
 class AppLocalizations {
   final Locale locale = Locale('en', 'zh');

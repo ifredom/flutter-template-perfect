@@ -12,13 +12,20 @@ class ConnectivityService implements StoppableService {
   final _connectivity = Connectivity();
 
   ConnectivityResult _lastResult = ConnectivityResult.none;
+
   late StreamSubscription<ConnectivityResult> _subscription =
       _connectivity.onConnectivityChanged.listen(_emitConnectivity);
+
   bool _serviceStopped = false;
+  bool get serviceStopped => _serviceStopped;
 
   Stream<ConnectivityStatus> get connectivity$ => _connectivityResultController.stream;
 
-  bool get serviceStopped => _serviceStopped;
+  ConnectivityService() {
+    _connectivityResultController.add(ConnectivityStatus.Init);
+    _connectivity.onConnectivityChanged
+        .listen((ConnectivityResult result) => _connectivityResultController.add(_convertResult(result)));
+  }
 
   Future<bool> get isConnected async {
     final result = await _connectivity.checkConnectivity();

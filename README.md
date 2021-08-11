@@ -2,7 +2,7 @@
 
 A new Flutter project template(flutter 完整商用项目模板).
 
-- flutter version: 2.2.0
+- flutter version: 2.2.3
 
 ## Getting Starter(开始)
 
@@ -17,7 +17,17 @@ A new Flutter project template(flutter 完整商用项目模板).
 - webview
 - 乐器曲谱( Score )
 
+### 项目核心结构
+
 ## Automatic generation model (自动生成模型)
+
+<!-- Project root run (项目根目录下执行命令) -->
+
+> flutter packages pub run build_runner build --delete-conflicting-outputs
+
+<!-- or(或者) -->
+
+> flutter packages pub run build_runner watch
 
 [Instructional video(教学视频)](https://www.youtube.com/watch?v=hNbOSSgpneI)
 
@@ -26,36 +36,6 @@ A new Flutter project template(flutter 完整商用项目模板).
 
 [Model example(模型示例)](https://www.stacksecrets.com/flutter/how-to-use-built_value-library)
 [built_value's object setter](https://stackoverflow.com/questions/51556540/whats-the-setter-of-a-built-values-object)
-
-```dash
-
-import 'package:built_value/built_value.dart';
-
-part 'testmode.g.dart';
-
-abstract class Testmode implements Built<Testmode, TestmodeBuilder> {
-  @nullable
-  String get id;
-
-  @nullable
-  String get token;
-
-  String get name;
-
-  Testmode._();
-  factory Testmode([updates(TestmodeBuilder b)]) = _$Testmode;
-}
-```
-
-<!-- Project root run (项目根目录下执行命令) -->
-
-> flutter packages pub run build_runner build
-
-<!-- or(或者) -->
-
-> flutter packages pub run build_runner watch
-
-<!-- other parameter(其他参数)：  --delete-conflicting-outputs -->
 
 ## 适配方法介绍
 

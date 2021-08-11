@@ -3,7 +3,7 @@ enum SupportLocale { FOLLOW_SYSTEM, SIMPLIFIED_CHINESE, TRADITIONAL_CHINESE_TW, 
 
 enum BackImageMode { light, black }
 
-enum ConnectivityStatus { Cellular, WiFi, Offline }
+enum ConnectivityStatus { Cellular, WiFi, Offline, Init }
 
 enum SexEnum { man, women }
 
