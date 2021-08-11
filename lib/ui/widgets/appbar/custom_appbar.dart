@@ -1,9 +1,9 @@
 import 'dart:math';
 
+import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:fluter_template_perfect/core/app/locator.dart';
 
 import 'package:fluter_template_perfect/core/utils/common/color_utils.dart';
 

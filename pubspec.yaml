@@ -67,6 +67,8 @@ dependencies:
   logging: 1.0.1
   # 日志
   fimber: 0.6.1
+  feedback: 2.0.0
+  feature_discovery: 0.14.0
 
 dev_dependencies:
   flutter_test:

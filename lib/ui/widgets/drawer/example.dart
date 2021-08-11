@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluter_template_perfect/ui/pages/login/login_view.dart';
+import 'package:fluter_template_perfect/ui/views/login/login_view.dart';
 
 import 'drawer_user_controller.dart';
 import 'home_drawer.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluter_template_perfect/ui/root/start_up_view_model.dart';
+import 'package:fluter_template_perfect/ui/views/start_up/start_up_view_model.dart';
 import 'package:fluter_template_perfect/ui/widgets/loading/loading_animation.dart';
 
 class StartUpView extends StatelessWidget {

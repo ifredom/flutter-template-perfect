@@ -1,11 +1,11 @@
-import 'package:fluter_template_perfect/ui/pages/register/register_view.dart';
+import 'package:fluter_template_perfect/ui/views/register/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:fluter_template_perfect/ui/pages/404.dart';
-import 'package:fluter_template_perfect/ui/pages/home/home_view/home.dart';
-import 'package:fluter_template_perfect/ui/pages/login/login_view.dart';
-import 'package:fluter_template_perfect/ui/pages/login/login_phone_view.dart';
-import 'package:fluter_template_perfect/ui/pages/product_detail/product_detail_view.dart';
+import 'package:fluter_template_perfect/ui/views/404.dart';
+import 'package:fluter_template_perfect/ui/views/home/home_view/home.dart';
+import 'package:fluter_template_perfect/ui/views/login/login_view.dart';
+import 'package:fluter_template_perfect/ui/views/login/login_phone_view.dart';
+import 'package:fluter_template_perfect/ui/views/product_detail/product_detail_view.dart';
 
 /// 路由跳转使用方式
 // locator<NavigationService>().push(ViewRoutes.homePage);

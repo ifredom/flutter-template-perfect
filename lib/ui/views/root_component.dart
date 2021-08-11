@@ -1,3 +1,5 @@
+import 'package:feature_discovery/feature_discovery.dart';
+import 'package:feedback/feedback.dart';
 import 'package:fluter_template_perfect/core/constants/app_theme.dart';
 import 'package:fluter_template_perfect/core/managers/core_manager.dart';
 import 'package:fluter_template_perfect/core/managers/restart_manager.dart';
@@ -7,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import './start_up_view.dart';
+import 'start_up/start_up_view.dart';
 
 class RootComponent extends StatefulWidget {
   @override
@@ -20,17 +22,21 @@ class _RootComponentState extends State<RootComponent> {
     return RestartManager(
       child: CoreManager(
         child: OKToast(
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            // localizationsDelegates: localizationsDelegates,
-            // supportedLocales: supportedLocales,
-            // localeResolutionCallback: loadSupportedLocals,
-            title: 'flutterApp',
-            theme: AppTheme.themData,
-            navigatorKey: StackedService.navigatorKey,
-            navigatorObservers: [CustomNavigatorObserver.routeObserver],
-            onGenerateRoute: (settings) => ViewRoutes.generateRoute(context, settings),
-            home: StartUpView(),
+          child: BetterFeedback(
+            child: FeatureDiscovery(
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                // localizationsDelegates: localizationsDelegates,
+                // supportedLocales: supportedLocales,
+                // localeResolutionCallback: loadSupportedLocals,
+                title: 'flutterApp',
+                theme: AppTheme.themData,
+                navigatorKey: StackedService.navigatorKey,
+                navigatorObservers: [CustomNavigatorObserver.routeObserver],
+                onGenerateRoute: (settings) => ViewRoutes.generateRoute(context, settings),
+                home: StartUpView(),
+              ),
+            ),
           ),
         ),
       ),

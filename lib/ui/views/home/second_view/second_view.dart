@@ -1,6 +1,7 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:fluter_template_perfect/core/constants/app_theme.dart';
-import 'package:fluter_template_perfect/ui/pages/home/first_view/title_view.dart';
+import 'package:fluter_template_perfect/ui/views/home/first_view/title_view.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -44,7 +45,7 @@ class _SecondScreenState extends State<SecondScreen> with TickerProviderStateMix
         backgroundColor: Colors.transparent,
         body: Stack(
           children: <Widget>[
-            getMainListViewUI(),
+            testBetterFeedback(),
             SizedBox(
               height: MediaQuery.of(context).padding.bottom,
             )
@@ -54,26 +55,15 @@ class _SecondScreenState extends State<SecondScreen> with TickerProviderStateMix
     );
   }
 
-  Widget getMainListViewUI() {
-    return FutureBuilder<bool>(
-      future: getData(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (!snapshot.hasData) {
-          return const SizedBox();
-        } else {
-          return ListView.builder(
-            padding: EdgeInsets.only(
-              top: AppBar().preferredSize.height + MediaQuery.of(context).padding.top + 24,
-              bottom: 62 + MediaQuery.of(context).padding.bottom,
-            ),
-            itemCount: listViews.length,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (BuildContext context, int index) {
-              return listViews[index];
+  Widget testBetterFeedback() {
+    return TextButton(
+        onPressed: () => {
+              BetterFeedback.of(context).show((
+                UserFeedback feedback,
+              ) {
+                // feedbackText, feedbackScreenshot).then((value) => BetterFeedback.of(context).hide();
+              }),
             },
-          );
-        }
-      },
-    );
+        child: Text('BetterFeedback'));
   }
 }

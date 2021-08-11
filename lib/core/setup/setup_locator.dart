@@ -1,16 +1,12 @@
+import 'package:fluter_template_perfect/core/services/auth/auth_service.dart';
+import 'package:fluter_template_perfect/core/services/connectivity/connectivity_service.dart';
+import 'package:fluter_template_perfect/core/services/hardware_info/hardware_info_service.dart';
+import 'package:fluter_template_perfect/core/services/key_storage/key_storage_service.dart';
+import 'package:fluter_template_perfect/core/utils/common/file_helper.dart';
+import 'package:fluter_template_perfect/ui/views/home/home_view/home_view_model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:fluter_template_perfect/core/services/auth/auth_service.dart';
-import 'package:fluter_template_perfect/core/services/auth/auth_service_impl.dart';
-import 'package:fluter_template_perfect/core/services/connectivity/connectivity_service.dart';
-import 'package:fluter_template_perfect/core/services/connectivity/connectivity_service_impl.dart';
-import 'package:fluter_template_perfect/core/services/hardware_info/hardware_info_service.dart';
-import 'package:fluter_template_perfect/core/services/hardware_info/hardware_info_service_impl.dart';
-import 'package:fluter_template_perfect/core/services/key_storage/key_storage_service.dart';
-import 'package:fluter_template_perfect/core/services/key_storage/key_storage_service_impl.dart';
-import 'package:fluter_template_perfect/core/utils/common/file_helper.dart';
-import 'package:fluter_template_perfect/ui/pages/home/home_view/home_view_model.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -18,17 +14,14 @@ GetIt locator = GetIt.instance;
 Future<void> setupLocator({bool test = false}) async {
   // Services
 
-  locator.registerLazySingleton(() => NavigationService()); // 使用 get package 导航
-
-  locator.registerLazySingleton<HardwareInfoService>(
-    () => HardwareInfoServiceImpl(),
-  );
-  locator.registerLazySingleton<ConnectivityService>(
-    () => ConnectivityServiceImpl(),
-  );
+  locator.registerLazySingleton(() => NavigationService()); // 使用包 stacked_services
+  locator.registerLazySingleton(() => DialogService()); // 使用包 stacked_services
+  locator.registerLazySingleton(() => SnackbarService()); // 使用包 stacked_services
+  locator.registerLazySingleton(() => HardwareInfoService());
+  locator.registerLazySingleton(() => ConnectivityService());
 
   // http data sources
-  locator.registerLazySingleton<AuthService>(() => AuthServiceImpl());
+  locator.registerLazySingleton<AuthService>(() => AuthService());
 
   // Home page data
   locator.registerLazySingleton<HomeViewModel>(() => HomeViewModel());
@@ -47,6 +40,6 @@ Future<void> setupLocator({bool test = false}) async {
 }
 
 Future<void> _setupSharedPreferences() async {
-  KeyStorageServiceImpl instance = await KeyStorageServiceImpl.getInstance();
+  KeyStorageService instance = await KeyStorageService.getInstance();
   locator.registerLazySingleton<KeyStorageService>(() => instance);
 }
