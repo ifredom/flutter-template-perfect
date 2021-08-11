@@ -8,21 +8,18 @@ import '../localization/localization.dart';
 /// https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 const supportedLocalCodes = ['zh', 'en'];
 
-final supportedLocales = supportedLocalCodes
-    .map<Locale>((code) => Locale.fromSubtags(languageCode: code))
-    .toList();
+final supportedLocales = supportedLocalCodes.map<Locale>((code) => Locale.fromSubtags(languageCode: code)).toList();
 
 /// A callback provided by [MaterialApp] that lets you
 /// specify which locales you plan to support by returning them.
-Locale loadSupportedLocals(Locale locale, Iterable<Locale> supportedLocales) {
-  // if (locale == null) {
-  //   Intl.defaultLocale = supportedLocales.first.languageCode;
-  //   return supportedLocales.first;
-  // }
+Locale? loadSupportedLocals(Locale? locale, Iterable<Locale> supportedLocales) {
+  if (locale == null) {
+    Intl.defaultLocale = supportedLocales.first.languageCode;
+    return supportedLocales.first;
+  }
 
   for (final supportedLocale in supportedLocales) {
-    if (supportedLocale.languageCode == locale.languageCode ||
-        supportedLocale.countryCode == locale.countryCode) {
+    if (supportedLocale.languageCode == locale.languageCode || supportedLocale.countryCode == locale.countryCode) {
       Intl.defaultLocale = supportedLocale.languageCode;
       return supportedLocale;
     }

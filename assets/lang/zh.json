@@ -28,5 +28,5 @@
   "password-short": "密码不能少于6位数",
   "snackbar-message": "SnackBar 通知",
   "snackbar-action": "SnackBar 操作",
-  "invalid-postal-idcard": "身份证号码不正确",
+  "invalid-postal-idcard": "身份证号码不正确"
 }

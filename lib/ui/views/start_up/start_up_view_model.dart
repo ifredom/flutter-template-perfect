@@ -13,7 +13,7 @@ class StartUpViewModel extends BaseViewModel {
 
   Future handleStartUpLogic() async {
     final hasLoggedInUser = await _authService.isUserLoggedIn();
-
+    print(hasLoggedInUser);
     if (hasLoggedInUser) {
       String id = await LocalStorage.get(LocalStorageKeys.USER_ID);
       var res = await _authService.fetchUserInfo(id);

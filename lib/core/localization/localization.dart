@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:fluter_template_perfect/core/utils/res/local_keys.dart';
 
 class AppLocalizations {
-  final Locale locale = Locale('fr', 'CH');
+  final Locale locale = Locale('en', 'zh');
   Map<String, String> _sentences = {};
 
   AppLocalizations(locale);

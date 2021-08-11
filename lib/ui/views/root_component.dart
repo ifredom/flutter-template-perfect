@@ -4,6 +4,7 @@ import 'package:fluter_template_perfect/core/constants/app_theme.dart';
 import 'package:fluter_template_perfect/core/managers/core_manager.dart';
 import 'package:fluter_template_perfect/core/managers/restart_manager.dart';
 import 'package:fluter_template_perfect/core/routes/routes.dart';
+import 'package:fluter_template_perfect/core/setup/setup_local.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
@@ -26,9 +27,10 @@ class _RootComponentState extends State<RootComponent> {
             child: FeatureDiscovery(
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
-                // localizationsDelegates: localizationsDelegates,
-                // supportedLocales: supportedLocales,
-                // localeResolutionCallback: loadSupportedLocals,
+                localizationsDelegates: localizationsDelegates,
+                supportedLocales: supportedLocales,
+                localeResolutionCallback: loadSupportedLocals,
+                locale: Locale('zh'),
                 title: 'flutterApp',
                 theme: AppTheme.themData,
                 navigatorKey: StackedService.navigatorKey,
