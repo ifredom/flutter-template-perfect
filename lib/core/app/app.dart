@@ -12,7 +12,7 @@ import 'package:fluter_template_perfect/core/services/hardware_info/hardware_inf
 import 'package:fluter_template_perfect/core/services/connectivity/connectivity_service.dart';
 
 import 'package:fluter_template_perfect/core/utils/common/file_helper.dart';
-import 'package:hive/hive.dart';
+// import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:fluter_template_perfect/core/services/auth/auth_service.dart';

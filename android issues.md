@@ -20,3 +20,8 @@ PS >./android/gradlew compileDebug --stacktrace -info
 ## Gradle 错误， 通过 AS 打开 flutter 项目中的 android 文件夹，在 AS 右上侧面有一个 gradle 菜单，点击 Toogle Offline Mode
 
 ### [布局约束](https://www.jianshu.com/p/b956b8a37012)
+
+
+### “error: cannot find symbol” when building for Android in flutter
+
+https://stackoverflow.com/questions/66305553/error-cannot-find-symbol-when-building-for-android-in-flutter
