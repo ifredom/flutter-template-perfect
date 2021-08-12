@@ -37,19 +37,22 @@ class _RootComponentState extends State<RootComponent> {
                 navigatorKey: StackedService.navigatorKey,
                 navigatorObservers: [CustomNavigatorObserver.routeObserver],
                 onGenerateRoute: StackedRouter().onGenerateRoute,
-                home: StartUpView(),
-                routingCallback: (Routing? routing) {
-                  if (routing!.current == Routes.homeView) {
-                    print("watch route event，navigatorTo homeview");
-                    Get.snackbar("观察", "You are on second route");
-                  }
-                },
+                routingCallback: routingCallback,
               ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  routingCallback(Routing? routing) {
+    print("路由监听，示例：导航到homeView，则执行回调");
+    if (routing!.current == Routes.homeView) {
+      // Future.delayed(const Duration(seconds: 2), () async {
+      //   Get.snackbar("观察", "You are on second route");
+      // });
+    }
   }
 }
 

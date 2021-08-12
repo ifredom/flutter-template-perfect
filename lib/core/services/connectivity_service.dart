@@ -8,8 +8,7 @@ import 'stoppable_service.dart';
 
 class ConnectivityService implements StoppableService {
   final _log = Logger("ConnectivityServiceImpl");
-  final _connectivityResultController = StreamController<ConnectivityStatus>();
-  final _connectivity = Connectivity();
+  StreamController<ConnectivityStatus> _connectivityResultController = StreamController<ConnectivityStatus>();
 
   ConnectivityResult _lastResult = ConnectivityResult.none;
 
@@ -19,6 +18,7 @@ class ConnectivityService implements StoppableService {
   bool _serviceStopped = false;
   bool get serviceStopped => _serviceStopped;
 
+  final _connectivity = Connectivity();
   Stream<ConnectivityStatus> get connectivity$ => _connectivityResultController.stream;
 
   ConnectivityService() {

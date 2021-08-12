@@ -22,7 +22,7 @@ class TokenInterceptors extends InterceptorsWrapper {
   }
 
   getAuthorization() async {
-    String token = await _localStorageService.get(StorageKeys.TOKEN_KEY);
+    String token = (await _localStorageService.get(StorageKeys.TOKEN_KEY)) ?? "";
     String result = '';
 
     if (token == '') {

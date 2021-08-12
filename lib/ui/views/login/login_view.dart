@@ -120,8 +120,8 @@ class _LoginViewState extends State<LoginView> {
                                   fontSize: 15,
                                 ),
                                 colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
-                                onPressed: () {
-                                  model.loginWithPassword(loginNameController.text, pwdController.text);
+                                onPressed: () async {
+                                  await model.loginWithPassword(loginNameController.text, pwdController.text);
                                 },
                               )),
                               Gaps.vGap20,

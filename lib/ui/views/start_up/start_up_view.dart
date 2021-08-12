@@ -8,7 +8,6 @@ class StartUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 初始化缩放比例
-    print("StartUpView");
     ScreenUtil.init(
       BoxConstraints(
         maxWidth: MediaQuery.of(context).size.width,
@@ -19,7 +18,7 @@ class StartUpView extends StatelessWidget {
     );
     return ViewModelBuilder<StartUpViewModel>.reactive(
       viewModelBuilder: () => StartUpViewModel(),
-      onModelReady: (model) => model.handleStartUpLogic(),
+      onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) => Scaffold(
         body: Center(
           child: LoadingAnimation(),

@@ -1,7 +1,9 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertemplate/ui/views/404.dart';
+import 'package:fluttertemplate/ui/views/update/update_view.dart';
 import 'package:fluttertemplate/ui/views/home/home_view/home.dart';
 import 'package:fluttertemplate/ui/views/login/login_phone_view.dart';
 import 'package:fluttertemplate/ui/views/login/login_view.dart';
@@ -14,18 +16,16 @@ import 'package:fluttertemplate/core/services/share_service.dart';
 import 'package:fluttertemplate/core/services/url_service.dart';
 import 'package:fluttertemplate/core/services/key_storage_service.dart';
 import 'package:fluttertemplate/core/services/environment_service.dart';
-
 import 'package:fluttertemplate/core/utils/common/file_helper.dart';
-// import 'package:hive/hive.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:fluttertemplate/core/services/auth_service.dart';
 import 'package:fluttertemplate/ui/views/home/home_view/home_view_model.dart';
 import './injection.dart';
+// import 'package:hive/hive.dart';
 
 @StackedApp(
   routes: [
     MaterialRoute(page: StartUpView, initial: true),
+    MaterialRoute(page: UpdateView),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: LoginPhoneView),
@@ -48,7 +48,7 @@ import './injection.dart';
     ),
 
     /// Stacked Services
-    LazySingleton(classType: NavigationService),
+    Singleton(classType: NavigationService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: SnackbarService),

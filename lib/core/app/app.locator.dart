@@ -41,7 +41,7 @@ Future setupLocator(
   final sharedPreferences = await SharedPreferences.getInstance();
   locator.registerSingleton(sharedPreferences);
 
-  locator.registerLazySingleton(() => NavigationService());
+  locator.registerSingleton(NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => SnackbarService());

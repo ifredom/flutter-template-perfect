@@ -4,6 +4,8 @@ class Colours {
   static const Color app_main = Color(0xFF4688FA);
   static const Color bg_color = Color(0xfff1f1f1);
 
+  static const Color textPrimary = Color(0xFF101010);
+  static const Color textSecondary = Color(0xFF555555);
   static const Color text_dark = Color(0xFF333333);
   static const Color text_normal = Color(0xFF666666);
   static const Color text_gray = Color(0xFF999999);

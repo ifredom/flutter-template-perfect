@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:fluttertemplate/core/model/app_models.dart';
 import 'package:fluttertemplate/core/services/api/apicode/api.dart';
 import 'package:fluttertemplate/core/services/api/http_service_impl.dart';
 import 'package:fluttertemplate/core/app/app.locator.dart';
@@ -7,10 +9,12 @@ import 'package:logging/logging.dart';
 import 'package:fluttertemplate/core/model/userinfo/user.dart';
 import 'package:fluttertemplate/core/services/key_storage_service.dart';
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
+import 'package:package_info/package_info.dart';
 
 // 定义异步接口请求
 class AuthService {
   final _localStorageService = locator<KeyStorageService>();
+  final PackageInfo _packageInfo = locator<PackageInfo>();
   final _log = Logger("AuthServiceImpl");
   User? _currentUser;
   User get currentUser => _currentUser!;
@@ -23,12 +27,23 @@ class AuthService {
   int _age = 0;
   int get age => _age;
 
+  // 检查App更新。是否必须更新app
+  Future isUpdateRequired() async {
+    print("检查App更新");
+    return _handleVersionUpdate(1);
+  }
+
+  bool _handleVersionUpdate(int apiVersion) {
+    var currentVersion = int.parse(_packageInfo.buildNumber);
+    return apiVersion > currentVersion;
+  }
+
   /// 账号密码登录
   Future signUpWithAuthPassword(
     String username,
     String password,
   ) async {
-    _log.severe('AuthServiceImpl: signUpWithAuthcode Exception');
+    _log.severe('接口: 账号密码登录');
     return await httpService.request(ApiCode.SIGN_IN, {
       "username": username,
       "password": password,
@@ -40,7 +55,7 @@ class AuthService {
     String mobile,
     String authCode,
   ) async {
-    _log.severe('AuthServiceImpl: signUpWithAuthcode Exception');
+    _log.severe('接口: 手机号验证码登录');
     return await httpService.request(ApiCode.SIGN_IN, {
       "mobile": mobile,
       "authCode": authCode,
@@ -51,7 +66,7 @@ class AuthService {
   Future fetchUserInfo(
     String id,
   ) async {
-    _log.severe('AuthServiceImpl: fetchUserInfo Exception');
+    _log.severe('接口: 获取用户信息');
     return await httpService.request(ApiCode.CHECK_USERINFO, {"id": id});
   }
 
@@ -68,8 +83,7 @@ class AuthService {
     String mobile,
     String openId,
   ) async {
-    _log.severe('AuthServiceImpl: fetchResetPassword Exception');
-
+    _log.severe('接口: 根据手机号查询是否新用户');
     return await httpService.request(ApiCode.ISNEW_USER, {"mobile": mobile, "openId": openId});
   }
 
