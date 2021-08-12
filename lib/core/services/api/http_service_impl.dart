@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart' show Dio, Options, DioError, Response, Headers;
-import 'package:fluter_template_perfect/core/constants/constants.dart';
-import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
+import 'package:fluttertemplate/core/constants/constants.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:logging/logging.dart';
-import 'package:fluter_template_perfect/core/utils/common/file_helper.dart';
+import 'package:fluttertemplate/core/utils/common/file_helper.dart';
 
-import '../../core/utils/common/network_utils.dart' as network_utils;
+import 'package:fluttertemplate/core/utils/common/network_utils.dart' as network_utils;
 import 'common/exception_handle.dart' show ExceptionHandle;
 import 'http_service.dart';
 import 'interceptors/api_interceptor.dart' show ApiInterceptors;

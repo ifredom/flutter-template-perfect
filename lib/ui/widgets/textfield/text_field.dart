@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:fluter_template_perfect/core/utils/common/color_utils.dart';
-import 'package:fluter_template_perfect/core/utils/res/gaps.dart';
+import 'package:fluttertemplate/core/utils/common/color_utils.dart';
+import 'package:fluttertemplate/core/utils/res/gaps.dart';
 
 typedef validatorT = String? Function(String?);
 

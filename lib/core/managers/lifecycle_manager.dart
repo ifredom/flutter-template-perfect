@@ -1,8 +1,8 @@
-import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
-import '../services/connectivity/connectivity_service.dart';
+import '../services/connectivity_service.dart';
 import '../services/stoppable_service.dart';
 
 /// A manager to start/stop [StoppableService]s when the app goes/returns into/from the background

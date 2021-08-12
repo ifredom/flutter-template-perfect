@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:logging/logging.dart';
-import 'package:fluter_template_perfect/core/constants/component_state.dart';
+import 'package:fluttertemplate/core/constants/component_state.dart';
 
-import '../stoppable_service.dart';
+import 'stoppable_service.dart';
 
 class ConnectivityService implements StoppableService {
   final _log = Logger("ConnectivityServiceImpl");

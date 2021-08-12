@@ -1,6 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:fluter_template_perfect/core/constants/animations.dart';
+import 'package:fluttertemplate/core/constants/animations.dart';
 
 class LoadingAnimation extends StatelessWidget {
   const LoadingAnimation({Key? key}) : super(key: key);

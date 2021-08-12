@@ -1,8 +1,8 @@
+import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
-import 'package:fluter_template_perfect/core/utils/common/validators.dart';
-import 'package:fluter_template_perfect/core/routes/routes.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/core/utils/common/validators.dart';
 
 // ViewModelProvider应该使用得是 LoginViewModel中得数据
 class LoginPhoneViewModel extends BaseViewModel with Validators {
@@ -22,6 +22,6 @@ class LoginPhoneViewModel extends BaseViewModel with Validators {
   }
 
   Future<void> loginWithPassword(String mobile, String password) async {
-    await _navigationService.replaceWith(ViewRoutes.homeView);
+    await _navigationService.replaceWith(Routes.homeView);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluter_template_perfect/core/utils/common/color_utils.dart';
-import 'package:fluter_template_perfect/core/utils/res/gaps.dart';
-import 'package:fluter_template_perfect/ui/widgets/appbar/custom_appbar.dart';
+import 'package:fluttertemplate/core/utils/common/color_utils.dart';
+import 'package:fluttertemplate/core/utils/res/gaps.dart';
+import 'package:fluttertemplate/ui/widgets/appbar/custom_appbar.dart';
 
 class ProductDetailView extends StatefulWidget {
   final Map post;

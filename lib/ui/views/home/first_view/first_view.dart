@@ -1,11 +1,10 @@
+import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:fluter_template_perfect/core/constants/app_theme.dart';
-import 'package:fluter_template_perfect/ui/views/home/first_view/title_view.dart';
+import 'package:fluttertemplate/core/constants/app_theme.dart';
+import 'package:fluttertemplate/ui/views/home/first_view/title_view.dart';
 
-import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
-
-import 'package:fluter_template_perfect/core/routes/routes.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key, required this.animationController}) : super(key: key);
@@ -64,7 +63,7 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
           Map props = Map();
           props["title"] = "First Screen 数据 1";
           props["description"] = "这是一条传递过来的数据";
-          _navigationService.navigateTo(ViewRoutes.productDetailView, arguments: props);
+          _navigationService.navigateTo(Routes.productDetailView, arguments: props);
         },
       ),
     );

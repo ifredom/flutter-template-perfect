@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:fluter_template_perfect/core/model/serializers.dart';
+import 'package:fluttertemplate/core/model/serializers.dart';
 
 part 'user.g.dart';
 

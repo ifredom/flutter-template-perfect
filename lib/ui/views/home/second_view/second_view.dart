@@ -1,7 +1,7 @@
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
-import 'package:fluter_template_perfect/core/constants/app_theme.dart';
-import 'package:fluter_template_perfect/ui/views/home/first_view/title_view.dart';
+import 'package:fluttertemplate/core/constants/app_theme.dart';
+import 'package:fluttertemplate/ui/views/home/first_view/title_view.dart';
 
 class SecondScreen extends StatefulWidget {
   @override

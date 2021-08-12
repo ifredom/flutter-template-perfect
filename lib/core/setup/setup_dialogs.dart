@@ -1,6 +1,6 @@
-import 'package:fluter_template_perfect/core/constants/component_state.dart';
-import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
-import 'package:fluter_template_perfect/ui/widgets/dialogs/confirm_dialog.dart';
+import 'package:fluttertemplate/core/constants/component_state.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/ui/widgets/dialogs/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
 

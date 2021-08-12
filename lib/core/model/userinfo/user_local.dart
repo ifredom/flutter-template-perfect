@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:fluter_template_perfect/core/model/userinfo/user.dart';
+import 'package:fluttertemplate/core/model/userinfo/user.dart';
 
 part 'user_local.g.dart';
 

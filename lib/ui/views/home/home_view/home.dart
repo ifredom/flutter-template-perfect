@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
-import 'package:fluter_template_perfect/core/constants/app_theme.dart';
-import 'package:fluter_template_perfect/core/constants/tab_icon_data.dart';
-import 'package:fluter_template_perfect/ui/widgets/bottombar/bottom_bar_view.dart';
-import 'package:fluter_template_perfect/ui/views/home/first_view/first_view.dart';
-import 'package:fluter_template_perfect/ui/views/home/forth_view/forth_view.dart';
-import 'package:fluter_template_perfect/ui/views/home/home_view/home_view_model.dart';
-import 'package:fluter_template_perfect/ui/views/home/second_view/second_view.dart';
-import 'package:fluter_template_perfect/ui/views/home/third_view/third_view.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/core/constants/app_theme.dart';
+import 'package:fluttertemplate/core/constants/tab_icon_data.dart';
+import 'package:fluttertemplate/ui/widgets/bottombar/bottom_bar_view.dart';
+import 'package:fluttertemplate/ui/views/home/first_view/first_view.dart';
+import 'package:fluttertemplate/ui/views/home/forth_view/forth_view.dart';
+import 'package:fluttertemplate/ui/views/home/home_view/home_view_model.dart';
+import 'package:fluttertemplate/ui/views/home/second_view/second_view.dart';
+import 'package:fluttertemplate/ui/views/home/third_view/third_view.dart';
 
 class HomeView extends StatefulWidget {
   @override

@@ -1,4 +1,4 @@
-import 'package:fluter_template_perfect/core/utils/res/locale_keys.dart';
+import 'package:fluttertemplate/core/utils/res/locale_keys.dart';
 
 /// 要使用 Validators验证类，使用 with 将其混入
 class Validators {

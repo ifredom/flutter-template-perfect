@@ -1,12 +1,11 @@
 import 'dart:convert';
 
-import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///SharedPreferences 本地存储
-class LocalStorageService {
+class KeyStorageService {
   final _sharedPrefs = locator<SharedPreferences>();
-  get instance => _sharedPrefs;
 
   Future<void> set<T>(String key, T value) async {
     if (value is String) {

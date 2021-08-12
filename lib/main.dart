@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:fluter_template_perfect/core/setup/setup_locator.dart';
-import 'package:fluter_template_perfect/core/setup/setup_logger.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/core/setup/setup_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

@@ -1,6 +1,6 @@
 {
-    "name": "fluter_template_perfect",
-    "short_name": "fluter_template_perfect",
+    "name": "fluttertemplate",
+    "short_name": "fluttertemplate",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

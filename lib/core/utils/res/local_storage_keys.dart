@@ -1,5 +1,9 @@
 // 确保localStorage中得每一个Key值 唯一
-class LocalStorageKeys {
+class StorageKeys {
+  // [.env] keys
+  static const String NoKey = "NO_KEY";
+
+  // LocalStorageKeys
   static const TOKEN_KEY = 'token';
   static const USER_ID_KEY = 'userid';
   static const DEFAULT_TOKEN_KEY = 'defaultToken';

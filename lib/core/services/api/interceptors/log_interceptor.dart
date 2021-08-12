@@ -8,7 +8,7 @@ import 'package:dio/dio.dart'
         Response,
         ResponseInterceptorHandler;
 import 'package:logging/logging.dart';
-import 'package:fluter_template_perfect/core/constants/constants.dart';
+import 'package:fluttertemplate/core/constants/constants.dart';
 
 bool openDebug = Constants.DEBUG;
 

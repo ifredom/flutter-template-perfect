@@ -1,10 +1,11 @@
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:feedback/feedback.dart';
-import 'package:fluter_template_perfect/core/constants/app_theme.dart';
-import 'package:fluter_template_perfect/core/managers/core_manager.dart';
-import 'package:fluter_template_perfect/core/managers/restart_manager.dart';
-import 'package:fluter_template_perfect/core/routes/routes.dart';
-import 'package:fluter_template_perfect/core/setup/setup_local.dart';
+import 'package:fluttertemplate/core/app/app.router.dart';
+import 'package:fluttertemplate/core/constants/app_theme.dart';
+import 'package:fluttertemplate/core/managers/core_manager.dart';
+import 'package:fluttertemplate/core/managers/restart_manager.dart';
+
+import 'package:fluttertemplate/core/setup/setup_local.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
@@ -35,9 +36,14 @@ class _RootComponentState extends State<RootComponent> {
                 theme: AppTheme.themData,
                 navigatorKey: StackedService.navigatorKey,
                 navigatorObservers: [CustomNavigatorObserver.routeObserver],
-                onGenerateRoute: (settings) => ViewRoutes.generateRoute(context, settings),
+                onGenerateRoute: StackedRouter().onGenerateRoute,
                 home: StartUpView(),
-                routingCallback: ViewRoutes.routingCallback,
+                routingCallback: (Routing? routing) {
+                  if (routing!.current == Routes.homeView) {
+                    print("watch route event，navigatorTo homeview");
+                    Get.snackbar("观察", "You are on second route");
+                  }
+                },
               ),
             ),
           ),
