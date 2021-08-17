@@ -40,3 +40,7 @@ A new Flutter project template(flutter 完整商用项目模板).
 ## 适配方法介绍
 
 <https://juejin.cn/post/6844904176489594893>
+
+## Flutter 支持通过自动选择 DPI 依赖资源来加载资产
+
+https://flutter.dev/docs/development/ui/assets-and-images#declaring-resolution-aware-image-assets
