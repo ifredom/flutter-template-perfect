@@ -59,3 +59,4 @@ ScreenUtil.init(
   orientation: Orientation.portrait,
 );
 ```
+
