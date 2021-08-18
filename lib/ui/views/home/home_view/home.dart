@@ -49,6 +49,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    print("home build");
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       viewModelBuilder: () => _homeViewModel,
       onModelReady: (model) => model.onModelReady(),

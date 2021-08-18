@@ -1,7 +1,7 @@
 import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -19,8 +19,8 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
-  FocusNode _loginNameFocus = FocusNode();
-  FocusNode _pwdFocus = FocusNode();
+  final FocusNode loginNameFocus = FocusNode();
+  final FocusNode pwdFocus = FocusNode();
   final TextEditingController loginNameController = TextEditingController();
   final TextEditingController pwdController = TextEditingController();
 
@@ -50,13 +50,14 @@ class _LoginViewState extends State<LoginView> {
     return ViewModelBuilder<LoginViewModel>.nonReactive(
       viewModelBuilder: () => LoginViewModel(),
       builder: (context, model, child) => Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Form(
           key: formKey,
           child: IgnorePointer(
             ignoring: model.isBusy,
             child: Container(
-              width: ScreenUtil().screenWidth,
-              height: ScreenUtil().screenHeight,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
@@ -67,24 +68,22 @@ class _LoginViewState extends State<LoginView> {
               ),
               child: SingleChildScrollView(
                 child: Container(
-                  // width: ScreenUtil().screenWidth * 0.638,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Lottie.asset('assets/animations/lottie/18582-as-the-waters-rise.json'),
                       Center(
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 60.w,
-                            vertical: 50.h,
+                            horizontal: 60,
+                            vertical: 50,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               InputField(
-                                focusNode: _loginNameFocus,
-                                nextFocusNode: _pwdFocus,
+                                focusNode: loginNameFocus,
+                                nextFocusNode: pwdFocus,
                                 roundBox: true,
                                 textStyle: TextStyle(
                                   color: Colors.white,
@@ -98,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
                               ),
                               Gaps.vGap40,
                               InputField(
-                                focusNode: _pwdFocus,
+                                focusNode: pwdFocus,
                                 roundBox: true,
                                 obscureText: true,
                                 textStyle: TextStyle(
@@ -146,6 +145,7 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                       ),
+                      Lottie.asset('assets/animations/lottie/18582-as-the-waters-rise.json'),
                     ],
                   ),
                 ),
@@ -171,10 +171,13 @@ class BuildLoginButton extends ViewModelWidget<LoginViewModel> {
   });
 
   @override
+  bool get reactive => false;
+
+  @override
   Widget build(BuildContext context, LoginViewModel model) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.2739,
-      height: ScreenUtil().setHeight(86.0),
+      height: 43,
       decoration: BoxDecoration(
         //背景
         color: HexToColor('#A061FD'),
@@ -184,7 +187,7 @@ class BuildLoginButton extends ViewModelWidget<LoginViewModel> {
       child: TextButton(
         child: Text(
           '登录',
-          style: TextStyle(fontSize: ScreenUtil().setSp(30), color: HexToColor('#ffffff')),
+          style: TextStyle(fontSize: 15, color: HexToColor('#ffffff')),
         ),
         onPressed: () {
           print("$phone  $password");

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //自定义按钮
 class GradientButton extends StatelessWidget {
@@ -38,7 +37,6 @@ class GradientButton extends StatelessWidget {
     Color? _backgroundColors; // 单色
     LinearGradient _linearGradient; // 渐变色
 
-    print(_colors);
     if (_colors.isEmpty) {
       _backgroundColors = theme.primaryColorDark;
       _linearGradient = LinearGradient(colors: []);
@@ -94,7 +92,7 @@ class GradientButton extends StatelessWidget {
                   style: style ??
                       TextStyle(
                         color: Colors.white,
-                        fontSize: ScreenUtil().setSp(30),
+                        fontSize: 15,
                       ),
                 ),
               ),

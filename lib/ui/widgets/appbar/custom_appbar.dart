@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:stacked_services/stacked_services.dart';
 
 import 'package:fluttertemplate/core/utils/common/color_utils.dart';
@@ -116,13 +116,12 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     // 中间组件，标题样式
     TextStyle _textStyle = this.style ??
         TextStyle(
-          fontSize: ScreenUtil().setSp(54),
+          fontSize: 26,
           color: this.backImageMode == BackImageMode.black ? HexToColor('#ffffff') : HexToColor('#177cb0'),
           fontWeight: FontWeight.bold,
         );
     // 中间组件
     Widget? _middle = this.middle;
-    print(null == _middle);
     if (null == _middle) {
       _middle = Container(
         alignment: Alignment.center,

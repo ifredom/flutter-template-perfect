@@ -1,6 +1,6 @@
 import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:fluttertemplate/core/app/app.locator.dart';
@@ -54,20 +54,17 @@ class _LoginPhoneViewState extends State<LoginPhoneView> {
           child: IgnorePointer(
             ignoring: model.isBusy,
             child: Container(
-              width: ScreenUtil().screenWidth,
-              height: ScreenUtil().screenHeight,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 color: HexToColor("#e9f1f6"),
               ),
               child: SingleChildScrollView(
                 child: Container(
-                  width: ScreenUtil().screenWidth * 0.638,
+                  width: MediaQuery.of(context).size.width,
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setWidth(60),
-                        vertical: ScreenUtil().setHeight(60),
-                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -88,7 +85,7 @@ class _LoginPhoneViewState extends State<LoginPhoneView> {
                           Center(
                               child: Container(
                             width: MediaQuery.of(context).size.width * 0.2739,
-                            height: ScreenUtil().setHeight(86.0),
+                            height: 44,
                             decoration: BoxDecoration(
                               //背景
                               color: HexToColor('#A061FD'),
@@ -97,11 +94,11 @@ class _LoginPhoneViewState extends State<LoginPhoneView> {
                             ),
                             child: GradientButton(
                               text: '登录',
-                              width: ScreenUtil().setWidth(320.0),
-                              height: ScreenUtil().setWidth(88.0),
+                              width: 160,
+                              height: 44,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: ScreenUtil().setSp(34.0),
+                                fontSize: 16,
                               ),
                               colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
                               onPressed: () {
@@ -117,7 +114,7 @@ class _LoginPhoneViewState extends State<LoginPhoneView> {
                                 "手机号登陆",
                                 style: TextStyle(
                                   color: HexToColor("#FF696A"),
-                                  fontSize: ScreenUtil().setSp(30),
+                                  fontSize: 15,
                                 ),
                               ),
                               onTap: () {
@@ -156,7 +153,7 @@ class BuildLoginButton extends ViewModelWidget<LoginPhoneViewModel> {
   Widget build(BuildContext context, LoginPhoneViewModel model) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.2739,
-      height: ScreenUtil().setHeight(86.0),
+      height: 43,
       decoration: BoxDecoration(
         //背景
         color: HexToColor('#A061FD'),
@@ -166,7 +163,7 @@ class BuildLoginButton extends ViewModelWidget<LoginPhoneViewModel> {
       child: TextButton(
         child: Text(
           '登录',
-          style: TextStyle(fontSize: ScreenUtil().setSp(30), color: HexToColor('#ffffff')),
+          style: TextStyle(fontSize: 15, color: HexToColor('#ffffff')),
         ),
         onPressed: () {
           print("$phone  $password");

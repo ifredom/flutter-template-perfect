@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 
 //自定义按钮
 class ImageBackgroundButton extends StatelessWidget {
@@ -31,8 +29,8 @@ class ImageBackgroundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: this.width ?? ScreenUtil().setSp(162.0),
-      height: this.height ?? ScreenUtil().setHeight(50),
+      width: this.width ?? 82,
+      height: this.height ?? 26,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fitWidth,
@@ -55,7 +53,7 @@ class ImageBackgroundButton extends StatelessWidget {
             style: style ??
                 TextStyle(
                   color: Colors.white,
-                  fontSize: ScreenUtil().setSp(30.0),
+                  fontSize: 15,
                 ),
           ),
         ),

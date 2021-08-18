@@ -1,12 +1,13 @@
 import 'dart:async';
-import 'package:fluttertemplate/core/app/app.locator.dart';
-import 'package:fluttertemplate/core/setup/setup_logger.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/core/setup/setup_logger.dart';
 
 import './core/Constants/Constants.dart';
-import 'ui/views/root_component.dart';
 import 'ui/views/error_page.dart';
+import 'ui/views/root_component.dart';
 
 void main() async {
   // 应用初始化
@@ -29,10 +30,15 @@ void main() async {
     /// 启动GetIt定位服务
     await setupLocator();
 
-    // 设置全屏
-    await SystemChrome.setEnabledSystemUIOverlays([]);
+    // 设置屏幕方向
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-    // 强制横屏
+    // 设置全屏
+    await SystemChrome.setEnabledSystemUIOverlays([
+      // SystemUiOverlay.top,
+      // SystemUiOverlay.bottom,
+    ]);
+
     runApp(RootComponent());
   }, (Object error, StackTrace stackTrace) async {
     // Zone中未捕获异常处理回调

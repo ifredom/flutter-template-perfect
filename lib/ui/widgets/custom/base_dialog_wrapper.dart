@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:fluttertemplate/core/utils/common/color_utils.dart';
 import 'package:fluttertemplate/core/utils/res/gaps.dart';
 import 'package:fluttertemplate/ui/widgets/buttons/gradient_button.dart';
@@ -32,6 +32,7 @@ class BaseDialogWrapper extends Dialog {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Material(
       ///背景透明
       color: Colors.transparent,
@@ -48,10 +49,10 @@ class BaseDialogWrapper extends Dialog {
             borderRadius: BorderRadius.circular(20),
           ),
           constraints: BoxConstraints(
-            minWidth: 0.48.w,
-            minHeight: 0.48.h,
-            maxWidth: 0.9,
-            maxHeight: 0.9.h,
+            minWidth: 0.48 * size.width,
+            minHeight: 0.48 * size.height,
+            maxWidth: 0.9 * size.width,
+            maxHeight: 0.9 * size.height,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -86,7 +87,7 @@ class BuildTopAreaWidget extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: TextStyle(color: HexToColor('#5324B3'), fontWeight: FontWeight.bold, fontSize: ScreenUtil().setSp(32)),
+          style: TextStyle(color: HexToColor('#5324B3'), fontWeight: FontWeight.bold, fontSize: 16),
         ),
       ),
     );
@@ -101,8 +102,8 @@ class BuildTopAreaWidget extends StatelessWidget {
                 child: Image.asset(
                   'assets/images/custom/close@2x.png',
                   fit: BoxFit.fitWidth,
-                  width: ScreenUtil().setHeight(24),
-                  height: ScreenUtil().setHeight(24),
+                  width: 12,
+                  height: 12,
                 ),
               ),
               onTap: () {
@@ -117,7 +118,7 @@ class BuildTopAreaWidget extends StatelessWidget {
           )
         : Gaps.empty;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(16), horizontal: ScreenUtil().setWidth(24)),
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       decoration: BoxDecoration(
         color: HexToColor('#F7F2FF'),
         borderRadius: BorderRadius.vertical(top: Radius.elliptical(16, 16)),
@@ -144,9 +145,7 @@ class BuildActionsButton extends StatelessWidget {
     Widget buttonWidget;
     if (onDenied != null && onConfirmed != null) {
       buttonWidget = Padding(
-        padding: EdgeInsets.all(
-          ScreenUtil().setHeight(40),
-        ),
+        padding: EdgeInsets.all(20),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -175,9 +174,7 @@ class BuildActionsButton extends StatelessWidget {
     } else if (onDenied != null && onConfirmed == null) {
       buttonWidget = Center(
         child: Padding(
-          padding: EdgeInsets.all(
-            ScreenUtil().setHeight(40),
-          ),
+          padding: EdgeInsets.all(20),
           child: GradientButton(
             colors: [HexToColor('#C7B8E6')],
             text: deniedButtonText,
@@ -192,9 +189,7 @@ class BuildActionsButton extends StatelessWidget {
     } else if (onDenied == null && onConfirmed != null) {
       buttonWidget = Center(
         child: Padding(
-          padding: EdgeInsets.all(
-            ScreenUtil().setHeight(40),
-          ),
+          padding: EdgeInsets.all(20),
           child: GradientButton(
             text: confirmedButtonText,
             colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],

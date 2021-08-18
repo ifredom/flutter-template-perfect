@@ -1,5 +1,5 @@
 import 'package:fluttertemplate/core/app/app.router.dart';
-import 'package:oktoast/oktoast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:fluttertemplate/core/app/app.locator.dart';
@@ -58,7 +58,7 @@ class LoginViewModel extends BaseViewModel with Validators {
       return res.data["data"] != "";
     } else {
       setBusy(false);
-      showToast(res.data["msg"]);
+      Fluttertoast.showToast(msg: res.data["msg"]);
     }
   }
 
@@ -78,7 +78,7 @@ class LoginViewModel extends BaseViewModel with Validators {
         await _navigationService.replaceWith(Routes.homeView);
       }
     } else {
-      showToast(res.data["msg"]);
+      Fluttertoast.showToast(msg: res.data["msg"]);
     }
   }
 

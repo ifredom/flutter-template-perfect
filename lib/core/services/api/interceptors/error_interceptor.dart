@@ -1,6 +1,5 @@
 import 'package:connectivity/connectivity.dart' show Connectivity, ConnectivityResult;
-import 'package:dio/dio.dart' show DioError, InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
-import 'package:dio/src/dio.dart';
+import 'package:dio/dio.dart' show Dio, DioError, InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
 import 'package:logging/logging.dart';
 
 class ErrorInterceptors extends InterceptorsWrapper {

@@ -1,12 +1,12 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:fluttertemplate/core/utils/common/color_utils.dart';
 import 'package:fluttertemplate/core/utils/res/gaps.dart';
 
-typedef validatorT = String? Function(String?);
+typedef ValidatorT = String? Function(String?);
 
 // 使用原textfield的属性，进行扩展
 // 参考项目 auctionesia_pengguna-master，可以优化
@@ -27,7 +27,7 @@ class InputField extends StatefulWidget {
   final int? roundBoxRadius;
   final bool obscureText;
   final TextEditingController? controller;
-  final validatorT? validator;
+  final ValidatorT? validator;
   final ValueChanged<String>? onChanged;
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
@@ -144,8 +144,8 @@ class _CustomTextFieldState extends State<InputField> {
         isDense: true,
         labelText: widget.labelText,
         // contentPadding: EdgeInsets.only(
-        //   top: ScreenUtil().setSp(5),
-        //   bottom: ScreenUtil().setSp(5),
+        //   top: 5,
+        //   bottom: 5,
         // ),
         border: InputBorder.none,
         fillColor: HexToColor("#482C70"),
@@ -196,8 +196,7 @@ class BuildTextfieldWrapper extends StatelessWidget {
             borderSide: BorderSide(width: 1.0, color: Colors.black),
           );
 
-    EdgeInsetsGeometry _padding =
-        widget.padding ?? EdgeInsets.fromLTRB(ScreenUtil().setWidth(32), 0, ScreenUtil().setWidth(32), 0);
+    EdgeInsetsGeometry _padding = widget.padding ?? EdgeInsets.fromLTRB(16, 0, 16, 0);
 
     return Container(
       padding: _padding,
@@ -219,15 +218,15 @@ class BuildTextfieldWrapper extends StatelessWidget {
               : Row(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    SizedBox(width: ScreenUtil().setWidth(32)),
+                    SizedBox(width: 16),
                     SizedBox(
                       width: 1,
-                      height: ScreenUtil().setWidth(48),
+                      height: 24,
                       child: Container(
                         color: HexToColor('#767680'),
                       ),
                     ),
-                    SizedBox(width: ScreenUtil().setWidth(32)),
+                    SizedBox(width: 16),
                     GestureDetector(
                       // padding: EdgeInsets.symmetric(vertical: 0),
                       child: Text(

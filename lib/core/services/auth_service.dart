@@ -1,14 +1,12 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:fluttertemplate/core/model/app_models.dart';
+
+import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/core/model/userinfo/user.dart';
 import 'package:fluttertemplate/core/services/api/apicode/api.dart';
 import 'package:fluttertemplate/core/services/api/http_service_impl.dart';
-import 'package:fluttertemplate/core/app/app.locator.dart';
-import 'package:logging/logging.dart';
-
-import 'package:fluttertemplate/core/model/userinfo/user.dart';
 import 'package:fluttertemplate/core/services/key_storage_service.dart';
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
+import 'package:logging/logging.dart';
 import 'package:package_info/package_info.dart';
 
 // 定义异步接口请求

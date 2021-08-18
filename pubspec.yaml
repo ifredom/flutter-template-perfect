@@ -34,7 +34,7 @@ dependencies:
   provider: 5.0.0
 
   flutter_screenutil: ^5.0.0
-  oktoast: 3.1.1
+  fluttertoast: 8.0.8
   flutter_inner_drawer: 1.0.0+1
   flutter_swiper: 1.1.6
   

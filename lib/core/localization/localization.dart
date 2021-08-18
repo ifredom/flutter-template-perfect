@@ -1,13 +1,15 @@
 import 'dart:convert';
 
-import 'package:fluttertemplate/core/setup/setup_local.dart';
+import 'package:fluttertemplate/core/constants/component_state.dart';
+import 'package:fluttertemplate/core/localization/setup_local.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertemplate/core/utils/res/locale_keys.dart';
 
 class AppLocalizations {
-  final Locale locale = Locale('en', 'zh');
+  final Locale locale = Locale('zh', 'en');
+
   Map<String, String> _sentences = {};
 
   AppLocalizations(locale);
@@ -110,3 +112,21 @@ class FallbackCupertinoLocalizationsDelegate extends LocalizationsDelegate<Cuper
   @override
   bool shouldReload(FallbackCupertinoLocalizationsDelegate old) => false;
 }
+
+/// SupportLocale -> locale
+Map<SupportLocale, Locale> mapLocales = {
+  SupportLocale.FOLLOW_SYSTEM: Locale("zh", "CN"),
+  SupportLocale.SIMPLIFIED_CHINESE: Locale("zh", "CN"),
+  SupportLocale.TRADITIONAL_CHINESE_TW: Locale("zh", "TW"),
+  SupportLocale.TRADITIONAL_CHINESE_HK: Locale("zh", "HK"),
+  SupportLocale.ENGLISH: Locale("en", "")
+};
+
+/// SupportLocale 对应的含义
+Map<SupportLocale, String> get mapSupportLocale => {
+      SupportLocale.FOLLOW_SYSTEM: "跟随系统",
+      SupportLocale.SIMPLIFIED_CHINESE: "简体中文",
+      SupportLocale.TRADITIONAL_CHINESE_TW: "繁體中文(臺灣)",
+      SupportLocale.TRADITIONAL_CHINESE_HK: "繁體中文(香港)",
+      SupportLocale.ENGLISH: "English",
+    };

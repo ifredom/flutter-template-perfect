@@ -24,4 +24,5 @@ PS >./android/gradlew compileDebug --stacktrace -info
 
 ### “error: cannot find symbol” when building for Android in flutter
 
+> flutterEngine.getPlugins().add(new com.example.appsettings.AppSettingsPlugin());
 https://stackoverflow.com/questions/66305553/error-cannot-find-symbol-when-building-for-android-in-flutter

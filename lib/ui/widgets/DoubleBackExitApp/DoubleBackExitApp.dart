@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'TipsScaleAnimated.dart';
 
 /// 二次返回退出APP组件
@@ -51,7 +51,7 @@ class _DoubleBackExitAppState extends State<DoubleBackExitApp> with SingleTicker
         child: Text(
           widget.title,
           style: TextStyle(
-            fontSize: 28.sp,
+            fontSize: 15,
             color: Colors.white.withOpacity(0.8),
           ),
           textAlign: TextAlign.center,
