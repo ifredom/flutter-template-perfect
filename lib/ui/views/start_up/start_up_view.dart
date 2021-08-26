@@ -7,7 +7,7 @@ import 'package:fluttertemplate/ui/widgets/loading/loading_animation.dart';
 class StartUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // 初始化缩放比例
+    // use package ScreenUtil, initial
     // ScreenUtil.init(
     //   BoxConstraints(
     //     maxWidth: MediaQuery.of(context).size.width,

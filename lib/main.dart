@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertemplate/core/app/app.locator.dart';
-import 'package:fluttertemplate/core/setup/setup_logger.dart';
 
 import './core/Constants/Constants.dart';
 import 'ui/views/error_page.dart';
@@ -14,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await runZonedGuarded<Future<void>>(() async {
-    // 程序异常时，不退出应用，仅仅捕捉异常信息并在控制台打印。
+    // 程序异常时，不退出应用，捕捉异常信息并显示错误UI。
     ErrorWidget.builder = (FlutterErrorDetails details) {
       if (Constants.DEBUG) {
         FlutterError.dumpErrorToConsole(details);
@@ -23,9 +22,6 @@ void main() async {
       }
       return ErrorPage(details);
     };
-
-    // 启动日志
-    setupLogger();
 
     /// 启动GetIt定位服务
     await setupLocator();
@@ -39,6 +35,7 @@ void main() async {
       // SystemUiOverlay.bottom,
     ]);
 
+    /// 根Widget
     runApp(RootComponent());
   }, (Object error, StackTrace stackTrace) async {
     // Zone中未捕获异常处理回调

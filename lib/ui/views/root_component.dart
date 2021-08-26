@@ -38,23 +38,22 @@ class _RootComponentState extends State<RootComponent> {
     );
   }
 
-  /// 路由监听
+  /// 路由回调
   routingCallback(Routing? routing) {
     if (routing!.current == Routes.homeView) {
       // Future.delayed(const Duration(seconds: 2), () async {
-      //   Get.snackbar("观察", "You are on second route");
+      //   Get.snackbar("Tips", "You are on homeView route");
       // });
     }
   }
 }
 
 /// 路由监听
-// 使用: navigatorObservers: <NavigatorObserver>[CustomNavigatorObserver()],
 class CustomNavigatorObserver extends NavigatorObserver {
   static CustomNavigatorObserver _instance = CustomNavigatorObserver();
   static final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
-  static CustomNavigatorObserver getInstance() => _instance;
+  static CustomNavigatorObserver getInstance() => CustomNavigatorObserver();
 
   static observer({Routing? routing}) {
     print(_instance);
@@ -63,11 +62,12 @@ class CustomNavigatorObserver extends NavigatorObserver {
   // https://juejin.im/post/6844903798398255111
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    // opaque：是否是全屏不透明的
     if ((previousRoute is TransitionRoute) && previousRoute.opaque) {
-      //全屏不透明，通常是一个page
+      // 全屏不透明，通常是一个page
       print("监控到");
     } else {
-      //全屏透明，通常是一个弹窗
+      // 全屏透明，通常是一个弹窗
     }
   }
 }

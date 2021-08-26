@@ -1,11 +1,11 @@
 import 'package:app_settings/app_settings.dart';
-import 'package:logging/logging.dart';
+import 'package:fluttertemplate/core/app/app.logger.dart';
 
 class AppSettingsService {
-  final _log = Logger('AppSettingsServiceImpl');
+  final _log = getLogger('AppSettingsServiceImpl');
 
   Future<void> openAppSettings() {
-    _log.finer('openAppSettings');
+    _log.v('openAppSettings');
     return AppSettings.openAppSettings();
   }
 }

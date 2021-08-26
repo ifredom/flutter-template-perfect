@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:logging/logging.dart';
+import 'package:fluttertemplate/core/app/app.logger.dart';
 import 'package:fluttertemplate/core/constants/component_state.dart';
 
 import 'stoppable_service.dart';
 
 class ConnectivityService implements StoppableService {
-  final _log = Logger("ConnectivityServiceImpl");
+  final _log = getLogger("ConnectivityServiceImpl");
   StreamController<ConnectivityStatus> _connectivityResultController = StreamController<ConnectivityStatus>();
 
   ConnectivityResult _lastResult = ConnectivityResult.none;
@@ -41,7 +41,7 @@ class ConnectivityService implements StoppableService {
   }
 
   void start() async {
-    _log.info('ConnectivityService resumed');
+    _log.i('ConnectivityService resumed');
     _serviceStopped = false;
 
     await _resumeSignal();
@@ -49,7 +49,7 @@ class ConnectivityService implements StoppableService {
   }
 
   void stop() {
-    _log.info('ConnectivityService paused');
+    _log.i('ConnectivityService paused');
     _serviceStopped = true;
 
     _subscription.pause(_resumeSignal());
@@ -58,7 +58,7 @@ class ConnectivityService implements StoppableService {
   void _emitConnectivity(ConnectivityResult event) {
     if (event == _lastResult) return;
 
-    _log.info('Connectivity status changed to $event');
+    _log.i('Connectivity status changed to $event');
     _connectivityResultController.add(_convertResult(event));
     _lastResult = event;
   }

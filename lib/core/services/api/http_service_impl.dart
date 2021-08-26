@@ -3,10 +3,11 @@ import 'dart:collection' show HashMap;
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart' show Dio, Options, DioError, Response, Headers;
+import 'package:fluttertemplate/core/app/app.logger.dart';
 import 'package:fluttertemplate/core/constants/constants.dart';
 import 'package:fluttertemplate/core/app/app.locator.dart';
-import 'package:logging/logging.dart';
 import 'package:fluttertemplate/core/utils/common/file_helper.dart';
 
 import 'package:fluttertemplate/core/utils/common/network_utils.dart' as network_utils;
@@ -20,45 +21,49 @@ import 'interceptors/token_interceptor.dart' show TokenInterceptors;
 
 /// 请求实体类
 class HttpServiceImpl implements HttpService {
-  static const CONTENT_TYPE_JSON = Headers.jsonContentType;
-  static const CONTENT_TYPE_FROM = Headers.formUrlEncodedContentType;
-
-  static HttpServiceImpl instance = HttpServiceImpl();
-
-  static HttpServiceImpl getInstance() => instance;
-
+  static HttpServiceImpl getInstance() => HttpServiceImpl();
   static TokenInterceptors _tokenInterceptors = TokenInterceptors();
 
-  final _log = Logger('HttpServiceImpl');
-  final _fileHelper = locator<FileHelper>();
+  final _log = getLogger('HttpServiceImpl');
+
   final Dio _dio = Dio();
 
   HttpServiceImpl() {
+    // 初始化http请求参数
+    _dio
+      ..options.baseUrl = Constants.BASE_URL
+      ..options.connectTimeout = 5000
+      ..options.receiveTimeout = 3000
+      ..httpClientAdapter;
+
+    // 添加拦截器
     _dio.interceptors.add(LogsInterceptors());
     _dio.interceptors.add(HeaderInterceptors());
     _dio.interceptors.add(_tokenInterceptors);
     _dio.interceptors.add(ApiInterceptors());
-    _dio.interceptors.add(ErrorInterceptors(_dio));
+    _dio.interceptors.add(ErrorInterceptors());
+
+    if (Constants.useProxy) {
+      final adapter = _dio.httpClientAdapter as DefaultHttpClientAdapter;
+      adapter.onHttpClientCreate = (client) {
+        // 设置Http代理
+        client.findProxy = (uri) {
+          return "PROXY ${Constants.proxyAddress}";
+        };
+        // https证书校验
+        client.badCertificateCallback = (cert, host, port) => true;
+      };
+    }
   }
 
   @override
-  Future<dynamic> request(
-    String apiCode,
-    Map params, {
-    Map<String, dynamic>? headers,
-    Options? options,
-    bool isNoTip = false,
-  }) async {
-    _dio.options.baseUrl = Constants.BASE_URL;
-
-    Map<String, dynamic> _headers = HashMap();
-
+  Future<dynamic> request(String apiCode, Map params, {Map<String, dynamic>? headers, Options? options}) async {
+    Options _options = Options(method: 'post', contentType: Headers.jsonContentType);
     if (headers != null) {
+      Map<String, dynamic> _headers = HashMap();
       _headers.addAll(headers);
+      _options.headers = _headers;
     }
-
-    Options _options = Options(method: 'post', contentType: 'application/json');
-    _options.headers = _headers;
 
     Response response;
     try {
@@ -70,11 +75,8 @@ class HttpServiceImpl implements HttpService {
         onReceiveProgress: network_utils.showLoadingProgress,
       );
     } on DioError catch (error) {
-      _log.severe(error.toString());
-      return ExceptionHandle.handleDioException(error, isNoTip);
-    }
-    if (response.data is DioError) {
-      return ExceptionHandle.handleDioException(response.data, isNoTip);
+      _log.e(error.toString());
+      return ExceptionHandle.handleDioException(error);
     }
     return response.data;
   }
@@ -82,7 +84,7 @@ class HttpServiceImpl implements HttpService {
   @override
   Future<File> downloadFile(String fileUrl) async {
     Response response;
-
+    final _fileHelper = locator<FileHelper>();
     final file = await _fileHelper.getFileFromUrl(fileUrl);
 
     try {
@@ -92,7 +94,7 @@ class HttpServiceImpl implements HttpService {
         onReceiveProgress: network_utils.showLoadingProgress,
       );
     } on DioError catch (e) {
-      throw ExceptionHandle.handleDioException(e, false);
+      throw ExceptionHandle.handleDioException(e);
     }
 
     network_utils.checkForNetworkExceptions(response);

@@ -7,12 +7,10 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:connectivity/connectivity.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../ui/views/home/home_view/home_view_model.dart';
 import '../services/auth_service.dart';
 import '../services/connectivity_service.dart';
 import '../services/environment_service.dart';
@@ -25,11 +23,9 @@ import 'injection.dart';
 
 final locator = StackedLocator.instance;
 
-Future setupLocator(
-    {String? environment, EnvironmentFilter? environmentFilter}) async {
+Future setupLocator({String? environment, EnvironmentFilter? environmentFilter}) async {
 // Register environments
-  locator.registerEnvironment(
-      environment: environment, environmentFilter: environmentFilter);
+  locator.registerEnvironment(environment: environment, environmentFilter: environmentFilter);
 
 // Register dependencies
   final environmentService = await EnvironmentService.getInstance();
@@ -38,8 +34,8 @@ Future setupLocator(
   final packageInjection = await PackageInjection.getInstance();
   locator.registerSingleton(packageInjection);
 
-  final sharedPreferences = await SharedPreferences.getInstance();
-  locator.registerSingleton(sharedPreferences);
+  final sharedPrefsInjection = await SharedPrefsInjection.getInstance();
+  locator.registerSingleton(sharedPrefsInjection);
 
   locator.registerSingleton(NavigationService());
   locator.registerLazySingleton(() => DialogService());
@@ -53,5 +49,4 @@ Future setupLocator(
   locator.registerLazySingleton<FileHelper>(() => FileHelperImpl());
   locator.registerLazySingleton(() => KeyStorageService());
   locator.registerLazySingleton(() => AuthService());
-  locator.registerLazySingleton(() => HomeViewModel());
 }

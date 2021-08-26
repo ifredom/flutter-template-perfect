@@ -7,19 +7,19 @@ import 'package:dio/dio.dart'
         RequestOptions,
         Response,
         ResponseInterceptorHandler;
-import 'package:logging/logging.dart';
+import 'package:fluttertemplate/core/app/app.logger.dart';
 import 'package:fluttertemplate/core/constants/constants.dart';
 
 bool openDebug = Constants.DEBUG;
 
 class LogsInterceptors extends InterceptorsWrapper {
-  final _log = Logger('Api - LogsInterceptors');
+  final _log = getLogger('Api - LogsInterceptors');
 
   @override
   onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     if (openDebug) {
       if (options.data != null) {
-        _log.info('request params: ${options.data.toString()} \r\n');
+        _log.i('request params: ${options.data.toString()} \r\n');
       }
     }
     return super.onRequest(options, handler);
@@ -28,7 +28,7 @@ class LogsInterceptors extends InterceptorsWrapper {
   @override
   onResponse(Response response, ResponseInterceptorHandler handler) async {
     if (openDebug) {
-      _log.info('response: ${response.toString()} \r\n');
+      _log.i('response: ${response.toString()} \r\n');
     }
     return super.onResponse(response, handler);
   }
@@ -36,7 +36,7 @@ class LogsInterceptors extends InterceptorsWrapper {
   @override
   onError(DioError err, ErrorInterceptorHandler handler) async {
     if (openDebug) {
-      _log.severe('request error info: ${err.response?.toString() ?? ""}');
+      _log.e('request error info: ${err.response?.toString() ?? ""}');
     }
     return super.onError(err, handler);
   }

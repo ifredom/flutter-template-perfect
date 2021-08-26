@@ -1,7 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertemplate/ui/views/404.dart';
 import 'package:fluttertemplate/ui/views/update/update_view.dart';
 import 'package:fluttertemplate/ui/views/home/home_view/home.dart';
@@ -18,7 +17,6 @@ import 'package:fluttertemplate/core/services/key_storage_service.dart';
 import 'package:fluttertemplate/core/services/environment_service.dart';
 import 'package:fluttertemplate/core/utils/common/file_helper.dart';
 import 'package:fluttertemplate/core/services/auth_service.dart';
-import 'package:fluttertemplate/ui/views/home/home_view/home_view_model.dart';
 import './injection.dart';
 // import 'package:hive/hive.dart';
 
@@ -43,8 +41,8 @@ import './injection.dart';
       presolveUsing: PackageInjection.getInstance,
     ),
     Presolve(
-      classType: SharedPreferences,
-      presolveUsing: SharedPreferences.getInstance,
+      classType: SharedPrefsInjection,
+      presolveUsing: SharedPrefsInjection.getInstance,
     ),
 
     /// Stacked Services
@@ -63,11 +61,11 @@ import './injection.dart';
     LazySingleton(classType: KeyStorageService),
 
     LazySingleton(classType: AuthService),
-    LazySingleton(classType: HomeViewModel),
 
     // LazySingleton(classType: HiveServiceImpl, asType: HiveService),
     // LazySingleton(classType: UserService),
   ],
+  logger: StackedLogger(),
 )
 class App {
   /** 除了附加注释之外，没有任何用途 */

@@ -14,7 +14,7 @@ import 'code.dart';
 import 'result_data.dart';
 
 class ExceptionHandle {
-  static Future<ResultData> handleDioException(DioError error, bool isNoTip) async {
+  static Future<ResultData> handleDioException(DioError error) async {
     if (error is DioError) {
       // http网络请求成功，服务器返回的信息数据
       if (error.type == DioErrorType.other || error.type == DioErrorType.response) {
