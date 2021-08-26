@@ -9,10 +9,9 @@ import 'ui/views/error_page.dart';
 import 'ui/views/root_component.dart';
 
 void main() async {
-  // 应用初始化
-  WidgetsFlutterBinding.ensureInitialized();
-
   await runZonedGuarded<Future<void>>(() async {
+    // 应用初始化
+    WidgetsFlutterBinding.ensureInitialized();
     // 程序异常时，不退出应用，捕捉异常信息并显示错误UI。
     ErrorWidget.builder = (FlutterErrorDetails details) {
       if (Constants.DEBUG) {
