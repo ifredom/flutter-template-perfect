@@ -1,6 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fluttertemplate/ui/views/404.dart';
 import 'package:fluttertemplate/ui/views/update/update_view.dart';
 import 'package:fluttertemplate/ui/views/home/home_view/home.dart';

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:device_info/device_info.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fluttertemplate/core/app/app.logger.dart';
 
 /// Service that is responsible for getting hardware device info
@@ -20,15 +20,15 @@ class HardwareInfoService {
     final deviceInfo = DeviceInfoPlugin();
 
     if (Platform.isIOS) {
-      final iosInfo = await deviceInfo.iosInfo;
-      _udid = iosInfo.identifierForVendor;
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      _udid = iosInfo.identifierForVendor!;
       _operatingSystem = 'iOS';
-      _device = iosInfo.utsname.machine;
+      _device = iosInfo.utsname.machine!;
     } else if (Platform.isAndroid) {
-      final androidInfo = await deviceInfo.androidInfo;
-      _udid = androidInfo.androidId;
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      _udid = androidInfo.androidId!;
       _operatingSystem = 'Android';
-      _device = androidInfo.model;
+      _device = androidInfo.model!;
     }
 
     _log.i('udid: $_udid');

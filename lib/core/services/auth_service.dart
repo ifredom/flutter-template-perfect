@@ -7,7 +7,7 @@ import 'package:fluttertemplate/core/services/api/apicode/api.dart';
 import 'package:fluttertemplate/core/services/api/http_service_impl.dart';
 import 'package:fluttertemplate/core/services/key_storage_service.dart';
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 // 定义异步接口请求
 class AuthService {

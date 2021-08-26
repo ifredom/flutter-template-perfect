@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fluttertemplate/core/app/app.logger.dart';
 import 'package:fluttertemplate/core/constants/component_state.dart';
 
 import 'stoppable_service.dart';
 
 class ConnectivityService implements StoppableService {
-  final _log = getLogger("ConnectivityServiceImpl");
+  final _log = getLogger("ConnectivityService");
   StreamController<ConnectivityStatus> _connectivityResultController = StreamController<ConnectivityStatus>();
 
   ConnectivityResult _lastResult = ConnectivityResult.none;
