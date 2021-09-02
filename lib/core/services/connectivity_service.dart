@@ -1,10 +1,12 @@
 import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:fluttertemplate/core/app/app.logger.dart';
 import 'package:fluttertemplate/core/constants/component_state.dart';
 
 import 'stoppable_service.dart';
+
+// 参考 https://github.com/TobiCrackIT/Tri-fold/tree/07f26c926bd3728f42f7a6e407dc7186509468c5/lib/core/services/app_service
 
 class ConnectivityService implements StoppableService {
   final _log = getLogger("ConnectivityService");

@@ -1,7 +1,6 @@
-import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertemplate/core/app/locator.dart';
 import 'package:fluttertemplate/core/app/app.logger.dart';
-import 'package:logging/logging.dart';
 
 import '../services/connectivity_service.dart';
 import '../services/stoppable_service.dart';

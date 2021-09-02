@@ -1,20 +1,18 @@
 import 'package:fluttertemplate/core/app/app.router.dart';
+import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/core/model/userinfo/user.dart';
+import 'package:fluttertemplate/core/services/auth_service.dart';
+import 'package:fluttertemplate/core/utils/common/local_storage.dart';
+import 'package:fluttertemplate/core/utils/common/validators.dart';
+import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:fluttertemplate/core/app/app.locator.dart';
-import 'package:fluttertemplate/core/utils/common/validators.dart';
-import 'package:fluttertemplate/core/model/userinfo/user.dart';
-
-import 'package:fluttertemplate/core/services/auth_service.dart';
-import 'package:fluttertemplate/core/services/key_storage_service.dart';
-import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 
 // ViewModelProvider应该使用得是 LoginViewModel中得数据
 class LoginViewModel extends BaseViewModel with Validators {
   final _authService = locator<AuthService>();
   final _navigationService = locator<NavigationService>();
-  final _localStorageService = locator<KeyStorageService>();
 
   // 数据从provider中取
   User get user => _authService.currentUser;
@@ -65,8 +63,8 @@ class LoginViewModel extends BaseViewModel with Validators {
   Future saveUserInfo(dynamic res, String mobile) async {
     if (res.data["code"] == 0) {
       User userInfo = User.fromMap(res.data["data"]);
-      await _localStorageService.set<String>(StorageKeys.TOKEN_KEY, userInfo.token);
-      await _localStorageService.set<bool>(StorageKeys.HAS_LOGIN_KEY, true);
+      LocalStorage.set<String>(StorageKeys.TOKEN_KEY, userInfo.token);
+      LocalStorage.set<bool>(StorageKeys.HAS_LOGIN_KEY, true);
 
       await _authService.updateCurrentUser(userInfo);
 

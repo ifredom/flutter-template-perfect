@@ -1,12 +1,10 @@
 import 'package:dio/dio.dart' show InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
-import 'package:fluttertemplate/core/app/app.locator.dart';
-import 'package:fluttertemplate/core/services/key_storage_service.dart';
+import 'package:fluttertemplate/core/utils/common/local_storage.dart';
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 
 const _authHeaderToekn = 'token';
 
 class TokenInterceptors extends InterceptorsWrapper {
-  final _localStorageService = locator<KeyStorageService>();
   String _token = '';
 
   @override
@@ -22,7 +20,7 @@ class TokenInterceptors extends InterceptorsWrapper {
   }
 
   getAuthorization() async {
-    String token = (await _localStorageService.get(StorageKeys.TOKEN_KEY)) ?? "";
+    String token = (await LocalStorage.get(StorageKeys.TOKEN_KEY)) ?? "";
     String result = '';
 
     if (token == '') {
@@ -36,6 +34,6 @@ class TokenInterceptors extends InterceptorsWrapper {
 
   clearAuthorization() {
     this._token = '';
-    _localStorageService.remove(StorageKeys.TOKEN_KEY);
+    LocalStorage.remove(StorageKeys.TOKEN_KEY);
   }
 }

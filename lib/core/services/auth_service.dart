@@ -1,29 +1,19 @@
 import 'dart:async';
 
-import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/app/app.logger.dart';
 import 'package:fluttertemplate/core/model/userinfo/user.dart';
 import 'package:fluttertemplate/core/services/api/apicode/api.dart';
 import 'package:fluttertemplate/core/services/api/http_service_impl.dart';
-import 'package:fluttertemplate/core/services/key_storage_service.dart';
+import 'package:fluttertemplate/core/utils/common/local_storage.dart';
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 // 定义异步接口请求
 class AuthService {
-  final _localStorageService = locator<KeyStorageService>();
-  final PackageInfo _packageInfo = locator<PackageInfo>();
   final _log = getLogger("AuthServiceImpl");
   User? _currentUser;
   User get currentUser => _currentUser!;
 
-  /// Returns [true] if the user is signed on the device
-  bool get hasLoggedInUser => _localStorageService.get(StorageKeys.HAS_LOGIN_KEY) ?? false;
-
-  // 使用stream数据传输通信, 入口sink,出口stream
-  // 可参考文章:https://juejin.im/post/5baa4b90e51d450e6d00f12e
-  StreamController<User>? _userController;
-  Stream<User> get userController => _userController!.stream;
+  bool get hasLoggedInUser => LocalStorage.get(StorageKeys.HAS_LOGIN_KEY) ?? false;
 
   // 检查App更新。是否必须更新app
   Future isUpdateRequired() async {
@@ -34,7 +24,9 @@ class AuthService {
 
   // api版本是否大于当前版本
   bool _handleVersionUpdate(int apiVersion) {
-    var currentVersion = int.parse(_packageInfo.buildNumber);
+    // 根据app版本设置，此处假设为0
+    int _packageInfoBuildNumber = 0;
+    int currentVersion = _packageInfoBuildNumber;
     return apiVersion > currentVersion;
   }
 
@@ -90,14 +82,14 @@ class AuthService {
   }
 
   Future<void> signOut() async {
-    await _localStorageService.clear();
+    await LocalStorage.clear();
     _currentUser = User((u) => u
       ..id = ""
       ..token = "");
   }
 
   Future<bool> isUserLoggedIn() async {
-    String token = (await _localStorageService.get(StorageKeys.TOKEN_KEY)) ?? '';
+    String token = (await LocalStorage.get(StorageKeys.TOKEN_KEY)) ?? '';
     return Future.value(token != '');
   }
 }

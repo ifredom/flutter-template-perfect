@@ -1,10 +1,9 @@
 import 'package:feature_discovery/feature_discovery.dart';
-import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:fluttertemplate/core/constants/app_theme.dart';
 import 'package:fluttertemplate/core/localization/setup_local.dart';
-import 'package:fluttertemplate/core/managers/core_manager.dart';
+import 'package:fluttertemplate/core/managers/lifecycle_manager.dart';
 import 'package:fluttertemplate/core/managers/restart_manager.dart';
 import 'package:get/get.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -18,7 +17,7 @@ class _RootComponentState extends State<RootComponent> {
   @override
   Widget build(BuildContext context) {
     return RestartManager(
-      child: CoreManager(
+      child: LifeCycleManager(
         child: FeatureDiscovery(
           child: GetMaterialApp(
             debugShowCheckedModeBanner: false,

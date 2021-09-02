@@ -6,8 +6,8 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart' show Dio, Options, DioError, Response, Headers;
 import 'package:fluttertemplate/core/app/app.logger.dart';
+import 'package:fluttertemplate/core/app/locator.dart';
 import 'package:fluttertemplate/core/constants/constants.dart';
-import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/utils/common/file_helper.dart';
 
 import 'package:fluttertemplate/core/utils/common/network_utils.dart' as network_utils;

@@ -1,14 +1,12 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart' show DioError, DioErrorType;
-import 'package:fluttertemplate/core/app/app.locator.dart';
-import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertemplate/core/app/app.router.dart';
+import 'package:fluttertemplate/core/utils/common/local_storage.dart';
+import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked_services/stacked_services.dart';
-
-import 'package:fluttertemplate/core/services/key_storage_service.dart';
-import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 
 import 'code.dart';
 import 'result_data.dart';
@@ -31,8 +29,7 @@ class ExceptionHandle {
 
         /// 后台接口，登录失效，跳转到登录 ,https://www.jianshu.com/p/bd6157914c2d
         if (res.code == 10000) {
-          final _localStorageService = locator<KeyStorageService>();
-          await _localStorageService.set<String>(StorageKeys.TOKEN_KEY, "");
+          LocalStorage.set<String>(StorageKeys.TOKEN_KEY, "");
           await StackedService.navigatorKey!.currentState!
               .pushNamedAndRemoveUntil(Routes.loginView, ModalRoute.withName("/"));
         }

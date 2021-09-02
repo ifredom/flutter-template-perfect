@@ -1,4 +1,4 @@
-import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/core/app/locator.dart';
 import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:flutter/material.dart';
 

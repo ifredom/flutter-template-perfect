@@ -1,18 +1,16 @@
-import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/app/app.router.dart';
+import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/core/model/userinfo/user.dart';
+import 'package:fluttertemplate/core/services/auth_service.dart';
 import 'package:fluttertemplate/core/services/connectivity_service.dart';
+import 'package:fluttertemplate/core/utils/common/local_storage.dart';
+import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:fluttertemplate/core/model/userinfo/user.dart';
-
-import 'package:fluttertemplate/core/services/auth_service.dart';
-import 'package:fluttertemplate/core/services/key_storage_service.dart';
-import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 
 class StartUpViewModel extends BaseViewModel {
   final _connectivityService = locator<ConnectivityService>();
   final _navigationService = locator<NavigationService>();
-  final _localStorageService = locator<KeyStorageService>();
   final _authService = locator<AuthService>();
 
   bool? _isConnected;
@@ -37,7 +35,7 @@ class StartUpViewModel extends BaseViewModel {
     final bool isLoggedIn = _authService.hasLoggedInUser;
 
     if (isLoggedIn) {
-      String id = (await _localStorageService.get(StorageKeys.USER_ID_KEY)) ?? "";
+      String id = (await LocalStorage.get(StorageKeys.USER_ID_KEY)) ?? "";
       var res = await _authService.fetchUserInfo(id);
       print("res");
       print(res);

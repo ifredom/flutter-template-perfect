@@ -9,7 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../ui/views/404.dart';
 import '../../ui/views/home/home_view/home.dart';
 import '../../ui/views/login/login_phone_view.dart';
 import '../../ui/views/login/login_view.dart';
@@ -26,7 +25,6 @@ class Routes {
   static const String loginPhoneView = '/login-phone-view';
   static const String registerView = '/register-view';
   static const String productDetailView = '/product-detail-view';
-  static const String widgetNotFound = '/widget-not-found';
   static const all = <String>{
     startUpView,
     updateView,
@@ -35,7 +33,6 @@ class Routes {
     loginPhoneView,
     registerView,
     productDetailView,
-    widgetNotFound,
   };
 }
 
@@ -50,7 +47,6 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.loginPhoneView, page: LoginPhoneView),
     RouteDef(Routes.registerView, page: RegisterView),
     RouteDef(Routes.productDetailView, page: ProductDetailView),
-    RouteDef(Routes.widgetNotFound, page: WidgetNotFound),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -98,12 +94,6 @@ class StackedRouter extends RouterBase {
           args.post,
           key: args.key,
         ),
-        settings: data,
-      );
-    },
-    WidgetNotFound: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => WidgetNotFound(),
         settings: data,
       );
     },

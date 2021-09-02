@@ -1,8 +1,7 @@
 import 'dart:collection';
 
 import 'package:dio/dio.dart';
-import 'package:fluttertemplate/core/app/app.locator.dart';
-import 'package:fluttertemplate/core/services/key_storage_service.dart';
+import 'package:fluttertemplate/core/utils/common/local_storage.dart';
 
 //  https://github.com/BrinsLee/MusicFlutter/blob/2e19f5a210ed04adc0ff0378a5deffc183ee5622/lib/global.dart
 const CACHE_ENABLE = true;
@@ -38,8 +37,7 @@ class NetCache extends Interceptor {
     if (options.extra["noCache"] != true && options.method.toLowerCase() == "get") {
       String key = options.extra["cacheKey"] ?? options.uri.toString();
       if (options.extra["cacheDisk"] == true) {
-        final _localStorageService = locator<KeyStorageService>();
-        await _localStorageService.set(key, object.data);
+        LocalStorage.set(key, object.data);
       }
       if (cache.length == CACHE_MAXCOUNT) {
         cache.remove(cache[cache.keys.first]);
@@ -66,8 +64,7 @@ class NetCache extends Interceptor {
       }
 
       if (cacheDisk) {
-        final _localStorageService = locator<KeyStorageService>();
-        await _localStorageService.remove(options.uri.toString());
+        await LocalStorage.remove(options.uri.toString());
       }
       return super.onRequest(options, handler);
     }
@@ -92,8 +89,7 @@ class NetCache extends Interceptor {
 
       // 2 磁盘缓存
       if (cacheDisk) {
-        final _localStorageService = locator<KeyStorageService>();
-        var cacheData = _localStorageService.get(key);
+        var cacheData = LocalStorage.get(key);
         if (cacheData != null) {
           return handler.resolve(Response(
             requestOptions: options,

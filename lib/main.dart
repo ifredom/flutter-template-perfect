@@ -1,38 +1,29 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/ui/views/error_page.dart';
 
 import './core/Constants/Constants.dart';
-import 'ui/views/error_page.dart';
 import 'ui/views/root_component.dart';
 
 void main() async {
+  // 应用初始化
+  WidgetsFlutterBinding.ensureInitialized();
   await runZonedGuarded<Future<void>>(() async {
-    // 应用初始化
-    WidgetsFlutterBinding.ensureInitialized();
-    // 程序异常时，不退出应用，捕捉异常信息并显示错误UI。
+    // 报错时，仅仅抛出异常
     ErrorWidget.builder = (FlutterErrorDetails details) {
       if (Constants.DEBUG) {
         FlutterError.dumpErrorToConsole(details);
       } else {
         Zone.current.handleUncaughtError(details.exception, details.stack as StackTrace);
       }
+
       return ErrorPage(details);
     };
 
     /// 启动GetIt定位服务
     await setupLocator();
-
-    // 设置屏幕方向
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
-    // 设置全屏
-    await SystemChrome.setEnabledSystemUIOverlays([
-      // SystemUiOverlay.top,
-      // SystemUiOverlay.bottom,
-    ]);
 
     /// 根Widget
     runApp(RootComponent());
