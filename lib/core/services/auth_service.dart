@@ -13,7 +13,7 @@ class AuthService {
   User? _currentUser;
   User get currentUser => _currentUser!;
 
-  bool get hasLoggedInUser => LocalStorage.get(StorageKeys.HAS_LOGIN_KEY) ?? false;
+  bool get hasLoggedInUser => LocalStorage.get<bool>(StorageKeys.HAS_LOGIN_KEY) ?? false;
 
   // 检查App更新。是否必须更新app
   Future isUpdateRequired() async {
@@ -25,7 +25,7 @@ class AuthService {
   // api版本是否大于当前版本
   bool _handleVersionUpdate(int apiVersion) {
     // 根据app版本设置，此处假设为0
-    int _packageInfoBuildNumber = 0;
+    int _packageInfoBuildNumber = 2;
     int currentVersion = _packageInfoBuildNumber;
     return apiVersion > currentVersion;
   }
