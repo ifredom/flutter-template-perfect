@@ -13,7 +13,7 @@ import 'package:stacked_services/stacked_services.dart';
 class LoginViewModel extends BaseViewModel with Validators {
   final _authService = locator<AuthService>();
   final _navigationService = locator<NavigationService>();
-
+  final _localStorageService = locator<LocalStorage>();
   // 数据从provider中取
   User get user => _authService.currentUser;
 
@@ -63,8 +63,8 @@ class LoginViewModel extends BaseViewModel with Validators {
   Future saveUserInfo(dynamic res, String mobile) async {
     if (res.data["code"] == 0) {
       User userInfo = User.fromMap(res.data["data"]);
-      LocalStorage.set<String>(StorageKeys.TOKEN_KEY, userInfo.token);
-      LocalStorage.set<bool>(StorageKeys.HAS_LOGIN_KEY, true);
+      _localStorageService.set<String>(StorageKeys.TOKEN_KEY, userInfo.token);
+      _localStorageService.set<bool>(StorageKeys.HAS_LOGIN_KEY, true);
 
       await _authService.updateCurrentUser(userInfo);
 

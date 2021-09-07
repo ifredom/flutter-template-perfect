@@ -8,6 +8,8 @@ import 'package:fluttertemplate/core/services/url_service.dart';
 import 'package:fluttertemplate/core/utils/common/file_helper.dart';
 import 'package:fluttertemplate/core/utils/common/local_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:package_info/package_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -21,6 +23,12 @@ Future<void> setupLocator({String? environment, EnvironmentFilter? environmentFi
   final environmentService = await EnvironmentService.getInstance();
   locator.registerSingleton(environmentService);
 
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  locator.registerSingleton(packageInfo);
+
+  final sharedPreferences = await SharedPreferences.getInstance();
+  locator.registerSingleton(sharedPreferences);
+
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => BottomSheetService());
@@ -31,13 +39,13 @@ Future<void> setupLocator({String? environment, EnvironmentFilter? environmentFi
   locator.registerLazySingleton(() => OpenLinkService());
   locator.registerLazySingleton(() => ShareService());
   locator.registerLazySingleton(() => HardwareInfoService());
+  locator.registerLazySingleton(() => LocalStorage());
   locator.registerLazySingleton(() => AuthService());
 
   // Utils
   locator.registerLazySingleton<FileHelper>(() => FileHelperImpl());
 
   // final instance = await LocalStorage.getInstance();
-  locator.registerLazySingleton(() => LocalStorage());
 }
 
 // https://github.com/fluttercommunity/get_it/issues/196

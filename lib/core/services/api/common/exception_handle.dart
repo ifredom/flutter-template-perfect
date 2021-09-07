@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart' show DioError, DioErrorType;
 import 'package:flutter/widgets.dart';
 import 'package:fluttertemplate/core/app/app.router.dart';
+import 'package:fluttertemplate/core/app/locator.dart';
 import 'package:fluttertemplate/core/utils/common/local_storage.dart';
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -29,7 +30,8 @@ class ExceptionHandle {
 
         /// 后台接口，登录失效，跳转到登录 ,https://www.jianshu.com/p/bd6157914c2d
         if (res.code == 10000) {
-          LocalStorage.set<String>(StorageKeys.TOKEN_KEY, "");
+          final _localStorageService = locator<LocalStorage>();
+          _localStorageService.set<String>(StorageKeys.TOKEN_KEY, "");
           await StackedService.navigatorKey!.currentState!
               .pushNamedAndRemoveUntil(Routes.loginView, ModalRoute.withName("/"));
         }
