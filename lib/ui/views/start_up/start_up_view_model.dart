@@ -12,6 +12,7 @@ class StartUpViewModel extends BaseViewModel {
   final _connectivityService = locator<ConnectivityService>();
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthService>();
+  final _localStorageService = locator<LocalStorage>();
 
   bool? _isConnected;
   bool get isConnected => _isConnected ?? true;
@@ -24,18 +25,18 @@ class StartUpViewModel extends BaseViewModel {
       return;
     }
 
-    var forceUpdateRequired = await _authService.isUpdateRequired();
+    bool forceUpdateRequired = await _authService.isUpdateRequired();
 
     if (forceUpdateRequired is bool && forceUpdateRequired) {
       print('app需要更新，前往更新页面');
       _navigationService.replaceWith(Routes.updateView);
       return;
     }
-
+    print(_authService.hasLoggedInUser);
     final bool isLoggedIn = _authService.hasLoggedInUser;
 
     if (isLoggedIn) {
-      String id = (await LocalStorage.get(StorageKeys.USER_ID_KEY)) ?? "";
+      String id = (await _localStorageService.get(StorageKeys.USER_ID_KEY)) ?? "";
       var res = await _authService.fetchUserInfo(id);
       print("res");
       print(res);

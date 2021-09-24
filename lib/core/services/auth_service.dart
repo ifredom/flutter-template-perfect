@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:fluttertemplate/core/app/app.logger.dart';
+import 'package:fluttertemplate/core/app/locator.dart';
 import 'package:fluttertemplate/core/model/userinfo/user.dart';
 import 'package:fluttertemplate/core/services/api/apicode/api.dart';
 import 'package:fluttertemplate/core/services/api/http_service_impl.dart';
@@ -10,10 +10,11 @@ import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 // 定义异步接口请求
 class AuthService {
   final _log = getLogger("AuthServiceImpl");
+  final _localStorageService = locator<LocalStorage>();
   User? _currentUser;
   User get currentUser => _currentUser!;
 
-  bool get hasLoggedInUser => LocalStorage.get(StorageKeys.HAS_LOGIN_KEY) ?? false;
+  bool get hasLoggedInUser => _localStorageService.get(StorageKeys.HAS_LOGIN_KEY) ?? false;
 
   // 检查App更新。是否必须更新app
   Future isUpdateRequired() async {
@@ -25,7 +26,7 @@ class AuthService {
   // api版本是否大于当前版本
   bool _handleVersionUpdate(int apiVersion) {
     // 根据app版本设置，此处假设为0
-    int _packageInfoBuildNumber = 0;
+    int _packageInfoBuildNumber = 2;
     int currentVersion = _packageInfoBuildNumber;
     return apiVersion > currentVersion;
   }
@@ -82,14 +83,14 @@ class AuthService {
   }
 
   Future<void> signOut() async {
-    await LocalStorage.clear();
+    await _localStorageService.clear();
     _currentUser = User((u) => u
       ..id = ""
       ..token = "");
   }
 
   Future<bool> isUserLoggedIn() async {
-    String token = (await LocalStorage.get(StorageKeys.TOKEN_KEY)) ?? '';
+    String token = (await _localStorageService.get(StorageKeys.TOKEN_KEY)) ?? '';
     return Future.value(token != '');
   }
 }

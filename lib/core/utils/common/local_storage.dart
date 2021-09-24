@@ -1,81 +1,38 @@
-import 'dart:convert';
-
+import 'package:fluttertemplate/core/app/locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///SharedPreferences 本地存储
 class LocalStorage {
-  static LocalStorage? _instance;
-  static SharedPreferences? _preferences;
-  static const notifications_key = 'notifications_key';
+  final _sharedPrefs = locator<SharedPreferences>();
 
-  static Future<LocalStorage> getInstance() async {
-    if (_instance == null) {
-      _instance = LocalStorage();
-      _preferences = await SharedPreferences.getInstance();
+  Future<void> set<T>(String key, T content) async {
+    if (content is String) {
+      await _sharedPrefs.setString(key, content);
     }
-    return Future.value(_instance);
-  }
-
-  static set<T>(String key, T value) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    if (value is String) {
-      await _preferences.setString(key, value);
-    } else if (value is bool) {
-      await _preferences.setBool(key, value);
-    } else if (value is int) {
-      await _preferences.setInt(key, value);
-    } else if (value is double) {
-      await _preferences.setDouble(key, value);
+    if (content is bool) {
+      await _sharedPrefs.setBool(key, content);
+    }
+    if (content is int) {
+      await _sharedPrefs.setInt(key, content);
+    }
+    if (content is double) {
+      await _sharedPrefs.setDouble(key, content);
+    }
+    if (content is List<String>) {
+      await _sharedPrefs.setStringList(key, content);
     }
   }
 
-  static dynamic get<T>(String key) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    dynamic value = _preferences.get(key);
+  dynamic get(String key) {
+    final value = _sharedPrefs.get(key);
     return value;
   }
 
-  static remove(String key) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    await _preferences.remove(key);
+  remove(String key) async {
+    await _sharedPrefs.remove(key);
   }
 
-  static getList(String key) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    return _preferences.getStringList(key);
-  }
-
-  static setList(String key, List<dynamic> list) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    List<String> items = [];
-    list.forEach((item) {
-      items..add(json.encode(item));
-    });
-    await _preferences.setStringList(key, items);
-  }
-
-  static setMap(String key, value) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    return _preferences.setString(key, json.encode(value));
-  }
-
-  static getMap(String key) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    return json.decode(_preferences.get(key) as String);
-  }
-
-  static getListStr(String key) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    return _preferences.getStringList(key);
-  }
-
-  static setListStr(String key, List<String> list) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    await _preferences.setStringList(key, list);
-  }
-
-  static clear() async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    await _preferences.clear();
+  clear() async {
+    await _sharedPrefs.clear();
   }
 }
