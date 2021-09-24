@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertemplate/core/app/locator.dart';
 import 'package:fluttertemplate/ui/views/error_page.dart';
 
@@ -10,6 +11,9 @@ import 'ui/views/root_component.dart';
 void main() async {
   // 应用初始化
   WidgetsFlutterBinding.ensureInitialized();
+
+  // debugProfileBuildsEnabled = true; // 查看需要重绘的widget
+
   await runZonedGuarded<Future<void>>(() async {
     // 报错时，仅仅抛出异常
     ErrorWidget.builder = (FlutterErrorDetails details) {
@@ -24,6 +28,12 @@ void main() async {
 
     /// 启动GetIt定位服务
     await setupLocator();
+
+    // 设置全屏
+    await SystemChrome.setEnabledSystemUIOverlays([
+      // SystemUiOverlay.top,
+      // SystemUiOverlay.bottom,
+    ]);
 
     /// 根Widget
     runApp(RootComponent());

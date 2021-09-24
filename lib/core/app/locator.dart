@@ -21,7 +21,7 @@ Future<void> setupLocator({String? environment, EnvironmentFilter? environmentFi
   final environmentService = await EnvironmentService.getInstance();
   locator.registerSingleton(environmentService);
 
-  locator.registerSingleton(NavigationService());
+  locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => SnackbarService());

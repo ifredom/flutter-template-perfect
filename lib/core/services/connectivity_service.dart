@@ -14,8 +14,7 @@ class ConnectivityService implements StoppableService {
 
   ConnectivityResult _lastResult = ConnectivityResult.none;
 
-  late StreamSubscription<ConnectivityResult> _subscription =
-      _connectivity.onConnectivityChanged.listen(_emitConnectivity);
+  late StreamSubscription<ConnectivityResult> _subscription;
 
   bool _serviceStopped = false;
   bool get serviceStopped => _serviceStopped;
@@ -24,6 +23,7 @@ class ConnectivityService implements StoppableService {
   Stream<ConnectivityStatus> get connectivity$ => _connectivityResultController.stream;
 
   ConnectivityService() {
+    _subscription = _connectivity.onConnectivityChanged.listen(_emitConnectivity);
     _connectivityResultController.add(ConnectivityStatus.Init);
     _connectivity.onConnectivityChanged
         .listen((ConnectivityResult result) => _connectivityResultController.add(_convertResult(result)));

@@ -46,6 +46,10 @@ A new Flutter project template with Null-safety.(flutter 完整商用项目模�
 
 <https://juejin.cn/post/6844904176489594893>
 
+> Material 设计规范:状态栏、导航栏、ListTile 高度分别为 24、56、56
+
+> dp 值 = px 值 / (density/160dpi)
+
 > ui/views/start_up_view.dart
 
 ```dart
@@ -59,4 +63,3 @@ ScreenUtil.init(
   orientation: Orientation.portrait,
 );
 ```
-
