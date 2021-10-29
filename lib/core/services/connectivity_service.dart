@@ -43,7 +43,7 @@ class ConnectivityService implements StoppableService {
   }
 
   void start() async {
-    _log.i('ConnectivityService resumed');
+    _log.w('ConnectivityService resumed');
     _serviceStopped = false;
 
     await _resumeSignal();
@@ -51,7 +51,7 @@ class ConnectivityService implements StoppableService {
   }
 
   void stop() {
-    _log.i('ConnectivityService paused');
+    _log.w('ConnectivityService paused');
     _serviceStopped = true;
 
     _subscription.pause(_resumeSignal());

@@ -17,3 +17,7 @@ https://stackoverflow.com/questions/64876381/how-to-build-a-list-using-built-val
 ## keymap 快捷方式
 
 win + E 打开资源管理器
+
+## 经验
+
+BottomNavigationBar + PageView 比用 BottomNavigationBar + IndexedStack 好一点，不用一次性加载完所有 page
