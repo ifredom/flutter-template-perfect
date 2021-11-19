@@ -294,7 +294,7 @@ packages:
       name: file
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "6.1.2"
+    version: "6.1.0"
   fixnum:
     dependency: transitive
     description:
@@ -650,7 +650,7 @@ packages:
       name: platform
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.0.2"
+    version: "3.0.0"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -671,7 +671,7 @@ packages:
       name: process
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.2.3"
+    version: "4.2.1"
   provider:
     dependency: "direct main"
     description:
@@ -728,6 +728,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.26.0"
+  screenshot:
+    dependency: "direct dev"
+    description:
+      name: screenshot
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.3"
   share:
     dependency: "direct main"
     description:

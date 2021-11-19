@@ -73,6 +73,7 @@ dev_dependencies:
   freezed: ^0.14.2
   mockito: ^5.0.0
   logger: 1.0.0
+  screenshot: 1.2.3
 
 flutter:
   uses-material-design: true
