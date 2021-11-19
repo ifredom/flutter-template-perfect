@@ -361,6 +361,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_midi:
+    dependency: "direct main"
+    description:
+      name: flutter_midi
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -915,6 +922,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  tonic:
+    dependency: transitive
+    description:
+      name: tonic
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.4"
   typed_data:
     dependency: transitive
     description:

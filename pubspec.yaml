@@ -59,6 +59,7 @@ dependencies:
   freezed_annotation: 0.14.2
   json_annotation: 4.0.1
   flutter_local_notifications: 8.1.1
+  flutter_midi: 1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +80,8 @@ flutter:
     - .env
     - assets/lang/zh.json
     - assets/lang/en.json
+
+    - assets/sounds/Piano.sf2
 
     - assets/audio/viper.mp3
     - assets/audio/bgaudio.mp3

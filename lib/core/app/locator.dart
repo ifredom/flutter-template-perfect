@@ -7,6 +7,7 @@ import 'package:fluttertemplate/core/services/share_service.dart';
 import 'package:fluttertemplate/core/services/url_service.dart';
 import 'package:fluttertemplate/core/utils/common/file_helper.dart';
 import 'package:fluttertemplate/core/utils/common/local_storage.dart';
+import 'package:fluttertemplate/ui/views/home/home_view/home_view_model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,6 +42,7 @@ Future<void> setupLocator({String? environment, EnvironmentFilter? environmentFi
   locator.registerLazySingleton(() => HardwareInfoService());
   locator.registerLazySingleton(() => LocalStorage());
   locator.registerLazySingleton(() => AuthService());
+  locator.registerLazySingleton(() => HomeViewModel());
 
   // Utils
   locator.registerLazySingleton<FileHelper>(() => FileHelperImpl());
