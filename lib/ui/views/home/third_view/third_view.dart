@@ -33,16 +33,17 @@ class _ThirdScreenState extends State<ThirdScreen> {
               showLabels: true,
               labelsOnlyOctaves: false,
               disableScroll: false,
+              thumbnail: true,
             ),
           ),
-          Flexible(
-            child: PianoView(
-              keyWidth: keyWidth,
-              showLabels: false,
-              labelsOnlyOctaves: false,
-              disableScroll: false,
-            ),
-          ),
+          // Flexible(
+          //   child: PianoView(
+          //     keyWidth: keyWidth,
+          //     showLabels: false,
+          //     labelsOnlyOctaves: false,
+          //     disableScroll: false,
+          //   ),
+          // ),
         ],
       );
     }

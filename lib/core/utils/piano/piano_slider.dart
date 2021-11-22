@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './theme.dart';
 
+const int whiteKeyNumber = 49;
+
 class PianoSlider extends StatelessWidget {
   const PianoSlider({
     required this.keyWidth,
@@ -22,6 +24,7 @@ class PianoSlider extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 8.0),
           child: Row(
             children: <Widget>[
+              // _buildHeadSection(context, 8),
               _buildSection(context, 0),
               _buildSection(context, 1),
               _buildSection(context, 2),
@@ -29,6 +32,7 @@ class PianoSlider extends StatelessWidget {
               _buildSection(context, 4),
               _buildSection(context, 5),
               _buildSection(context, 6),
+              // _buildTailSection(context, 9),
             ],
           ),
         ),
@@ -37,7 +41,7 @@ class PianoSlider extends StatelessWidget {
   }
 
   Widget _buildSection(BuildContext context, int octave) {
-    final _keyWidth = MediaQuery.of(context).size.width / 49;
+    final _keyWidth = MediaQuery.of(context).size.width / whiteKeyNumber;
     return InkWell(
       onTap: () => octaveTapped(octave),
       child: Stack(
@@ -88,8 +92,77 @@ class PianoSlider extends StatelessWidget {
     );
   }
 
+  Widget _buildHeadSection(BuildContext context, int octave) {
+    final _keyWidth = MediaQuery.of(context).size.width / whiteKeyNumber;
+    return InkWell(
+      onTap: () => octaveTapped(octave),
+      child: Stack(
+        children: <Widget>[
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              _buildKey(context, false),
+              _buildKey(context, false),
+            ],
+          ),
+          Positioned(
+              left: 0.0,
+              right: 0.0,
+              bottom: 15.0,
+              top: 0.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(width: _keyWidth * .5),
+                  _buildKey(context, true),
+                  Container(width: _keyWidth * .5),
+                ],
+              )),
+          Positioned(
+            left: 0.0,
+            right: 0.0,
+            top: 0.0,
+            bottom: 0.0,
+            child: Container(
+              color: currentOctave != octave ? Colors.grey.withOpacity(0.7) : null,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTailSection(BuildContext context, int octave) {
+    final _keyWidth = MediaQuery.of(context).size.width / whiteKeyNumber;
+    return InkWell(
+      onTap: () => octaveTapped(octave),
+      child: Stack(
+        children: <Widget>[
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              _buildKey(context, false),
+            ],
+          ),
+          Positioned(
+            left: 0.0,
+            right: 0.0,
+            top: 0.0,
+            bottom: 0.0,
+            child: Container(
+              color: currentOctave != octave ? Colors.grey.withOpacity(0.7) : null,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildKey(BuildContext context, bool accidental) {
-    final _keyWidth = MediaQuery.of(context).size.width / 49;
+    final _keyWidth = MediaQuery.of(context).size.width / whiteKeyNumber;
     if (accidental) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 1.0),

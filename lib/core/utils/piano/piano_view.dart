@@ -9,6 +9,7 @@ class PianoView extends StatefulWidget {
     this.showLabels = false,
     required this.keyWidth,
     required this.labelsOnlyOctaves,
+    this.thumbnail = true,
     this.disableScroll = false,
     this.feedback,
   });
@@ -17,6 +18,7 @@ class PianoView extends StatefulWidget {
   final bool showLabels;
   final bool labelsOnlyOctaves;
   final bool disableScroll;
+  final bool thumbnail;
   final bool? feedback;
 
   @override
@@ -40,32 +42,37 @@ class _PianoViewState extends State<PianoView> {
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
-        Flexible(
-          flex: 1,
-          child: Container(
-            child: PianoSlider(
-              theme: ThemeUtils(context),
-              keyWidth: widget.keyWidth,
-              currentOctave: _currentOctave,
-              octaveTapped: (int octave) {
-                setState(() {
-                  _currentOctave = octave;
-                });
-                _controller.jumpTo(currentOffset);
-              },
-            ),
-          ),
-        ),
+        widget.thumbnail ? thumbnailWidget(context) : SizedBox(),
         Flexible(
           flex: 8,
           child: PianoSection(
-              controller: _controller,
-              disableScroll: widget.disableScroll,
-              keyWidth: widget.keyWidth,
-              showLabels: widget.showLabels,
-              labelsOnlyOctaves: widget.labelsOnlyOctaves),
+            controller: _controller,
+            disableScroll: widget.disableScroll,
+            keyWidth: widget.keyWidth,
+            showLabels: widget.showLabels,
+            labelsOnlyOctaves: widget.labelsOnlyOctaves,
+          ),
         ),
       ],
+    );
+  }
+
+  Widget thumbnailWidget(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      child: Container(
+        child: PianoSlider(
+          theme: ThemeUtils(context),
+          keyWidth: widget.keyWidth,
+          currentOctave: _currentOctave,
+          octaveTapped: (int octave) {
+            setState(() {
+              _currentOctave = octave;
+            });
+            _controller.jumpTo(currentOffset);
+          },
+        ),
+      ),
     );
   }
 }
