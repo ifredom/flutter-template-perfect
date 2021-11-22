@@ -31,7 +31,7 @@ class LoginViewModel extends BaseViewModel with Validators {
   Future<void> loginWithPassword(String username, String password) async {
     _isBusy = true;
     setBusy(_isBusy);
-    Future.delayed(Duration(seconds: 2), () async {
+    Future.delayed(Duration(milliseconds: 500), () async {
       _isBusy = false;
       setBusy(_isBusy);
       await _navigationService.replaceWith(Routes.homeView);

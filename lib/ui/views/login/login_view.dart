@@ -51,105 +51,92 @@ class _LoginViewState extends State<LoginView> {
       viewModelBuilder: () => LoginViewModel(),
       builder: (context, model, child) => Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Form(
-          key: formKey,
-          child: IgnorePointer(
-            ignoring: model.isBusy,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                    "assets/images/loginbg.png",
-                  ),
-                ),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(
+                "assets/images/loginbg.png",
               ),
-              child: SingleChildScrollView(
-                child: Container(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 60,
-                            vertical: 50,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              InputField(
-                                focusNode: loginNameFocus,
-                                nextFocusNode: pwdFocus,
-                                roundBox: true,
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15.0,
-                                  textBaseline: TextBaseline.alphabetic,
-                                ),
-                                hintText: "请输入账号",
-                                hintStyle: TextStyle(color: HexToColor("#FFFFFF")),
-                                controller: loginNameController,
-                                borderColor: HexToColor("#CBAEFA"),
-                              ),
-                              Gaps.vGap40,
-                              InputField(
-                                focusNode: pwdFocus,
-                                roundBox: true,
-                                obscureText: true,
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15.0,
-                                  textBaseline: TextBaseline.alphabetic,
-                                ),
-                                hintText: "请输入登陆密码",
-                                hintStyle: TextStyle(color: HexToColor("#FFFFFF")),
-                                controller: pwdController,
-                                borderColor: HexToColor("#CBAEFA"),
-                              ),
-                              Gaps.vGap20,
-                              Center(
-                                  child: GradientButton(
-                                text: '登录',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
-                                colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
-                                onPressed: () async {
-                                  await model.loginWithPassword(loginNameController.text, pwdController.text);
-                                },
-                              )),
-                              Gaps.vGap20,
-                              Center(
-                                child: GestureDetector(
-                                  child: FittedBox(
-                                    child: Text(
-                                      "手机验证码登录",
-                                      style: TextStyle(
-                                        color: HexToColor("#FF696A"),
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    locator<NavigationService>().navigateTo(Routes.loginPhoneView);
-                                  },
-                                ),
-                              ),
-                              Gaps.vGap40,
-                            ],
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
+            child: Form(
+              key: formKey,
+              child: IgnorePointer(
+                ignoring: model.isBusy,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    InputField(
+                      focusNode: loginNameFocus,
+                      nextFocusNode: pwdFocus,
+                      roundBox: true,
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15.0,
+                        textBaseline: TextBaseline.alphabetic,
+                      ),
+                      hintText: "请输入账号",
+                      hintStyle: TextStyle(color: HexToColor("#FFFFFF")),
+                      controller: loginNameController,
+                      borderColor: HexToColor("#CBAEFA"),
+                    ),
+                    Gaps.vGap40,
+                    InputField(
+                      focusNode: pwdFocus,
+                      roundBox: true,
+                      obscureText: true,
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15.0,
+                        textBaseline: TextBaseline.alphabetic,
+                      ),
+                      hintText: "请输入登陆密码",
+                      hintStyle: TextStyle(color: HexToColor("#FFFFFF")),
+                      controller: pwdController,
+                      borderColor: HexToColor("#CBAEFA"),
+                    ),
+                    Gaps.vGap20,
+                    Center(
+                        child: GradientButton(
+                      text: '登录',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                      colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
+                      onPressed: () async {
+                        await model.loginWithPassword(loginNameController.text, pwdController.text);
+                      },
+                    )),
+                    Gaps.vGap20,
+                    Center(
+                      child: GestureDetector(
+                        child: FittedBox(
+                          child: Text(
+                            "手机验证码登录",
+                            style: TextStyle(
+                              color: HexToColor("#FF696A"),
+                              fontSize: 15,
+                            ),
                           ),
                         ),
+                        onTap: () {
+                          locator<NavigationService>().navigateTo(Routes.loginPhoneView);
+                        },
                       ),
-                      Lottie.asset('assets/animations/lottie/18582-as-the-waters-rise.json'),
-                    ],
-                  ),
+                    ),
+                    Gaps.vGap40,
+                  ],
                 ),
               ),
+
+              // Lottie.asset('assets/animations/lottie/18582-as-the-waters-rise.json', fit: BoxFit.fitWidth),
             ),
           ),
         ),
