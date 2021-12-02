@@ -1,20 +1,22 @@
 import 'dart:async';
 import 'package:fluttertemplate/core/app/app.logger.dart';
-import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/model/userinfo/user.dart';
 import 'package:fluttertemplate/core/services/api/apicode/api.dart';
 import 'package:fluttertemplate/core/services/api/http_service_impl.dart';
-import 'package:fluttertemplate/core/utils/common/local_storage.dart';
+import 'package:fluttertemplate/core/services/local_storage_service.dart';
+
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 
 // 定义异步接口请求
 class AuthService {
   final _log = getLogger("AuthServiceImpl");
-  final _localStorageService = locator<LocalStorage>();
+  final _localStorageService = locator<LocalStorageService>();
   User? _currentUser;
   User get currentUser => _currentUser!;
 
-  bool get hasLoggedInUser => _localStorageService.get(StorageKeys.HAS_LOGIN_KEY) ?? false;
+  bool get hasLoggedInUser => false;
+  // bool get hasLoggedInUser => _localStorageService.get<bool>(StorageKeys.HAS_LOGIN_KEY) ?? false;
 
   // 检查App更新。是否必须更新app
   Future isUpdateRequired() async {

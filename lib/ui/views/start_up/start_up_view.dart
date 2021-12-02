@@ -13,7 +13,8 @@ class StartUpView extends StatelessWidget {
     //     maxWidth: MediaQuery.of(context).size.width,
     //     maxHeight: MediaQuery.of(context).size.height,
     //   ),
-    //   designSize: Size(750, 1334), // 设计稿尺寸
+    /// Design draft size（设计稿尺寸）
+    //   designSize: Size(750, 1334),
     //   orientation: Orientation.portrait,
     // );
     return ViewModelBuilder<StartUpViewModel>.reactive(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 
 import 'package:fluttertemplate/core/utils/common/color_utils.dart';
 import 'package:fluttertemplate/core/utils/res/gaps.dart';

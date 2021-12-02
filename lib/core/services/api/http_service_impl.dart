@@ -6,9 +6,9 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart' show Dio, Options, DioError, Response, Headers;
 import 'package:fluttertemplate/core/app/app.logger.dart';
-import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/constants/constants.dart';
-import 'package:fluttertemplate/core/utils/common/file_helper.dart';
+import 'package:fluttertemplate/core/services/file_helper.dart';
 
 import 'package:fluttertemplate/core/utils/common/network_utils.dart' as network_utils;
 import 'common/exception_handle.dart' show ExceptionHandle;
@@ -84,7 +84,7 @@ class HttpServiceImpl implements HttpService {
   @override
   Future<File> downloadFile(String fileUrl) async {
     Response response;
-    final _fileHelper = locator<FileHelper>();
+    final _fileHelper = locator<FileService>();
     final file = await _fileHelper.getFileFromUrl(fileUrl);
 
     try {

@@ -5,9 +5,9 @@ class WidgetNotFound extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("页面不存在"),
+        title: Text("not found"),
       ),
-      body: Text('页面不存在'),
+      body: Text('not found'),
     );
   }
 }

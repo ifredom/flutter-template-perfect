@@ -1,8 +1,9 @@
 import 'package:fluttertemplate/core/app/app.router.dart';
-import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/model/userinfo/user.dart';
 import 'package:fluttertemplate/core/services/auth_service.dart';
-import 'package:fluttertemplate/core/utils/common/local_storage.dart';
+import 'package:fluttertemplate/core/services/local_storage_service.dart';
+
 import 'package:fluttertemplate/core/utils/common/validators.dart';
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,7 +14,7 @@ import 'package:stacked_services/stacked_services.dart';
 class LoginViewModel extends BaseViewModel with Validators {
   final _authService = locator<AuthService>();
   final _navigationService = locator<NavigationService>();
-  final _localStorageService = locator<LocalStorage>();
+  final _localStorageService = locator<LocalStorageService>();
   // 数据从provider中取
   User get user => _authService.currentUser;
 

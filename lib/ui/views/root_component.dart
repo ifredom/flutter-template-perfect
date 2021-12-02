@@ -1,4 +1,3 @@
-import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:fluttertemplate/core/constants/app_theme.dart';
@@ -18,55 +17,28 @@ class _RootComponentState extends State<RootComponent> {
   Widget build(BuildContext context) {
     return RestartManager(
       child: LifeCycleManager(
-        child: FeatureDiscovery(
-          child: GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: localizationsDelegates,
-            localeResolutionCallback: loadSupportedLocals,
-            supportedLocales: supportedLocales,
-            locale: Locale('zh', 'CN'),
-            title: 'flutterApp',
-            theme: AppTheme.themData,
-            navigatorKey: StackedService.navigatorKey,
-            navigatorObservers: [CustomNavigatorObserver.routeObserver],
-            onGenerateRoute: StackedRouter().onGenerateRoute,
-            routingCallback: routingCallback,
-          ),
+        child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: localizationsDelegates,
+          localeResolutionCallback: loadSupportedLocals,
+          supportedLocales: supportedLocales,
+          locale: Locale('zh', 'CN'),
+          title: 'flutterApp',
+          theme: AppTheme.themData,
+          navigatorKey: StackedService.navigatorKey,
+          navigatorObservers: [StackedService.routeObserver],
+          onGenerateRoute: StackedRouter().onGenerateRoute,
+          routingCallback: routingCallback,
         ),
       ),
     );
   }
 
-  /// 路由回调
   routingCallback(Routing? routing) {
     if (routing!.current == Routes.homeView) {
       // Future.delayed(const Duration(seconds: 2), () async {
       //   Get.snackbar("Tips", "You are on homeView route");
       // });
-    }
-  }
-}
-
-/// 路由监听
-class CustomNavigatorObserver extends NavigatorObserver {
-  static CustomNavigatorObserver _instance = CustomNavigatorObserver();
-  static final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
-
-  static CustomNavigatorObserver getInstance() => CustomNavigatorObserver();
-
-  static observer({Routing? routing}) {
-    print(_instance);
-  }
-
-  // https://juejin.im/post/6844903798398255111
-  @override
-  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    // opaque：是否是全屏不透明的
-    if ((previousRoute is TransitionRoute) && previousRoute.opaque) {
-      // 全屏不透明，通常是一个page
-      print("监控到");
-    } else {
-      // 全屏透明，通常是一个弹窗
     }
   }
 }

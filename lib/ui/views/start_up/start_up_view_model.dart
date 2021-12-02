@@ -1,9 +1,10 @@
 import 'package:fluttertemplate/core/app/app.router.dart';
-import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/model/userinfo/user.dart';
 import 'package:fluttertemplate/core/services/auth_service.dart';
 import 'package:fluttertemplate/core/services/connectivity_service.dart';
-import 'package:fluttertemplate/core/utils/common/local_storage.dart';
+import 'package:fluttertemplate/core/services/local_storage_service.dart';
+
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -12,7 +13,7 @@ class StartUpViewModel extends BaseViewModel {
   final _connectivityService = locator<ConnectivityService>();
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthService>();
-  final _localStorageService = locator<LocalStorage>();
+  final _localStorageService = locator<LocalStorageService>();
 
   bool? _isConnected;
   bool get isConnected => _isConnected ?? true;

@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart' show InterceptorsWrapper, RequestInterceptorHandler, RequestOptions;
-import 'package:fluttertemplate/core/app/locator.dart';
-import 'package:fluttertemplate/core/utils/common/local_storage.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/core/services/local_storage_service.dart';
 import 'package:fluttertemplate/core/utils/res/local_storage_keys.dart';
 
 import '../apicode/whiteList.dart';
 
 class ApiInterceptors extends InterceptorsWrapper {
-  final _localStorageService = locator<LocalStorage>();
+  final _localStorageService = locator<LocalStorageService>();
   // 白名单
   // ignore: unused_element
   _getUnWhitelistToken(String apiCode) async {

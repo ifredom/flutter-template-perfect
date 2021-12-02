@@ -4,7 +4,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:fluttertemplate/core/constants/app_theme.dart';
 import 'package:fluttertemplate/ui/views/home/first_view/title_view.dart';
 
-import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key, required this.animationController}) : super(key: key);

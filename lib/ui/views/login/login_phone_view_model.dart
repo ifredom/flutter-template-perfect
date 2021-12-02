@@ -1,7 +1,7 @@
 import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:fluttertemplate/core/app/locator.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/utils/common/validators.dart';
 
 // ViewModelProvider应该使用得是 LoginViewModel中得数据

@@ -2,52 +2,49 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertemplate/core/app/locator.dart';
 import 'package:fluttertemplate/ui/views/error_page.dart';
 
 import './core/Constants/Constants.dart';
+import 'core/app/app.locator.dart';
 import 'ui/views/root_component.dart';
 
 void main() async {
-  // 应用初始化
   WidgetsFlutterBinding.ensureInitialized();
 
-  // debugProfileBuildsEnabled = true; // 查看需要重绘的widget
+  // View the that need to be redrawn Widget(查看需要重绘的widget)
+  // debugProfileBuildsEnabled = true;
 
   await runZonedGuarded<Future<void>>(() async {
-    // 报错时，仅仅抛出异常
     ErrorWidget.builder = (FlutterErrorDetails details) {
       if (Constants.DEBUG) {
         FlutterError.dumpErrorToConsole(details);
       } else {
         Zone.current.handleUncaughtError(details.exception, details.stack as StackTrace);
       }
-
       return ErrorPage(details);
     };
 
-    /// 启动GetIt定位服务
+    /// Start getit location service(启动GetIt定位服务)
     await setupLocator();
 
-    // 设置全屏
+    // Set full screen (设置全屏)
     await SystemChrome.setEnabledSystemUIOverlays([
       // SystemUiOverlay.top,
       // SystemUiOverlay.bottom,
     ]);
 
-    /// 根Widget
+    /// root Widget
     runApp(RootComponent());
   }, (Object error, StackTrace stackTrace) async {
-    // Zone中未捕获异常处理回调
     await _reportError(error, stackTrace);
   });
 }
 
-// 上传应用异常信息到服务器！
+// Upload application exception information to the server!(上传应用异常信息到日志服务器！)
 Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
   if (Constants.DEBUG) {
-    print('开发模式, 不发送异常到服务端. $stackTrace');
+    print('Development mode, do not send exceptions to the server. $stackTrace');
     return;
   }
-  print('发送异常信息到服务器 ...');
+  print('Send exception information to the server ...');
 }

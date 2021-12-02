@@ -1,8 +1,8 @@
 import 'dart:collection';
 
 import 'package:dio/dio.dart';
-import 'package:fluttertemplate/core/app/locator.dart';
-import 'package:fluttertemplate/core/utils/common/local_storage.dart';
+import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/core/services/local_storage_service.dart';
 
 //  https://github.com/BrinsLee/MusicFlutter/blob/2e19f5a210ed04adc0ff0378a5deffc183ee5622/lib/global.dart
 const CACHE_ENABLE = true;
@@ -27,7 +27,7 @@ class CacheObject {
 }
 
 class NetCache extends Interceptor {
-  final _localStorageService = locator<LocalStorage>();
+  final _localStorageService = locator<LocalStorageService>();
   var cache = LinkedHashMap<String, CacheObject>();
 
   void delete(String key) {
