@@ -1,4 +1,4 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fluttertemplate/core/services/auth_service.dart';
 import 'package:fluttertemplate/core/services/connectivity_service.dart';
 import 'package:fluttertemplate/core/services/file_helper.dart';

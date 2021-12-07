@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fluttertemplate/core/app/app.logger.dart';
 import 'package:fluttertemplate/core/constants/component_state.dart';
 
