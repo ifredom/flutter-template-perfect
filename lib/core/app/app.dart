@@ -7,7 +7,6 @@ import 'package:fluttertemplate/core/services/local_storage_service.dart';
 import 'package:fluttertemplate/core/services/share_service.dart';
 import 'package:fluttertemplate/core/services/url_service.dart';
 import 'package:fluttertemplate/ui/views/home/home_view/home.dart';
-import 'package:fluttertemplate/ui/views/login/login_phone_view.dart';
 import 'package:fluttertemplate/ui/views/login/login_view.dart';
 import 'package:fluttertemplate/ui/views/product_detail/product_detail_view.dart';
 import 'package:fluttertemplate/ui/views/register/register_view.dart';
@@ -25,7 +24,6 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: UpdateView),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: LoginView),
-    MaterialRoute(page: LoginPhoneView),
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: ProductDetailView)
   ],

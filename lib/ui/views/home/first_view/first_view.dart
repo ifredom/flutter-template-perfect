@@ -1,10 +1,6 @@
-import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:flutter/material.dart';
-import 'package:stacked_services/stacked_services.dart';
 import 'package:fluttertemplate/core/constants/app_theme.dart';
-import 'package:fluttertemplate/ui/views/home/first_view/title_view.dart';
-
-import 'package:fluttertemplate/core/app/app.locator.dart';
+import 'package:fluttertemplate/ui/views/home/first_view/sliding_cards.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key, required this.animationController}) : super(key: key);
@@ -15,7 +11,6 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin {
-  final _navigationService = locator<NavigationService>();
   late Animation<double> topBarAnimation;
 
   List<Widget> listViews = <Widget>[];
@@ -51,41 +46,10 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
   }
 
   void addAllListData() {
-    const int count = 5;
-    listViews.add(
-      TitleView(
-        titleTxt: '油闷大虾',
-        subTxt: '七星酒店',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController,
-        callback: () {
-          Map props = Map();
-          props["title"] = "First Screen 数据 1";
-          props["description"] = "这是一条传递过来的数据";
-          _navigationService.navigateTo(Routes.productDetailView, arguments: props);
-        },
-      ),
-    );
-
-    listViews.add(
-      TitleView(
-        titleTxt: '水煮肉片',
-        subTxt: '苍蝇馆',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController,
-      ),
-    );
-    listViews.add(
-      TitleView(
-        titleTxt: '啤酒鸭',
-        subTxt: '宿舍',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController,
-      ),
-    );
+    listViews
+      ..add(
+        SlidingCardsView(),
+      );
   }
 
   Future<bool> getData() async {

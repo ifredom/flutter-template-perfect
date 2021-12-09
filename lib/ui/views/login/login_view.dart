@@ -1,10 +1,8 @@
-import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 import 'package:fluttertemplate/core/utils/common/color_utils.dart';
 import 'package:fluttertemplate/core/utils/res/gaps.dart';
@@ -27,15 +25,6 @@ class _LoginViewState extends State<LoginView> {
   @override
   void initState() {
     super.initState();
-
-    loginNameController.text = "ifredom"; // 设置默认值
-    pwdController.text = "123456"; // 设置默认值
-    loginNameController.addListener(() {
-      // 做点什么
-    });
-    pwdController.addListener(() {
-      // 做点什么
-    });
   }
 
   @override
@@ -49,8 +38,9 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.nonReactive(
       viewModelBuilder: () => LoginViewModel(),
+      onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) => Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         body: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -62,8 +52,7 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
           ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
+          child: Center(
             child: Form(
               key: formKey,
               child: IgnorePointer(
@@ -102,40 +91,13 @@ class _LoginViewState extends State<LoginView> {
                       borderColor: HexToColor("#CBAEFA"),
                     ),
                     Gaps.vGap20,
-                    Center(
-                        child: GradientButton(
-                      text: '登录',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                      ),
-                      colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
-                      onPressed: () async {
-                        await model.loginWithPassword(loginNameController.text, pwdController.text);
-                      },
-                    )),
-                    Gaps.vGap20,
-                    Center(
-                      child: GestureDetector(
-                        child: FittedBox(
-                          child: Text(
-                            "手机验证码登录",
-                            style: TextStyle(
-                              color: HexToColor("#FF696A"),
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          locator<NavigationService>().navigateTo(Routes.loginPhoneView);
-                        },
-                      ),
+                    BuildLoginButton(
+                      loginNameController: loginNameController,
+                      pwdController: pwdController,
                     ),
-                    Gaps.vGap40,
                   ],
                 ),
               ),
-
               // Lottie.asset('assets/animations/lottie/18582-as-the-waters-rise.json', fit: BoxFit.fitWidth),
             ),
           ),
@@ -146,15 +108,13 @@ class _LoginViewState extends State<LoginView> {
 }
 
 class BuildLoginButton extends ViewModelWidget<LoginViewModel> {
-  final GlobalKey<FormState> formKey;
-  final String phone;
-  final String password;
+  final TextEditingController loginNameController;
+  final TextEditingController pwdController;
 
   BuildLoginButton({
     Key? key,
-    required this.formKey,
-    required this.phone,
-    required this.password,
+    required this.loginNameController,
+    required this.pwdController,
   });
 
   @override
@@ -162,26 +122,17 @@ class BuildLoginButton extends ViewModelWidget<LoginViewModel> {
 
   @override
   Widget build(BuildContext context, LoginViewModel model) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.2739,
-      height: 43,
-      decoration: BoxDecoration(
-        //背景
-        color: HexToColor('#A061FD'),
-        //设置四周圆角 角度 这里的角度应该为 父Container height 的一半
-        borderRadius: BorderRadius.all(Radius.circular(43.0)),
+    return Center(
+        child: GradientButton(
+      text: 'Sign In',
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 15,
       ),
-      child: TextButton(
-        child: Text(
-          '登录',
-          style: TextStyle(fontSize: 15, color: HexToColor('#ffffff')),
-        ),
-        onPressed: () {
-          print("$phone  $password");
-          if (!formKey.currentState!.validate()) return;
-          model.loginWithPassword(phone, password);
-        },
-      ),
-    );
+      colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
+      onPressed: () async {
+        await model.loginWithPassword(loginNameController.text, pwdController.text);
+      },
+    ));
   }
 }

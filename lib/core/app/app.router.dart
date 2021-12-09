@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../ui/views/home/home_view/home.dart';
-import '../../ui/views/login/login_phone_view.dart';
 import '../../ui/views/login/login_view.dart';
 import '../../ui/views/product_detail/product_detail_view.dart';
 import '../../ui/views/register/register_view.dart';
@@ -22,7 +21,6 @@ class Routes {
   static const String updateView = '/update-view';
   static const String homeView = '/home-view';
   static const String loginView = '/login-view';
-  static const String loginPhoneView = '/login-phone-view';
   static const String registerView = '/register-view';
   static const String productDetailView = '/product-detail-view';
   static const all = <String>{
@@ -30,7 +28,6 @@ class Routes {
     updateView,
     homeView,
     loginView,
-    loginPhoneView,
     registerView,
     productDetailView,
   };
@@ -44,7 +41,6 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.updateView, page: UpdateView),
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.loginView, page: LoginView),
-    RouteDef(Routes.loginPhoneView, page: LoginPhoneView),
     RouteDef(Routes.registerView, page: RegisterView),
     RouteDef(Routes.productDetailView, page: ProductDetailView),
   ];
@@ -72,12 +68,6 @@ class StackedRouter extends RouterBase {
     LoginView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => LoginView(),
-        settings: data,
-      );
-    },
-    LoginPhoneView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => LoginPhoneView(),
         settings: data,
       );
     },

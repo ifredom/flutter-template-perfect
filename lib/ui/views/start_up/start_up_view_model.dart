@@ -39,8 +39,6 @@ class StartUpViewModel extends BaseViewModel {
     if (isLoggedIn) {
       String id = (await _localStorageService.get(StorageKeys.USER_ID_KEY)) ?? "";
       var res = await _authService.fetchUserInfo(id);
-      print("res");
-      print(res);
       if (res.data["code"] == 0) {
         User userinfo = User.fromMap(res.data["data"]);
         if (userinfo.age! > 18) {

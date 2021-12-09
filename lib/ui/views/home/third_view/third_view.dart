@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertemplate/core/utils/piano/piano_view.dart';
 
 class ThirdScreen extends StatefulWidget {
   @override
@@ -16,37 +15,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
       appBar: AppBar(
         title: Text("piano"),
       ),
-      body: _buildKeys(context),
+      body: Text("third"),
     );
-  }
-
-  Widget _buildKeys(BuildContext context) {
-    double keyWidth = 40 + (80 * 0.5);
-
-    if (MediaQuery.of(context).size.height > 600) {
-      return Flex(
-        direction: Axis.vertical,
-        children: <Widget>[
-          Flexible(
-            child: PianoView(
-              keyWidth: keyWidth,
-              showLabels: true,
-              labelsOnlyOctaves: false,
-              disableScroll: false,
-              thumbnail: true,
-            ),
-          ),
-          // Flexible(
-          //   child: PianoView(
-          //     keyWidth: keyWidth,
-          //     showLabels: false,
-          //     labelsOnlyOctaves: false,
-          //     disableScroll: false,
-          //   ),
-          // ),
-        ],
-      );
-    }
-    return Container();
   }
 }

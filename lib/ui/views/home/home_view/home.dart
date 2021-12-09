@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
-import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/constants/app_theme.dart';
 import 'package:fluttertemplate/core/constants/tab_icon_data.dart';
-import 'package:fluttertemplate/ui/widgets/bottombar/bottom_bar_view.dart';
 import 'package:fluttertemplate/ui/views/home/first_view/first_view.dart';
 import 'package:fluttertemplate/ui/views/home/forth_view/forth_view.dart';
 import 'package:fluttertemplate/ui/views/home/home_view/home_view_model.dart';
 import 'package:fluttertemplate/ui/views/home/second_view/second_view.dart';
 import 'package:fluttertemplate/ui/views/home/third_view/third_view.dart';
+import 'package:fluttertemplate/ui/widgets/bottombar/bottom_bar_view.dart';
+import 'package:stacked/stacked.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -16,8 +15,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
-  final _homeViewModel = locator<HomeViewModel>();
-
   late AnimationController animationController;
 
   late List<TabIconData> tabIconsList;
@@ -51,7 +48,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     print("home build");
     return ViewModelBuilder<HomeViewModel>.nonReactive(
-      viewModelBuilder: () => _homeViewModel,
+      viewModelBuilder: () => HomeViewModel(),
       onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) => Scaffold(
         body: Container(
@@ -80,7 +77,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   }
 
   Future<bool> getData() async {
-    return Future<dynamic>.delayed(const Duration(milliseconds: 200)).then((value) => true);
+    return Future.delayed(const Duration(milliseconds: 100)).then((value) => true);
   }
 
   Widget bottomBar() {
