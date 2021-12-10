@@ -60,7 +60,6 @@ dependencies:
 
   json_annotation: 4.4.0
   flutter_local_notifications: 9.1.4
-  flutter_midi: 1.1.0
 
 dev_dependencies:
   flutter_test:
