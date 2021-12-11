@@ -28,7 +28,7 @@ void main() async {
     await setupLocator();
 
     // Set full screen (设置全屏)
-    await SystemChrome.setEnabledSystemUIOverlays([
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
       // SystemUiOverlay.top,
       // SystemUiOverlay.bottom,
     ]);

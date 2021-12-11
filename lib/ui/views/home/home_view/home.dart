@@ -16,8 +16,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
-  final _homeViewModel = locator<HomeViewModel>();
-
   late AnimationController animationController;
 
   late List<TabIconData> tabIconsList;
@@ -51,7 +49,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     print("home build");
     return ViewModelBuilder<HomeViewModel>.nonReactive(
-      viewModelBuilder: () => _homeViewModel,
+      viewModelBuilder: () => HomeViewModel(),
       onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) => Scaffold(
         body: Container(
