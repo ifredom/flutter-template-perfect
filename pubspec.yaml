@@ -60,11 +60,17 @@ dependencies:
 
   json_annotation: 4.4.0
   flutter_local_notifications: 9.1.4
+  tonic: 0.2.4
+  flutter_midi:    
+    git:
+      url:
+        https://github.com/rodydavis/flutter_midi
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  flutter_lints: ^1.0.0
   build_runner: ^2.0.1
   json_serializable: 6.1.1
   built_value_generator: ^8.0.6

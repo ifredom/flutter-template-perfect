@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertemplate/ui/views/home/first_view/title_view.dart';
 
 import '../plugins/midi/midi.dart';
 import 'piano_octave.dart';

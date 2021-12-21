@@ -126,7 +126,7 @@ class BuildLoginButton extends ViewModelWidget<LoginViewModel> {
         child: GradientButton(
       text: 'Sign In',
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black,
         fontSize: 15,
       ),
       colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
