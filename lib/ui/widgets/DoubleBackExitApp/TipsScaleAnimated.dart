@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/animation.dart';
 
 class TipsScaleAnimated extends AnimatedWidget {
   final Widget child;

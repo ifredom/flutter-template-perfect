@@ -37,7 +37,9 @@ class TitleView extends StatelessWidget {
               highlightColor: Colors.transparent,
               borderRadius: BorderRadius.all(Radius.circular(4.0)),
               onTap: () {
-                this.callback!();
+                if (this.callback != null) {
+                  this.callback!();
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),

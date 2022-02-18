@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
-import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/constants/app_theme.dart';
-import 'package:fluttertemplate/core/constants/tab_icon_data.dart';
-import 'package:fluttertemplate/ui/widgets/bottombar/bottom_bar_view.dart';
+import 'package:fluttertemplate/ui/widgets/bottombar/tab_icon_data.dart';
 import 'package:fluttertemplate/ui/views/home/first_view/first_view.dart';
 import 'package:fluttertemplate/ui/views/home/forth_view/forth_view.dart';
 import 'package:fluttertemplate/ui/views/home/home_view/home_view_model.dart';
 import 'package:fluttertemplate/ui/views/home/second_view/second_view.dart';
 import 'package:fluttertemplate/ui/views/home/third_view/third_view.dart';
+import 'package:fluttertemplate/ui/widgets/bottombar/bottom_bar_view.dart';
+import 'package:stacked/stacked.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -18,7 +17,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late AnimationController animationController;
 
-  late List<TabIconData> tabIconsList;
+  List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   Widget tabBody = Container(
     color: AppTheme.background,
@@ -27,13 +26,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   void initState() {
     animationController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
-
-    tabIconsList = TabIconData.tabIconsList;
-
-    tabIconsList.forEach((TabIconData tab) {
-      tab.isSelected = false;
-    });
-    tabIconsList[0].isSelected = true;
 
     tabBody = FirstScreen(animationController: animationController);
     super.initState();
@@ -51,25 +43,27 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       viewModelBuilder: () => HomeViewModel(),
       onModelReady: (model) => model.onModelReady(),
-      builder: (context, model, child) => Scaffold(
-        body: Container(
-          color: AppTheme.background,
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: FutureBuilder<bool>(
-              future: getData(),
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                if (!snapshot.hasData) {
-                  return const SizedBox();
-                } else {
-                  return Stack(
-                    children: <Widget>[
-                      tabBody,
-                      bottomBar(),
-                    ],
-                  );
-                }
-              },
+      builder: (context, model, child) => SafeArea(
+        child: Scaffold(
+          body: Container(
+            color: AppTheme.background,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: FutureBuilder<bool>(
+                future: getData(),
+                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  if (!snapshot.hasData) {
+                    return const SizedBox();
+                  } else {
+                    return Stack(
+                      children: <Widget>[
+                        tabBody,
+                        bottomBar(),
+                      ],
+                    );
+                  }
+                },
+              ),
             ),
           ),
         ),

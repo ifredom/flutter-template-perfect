@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertemplate/core/constants/app_theme.dart';
-import 'package:fluttertemplate/core/constants/tab_icon_data.dart';
+import 'package:fluttertemplate/ui/widgets/bottombar/tab_icon_data.dart';
 import 'package:fluttertemplate/core/utils/common/color_utils.dart';
 
 class BottomBarView extends StatefulWidget {

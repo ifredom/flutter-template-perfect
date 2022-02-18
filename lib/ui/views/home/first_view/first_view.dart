@@ -55,15 +55,16 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
     listViews.add(
       TitleView(
         titleTxt: '油闷大虾',
-        subTxt: '七星酒店',
+        subTxt: '北京大酒店',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
         callback: () {
-          Map props = Map();
-          props["title"] = "First Screen 数据 1";
-          props["description"] = "这是一条传递过来的数据";
-          _navigationService.navigateTo(Routes.productDetailView, arguments: props);
+          Map post = Map();
+          post["title"] = "油闷大虾";
+          post["description"] = "油焖大虾是山东省的一道特色名菜，属于鲁菜，使用鲁菜特有的油焖技法。";
+
+          _navigationService.navigateTo(Routes.productDetailView, arguments: ProductDetailViewArguments(post: post));
         },
       ),
     );
@@ -71,25 +72,39 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
     listViews.add(
       TitleView(
         titleTxt: '水煮肉片',
-        subTxt: '苍蝇馆',
+        subTxt: '花园大酒店',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
+        callback: () {
+          Map post = Map();
+          post["title"] = "水煮肉片";
+          post["description"] = "水煮肉片是以猪里脊肉为主料的一道地方新创名菜，起源于自贡，发扬于西南，属于川菜中著名的家常菜";
+
+          _navigationService.navigateTo(Routes.productDetailView, arguments: ProductDetailViewArguments(post: post));
+        },
       ),
     );
     listViews.add(
       TitleView(
         titleTxt: '啤酒鸭',
-        subTxt: '宿舍',
+        subTxt: '民宿',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
+        callback: () {
+          Map post = Map();
+          post["title"] = "啤酒鸭";
+          post["description"] = "啤酒鸭是一道以鸭子、啤酒为主料的特色佳肴，据传起源于清代";
+
+          _navigationService.navigateTo(Routes.productDetailView, arguments: ProductDetailViewArguments(post: post));
+        },
       ),
     );
   }
 
   Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 50));
+    await Future<dynamic>.delayed(const Duration(milliseconds: 10));
     return Future.value(true);
   }
 

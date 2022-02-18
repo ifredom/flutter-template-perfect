@@ -18,7 +18,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   // 高度
   final double height;
   // 默认显示左侧按钮
-  final bool defaultLeft;
+  final bool showBackButton;
   // 左侧widget
   final Widget? frontWidget;
   // 右侧widget
@@ -36,7 +36,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   // 背景视图
   final Widget? background;
   // 背景颜色数组,支持渐变色
-  final List<Color>? colors;
+  final List<Color>? backgroundColors;
 
   //默认 _actionW * count 如果超过需要设置
   final double? actionsMaxW;
@@ -45,11 +45,11 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.height = 50,
     this.opacity = 1.0,
-    this.colors,
     this.style,
+    this.backgroundColors,
     this.background,
     this.middle,
-    this.defaultLeft = true,
+    this.showBackButton = false,
     this.frontWidget,
     this.trailingWidget,
     this.actionsMaxW,
@@ -62,7 +62,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     double _actionsMaxW = 94.0;
-    List<Color> _widgetColors = this.colors ?? [];
+    List<Color> _widgetColors = this.backgroundColors ?? [HexToColor("#544a7d"), HexToColor("#ffd452")];
     Color _backgroundColors;
     LinearGradient _linearGradient;
 
@@ -86,12 +86,17 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
     // 左侧组件
     Widget? _frontWidget = this.frontWidget;
-    if (null == _frontWidget && defaultLeft) {
+    if (null == _frontWidget && showBackButton) {
       _frontWidget = this.backImageMode == BackImageMode.light
-          ? Image.asset(
-              "assets/images/back2.png",
-              fit: BoxFit.fitHeight,
-              height: this.preferredSize.height,
+          ? GestureDetector(
+              child: Image.asset(
+                "assets/images/back2.png",
+                fit: BoxFit.fitHeight,
+                height: this.preferredSize.height,
+              ),
+              onTap: () {
+                locator<NavigationService>().back();
+              },
             )
           : Image.asset(
               "assets/images/back.png",

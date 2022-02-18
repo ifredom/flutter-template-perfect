@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:fluttertemplate/core/constants/component_state.dart';
 import 'package:fluttertemplate/core/localization/setup_local.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertemplate/core/utils/res/locale_keys.dart';
 

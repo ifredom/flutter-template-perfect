@@ -32,7 +32,7 @@ class LoginViewModel extends BaseViewModel with Validators {
   Future<void> loginWithPassword(String username, String password) async {
     _isBusy = true;
     setBusy(_isBusy);
-    Future.delayed(Duration(milliseconds: 500), () async {
+    Future.delayed(Duration(milliseconds: 100), () async {
       _isBusy = false;
       setBusy(_isBusy);
       await _navigationService.replaceWith(Routes.homeView);
@@ -49,16 +49,14 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   /// 是否新用户
   Future queryIsNewUser(String mobile, String id) async {
-    setBusy(true);
-
     var res = await _authService.fetchIsNewUser(mobile, id);
-    setBusy(false);
+
     if (res.data["code"] == 0) {
       return res.data["data"] != "";
     } else {
-      setBusy(false);
       Fluttertoast.showToast(msg: res.data["msg"]);
     }
+    notifyListeners();
   }
 
   Future saveUserInfo(dynamic res, String mobile) async {

@@ -28,7 +28,7 @@ class StartUpViewModel extends BaseViewModel {
 
     bool forceUpdateRequired = await _authService.isUpdateRequired();
 
-    if (forceUpdateRequired is bool && forceUpdateRequired) {
+    if (forceUpdateRequired && forceUpdateRequired) {
       print('app需要更新，前往更新页面');
       _navigationService.replaceWith(Routes.updateView);
       return;

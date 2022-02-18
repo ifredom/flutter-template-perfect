@@ -4,7 +4,6 @@ import 'package:fluttertemplate/core/constants/app_theme.dart';
 import 'package:fluttertemplate/core/localization/setup_local.dart';
 import 'package:fluttertemplate/core/managers/lifecycle_manager.dart';
 import 'package:fluttertemplate/core/managers/restart_manager.dart';
-import 'package:get/get.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class RootComponent extends StatefulWidget {

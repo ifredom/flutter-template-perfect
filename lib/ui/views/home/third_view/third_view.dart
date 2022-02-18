@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertemplate/ui/widgets/appbar/custom_appbar.dart';
 
 class ThirdScreen extends StatefulWidget {
   @override
@@ -12,19 +13,12 @@ class _ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("piano"),
-      ),
-      body: _buildKeys(context),
+      appBar: CustomAppbar(title: "ThirdScreen"),
+      body: buildContent(),
     );
   }
 
-  Widget _buildKeys(BuildContext context) {
-    double keyWidth = 40 + (80 * 0.5);
-
-    if (MediaQuery.of(context).size.height > 600) {
-      return Text("third");
-    }
-    return Container();
+  Widget buildContent() {
+    return Center(child: Text("ThirdScreen"));
   }
 }

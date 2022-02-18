@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertemplate/core/utils/common/color_utils.dart';
 
 class AppTheme {
   AppTheme._();
@@ -20,7 +21,7 @@ class AppTheme {
     return themeMode == 'light' ? primaryMaterialTheme : darkMaterialTheme;
   }
 
-  static const Color background = Color(0xFFF2F3F8);
+  static Color background = HexToColor("#f3f9f1");
   static const Color scaffoldBackgroundColor = Color(0xFFEDF0F2); // 整体的scaffold背景颜色
   static const Color iconColor = Color(0xFFEDF0F2);
   static const Color primaryIconColor = Color(0xFFEDF0F2); // 导航栏按钮颜色
@@ -45,9 +46,8 @@ class AppTheme {
   static ThemeData themData = ThemeData(
     textTheme: textTheme,
     iconTheme: iconTheme,
-    // primaryIconTheme 导航栏按钮颜色
-    primaryIconTheme: iconTheme,
-    accentColor: Colors.grey, // 选中颜色
+    primaryIconTheme: iconTheme, // primaryIconTheme 导航栏按钮颜色
+    colorScheme: ColorScheme.highContrastLight(), // 选中颜色colorScheme.secondary
     primaryColor: background,
     scaffoldBackgroundColor: scaffoldBackgroundColor,
   );
@@ -93,7 +93,7 @@ class AppTheme {
   );
   static const IconThemeData iconTheme = IconThemeData(
     size: 32,
-    color: iconColor,
+    color: Colors.red,
     opacity: 0.9,
   );
 }

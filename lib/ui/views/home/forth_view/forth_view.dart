@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertemplate/core/constants/app_theme.dart';
+import 'package:fluttertemplate/ui/widgets/appbar/custom_appbar.dart';
 
 class ForthScreen extends StatefulWidget {
   @override
@@ -9,16 +9,10 @@ class ForthScreen extends StatefulWidget {
 class _ForthScreenState extends State<ForthScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppTheme.background,
-      child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Container(
-            color: Color.fromRGBO(124, 124, 124, 0.8),
-            child: Center(
-              child: Text("Me"),
-            ),
-          )),
+    return Scaffold(
+      appBar: CustomAppbar(title: "ForthScreen"),
+      backgroundColor: Colors.transparent,
+      body: Center(child: Text("ForthScreen")),
     );
   }
 }

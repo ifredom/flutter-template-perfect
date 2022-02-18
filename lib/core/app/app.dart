@@ -18,7 +18,6 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 //  Using StackedApp for state management, generating routes and dependency injection.
-//  需要預解析的 shared_preferences service 报错，所以不采用自动生成
 @StackedApp(
   routes: [
     MaterialRoute(page: StartUpView, initial: true),
@@ -27,11 +26,11 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: LoginView),
     MaterialRoute(page: LoginPhoneView),
     MaterialRoute(page: RegisterView),
-    MaterialRoute(page: ProductDetailView)
+    MaterialRoute(page: ProductDetailView),
   ],
   dependencies: [
     // Lazy singletons
-    LazySingleton(classType: NavigationService),
+    LazySingleton(classType: NavigationService, environments: {Environment.dev}),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: Connectivity),

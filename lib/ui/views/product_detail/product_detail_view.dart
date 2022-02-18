@@ -19,34 +19,45 @@ class _ProductDetailViewState extends State<ProductDetailView> with TickerProvid
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(
-        title: '详情页面',
-      ),
-      backgroundColor: Colors.transparent,
-      body: getMainListViewUI(),
+      appBar: CustomAppbar(title: '详情页面', showBackButton: true),
+      body: buildMainListView(),
     );
   }
 
-  Widget getMainListViewUI() {
+  Widget buildMainListView() {
     return Container(
-      color: HexToColor("#FFFFFF"),
-      child: ListView.builder(
-        itemCount: 20,
-        scrollDirection: Axis.vertical,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            color: HexToColor("#88ADA6"),
-            child: Column(
-              children: [
-                Text(widget.post["title"]),
-                Gaps.vGap30,
-                Text(widget.post["description"]),
-              ],
-            ),
-          );
-        },
-      ),
+      height: double.infinity,
+      child: ListView.separated(
+          itemCount: 20,
+          scrollDirection: Axis.vertical,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              padding: EdgeInsets.all(20),
+              color: HexToColor("#88ADA6"),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.post["title"],
+                        style: TextStyle(color: HexToColor("#544a7d")),
+                      ),
+                      Text(
+                        widget.post["description"],
+                        style: TextStyle(color: HexToColor("#ffd452")),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider(
+              height: 1,
+            );
+          }),
     );
   }
 }
