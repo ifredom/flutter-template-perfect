@@ -72,7 +72,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   }
 
   Future<bool> getData() async {
-    return Future<dynamic>.delayed(const Duration(milliseconds: 200)).then((value) => true);
+    return Future.value(true);
   }
 
   Widget bottomBar() {

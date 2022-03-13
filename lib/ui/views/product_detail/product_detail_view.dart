@@ -34,20 +34,19 @@ class _ProductDetailViewState extends State<ProductDetailView> with TickerProvid
             return Container(
               padding: EdgeInsets.all(20),
               color: HexToColor("#88ADA6"),
-              child: Column(
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        widget.post["title"],
-                        style: TextStyle(color: HexToColor("#544a7d")),
-                      ),
-                      Text(
-                        widget.post["description"],
-                        style: TextStyle(color: HexToColor("#ffd452")),
-                      ),
-                    ],
+                  Text(
+                    widget.post["title"],
+                    maxLines: 5,
+                    style: TextStyle(color: HexToColor("#544a7d")),
+                  ),
+                  Text(
+                    widget.post["description"],
+                    maxLines: 5,
+                    style: TextStyle(color: HexToColor("#ffd452")),
                   ),
                 ],
               ),

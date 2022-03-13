@@ -79,7 +79,7 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
         callback: () {
           Map post = Map();
           post["title"] = "水煮肉片";
-          post["description"] = "水煮肉片是以猪里脊肉为主料的一道地方新创名菜，起源于自贡，发扬于西南，属于川菜中著名的家常菜";
+          post["description"] = "水煮肉片是以猪里脊肉为主料的一道地方新创名菜，起源于自贡";
 
           _navigationService.navigateTo(Routes.productDetailView, arguments: ProductDetailViewArguments(post: post));
         },
