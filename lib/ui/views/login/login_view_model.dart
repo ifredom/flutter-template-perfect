@@ -22,21 +22,29 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   bool _isBusy = false;
 
+  String _testString = "first";
+  String get testString => _testString;
+
   String get mobile => user.mobile ?? '';
 
   bool get isNewUser => _isNewUser;
 
   bool get isBusy => _isBusy;
 
+  int _count = 0;
+  int get count => _count;
+
   /// 密码登录
   Future<void> loginWithPassword(String username, String password) async {
-    _isBusy = true;
-    setBusy(_isBusy);
-    Future.delayed(Duration(milliseconds: 100), () async {
-      _isBusy = false;
-      setBusy(_isBusy);
-      await _navigationService.replaceWith(Routes.homeView);
-    });
+    _count++;
+    notifyListeners();
+    // Future.delayed(Duration(milliseconds: 100), () async {
+    //   _isBusy = true;
+
+    //   _testString = "second";
+    //   // await _navigationService.replaceWith(Routes.homeView);
+    //   notifyListeners();
+    // });
   }
 
   /// 验证码登录
@@ -44,7 +52,9 @@ class LoginViewModel extends BaseViewModel with Validators {
     setBusy(true);
     var res = await _authService.signUpWithAuthcode(mobile, authCode);
     setBusy(false);
-    await saveUserInfo(res, mobile);
+
+    _testString = "second";
+    // await saveUserInfo(res, mobile);
   }
 
   /// 是否新用户
