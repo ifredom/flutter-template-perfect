@@ -1,8 +1,8 @@
-# template(模板)
+# flutter MVVM template[中文](./README_ZH.md)
 
-A new Flutter project template with Null-safety.(flutter 完整商用项目模板).
+A new Flutter project template with Null-safety.
 
-## Getting Starter(开始)
+## Getting Starter
 
 ```bash
 # dev
@@ -15,37 +15,37 @@ A new Flutter project template with Null-safety.(flutter 完整商用项目模�
 > flutter build apk
 ```
 
-### Core functions（核心功能）
+### Core functions
 
-- stacked (MVVM 架构)
-- route （路由）基于 `auto_route` ，由 **build_runner** 自动生成 ，
-- service （服务）基于 `get_it, stacked_service`，内置十种基础懒加载服务 [NavigationService,DialogService,BottomSheetService,SnackbarService] [ConnectivityService,OpenLinkService,ShareService,FileService,LocalStorageService...]
-- model （模型）基于 `built_value` ，由 **build_runner** 自动生成
-- localization （国际化）基于 `flutter_localizations`，内置中英文 [en,zh]，只需在 **assets/lang** 定义
-- common utils（常用函数）位于 utils，内置常见颜色，尺寸[Colour,Distance,validators]
+- `stacked` : MVVM architecture
+- `route` base on `auto_route`, Generate using **build_runner**
+- `service` base on `get_it, stacked_service`, for example [NavigationService,DialogService,BottomSheetService,SnackbarService] [ConnectivityService,OpenLinkService,ShareService,FileService,LocalStorageService...]
+- `model` base on `built_value` ，Generate using **build_runner**
+- `localization` base on `flutter_localizations`，Built in Chinese and English [en,zh]，Define in **assets/lang**
+- `common utils` be located **core/utils**，Built in common colors，size[Colour,Distance,validators]
 
-### 1. [stacked (MVVM 架构)](https://pub.flutter-io.cn/packages/stacked)
+### 1. [stacked](https://pub.flutter-io.cn/packages/stacked)
 
-- A view file controls UI and a model file controls all data（一个文件控制 Ui，一个文件控制所有数据） eg: **XX_view.dart && XX_view_model.dart**
+- A view file controls UI and a model file controls all data. eg: **XX_view.dart && XX_view_model.dart**
 
-### 2. [service (服务)](https://pub.flutter-io.cn/packages/get_it)
+### 2. [service ](https://pub.flutter-io.cn/packages/get_it)
 
-- NavigationService： Router control,router listen (路由服务，控制路由跳转，数据传输，路由监听。路由由指令自动生成。)
-- DialogService: Dialog (对话框服务，默认对话框，可定制 UI)
-- BottomSheetService： BottomSheet (应用底部提示框服务，可定制 UI)
-- SnackbarService： Snackbar (应用顶部提示框服务，可定制 UI)
+- NavigationService： Router control,router listen
+- DialogService: Dialog
+- BottomSheetService： BottomSheet
+- SnackbarService： Snackbar
 
-- ConnectivityService ：Connect to the service. Whether the application is in the foreground or zoomed to the background. Monitor the application lifecycle.(连接服务。应用是否处于前台或缩放到后台。监听应用生命周期。) . use `connectivity_plus` package
+- ConnectivityService ：Connect to the service. Whether the application is in the foreground or zoomed to the background. Monitor the application lifecycle. use `connectivity_plus` package
 - OpenLinkService : launching a URL . use `url_launcher` package
 - ShareService : Share . use `share` package
-- FileService : File upload, download and save service(文件上传下载保存服务). use `path_provider` package
-- LocalStorageService : Local storage service(本地存储服务). use `shared_preferences` package
-- AppSettingsService : AppSetting(APP 设置服务). use `app_settings` package
-- EnvironmentService : Environment setting(开发/产品 环境服务). use `flutter_dotenv` package
-- device_info_plus : get device info (设备信息服务). use `device_info_plus` package
-- KeyboardService : Keyboard(键盘服务). use `flutter_keyboard_visibility` package
-- HttpService : Http request (API 接口服务，对 dio 进行封装，极易调用). use `dio` package
-- StoppableService : Stop called Service (停止服务. 停用已经启用得服务)
+- FileService : File upload, download and save service. use `path_provider` package
+- LocalStorageService : Local storage service. use `shared_preferences` package
+- AppSettingsService : AppSetting. use `app_settings` package
+- EnvironmentService : Environment setting. use `flutter_dotenv` package
+- device_info_plus : get device info . use `device_info_plus` package
+- KeyboardService : Keyboard. use `flutter_keyboard_visibility` package
+- HttpService : Http request. use `dio` package
+- StoppableService : Stop called Service
 
 <!--
 
@@ -59,9 +59,9 @@ A new Flutter project template with Null-safety.(flutter 完整商用项目模�
 - Webview
 - MusicXML Score : render, play ( musicxml 加载五线谱: 渲染，播放 ) -->
 
-## Automatic generation model (自动生成模型)
+## Automatic generation model
 
-> 在 cmd 中，导航到项目根目录下运行指令：
+> Run in the project root directory：
 
 ```bash
 > flutter packages pub run build_runner build --delete-conflicting-outputs

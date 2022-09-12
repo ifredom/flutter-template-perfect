@@ -1,6 +1,6 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertemplate/core/constants/animations.dart';
+import 'package:rive/rive.dart';
 
 class LoadingAnimation extends StatelessWidget {
   const LoadingAnimation({Key? key}) : super(key: key);
@@ -9,10 +9,7 @@ class LoadingAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      child: FlareActor(
-        Animations.loader,
-        animation: Animations.loader_name,
-      ),
+      child: RiveAnimation.asset(Animations.loader),
     );
   }
 }

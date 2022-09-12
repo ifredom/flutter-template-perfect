@@ -1,4 +1,4 @@
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 /// wrapper around [Share] package
 class ShareService {

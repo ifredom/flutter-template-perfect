@@ -37,14 +37,7 @@ class LoginViewModel extends BaseViewModel with Validators {
   /// 密码登录
   Future<void> loginWithPassword(String username, String password) async {
     _count++;
-    notifyListeners();
-    // Future.delayed(Duration(milliseconds: 100), () async {
-    //   _isBusy = true;
-
-    //   _testString = "second";
-    //   // await _navigationService.replaceWith(Routes.homeView);
-    //   notifyListeners();
-    // });
+    locator<NavigationService>().navigateTo(Routes.homeView);
   }
 
   /// 验证码登录

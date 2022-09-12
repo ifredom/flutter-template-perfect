@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertemplate/ui/widgets/appbar/custom_appbar.dart';
 
 class SecondScreen extends StatefulWidget {
   @override

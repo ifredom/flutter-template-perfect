@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:android_id/android_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fluttertemplate/core/app/app.logger.dart';
 
@@ -25,8 +26,10 @@ class HardwareInfoService {
       _operatingSystem = 'iOS';
       _device = iosInfo.utsname.machine!;
     } else if (Platform.isAndroid) {
+      const _androidIdPlugin = AndroidId();
+      _udid = (await _androidIdPlugin.getId())!;
+
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      _udid = androidInfo.androidId!;
       _operatingSystem = 'Android';
       _device = androidInfo.model!;
     }

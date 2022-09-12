@@ -109,7 +109,7 @@ class _LoginViewState extends State<LoginView> {
                   ],
                 ),
               ),
-
+        
               // Lottie.asset('assets/animations/lottie/18582-as-the-waters-rise.json', fit: BoxFit.fitWidth),
             ),
           ),
