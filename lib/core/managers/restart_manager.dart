@@ -5,21 +5,21 @@ import 'package:flutter/material.dart';
 class RestartManager extends StatefulWidget {
   final Widget child;
 
-  RestartManager({Key? key, required this.child}) : super(key: key);
+  const RestartManager({super.key, required this.child});
 
   static restartApp(BuildContext context) {
     // https://stackoverflow.com/questions/59448102/ancestorstateoftype-is-deprecated-use-findancestorstateoftype-instead
 
-    final _RestartWidgetState? state = context.findAncestorStateOfType<_RestartWidgetState>();
+    final RestartWidgetState? state = context.findAncestorStateOfType<RestartWidgetState>();
 
     state!.restartApp();
   }
 
   @override
-  _RestartWidgetState createState() => _RestartWidgetState();
+  RestartWidgetState createState() => RestartWidgetState();
 }
 
-class _RestartWidgetState extends State<RestartManager> {
+class RestartWidgetState extends State<RestartManager> {
   Key key = UniqueKey();
 
   void restartApp() {

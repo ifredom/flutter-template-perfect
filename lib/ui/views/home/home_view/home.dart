@@ -10,11 +10,13 @@ import 'package:fluttertemplate/ui/widgets/bottombar/bottom_bar_view.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatefulWidget {
+  const HomeView({super.key});
+
   @override
-  _HomeViewState createState() => _HomeViewState();
+  HomeViewState createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
+class HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late AnimationController animationController;
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -42,7 +44,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     print("home build");
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       viewModelBuilder: () => HomeViewModel(),
-      onModelReady: (model) => model.onModelReady(),
+      onViewModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) => SafeArea(
         child: Scaffold(
           body: Container(

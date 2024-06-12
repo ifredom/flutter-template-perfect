@@ -8,8 +8,12 @@ class LocalStorageService {
   static Future<LocalStorageService> getInstance() async {
     _instance ??= LocalStorageService();
     _preferences ??= await SharedPreferences.getInstance();
-    return _instance!;
+
+    return Future.value(_instance);
+    // return _instance!;
   }
+
+  Future<void> init() async => await getInstance();
 
   bool get hasNotificationsEnabled => get<bool>(notifications_key) ?? false;
   set hasNotificationsEnabled(bool value) => set(notifications_key, value);

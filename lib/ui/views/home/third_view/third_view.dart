@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:fluttertemplate/ui/widgets/appbar/custom_appbar.dart';
 
 class ThirdScreen extends StatefulWidget {
+  const ThirdScreen({super.key});
+
   @override
-  _ThirdScreenState createState() => _ThirdScreenState();
+  ThirdScreenState createState() => ThirdScreenState();
 }
 
-class _ThirdScreenState extends State<ThirdScreen> {
+class ThirdScreenState extends State<ThirdScreen> {
   double get keyWidth => 80 + (80 * _widthRatio);
-  double _widthRatio = 0.0;
+  final double _widthRatio = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,6 @@ class _ThirdScreenState extends State<ThirdScreen> {
   }
 
   Widget buildContent() {
-    return Center(child: Text("ThirdScreen"));
+    return const Center(child: Text("ThirdScreen"));
   }
 }

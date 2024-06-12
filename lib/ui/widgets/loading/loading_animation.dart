@@ -3,11 +3,11 @@ import 'package:fluttertemplate/core/constants/animations.dart';
 import 'package:rive/rive.dart';
 
 class LoadingAnimation extends StatelessWidget {
-  const LoadingAnimation({Key? key}) : super(key: key);
+  const LoadingAnimation({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return const SizedBox(
       height: 50,
       child: RiveAnimation.asset(Animations.loader),
     );

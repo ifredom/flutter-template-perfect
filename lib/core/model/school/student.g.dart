@@ -40,17 +40,17 @@ class _$StudentModelSerializer implements StructuredSerializer<StudentModel> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'name':
           result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'level':
           result.level = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'students':
           result.students.replace(serializers.deserialize(value,
@@ -74,14 +74,15 @@ class _$StudentModel extends StudentModel {
   final BuiltList<StudentModel> students;
 
   factory _$StudentModel([void Function(StudentModelBuilder)? updates]) =>
-      (new StudentModelBuilder()..update(updates)).build();
+      (new StudentModelBuilder()..update(updates))._build();
 
   _$StudentModel._(
       {required this.name, required this.level, required this.students})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, 'StudentModel', 'name');
-    BuiltValueNullFieldError.checkNotNull(level, 'StudentModel', 'level');
-    BuiltValueNullFieldError.checkNotNull(students, 'StudentModel', 'students');
+    BuiltValueNullFieldError.checkNotNull(name, r'StudentModel', 'name');
+    BuiltValueNullFieldError.checkNotNull(level, r'StudentModel', 'level');
+    BuiltValueNullFieldError.checkNotNull(
+        students, r'StudentModel', 'students');
   }
 
   @override
@@ -102,13 +103,17 @@ class _$StudentModel extends StudentModel {
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, name.hashCode), level.hashCode), students.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, level.hashCode);
+    _$hash = $jc(_$hash, students.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('StudentModel')
+    return (newBuiltValueToStringHelper(r'StudentModel')
           ..add('name', name)
           ..add('level', level)
           ..add('students', students))
@@ -159,15 +164,17 @@ class StudentModelBuilder
   }
 
   @override
-  _$StudentModel build() {
+  StudentModel build() => _build();
+
+  _$StudentModel _build() {
     _$StudentModel _$result;
     try {
       _$result = _$v ??
           new _$StudentModel._(
               name: BuiltValueNullFieldError.checkNotNull(
-                  name, 'StudentModel', 'name'),
+                  name, r'StudentModel', 'name'),
               level: BuiltValueNullFieldError.checkNotNull(
-                  level, 'StudentModel', 'level'),
+                  level, r'StudentModel', 'level'),
               students: students.build());
     } catch (_) {
       late String _$failedField;
@@ -176,7 +183,7 @@ class StudentModelBuilder
         students.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'StudentModel', _$failedField, e.toString());
+            r'StudentModel', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -185,4 +192,4 @@ class StudentModelBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

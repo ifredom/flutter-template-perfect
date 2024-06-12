@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart' show DioError, DioErrorType;
+import 'package:dio/dio.dart' show DioException, DioExceptionType;
 import 'package:flutter/widgets.dart';
 import 'package:fluttertemplate/core/app/app.router.dart';
 import 'package:fluttertemplate/core/app/app.locator.dart';
@@ -14,9 +14,9 @@ import 'code.dart';
 import 'result_data.dart';
 
 class ExceptionHandle {
-  static Future<ResultData> handleDioException(DioError error) async {
+  static Future<ResultData> handleDioException(DioException error) async {
     // http网络请求成功，服务器返回的信息数据
-    if (error.type == DioErrorType.other || error.type == DioErrorType.response) {
+    if (error.type == DioExceptionType.unknown || error.type == DioExceptionType.badResponse) {
       dynamic e = error.error;
 
       if (e is SocketException) {
@@ -37,11 +37,11 @@ class ExceptionHandle {
       }
 
       return ResultData('服务器异常！', true, Code.http_error_code);
-    } else if (error.type == DioErrorType.connectTimeout ||
-        error.type == DioErrorType.sendTimeout ||
-        error.type == DioErrorType.receiveTimeout) {
+    } else if (error.type == DioExceptionType.connectionTimeout ||
+        error.type == DioExceptionType.sendTimeout ||
+        error.type == DioExceptionType.receiveTimeout) {
       return ResultData('连接超时！', false, Code.connect_timeout_code);
-    } else if (error.type == DioErrorType.cancel) {
+    } else if (error.type == DioExceptionType.cancel) {
       return ResultData('取消请求', false, Code.cancel_error_code);
     } else {
       return ResultData('未知异常', false, Code.unknown_error_code);

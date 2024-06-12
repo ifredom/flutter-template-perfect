@@ -20,7 +20,7 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   bool _isNewUser = true; // 是否新用户
 
-  bool _isBusy = false;
+  final bool _isBusy = false;
 
   String _testString = "first";
   String get testString => _testString;
@@ -29,6 +29,7 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   bool get isNewUser => _isNewUser;
 
+  @override
   bool get isBusy => _isBusy;
 
   int _count = 0;
@@ -44,6 +45,7 @@ class LoginViewModel extends BaseViewModel with Validators {
   Future<void> loginWithVcode(String mobile, String authCode) async {
     setBusy(true);
     var res = await _authService.signUpWithAuthcode(mobile, authCode);
+    print(res);
     setBusy(false);
 
     _testString = "second";

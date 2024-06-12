@@ -5,7 +5,7 @@ class AppSettingsService {
   final _log = getLogger('AppSettingsServiceImpl');
 
   Future<void> openAppSettings() {
-    _log.v('openAppSettings');
+    _log.t('openAppSettings');
     return AppSettings.openAppSettings();
   }
 }

@@ -13,9 +13,12 @@ import 'package:fluttertemplate/ui/views/product_detail/product_detail_view.dart
 import 'package:fluttertemplate/ui/views/register/register_view.dart';
 import 'package:fluttertemplate/ui/views/start_up/start_up_view.dart';
 import 'package:fluttertemplate/ui/views/update/update_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertemplate/ui/widgets/dialogs/info_alert/info_alert_dialog.dart';
+import 'package:fluttertemplate/ui/widgets/notice/notice_sheet.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+// document: https://stacked.filledstacks.com/docs/in-depth/service-locator
+// example: https://github.com/Stacked-Org/stacked/blob/9f88465576f3e40c22c82da0500704919476a47a/example/router_example/lib/app/app.dart#L82
 
 //  Using StackedApp for state management, generating routes and dependency injection.
 @StackedApp(
@@ -30,7 +33,7 @@ import 'package:stacked_services/stacked_services.dart';
   ],
   dependencies: [
     // Lazy singletons
-    LazySingleton(classType: NavigationService, environments: {Environment.dev}),
+    LazySingleton(classType: NavigationService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: Connectivity),
@@ -44,10 +47,15 @@ import 'package:stacked_services/stacked_services.dart';
     // singletons
 
     // Presolve
-    Presolve(
-      classType: LocalStorageService,
-      presolveUsing: SharedPreferences.getInstance,
-    ),
+    InitializableSingleton(classType: LocalStorageService),
+  ],
+  bottomsheets: [
+    StackedBottomsheet(classType: NoticeSheet),
+    // @stacked-bottom-sheet
+  ],
+  dialogs: [
+    StackedDialog(classType: InfoAlertDialog),
+    // @stacked-dialog
   ],
   logger: StackedLogger(),
 )

@@ -36,13 +36,13 @@ class _$SchoolModelSerializer implements StructuredSerializer<SchoolModel> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'name':
           result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'teacher':
           result.teacher.replace(serializers.deserialize(value,
@@ -64,11 +64,11 @@ class _$SchoolModel extends SchoolModel {
   final BuiltList<TeacherModel> teacher;
 
   factory _$SchoolModel([void Function(SchoolModelBuilder)? updates]) =>
-      (new SchoolModelBuilder()..update(updates)).build();
+      (new SchoolModelBuilder()..update(updates))._build();
 
   _$SchoolModel._({required this.name, required this.teacher}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, 'SchoolModel', 'name');
-    BuiltValueNullFieldError.checkNotNull(teacher, 'SchoolModel', 'teacher');
+    BuiltValueNullFieldError.checkNotNull(name, r'SchoolModel', 'name');
+    BuiltValueNullFieldError.checkNotNull(teacher, r'SchoolModel', 'teacher');
   }
 
   @override
@@ -88,12 +88,16 @@ class _$SchoolModel extends SchoolModel {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, name.hashCode), teacher.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, teacher.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SchoolModel')
+    return (newBuiltValueToStringHelper(r'SchoolModel')
           ..add('name', name)
           ..add('teacher', teacher))
         .toString();
@@ -136,13 +140,15 @@ class SchoolModelBuilder implements Builder<SchoolModel, SchoolModelBuilder> {
   }
 
   @override
-  _$SchoolModel build() {
+  SchoolModel build() => _build();
+
+  _$SchoolModel _build() {
     _$SchoolModel _$result;
     try {
       _$result = _$v ??
           new _$SchoolModel._(
               name: BuiltValueNullFieldError.checkNotNull(
-                  name, 'SchoolModel', 'name'),
+                  name, r'SchoolModel', 'name'),
               teacher: teacher.build());
     } catch (_) {
       late String _$failedField;
@@ -151,7 +157,7 @@ class SchoolModelBuilder implements Builder<SchoolModel, SchoolModelBuilder> {
         teacher.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'SchoolModel', _$failedField, e.toString());
+            r'SchoolModel', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -160,4 +166,4 @@ class SchoolModelBuilder implements Builder<SchoolModel, SchoolModelBuilder> {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

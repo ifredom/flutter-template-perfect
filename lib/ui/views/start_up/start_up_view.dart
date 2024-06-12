@@ -5,6 +5,8 @@ import 'package:fluttertemplate/ui/views/start_up/start_up_view_model.dart';
 import 'package:fluttertemplate/ui/widgets/loading/loading_animation.dart';
 
 class StartUpView extends StatelessWidget {
+  const StartUpView({super.key});
+
   @override
   Widget build(BuildContext context) {
     // use package ScreenUtil, initial
@@ -19,8 +21,8 @@ class StartUpView extends StatelessWidget {
     // );
     return ViewModelBuilder<StartUpViewModel>.reactive(
       viewModelBuilder: () => StartUpViewModel(),
-      onModelReady: (model) => model.onModelReady(),
-      builder: (context, model, child) => Scaffold(
+      onViewModelReady: (model) => model.onModelReady(),
+      builder: (context, model, child) => const Scaffold(
         body: Center(
           child: LoadingAnimation(),
         ),

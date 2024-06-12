@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart'
     show
-        DioError,
+        DioException,
         ErrorInterceptorHandler,
         InterceptorsWrapper,
         RequestInterceptorHandler,
@@ -34,7 +34,7 @@ class LogsInterceptors extends InterceptorsWrapper {
   }
 
   @override
-  onError(DioError err, ErrorInterceptorHandler handler) async {
+  onError(DioException err, ErrorInterceptorHandler handler) async {
     if (openDebug) {
       _log.e('request error info: ${err.response?.toString() ?? ""}');
     }

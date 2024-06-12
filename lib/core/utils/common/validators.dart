@@ -1,7 +1,9 @@
 import 'package:fluttertemplate/core/utils/res/locale_keys.dart';
 
 /// 要使用 Validators验证类，使用 with 将其混入
-class Validators {
+/// example: class LoginPhoneViewModel extends BaseViewModel with Validators {}
+
+mixin class Validators {
   /// 手机号验证
   final phoneNumberRegExp = RegExp(r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
 

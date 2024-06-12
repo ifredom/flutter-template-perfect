@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class SecondScreen extends StatefulWidget {
+  const SecondScreen({super.key});
+
   @override
-  _SecondScreenState createState() => _SecondScreenState();
+  SecondScreenState createState() => SecondScreenState();
 }
 
-class _SecondScreenState extends State<SecondScreen> {
+class SecondScreenState extends State<SecondScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
         body: Center(child: Text("SecondScreen")),
       ),

@@ -52,18 +52,18 @@ class GradientButton extends StatelessWidget {
     }
 
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: Colors.transparent,
-      primary: Colors.transparent, // transparent
+      // onPrimary: Colors.transparent,
+      // primary: Colors.transparent, // transparent
       padding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
     ).merge(
       ButtonStyle(
-        overlayColor: MaterialStateProperty.resolveWith((states) {
-          return states.contains(MaterialState.pressed) ? Colors.transparent : null; //点击时，水波动画中水波的颜色
+        overlayColor: WidgetStateProperty.resolveWith((states) {
+          return states.contains(WidgetState.pressed) ? Colors.transparent : null; //点击时，水波动画中水波的颜色
         }),
-        elevation: MaterialStateProperty.resolveWith((states) => 0),
+        elevation: WidgetStateProperty.resolveWith((states) => 0),
       ),
     );
 

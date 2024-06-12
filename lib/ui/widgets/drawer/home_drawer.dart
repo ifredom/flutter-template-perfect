@@ -5,13 +5,13 @@ class HomeDrawer extends StatefulWidget {
   final DrawerIndex screenIndex;
   final Function(DrawerIndex)? callBackIndex;
 
-  const HomeDrawer({Key? key, required this.screenIndex, required this.iconAnimationController, this.callBackIndex});
+  const HomeDrawer({super.key, required this.screenIndex, required this.iconAnimationController, this.callBackIndex});
 
   @override
-  _HomeDrawerState createState() => _HomeDrawerState();
+  HomeDrawerState createState() => HomeDrawerState();
 }
 
-class _HomeDrawerState extends State<HomeDrawer> {
+class HomeDrawerState extends State<HomeDrawer> {
   late List<DrawerList> drawerList;
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
       DrawerList(
         index: DrawerIndex.HOME,
         labelName: 'Home',
-        icon: Icon(Icons.home),
+        icon: const Icon(Icons.home),
       ),
       DrawerList(
         index: DrawerIndex.Help,
@@ -35,22 +35,22 @@ class _HomeDrawerState extends State<HomeDrawer> {
       DrawerList(
         index: DrawerIndex.FeedBack,
         labelName: 'FeedBack',
-        icon: Icon(Icons.help),
+        icon: const Icon(Icons.help),
       ),
       DrawerList(
         index: DrawerIndex.Invite,
         labelName: 'Invite Friend',
-        icon: Icon(Icons.group),
+        icon: const Icon(Icons.group),
       ),
       DrawerList(
         index: DrawerIndex.Share,
         labelName: 'Rate the app',
-        icon: Icon(Icons.share),
+        icon: const Icon(Icons.share),
       ),
       DrawerList(
         index: DrawerIndex.About,
         labelName: 'About Us',
-        icon: Icon(Icons.info),
+        icon: const Icon(Icons.info),
       ),
     ];
   }
@@ -85,10 +85,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
                           child: Container(
                             height: 120,
                             width: 120,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               boxShadow: <BoxShadow>[
-                                BoxShadow(offset: const Offset(2.0, 4.0), blurRadius: 8),
+                                BoxShadow(offset: Offset(2.0, 4.0), blurRadius: 8),
                               ],
                             ),
                             child: ClipRRect(
@@ -100,8 +100,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
                       );
                     },
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, left: 4),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8, left: 4),
                     child: Text(
                       'Chris Hemsworth',
                       style: TextStyle(
@@ -117,7 +117,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           const SizedBox(
             height: 4,
           ),
-          Divider(
+          const Divider(
             height: 1,
           ),
           Expanded(
@@ -130,13 +130,13 @@ class _HomeDrawerState extends State<HomeDrawer> {
               },
             ),
           ),
-          Divider(
+          const Divider(
             height: 1,
           ),
           Column(
             children: <Widget>[
               ListTile(
-                title: Text(
+                title: const Text(
                   'Sign Out',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -144,7 +144,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.power_settings_new,
                   color: Colors.red,
                 ),
@@ -175,7 +175,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Row(
                 children: <Widget>[
-                  Container(
+                  const SizedBox(
                     width: 6.0,
                     height: 46.0,
                   ),
@@ -183,7 +183,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                     padding: EdgeInsets.all(4.0),
                   ),
                   listData.isAssetsImage
-                      ? Container(
+                      ? SizedBox(
                           width: 24,
                           height: 24,
                           child: Image.asset(listData.imageName),
@@ -194,7 +194,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   ),
                   Text(
                     listData.labelName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                     ),
@@ -214,13 +214,13 @@ class _HomeDrawerState extends State<HomeDrawer> {
                             0.0,
                             0.0),
                         child: Padding(
-                          padding: EdgeInsets.only(top: 8, bottom: 8),
+                          padding: const EdgeInsets.only(top: 8, bottom: 8),
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.75 - 64,
                             height: 46,
                             decoration: BoxDecoration(
                               color: Colors.blue.withOpacity(0.2),
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(0),
                                 topRight: Radius.circular(28),
                                 bottomLeft: Radius.circular(0),

@@ -10,13 +10,13 @@ class DoubleBackExitApp extends StatefulWidget {
   final String title;
 
   /// 退出提示动画组件
-  DoubleBackExitApp({this.title = '再按一次退出'});
+  const DoubleBackExitApp({super.key, this.title = '再按一次退出'});
 
   @override
-  _DoubleBackExitAppState createState() => _DoubleBackExitAppState();
+  DoubleBackExitAppState createState() => DoubleBackExitAppState();
 }
 
-class _DoubleBackExitAppState extends State<DoubleBackExitApp> with SingleTickerProviderStateMixin {
+class DoubleBackExitAppState extends State<DoubleBackExitApp> with SingleTickerProviderStateMixin {
   late Animation<double> animation; // 动画对象
   late AnimationController controller;
   late DateTime _lastPressedAt; // 上次点击时间
@@ -27,7 +27,7 @@ class _DoubleBackExitAppState extends State<DoubleBackExitApp> with SingleTicker
     super.initState();
     // 动画对象
     controller = AnimationController(
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
     );
     // 定义开始到结束的值
@@ -43,9 +43,9 @@ class _DoubleBackExitAppState extends State<DoubleBackExitApp> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      // 监听返回事件
-      onWillPop: this.handleWillPop,
+    return PopScope(
+      //  listen to the back event  监听返回事件
+      canPop: handleWillPop(),
       child: TipsScaleAnimated(
         animation: animation,
         child: Text(
@@ -60,12 +60,12 @@ class _DoubleBackExitAppState extends State<DoubleBackExitApp> with SingleTicker
     );
   }
 
-  // 验校几秒内二次返回键退出APP，默认2秒
-  Future<bool> handleWillPop() async {
-    if (DateTime.now().difference(_lastPressedAt) > Duration(seconds: 2)) {
+  // validates if the user wants to exit the app  in 2 seconds  验证用户是否要退出APP，默认2秒
+  bool handleWillPop() {
+    if (DateTime.now().difference(_lastPressedAt) > const Duration(seconds: 2)) {
       //两次点击间隔超过2秒则重新计时
       _lastPressedAt = DateTime.now();
-      this.runTips();
+      runTips();
       return false;
     }
     return exit(0);

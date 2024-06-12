@@ -36,17 +36,17 @@ class _$TeacherModelSerializer implements StructuredSerializer<TeacherModel> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'name':
           result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'level':
           result.level = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -62,11 +62,11 @@ class _$TeacherModel extends TeacherModel {
   final int level;
 
   factory _$TeacherModel([void Function(TeacherModelBuilder)? updates]) =>
-      (new TeacherModelBuilder()..update(updates)).build();
+      (new TeacherModelBuilder()..update(updates))._build();
 
   _$TeacherModel._({required this.name, required this.level}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, 'TeacherModel', 'name');
-    BuiltValueNullFieldError.checkNotNull(level, 'TeacherModel', 'level');
+    BuiltValueNullFieldError.checkNotNull(name, r'TeacherModel', 'name');
+    BuiltValueNullFieldError.checkNotNull(level, r'TeacherModel', 'level');
   }
 
   @override
@@ -84,12 +84,16 @@ class _$TeacherModel extends TeacherModel {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, name.hashCode), level.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, level.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('TeacherModel')
+    return (newBuiltValueToStringHelper(r'TeacherModel')
           ..add('name', name)
           ..add('level', level))
         .toString();
@@ -132,16 +136,18 @@ class TeacherModelBuilder
   }
 
   @override
-  _$TeacherModel build() {
+  TeacherModel build() => _build();
+
+  _$TeacherModel _build() {
     final _$result = _$v ??
         new _$TeacherModel._(
             name: BuiltValueNullFieldError.checkNotNull(
-                name, 'TeacherModel', 'name'),
+                name, r'TeacherModel', 'name'),
             level: BuiltValueNullFieldError.checkNotNull(
-                level, 'TeacherModel', 'level'));
+                level, r'TeacherModel', 'level'));
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

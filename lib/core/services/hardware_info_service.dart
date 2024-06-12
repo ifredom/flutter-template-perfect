@@ -24,14 +24,14 @@ class HardwareInfoService {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       _udid = iosInfo.identifierForVendor!;
       _operatingSystem = 'iOS';
-      _device = iosInfo.utsname.machine!;
+      _device = iosInfo.utsname.machine;
     } else if (Platform.isAndroid) {
       const _androidIdPlugin = AndroidId();
       _udid = (await _androidIdPlugin.getId())!;
 
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       _operatingSystem = 'Android';
-      _device = androidInfo.model!;
+      _device = androidInfo.model;
     }
 
     _log.i('udid: $_udid');

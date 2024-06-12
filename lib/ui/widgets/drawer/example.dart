@@ -5,11 +5,13 @@ import 'drawer_user_controller.dart';
 import 'home_drawer.dart';
 
 class DrawerExample extends StatefulWidget {
+  const DrawerExample({super.key});
+
   @override
-  _DrawerExampleState createState() => _DrawerExampleState();
+  DrawerExampleState createState() => DrawerExampleState();
 }
 
-class _DrawerExampleState extends State<DrawerExample> {
+class DrawerExampleState extends State<DrawerExample> {
   late AnimationController sliderAnimationController;
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class _DrawerExampleState extends State<DrawerExample> {
         animationController: (AnimationController animationController) {
           sliderAnimationController = animationController;
         },
-        screenView: LoginView(), //任何页面
+        screenView: const LoginView(), //任何页面
       ),
     );
   }

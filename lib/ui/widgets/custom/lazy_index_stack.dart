@@ -17,8 +17,8 @@ class LazyIndexedStack extends StatefulWidget {
   /// Reuse the created view
   final bool reuse;
 
-  LazyIndexedStack({
-    Key? key,
+  const LazyIndexedStack({
+    super.key,
     this.alignment = AlignmentDirectional.topStart,
     this.textDirection = TextDirection.ltr,
     this.sizing = StackFit.loose,
@@ -26,15 +26,15 @@ class LazyIndexedStack extends StatefulWidget {
     this.reuse = true,
     required this.itemBuilder,
     this.itemCount = 0,
-  }) : super(key: key);
+  });
 
   @override
-  _LazyIndexedStackState createState() => _LazyIndexedStackState();
+  LazyIndexedStackState createState() => LazyIndexedStackState();
 }
 
-class _LazyIndexedStackState extends State<LazyIndexedStack> {
-  List<Widget> _children = [];
-  List<bool> _loaded = [];
+class LazyIndexedStackState extends State<LazyIndexedStack> {
+  final List<Widget> _children = [];
+  final List<bool> _loaded = [];
 
   @override
   void initState() {

@@ -106,7 +106,7 @@ class NetCache extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     return super.onError(err, handler);
   }
 

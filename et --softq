@@ -1,0 +1,513 @@
+[33mcommit 2ce0c41a27d82d09ba410f8d9b4a1e4a9f35c463[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: magicTang <ifredomvip@gmail.com>
+Date:   Thu Jun 13 04:22:15 2024 +0800
+
+    feat: update flutter sdk version to 3,22.0,update all package version magiclang
+
+[33mcommit d1839904df4e208aee3fad26be526a215bbd4021[m
+Author: magicTang <ifredomvip@gmail.com>
+Date:   Thu Jun 13 04:21:16 2024 +0800
+
+    feat:  update flutter sdk version to 3.22.0,update all package version
+
+[33mcommit a9a098817c17ed405099bc113611c62a665504a8[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: ifredom <1950735817@qq.com>
+Date:   Mon Oct 3 13:05:24 2022 +0800
+
+    update to flutter 3.3.3
+
+[33mcommit d5bc7165e12c8b972561cffc45aea819f422bdc1[m
+Author: ifredom <1950735817@qq.com>
+Date:   Mon Sep 12 12:16:16 2022 +0800
+
+    fix: update packages
+
+[33mcommit eb4a69ba545775eb6fe88eaa6efc7f6494af1ed1[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Mon Apr 4 20:55:07 2022 +0800
+
+    remove signin time
+
+[33mcommit f20872d69252bd2cbf72bc305b660786b9643431[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Sun Mar 13 20:30:07 2022 +0800
+
+    refactor: create new project
+
+[33mcommit ba3b0f6b24852d4870ab54a8045c80d6604afb9c[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Sun Mar 13 13:29:54 2022 +0800
+
+    fix: remove useless packages
+
+[33mcommit 5650e8821f0972e739286bb8b89548a97f4c6fc0[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Feb 18 11:29:42 2022 +0800
+
+    Generation model
+
+[33mcommit b11caedc37bea8415bbd506b4df43ea824f7bffb[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Feb 18 11:24:43 2022 +0800
+
+    delete redundant data
+
+[33mcommit 042a1844f208a311a33cc74dcb115996a7c562f4[m
+Author: 伊布雷多姆 <ifredomvip@gmail.com>
+Date:   Thu Feb 17 16:49:53 2022 +0800
+
+    update readme
+    
+    update readme
+
+[33mcommit 9d4ca9b57cb558fece11723500fbc5875ece92ed[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Wed Dec 15 23:36:51 2021 +0800
+
+    flutter 版本限定
+
+[33mcommit e54d29272c3f05cad635deb43076e89ae4c7b277[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Sat Dec 11 15:20:31 2021 +0800
+
+    fix
+
+[33mcommit 7b95ba4ab2062124ae1203d880f3133fda45addb[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Dec 10 14:32:56 2021 +0800
+
+    update hive
+
+[33mcommit 420bf1ae99e03300699e3e2bb03104950b2231f8[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Dec 10 10:49:20 2021 +0800
+
+    minSdkVersion
+
+[33mcommit 9219141068619b6884503d35f5f41571c2703e95[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Dec 10 10:41:49 2021 +0800
+
+    remove fluttermidi
+
+[33mcommit d15735c5eaa16cb72870dae7ac4374be6153f83a[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Dec 10 10:15:05 2021 +0800
+
+    merge
+
+[33mcommit 375127211fc06ed7fe6fcea893e4f45868c36190[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Wed Dec 8 00:27:56 2021 +0800
+
+    update to 2.5.3& packages version
+
+[33mcommit 0e4c53cfed462912590c4135cc5ed4c17963b448[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Thu Dec 2 15:43:50 2021 +0800
+
+    simplify
+
+[33mcommit 35276bff70c63965238baf817e189b682688bb33[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Mon Nov 22 16:49:36 2021 +0800
+
+    piano
+
+[33mcommit 61bb8a246ed38234da76f8e120be813db05da94a[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Mon Nov 22 16:34:42 2021 +0800
+
+    52白键
+
+[33mcommit 24d55db25ba8ed803713e72cd959f905da29b54c[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Nov 19 11:55:20 2021 +0800
+
+    按键反馈
+
+[33mcommit 7a2a14f0dcd8bf8568e9a183a37a70c30f8b8ea0[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Nov 19 11:28:31 2021 +0800
+
+    piano
+
+[33mcommit 009db6bbe70df5c72f7eb4ca672818c837b9b643[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Oct 29 15:39:37 2021 +0800
+
+    经验
+
+[33mcommit aff6ba6574b119a3cd10b7e10fb108c8944d761c[m
+Merge: cb03011 443e662
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Sep 24 11:02:51 2021 +0800
+
+    readme
+
+[33mcommit cb0301115677f96bf83d87ad1bf0edea7017a0d1[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Fri Sep 24 11:01:50 2021 +0800
+
+    update readme
+
+[33mcommit 443e6627667dab3d86462e50ec92de33f7c7c039[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Tue Sep 7 15:11:52 2021 +0800
+
+    fix run error
+
+[33mcommit f62fe455a8f5aec6457a8f10bc67db6da6eb47c7[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Tue Sep 7 14:26:15 2021 +0800
+
+    fix
+
+[33mcommit 5751f154aee75b91d7e15ba86e99b255e1b16a08[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Tue Sep 7 14:26:10 2021 +0800
+
+    fix run error
+
+[33mcommit 0336bcabea027c89112854c73f5d6e4ba9af0b27[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Sep 3 01:37:19 2021 +0800
+
+    降级package
+
+[33mcommit c8832a8441afbed10f7b37edde9e52ded051bc43[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Wed Sep 1 17:58:28 2021 +0800
+
+    添加缓存
+
+[33mcommit 24bb080c77bdd0a8ea8bc08c2d4e9dded75867c2[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Thu Aug 26 17:50:10 2021 +0800
+
+    update readme
+
+[33mcommit 8cd54a2966eacb4b8c9915d7ff1266aa28e005a0[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Thu Aug 26 17:46:12 2021 +0800
+
+    ensureInitialized at runZonedGuarded
+
+[33mcommit 27345d04b83bca9714f4a0950e28030206548294[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Thu Aug 26 17:36:26 2021 +0800
+
+    update community plus
+
+[33mcommit ac9bb968492b3bb1762eec8dfd989064d00abf9d[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Thu Aug 26 16:32:18 2021 +0800
+
+    packageinfo fix
+
+[33mcommit 4153ab4c01ad572105921288ab0be3c9f503a4e7[m
+Author: youxspace computer <1950735817@qq.com>
+Date:   Thu Aug 26 13:58:09 2021 +0800
+
+    update readme
+
+[33mcommit 8194cb7e49a0ddd91eefa7af931f8ac0463b2871[m
+Merge: 6115493 fb3f383
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Wed Aug 18 23:37:51 2021 +0800
+
+    update readme
+
+[33mcommit 6115493ee3b786da1ad1f577c933b20f417a4d7e[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Wed Aug 18 23:33:49 2021 +0800
+
+    update
+
+[33mcommit fb3f383d34ea15f77826beba9d30af54c22a48c0[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Tue Aug 17 17:39:13 2021 +0800
+
+    update readme
+
+[33mcommit 8f4ac2b3e2bb8660d91f0fe9d6ab729a0661ed90[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Tue Aug 17 11:03:28 2021 +0800
+
+    readme
+
+[33mcommit 3d8cb2c46e18408e309e952b2ed8f3562d2d94b5[m[33m ([m[1;33mtag: v0.2.0[m[33m)[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Mon Aug 16 00:08:50 2021 +0800
+
+    keyValue
+
+[33mcommit 15b6de5ab23b8e2fa40482f22b9877615b2d6758[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Aug 13 01:42:47 2021 +0800
+
+    fix bugs
+
+[33mcommit 09fd1b86fd0df9741158608ee1c18b2c69227caf[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Aug 13 00:49:56 2021 +0800
+
+    add common services
+
+[33mcommit 4cd3ae7024cb798d414ac63bd2144f8720fd50f1[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Thu Aug 12 03:24:57 2021 +0800
+
+[33mcommit f9c8b3b2ef0dfb6220be2f00b2d937437b66cd1d[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Thu Aug 12 03:24:47 2021 +0800
+
+    奇怪的bug
+
+[33mcommit c2c524fd97395e58ffb84e15f87120bdb9e30157[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Thu Aug 12 02:57:39 2021 +0800
+
+    update
+
+[33mcommit 0ca43602d5b56521a23536ef741b2aacee2e7282[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Wed Aug 11 17:36:46 2021 +0800
+
+    fix locale
+
+[33mcommit 97e8ccd6557cd6394671d3b5a4e0700cfb7de5d5[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Wed Aug 11 17:25:18 2021 +0800
+
+    简化
+
+[33mcommit e613b0847d2b02ced852738cd42be3cf6bc26d52[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Wed Aug 11 17:24:24 2021 +0800
+
+    简化结构
+
+[33mcommit ce9d5ebe468a56ab5e6b8749c986fa427731cd60[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Mon Aug 9 00:19:42 2021 +0800
+
+    构造空Lsit
+
+[33mcommit 6d9aae4ba2f43b013ca8e358c3146bf5a91087dc[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Aug 6 02:38:28 2021 +0800
+
+    update
+
+[33mcommit 7c0ee47766be8252f4daae2fe41a3c459f0a8468[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Aug 6 02:33:08 2021 +0800
+
+    修复渐变按钮
+
+[33mcommit bb41472af72d63594fff78d17a1656da5f083f27[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Aug 6 02:19:10 2021 +0800
+
+    空安全
+
+[33mcommit 36e2771592197f4b6fa7e0302cace59a3ba4a232[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Aug 6 02:19:03 2021 +0800
+
+    空安全版本
+
+[33mcommit 4ae5ac0078ef58852dd8a7f83a6c0059c20f1c15[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Aug 6 00:22:47 2021 +0800
+
+    update package
+
+[33mcommit b2db64ad0afe3224a1a033f801be399d711f8ada[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Thu Aug 5 23:48:54 2021 +0800
+
+    升级空安全 fix bugs
+
+[33mcommit 7ddde9e13c12cb90c8c6730ea763a174b15fb97b[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Thu Aug 5 23:13:40 2021 +0800
+
+    ble不支持空安全，暂时压缩闲置
+
+[33mcommit 7d25d765e0e52f3f9c6df887959f02c3ac025512[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Wed Aug 4 23:26:35 2021 +0800
+
+    update bake
+
+[33mcommit d139eab19e3a707e5ce88946056637515aee36b5[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Wed Aug 4 10:13:01 2021 +0800
+
+    update
+
+[33mcommit 79c56eb6248a677cfbfe3d0fc264475cc25b7de3[m
+Merge: 0d8e809 81b8abf
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Jul 30 10:38:21 2021 +0800
+
+    Merge branch 'master' of github.com:ifredom/flutter-template-perfect
+
+[33mcommit 0d8e80942250b3887d59afcc32d3db8a1c705e01[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Jul 30 10:34:31 2021 +0800
+
+    update readme
+
+[33mcommit 81b8abf045c2da037af55c36e9134e1fada9978a[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Sun Jul 25 22:34:58 2021 +0800
+
+    升级到空安全
+
+[33mcommit 9d085cc2b798984d0812fc5ea643d35cc2f15f95[m
+Author: ifredom <1950735817@qq.com>
+Date:   Fri Jul 2 17:50:18 2021 +0800
+
+    upgrade
+
+[33mcommit a9a5018ddb8b1eaa966fecdc8f749d5d9a41220a[m
+Author: ifredom <1950735817@qq.com>
+Date:   Thu Jul 1 17:44:52 2021 +0800
+
+    upgrade2.0
+
+[33mcommit 37bca1d78436e66091a269e237ed95897e99bfc5[m
+Author: ifredom <1950735817@qq.com>
+Date:   Thu May 20 01:33:47 2021 +0800
+
+    update
+
+[33mcommit d38126eac4fffe956641bb2d8309e551ccd469e3[m
+Author: ifredom <1950735817@qq.com>
+Date:   Thu May 20 01:16:01 2021 +0800
+
+    upgrade
+
+[33mcommit aba3e0a6c665118a2debbb5989c27123c94d306f[m
+Author: ifredom <1950735817@qq.com>
+Date:   Wed May 19 23:57:24 2021 +0800
+
+    Migrating V2,update packages
+
+[33mcommit 915401f49dac6fab3a98fa141fd8324dece07e1f[m
+Author: ifredom <1950735817@qq.com>
+Date:   Mon Aug 17 11:34:13 2020 +0800
+
+    screen
+
+[33mcommit 878bb2500caf845dd8680c36046a5e844ba4d686[m
+Author: ifredom <1950735817@qq.com>
+Date:   Thu Aug 13 23:36:33 2020 +0800
+
+    详情页
+
+[33mcommit d72c8cea07d503385c566a7161ac8b06dfb53124[m
+Author: ifredom <1950735817@qq.com>
+Date:   Thu Aug 13 22:39:19 2020 +0800
+
+    更新UI
+
+[33mcommit c774b2bf3d888a00def1ef7df53d2e3e473b805b[m
+Author: ifredom <1950735817@qq.com>
+Date:   Wed Aug 12 23:50:45 2020 +0800
+
+    添加第一页和第二页
+
+[33mcommit 722dac033547506583f4a1fdd4c0b291df665fc5[m
+Author: ifredom <1950735817@qq.com>
+Date:   Fri Aug 7 00:30:14 2020 +0800
+
+    接口https自签名证书认证报错
+
+[33mcommit 8c9e09e1360dd8b94dc85d9129a0198f2549f701[m
+Author: ifredom <1950735817@qq.com>
+Date:   Thu Aug 6 23:10:22 2020 +0800
+
+    update service_impl
+
+[33mcommit 0a9719ecc28c510f6a1ea51f0496a6327e171ad8[m
+Author: ifredom <1950735817@qq.com>
+Date:   Thu Aug 6 22:59:44 2020 +0800
+
+    update login view
+
+[33mcommit ec127b5005b8656c5ca9922cd68c46769fdd6d4f[m
+Merge: b4e527c 7120b75
+Author: ifredom <1950735817@qq.com>
+Date:   Thu Aug 6 01:11:11 2020 +0800
+
+    confilt
+
+[33mcommit b4e527c22116803eb82cfc4417b4409c107dd1d4[m
+Author: ifredom <1950735817@qq.com>
+Date:   Thu Aug 6 00:50:38 2020 +0800
+
+    优化
+
+[33mcommit 2821de311f418abee1825d1d3b372cc2d9be4de2[m
+Author: ifredom <1950735817@qq.com>
+Date:   Thu Aug 6 00:49:54 2020 +0800
+
+    优化
+
+[33mcommit 8f89009aa7e91e9d35b55798d2b550681f9b1023[m
+Author: ifredom <1950735817@qq.com>
+Date:   Wed Aug 5 21:42:06 2020 +0800
+
+    添加图片信息
+
+[33mcommit 7120b757e118650667bb22491a3f534cac8c7d2f[m
+Author: ifredom <1950735817@qq.com>
+Date:   Mon Aug 3 01:21:28 2020 +0800
+
+    update
+
+[33mcommit 06b2811c3635ef08d1b95b778eb881e00afe2af1[m
+Author: ifredom <1950735817@qq.com>
+Date:   Mon Aug 3 01:12:28 2020 +0800
+
+    update
+
+[33mcommit 1fce715d3818c54d9f650a622559b03dd8da2c42[m
+Author: ifredom <1950735817@qq.com>
+Date:   Mon Aug 3 01:07:17 2020 +0800
+
+    update
+
+[33mcommit cba42d24078fb0dc52bbec0ced5b41b02c0b31ae[m
+Author: ifredom <1950735817@qq.com>
+Date:   Sat Apr 4 19:31:41 2020 +0800
+
+    update readme
+
+[33mcommit f7c9f4727caaadbee439b3b6248ec796cf01f3cb[m
+Author: ifredom <1950735817@qq.com>
+Date:   Sat Apr 4 19:09:06 2020 +0800
+
+    intial
+
+[33mcommit b69c8e86738f48f571ae75f4b16a162ad0fad7f3[m
+Author: ifredom <1950735817@qq.com>
+Date:   Fri Mar 13 00:10:18 2020 +0800
+
+    update readme
+
+[33mcommit 9813d1b661221d1bd36946c720f5a11b431a8fcf[m
+Author: ifredom <1950735817@qq.com>
+Date:   Fri Mar 13 00:07:43 2020 +0800
+
+    initialization
+
+[33mcommit 5ee42d1990d561c8bffb656933e8d33954938b35[m
+Author: ifredom <ifredomvip@gmail.com>
+Date:   Fri Mar 13 00:06:03 2020 +0800
+
+    Initial commit

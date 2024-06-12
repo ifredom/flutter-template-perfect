@@ -11,8 +11,8 @@ class DrawerUserController extends StatefulWidget {
   final Widget? menuView;
   final DrawerIndex screenIndex;
 
-  DrawerUserController({
-    Key? key,
+  const DrawerUserController({
+    super.key,
     this.drawerWidth = 250,
     this.onDrawerCall,
     this.screenView,
@@ -21,13 +21,13 @@ class DrawerUserController extends StatefulWidget {
     this.menuView,
     this.drawerIsOpen,
     this.screenIndex = DrawerIndex.HOME,
-  }) : super(key: key);
+  });
 
   @override
-  _DrawerUserControllerState createState() => _DrawerUserControllerState();
+  DrawerUserControllerState createState() => DrawerUserControllerState();
 }
 
-class _DrawerUserControllerState extends State<DrawerUserController> with TickerProviderStateMixin {
+class DrawerUserControllerState extends State<DrawerUserController> with TickerProviderStateMixin {
   late ScrollController scrollController;
   late AnimationController iconAnimationController;
   late AnimationController animationController;
@@ -41,33 +41,32 @@ class _DrawerUserControllerState extends State<DrawerUserController> with Ticker
     iconAnimationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 0));
     iconAnimationController.animateTo(1.0, duration: const Duration(milliseconds: 0), curve: Curves.fastOutSlowIn);
     scrollController = ScrollController(initialScrollOffset: widget.drawerWidth);
-    scrollController
-      ..addListener(() {
-        if (scrollController.offset <= 0) {
-          if (scrolloffset != 1.0) {
-            setState(() {
-              scrolloffset = 1.0;
-              try {
-                widget.drawerIsOpen!(true);
-              } catch (_) {}
-            });
-          }
-          iconAnimationController.animateTo(0.0, duration: const Duration(milliseconds: 0), curve: Curves.linear);
-        } else if (scrollController.offset > 0 && scrollController.offset < widget.drawerWidth) {
-          iconAnimationController.animateTo((scrollController.offset * 100 / (widget.drawerWidth)) / 100,
-              duration: const Duration(milliseconds: 0), curve: Curves.linear);
-        } else if (scrollController.offset <= widget.drawerWidth) {
-          if (scrolloffset != 0.0) {
-            setState(() {
-              scrolloffset = 0.0;
-              try {
-                widget.drawerIsOpen!(false);
-              } catch (_) {}
-            });
-          }
-          iconAnimationController.animateTo(1.0, duration: const Duration(milliseconds: 0), curve: Curves.linear);
+    scrollController.addListener(() {
+      if (scrollController.offset <= 0) {
+        if (scrolloffset != 1.0) {
+          setState(() {
+            scrolloffset = 1.0;
+            try {
+              widget.drawerIsOpen!(true);
+            } catch (_) {}
+          });
         }
-      });
+        iconAnimationController.animateTo(0.0, duration: const Duration(milliseconds: 0), curve: Curves.linear);
+      } else if (scrollController.offset > 0 && scrollController.offset < widget.drawerWidth) {
+        iconAnimationController.animateTo((scrollController.offset * 100 / (widget.drawerWidth)) / 100,
+            duration: const Duration(milliseconds: 0), curve: Curves.linear);
+      } else if (scrollController.offset <= widget.drawerWidth) {
+        if (scrolloffset != 0.0) {
+          setState(() {
+            scrolloffset = 0.0;
+            try {
+              widget.drawerIsOpen!(false);
+            } catch (_) {}
+          });
+        }
+        iconAnimationController.animateTo(1.0, duration: const Duration(milliseconds: 0), curve: Curves.linear);
+      }
+    });
     getInitState();
     super.initState();
   }
@@ -136,7 +135,7 @@ class _DrawerUserControllerState extends State<DrawerUserController> with Ticker
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       boxShadow: <BoxShadow>[
                         BoxShadow(blurRadius: 24),
                       ],
@@ -145,11 +144,10 @@ class _DrawerUserControllerState extends State<DrawerUserController> with Ticker
                       children: <Widget>[
                         IgnorePointer(
                           ignoring: scrolloffset == 1 || false,
-                          child: widget.screenView == null
-                              ? Container(
-                                  color: Colors.white,
-                                )
-                              : widget.screenView,
+                          child: widget.screenView ??
+                              Container(
+                                color: Colors.white,
+                              ),
                         ),
                         scrolloffset == 1.0
                             ? InkWell(
@@ -157,7 +155,7 @@ class _DrawerUserControllerState extends State<DrawerUserController> with Ticker
                                   onDrawerClick();
                                 },
                               )
-                            : SizedBox(),
+                            : const SizedBox(),
                         Padding(
                           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 8, left: 8),
                           child: SizedBox(
@@ -168,9 +166,8 @@ class _DrawerUserControllerState extends State<DrawerUserController> with Ticker
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(AppBar().preferredSize.height),
                                 child: Center(
-                                  child: widget.menuView != null
-                                      ? widget.menuView
-                                      : AnimatedIcon(icon: widget.animatedIconData, progress: iconAnimationController),
+                                  child: widget.menuView ??
+                                      AnimatedIcon(icon: widget.animatedIconData, progress: iconAnimationController),
                                 ),
                                 onTap: () {
                                   FocusScope.of(context).requestFocus(FocusNode());

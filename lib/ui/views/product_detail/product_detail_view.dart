@@ -4,12 +4,12 @@ import 'package:fluttertemplate/ui/widgets/appbar/custom_appbar.dart';
 
 class ProductDetailView extends StatefulWidget {
   final Map post;
-  ProductDetailView(this.post, {Key? key}) : super(key: key);
+  const ProductDetailView(this.post, {super.key});
   @override
-  _ProductDetailViewState createState() => _ProductDetailViewState();
+  ProductDetailViewState createState() => ProductDetailViewState();
 }
 
-class _ProductDetailViewState extends State<ProductDetailView> with TickerProviderStateMixin {
+class ProductDetailViewState extends State<ProductDetailView> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -24,14 +24,14 @@ class _ProductDetailViewState extends State<ProductDetailView> with TickerProvid
   }
 
   Widget buildMainListView() {
-    return Container(
+    return SizedBox(
       height: double.infinity,
       child: ListView.separated(
           itemCount: 20,
           scrollDirection: Axis.vertical,
           itemBuilder: (BuildContext context, int index) {
             return Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               color: HexToColor("#88ADA6"),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
@@ -52,7 +52,7 @@ class _ProductDetailViewState extends State<ProductDetailView> with TickerProvid
             );
           },
           separatorBuilder: (context, index) {
-            return Divider(
+            return const Divider(
               height: 1,
             );
           }),
