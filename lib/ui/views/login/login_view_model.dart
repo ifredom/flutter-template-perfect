@@ -22,9 +22,6 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   final bool _isBusy = false;
 
-  String _testString = "first";
-  String get testString => _testString;
-
   String get mobile => user.mobile ?? '';
 
   bool get isNewUser => _isNewUser;
@@ -37,18 +34,21 @@ class LoginViewModel extends BaseViewModel with Validators {
 
   /// 密码登录
   Future<void> loginWithPassword(String username, String password) async {
-    _count++;
-    locator<NavigationService>().navigateTo(Routes.homeView);
+    setBusy(true);
+    rebuildUi();
+    Future.delayed(const Duration(seconds: 5)).then((value) {
+      setBusy(false);
+      _count++;
+      locator<NavigationService>().navigateTo(Routes.homeView);
+    });
   }
 
   /// 验证码登录
-  Future<void> loginWithVcode(String mobile, String authCode) async {
+  Future<void> loginWithCode(String mobile, String authCode) async {
     setBusy(true);
     var res = await _authService.signUpWithAuthcode(mobile, authCode);
     print(res);
     setBusy(false);
-
-    _testString = "second";
     // await saveUserInfo(res, mobile);
   }
 

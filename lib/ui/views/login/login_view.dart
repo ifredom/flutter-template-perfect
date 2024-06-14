@@ -100,14 +100,12 @@ class LoginViewState extends State<LoginView> {
                       controller: pwdController,
                       borderColor: HexToColor("#CBAEFA"),
                     ),
-                    Gaps.vGap20,
-                    LoginButton(loginNameController: loginNameController, pwdController: pwdController),
+                    Gaps.vGap40,
+                    Consumer(builder: (context, LoginViewModel model, child) {
+                      return LoginButton(loginNameController: loginNameController, pwdController: pwdController);
+                    }),
                     Gaps.vGap20,
                     const Center(child: PhoneCodeButton()),
-                    Gaps.vGap40,
-                    Consumer(builder: (_, a, build) {
-                      return const Center(child: ThirdButton());
-                    }),
                   ],
                 ),
               ),
@@ -126,7 +124,7 @@ class LoginButton extends ViewModelWidget<LoginViewModel> {
     super.key,
     required this.loginNameController,
     required this.pwdController,
-  }) : super(reactive: false);
+  });
 
   final TextEditingController loginNameController;
   final TextEditingController pwdController;
@@ -135,17 +133,18 @@ class LoginButton extends ViewModelWidget<LoginViewModel> {
   Widget build(BuildContext context, LoginViewModel viewModel) {
     print("LoginButton build");
     return Center(
-        child: GradientButton(
-      text: '登录 ${viewModel.testString}',
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 15,
+      child: GradientButton(
+        text: 'Sign In ${viewModel.isBusy ? "..." : ""}',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 15,
+        ),
+        colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
+        onPressed: () async {
+          await viewModel.loginWithPassword(loginNameController.text, pwdController.text);
+        },
       ),
-      colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
-      onPressed: () async {
-        await viewModel.loginWithPassword(loginNameController.text, pwdController.text);
-      },
-    ));
+    );
   }
 }
 
@@ -160,32 +159,7 @@ class PhoneCodeButton extends ViewModelWidget<LoginViewModel> {
     return GestureDetector(
       child: FittedBox(
         child: Text(
-          "手机验证码登录 ${viewModel.isBusy.toString()}",
-          style: TextStyle(
-            color: HexToColor("#FF696A"),
-            fontSize: 15,
-          ),
-        ),
-      ),
-      onTap: () {
-        locator<NavigationService>().navigateTo(Routes.loginPhoneView);
-      },
-    );
-  }
-}
-
-class ThirdButton extends ViewModelWidget<LoginViewModel> {
-  const ThirdButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, LoginViewModel viewModel) {
-    print("ThirdButton build");
-    return GestureDetector(
-      child: FittedBox(
-        child: Text(
-          "ThirdButton ${viewModel.isBusy.toString()}",
+          "Sign In with Phone Code",
           style: TextStyle(
             color: HexToColor("#FF696A"),
             fontSize: 15,

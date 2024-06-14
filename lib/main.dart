@@ -9,22 +9,17 @@ import './core/Constants/Constants.dart';
 import 'core/app/app.locator.dart';
 import 'ui/views/root_component.dart';
 
-void main() async {
-  BindingBase.debugZoneErrorsAreFatal = true;
-
-  // View the that need to be redrawn Widget(查看需要重绘的widget)
-  // debugProfileBuildsEnabled = true;
-
-  // If we run on web, do not use Crashlytics (not supported on web yet)
-  if (kIsWeb) {
-    WidgetsFlutterBinding.ensureInitialized();
-
+class App {
+  static void run() async {
     FlutterError.onError = (FlutterErrorDetails details) {
-      FlutterError.dumpErrorToConsole(details);
+      _reportError(details.exception, details.stack);
     };
-    runApp(const RootComponent(web: true));
-  } else {
-    // Use dart zone to define Crashlytics as error handler for errors
+    defaultApp();
+  }
+
+  static void defaultApp() {
+    BindingBase.debugZoneErrorsAreFatal = true;
+
     runZonedGuarded<Future<void>>(() async {
       WidgetsFlutterBinding.ensureInitialized();
 
@@ -41,22 +36,24 @@ void main() async {
       await setupLocator();
 
       // Set full screen (设置全屏)
-      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
-        // SystemUiOverlay.top,
-        // SystemUiOverlay.bottom,
-      ]);
+      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual);
 
       /// root Widget
       runApp(const RootComponent());
     }, (error, stack) => _reportError(error, stack));
   }
+
+  // Upload application exception information to the server!
+  // 上传应用异常信息到日志服务器！
+  static Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
+    if (Constants.DEBUG) {
+      print('Development mode, do not send exceptions to the server. $stackTrace');
+      return;
+    }
+    print('Send exception information to the server ...');
+  }
 }
 
-// Upload application exception information to the server!(上传应用异常信息到日志服务器！)
-Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
-  if (Constants.DEBUG) {
-    print('Development mode, do not send exceptions to the server. $stackTrace');
-    return;
-  }
-  print('Send exception information to the server ...');
+void main() async {
+  App.run();
 }

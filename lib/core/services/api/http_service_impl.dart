@@ -22,7 +22,7 @@ import 'interceptors/token_interceptor.dart' show TokenInterceptors;
 /// 请求实体类
 class HttpServiceImpl implements HttpService {
   static HttpServiceImpl getInstance() => HttpServiceImpl();
-  static TokenInterceptors _tokenInterceptors = TokenInterceptors();
+  static final TokenInterceptors _tokenInterceptors = TokenInterceptors();
 
   final _log = getLogger('HttpServiceImpl');
 
@@ -32,8 +32,8 @@ class HttpServiceImpl implements HttpService {
     // 初始化http请求参数
     _dio
       ..options.baseUrl = Constants.BASE_URL
-      ..options.connectTimeout = Duration(seconds: 5)
-      ..options.receiveTimeout = Duration(seconds: 3)
+      ..options.connectTimeout = const Duration(seconds: 5)
+      ..options.receiveTimeout = const Duration(seconds: 3)
       ..httpClientAdapter;
 
     // 添加拦截器
@@ -62,11 +62,11 @@ class HttpServiceImpl implements HttpService {
 
   @override
   Future<dynamic> request(String apiCode, Map params, {Map<String, dynamic>? headers, Options? options}) async {
-    Options _options = Options(method: 'post', contentType: Headers.jsonContentType);
+    Options options = Options(method: 'post', contentType: Headers.jsonContentType);
     if (headers != null) {
-      Map<String, dynamic> _headers = HashMap();
-      _headers.addAll(headers);
-      _options.headers = _headers;
+      Map<String, dynamic> headers0 = HashMap();
+      headers0.addAll(headers);
+      options.headers = headers0;
     }
 
     Response response;
@@ -74,7 +74,7 @@ class HttpServiceImpl implements HttpService {
       response = await _dio.request(
         Constants.BASE_URL + apiCode,
         data: json.encode(params), // 注意，所有data数据都要encode变为json字符串.
-        options: _options,
+        options: options,
         onSendProgress: network_utils.showLoadingProgress,
         onReceiveProgress: network_utils.showLoadingProgress,
       );
@@ -88,8 +88,8 @@ class HttpServiceImpl implements HttpService {
   @override
   Future<File> downloadFile(String fileUrl) async {
     Response response;
-    final _fileHelper = locator<FileService>();
-    final file = await _fileHelper.getFileFromUrl(fileUrl);
+    final fileHelper = locator<FileService>();
+    final file = await fileHelper.getFileFromUrl(fileUrl);
 
     try {
       response = await _dio.download(

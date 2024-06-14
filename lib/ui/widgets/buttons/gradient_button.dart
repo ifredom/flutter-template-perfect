@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 //自定义按钮
 class GradientButton extends StatelessWidget {
-  GradientButton({
+  const GradientButton({
+    super.key,
     this.colors,
     this.width,
     this.height,
@@ -31,23 +32,23 @@ class GradientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    final List<Color> _colors = this.colors ?? [];
+    final List<Color> colors = this.colors ?? [];
     num colorMode = 0;
 
-    Color? _backgroundColors; // 单色
-    LinearGradient _linearGradient; // 渐变色
+    Color? backgroundColors; // 单色
+    LinearGradient linearGradient; // 渐变色
 
-    if (_colors.isEmpty) {
-      _backgroundColors = theme.primaryColorDark;
-      _linearGradient = LinearGradient(colors: []);
+    if (colors.isEmpty) {
+      backgroundColors = theme.primaryColorDark;
+      linearGradient = const LinearGradient(colors: []);
       colorMode = 0;
-    } else if (_colors.length == 1) {
-      _backgroundColors = _colors[0];
-      _linearGradient = LinearGradient(colors: []);
+    } else if (colors.length == 1) {
+      backgroundColors = colors[0];
+      linearGradient = const LinearGradient(colors: []);
       colorMode = 1;
     } else {
-      _backgroundColors = Colors.transparent;
-      _linearGradient = LinearGradient(colors: _colors);
+      backgroundColors = Colors.transparent;
+      linearGradient = LinearGradient(colors: colors);
       colorMode = 2;
     }
 
@@ -55,7 +56,7 @@ class GradientButton extends StatelessWidget {
       // onPrimary: Colors.transparent,
       // primary: Colors.transparent, // transparent
       padding: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
     ).merge(
@@ -68,18 +69,18 @@ class GradientButton extends StatelessWidget {
     );
 
     return Container(
-        width: this.width ?? 128,
-        height: this.height ?? 44,
+        width: width ?? 128,
+        height: height ?? 44,
         decoration: BoxDecoration(
-          color: colorMode == 1 ? _backgroundColors : null,
-          gradient: colorMode == 2 ? _linearGradient : null,
+          color: colorMode == 1 ? backgroundColors : null,
+          gradient: colorMode == 2 ? linearGradient : null,
           borderRadius: borderRadius ?? BorderRadius.circular(24),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            this.prefixIcon ?? SizedBox(),
+            prefixIcon ?? const SizedBox(),
             TextButton(
               style: raisedButtonStyle,
               onPressed: () {
@@ -90,7 +91,7 @@ class GradientButton extends StatelessWidget {
                 child: Text(
                   text,
                   style: style ??
-                      TextStyle(
+                      const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                       ),

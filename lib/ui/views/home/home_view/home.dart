@@ -42,6 +42,7 @@ class HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     print("home build");
+
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       viewModelBuilder: () => HomeViewModel(),
       onViewModelReady: (model) => model.onModelReady(),
@@ -96,13 +97,13 @@ class HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                   tabBody = FirstScreen(animationController: animationController);
                   break;
                 case 1:
-                  tabBody = SecondScreen();
+                  tabBody = const SecondScreen();
                   break;
                 case 2:
-                  tabBody = ThirdScreen();
+                  tabBody = const ThirdScreen();
                   break;
                 case 3:
-                  tabBody = ForthScreen();
+                  tabBody = const ForthScreen();
                   break;
                 default:
               }
