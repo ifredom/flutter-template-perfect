@@ -4,6 +4,8 @@
 // StackedLoggerGenerator
 // **************************************************************************
 
+// ignore_for_file: avoid_print, depend_on_referenced_packages
+
 /// Maybe this should be generated for the user as well?
 ///
 /// import 'package:customer_app/services/stackdriver/stackdriver_service.dart';
@@ -27,15 +29,15 @@ class SimpleLogPrinter extends LogPrinter {
 
   @override
   List<String> log(LogEvent event) {
-    var color = PrettyPrinter.levelColors[event.level];
-    var emoji = PrettyPrinter.levelEmojis[event.level];
+    var color = PrettyPrinter.defaultLevelColors[event.level];
+    var emoji = PrettyPrinter.defaultLevelEmojis[event.level];
     var methodName = _getMethodName();
 
     var methodNameSection =
-        printCallingFunctionName && methodName != null ? ' | $methodName ' : '';
+        printCallingFunctionName && methodName != null ? ' | $methodName' : '';
     var stackLog = event.stackTrace.toString();
     var output =
-        '$emoji $className$methodNameSection - ${event.message}${printCallStack ? '\nSTACKTRACE:\n$stackLog' : ''}';
+        '$emoji $className$methodNameSection - ${event.message}${event.error != null ? '\nERROR: ${event.error}\n' : ''}${printCallStack ? '\nSTACKTRACE:\n$stackLog' : ''}';
 
     if (exludeLogsFromClasses
             .any((excludeClass) => className == excludeClass) ||
@@ -59,18 +61,49 @@ class SimpleLogPrinter extends LogPrinter {
 
   String? _getMethodName() {
     try {
-      var currentStack = StackTrace.current;
-      var formattedStacktrace = _formatStackTrace(currentStack, 3);
+      final currentStack = StackTrace.current;
+      final formattedStacktrace = _formatStackTrace(currentStack, 3);
+      if (kIsWeb) {
+        final classNameParts = _splitClassNameWords(className);
+        return _findMostMatchedTrace(formattedStacktrace!, classNameParts)
+            .split(' ')
+            .last;
+      } else {
+        final realFirstLine = formattedStacktrace
+            ?.firstWhere((line) => line.contains(className), orElse: () => "");
 
-      var realFirstLine =
-          formattedStacktrace?.firstWhere((line) => line.contains(className));
-
-      var methodName = realFirstLine?.replaceAll('$className.', '');
-      return methodName;
+        final methodName = realFirstLine?.replaceAll('$className.', '');
+        return methodName;
+      }
     } catch (e) {
       // There's no deliberate function call from our code so we return null;
       return null;
     }
+  }
+
+  List<String> _splitClassNameWords(String className) {
+    return className
+        .split(RegExp(r'(?=[A-Z])'))
+        .map((e) => e.toLowerCase())
+        .toList();
+  }
+
+  /// When the faulty word exists in the begging this method will not be very usefull
+  String _findMostMatchedTrace(
+      List<String> stackTraces, List<String> keyWords) {
+    String match = stackTraces.firstWhere(
+        (trace) => _doesTraceContainsAllKeywords(trace, keyWords),
+        orElse: () => '');
+    if (match.isEmpty) {
+      match = _findMostMatchedTrace(
+          stackTraces, keyWords.sublist(0, keyWords.length - 1));
+    }
+    return match;
+  }
+
+  bool _doesTraceContainsAllKeywords(String stackTrace, List<String> keywords) {
+    final formattedKeywordsAsRegex = RegExp(keywords.join('.*'));
+    return stackTrace.contains(formattedKeywordsAsRegex);
   }
 }
 
@@ -104,22 +137,6 @@ List<String>? _formatStackTrace(StackTrace stackTrace, int methodCount) {
   }
 }
 
-class MultipleLoggerOutput extends LogOutput {
-  final List<LogOutput> logOutputs;
-  MultipleLoggerOutput(this.logOutputs);
-
-  @override
-  void output(OutputEvent event) {
-    for (var logOutput in logOutputs) {
-      try {
-        logOutput.output(event);
-      } catch (e) {
-        print('Log output failed');
-      }
-    }
-  }
-}
-
 Logger getLogger(
   String className, {
   bool printCallingFunctionName = true,
@@ -135,8 +152,8 @@ Logger getLogger(
       showOnlyClass: showOnlyClass,
       exludeLogsFromClasses: exludeLogsFromClasses,
     ),
-    output: MultipleLoggerOutput([
-      ConsoleOutput(),
+    output: MultiOutput([
+      if (!kReleaseMode) ConsoleOutput(),
     ]),
   );
 }

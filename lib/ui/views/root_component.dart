@@ -8,11 +8,14 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class RootComponent extends StatefulWidget {
+  final bool web;
+  const RootComponent({super.key, this.web = false});
+
   @override
-  _RootComponentState createState() => _RootComponentState();
+  RootComponentState createState() => RootComponentState();
 }
 
-class _RootComponentState extends State<RootComponent> {
+class RootComponentState extends State<RootComponent> {
   @override
   Widget build(BuildContext context) {
     return RestartManager(
@@ -22,7 +25,7 @@ class _RootComponentState extends State<RootComponent> {
           localizationsDelegates: localizationsDelegates,
           localeResolutionCallback: loadSupportedLocals,
           supportedLocales: supportedLocales,
-          locale: Locale('zh', 'CN'),
+          locale: const Locale('zh', 'CN'),
           title: 'flutterApp',
           theme: AppTheme.themData,
           navigatorKey: StackedService.navigatorKey,

@@ -1,4 +1,6 @@
-# flutter MVVM template[中文](./README_ZH.md)
+# flutter MVVM template
+
+- [中文](./README_ZH.md)
 
 A new Flutter project template with Null-safety.
 
@@ -59,14 +61,24 @@ A new Flutter project template with Null-safety.
 - Webview
 - MusicXML Score : render, play ( musicxml 加载五线谱: 渲染，播放 ) -->
 
-## Automatic generation model
+## Automatic generation data model
 
 > Run in the project root directory：
 
 ```bash
 > flutter packages pub run build_runner build --delete-conflicting-outputs
 
-# or(或者)
+# or
 
 > flutter packages pub run build_runner watch
+```
+
+## generation routing, positioning, and logging models
+
+> Run in the project root directory：
+
+```bash
+# Generate routing, positioning, and logging models based on core/app/app.dart
+# The result is located in /core/app/
+> flutter pub run build_runner build --delete-conflicting-outputs stacked generate
 ```

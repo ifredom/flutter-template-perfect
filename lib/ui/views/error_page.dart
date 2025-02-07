@@ -5,13 +5,13 @@ import 'package:stacked_services/stacked_services.dart';
 class ErrorPage extends StatefulWidget {
   final FlutterErrorDetails details;
 
-  ErrorPage(this.details);
+  const ErrorPage(this.details, {super.key});
 
   @override
-  _ErrorPageState createState() => _ErrorPageState();
+  ErrorPageState createState() => ErrorPageState();
 }
 
-class _ErrorPageState extends State<ErrorPage> {
+class ErrorPageState extends State<ErrorPage> {
   final TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -19,7 +19,7 @@ class _ErrorPageState extends State<ErrorPage> {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      color: Color(0xFF24292E),
+      color: const Color(0xFF24292E),
       child: Center(
         child: Container(
           alignment: Alignment.center,
@@ -32,7 +32,7 @@ class _ErrorPageState extends State<ErrorPage> {
               radius: 0.1,
               colors: [
                 Colors.white.withAlpha(10),
-                Color(0xFF24292E),
+                const Color(0xFF24292E),
               ],
             ),
             borderRadius: BorderRadius.all(Radius.circular(width / 2)),
@@ -41,22 +41,22 @@ class _ErrorPageState extends State<ErrorPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image(
+              const Image(
                 image: AssetImage("assets/images/ifredom.jpg"),
                 width: 90.0,
                 height: 90.0,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 11.0,
               ),
-              Material(
+              const Material(
+                color: Color(0xFF24292E),
                 child: Text(
                   'Error Occur',
                   style: TextStyle(fontSize: 24.0, color: Colors.white),
                 ),
-                color: Color(0xFF24292E),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40.0,
               ),
               Row(
@@ -65,26 +65,26 @@ class _ErrorPageState extends State<ErrorPage> {
                 children: <Widget>[
                   TextButton(
                     style: ButtonStyle(
-                      textStyle: MaterialStateProperty.all(TextStyle(
+                      textStyle: WidgetStateProperty.all(const TextStyle(
                         color: Color(0xFF24292E),
                       )),
                     ),
                     onPressed: _errorReport,
-                    child: Text('Report'),
+                    child: const Text('Report'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 40.0,
                   ),
                   TextButton(
                     style: ButtonStyle(
-                      textStyle: MaterialStateProperty.all(TextStyle(
+                      textStyle: WidgetStateProperty.all(const TextStyle(
                         color: Colors.white,
                       )),
                     ),
                     onPressed: () {
                       locator<NavigationService>().back();
                     },
-                    child: Text('Back'),
+                    child: const Text('Back'),
                   )
                 ],
               )

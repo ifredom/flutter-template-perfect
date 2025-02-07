@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertemplate/core/utils/res/colors.dart';
 
 class ScalingHelper {
-  ScalingHelper({this.width: 750});
+  ScalingHelper({this.width = 750});
 
   // width of the current device
   double width;
@@ -88,7 +88,8 @@ class UIHelpers {
 
     scalingHelper = ScalingHelper(width: width!);
 
-    heading = Theme.of(context).textTheme.headline5!.copyWith(color: Colours.textPrimary, fontWeight: FontWeight.w800);
+    heading =
+        Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colours.textPrimary, fontWeight: FontWeight.w800);
 
     //subheading = Theme.of(context).textTheme.headline6!.copyWith(
     //         color: AppColors.textSecondary, fontWeight: FontWeight.normal);

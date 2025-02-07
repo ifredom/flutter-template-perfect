@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertemplate/core/utils/res/locale_keys.dart';
 
 class AppLocalizations {
-  final Locale locale = Locale('zh', 'en');
+  final Locale locale = const Locale('zh', 'en');
 
   Map<String, String> _sentences = {};
 
@@ -18,10 +18,10 @@ class AppLocalizations {
   Future<bool> load() async {
     final path = 'assets/lang/${locale.languageCode}.json';
     final data = await rootBundle.loadString(path);
-    final Map<String, dynamic> _result = json.decode(data);
+    final Map<String, dynamic> result = json.decode(data);
 
     _sentences = <String, String>{};
-    _result.forEach((String key, dynamic value) {
+    result.forEach((String key, dynamic value) {
       _sentences[key] = value.toString();
     });
 
@@ -114,11 +114,11 @@ class FallbackCupertinoLocalizationsDelegate extends LocalizationsDelegate<Cuper
 
 /// SupportLocale -> locale
 Map<SupportLocale, Locale> mapLocales = {
-  SupportLocale.FOLLOW_SYSTEM: Locale("zh", "CN"),
-  SupportLocale.SIMPLIFIED_CHINESE: Locale("zh", "CN"),
-  SupportLocale.TRADITIONAL_CHINESE_TW: Locale("zh", "TW"),
-  SupportLocale.TRADITIONAL_CHINESE_HK: Locale("zh", "HK"),
-  SupportLocale.ENGLISH: Locale("en", "")
+  SupportLocale.FOLLOW_SYSTEM: const Locale("zh", "CN"),
+  SupportLocale.SIMPLIFIED_CHINESE: const Locale("zh", "CN"),
+  SupportLocale.TRADITIONAL_CHINESE_TW: const Locale("zh", "TW"),
+  SupportLocale.TRADITIONAL_CHINESE_HK: const Locale("zh", "HK"),
+  SupportLocale.ENGLISH: const Locale("en", "")
 };
 
 /// SupportLocale 对应的含义

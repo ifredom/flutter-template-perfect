@@ -6,17 +6,19 @@ import 'package:fluttertemplate/core/constants/component_state.dart';
 
 import 'stoppable_service.dart';
 
-// 参考 https://github.com/TobiCrackIT/Tri-fold/tree/07f26c926bd3728f42f7a6e407dc7186509468c5/lib/core/services/app_service
+// document:  https://pub.dev/packages/connectivity_plus
 
 class ConnectivityService implements StoppableService {
   final _log = getLogger("ConnectivityService");
-  StreamController<ConnectivityStatus> _connectivityResultController = StreamController<ConnectivityStatus>();
+  final StreamController<ConnectivityStatus> _connectivityResultController = StreamController<ConnectivityStatus>();
 
   ConnectivityResult _lastResult = ConnectivityResult.none;
+  ConnectivityResult get lastConnectivity => _lastResult;
 
-  late StreamSubscription<ConnectivityResult> _subscription;
+  late StreamSubscription<List<ConnectivityResult>> _subscription;
 
   bool _serviceStopped = false;
+  @override
   bool get serviceStopped => _serviceStopped;
 
   final _connectivity = Connectivity();
@@ -25,23 +27,22 @@ class ConnectivityService implements StoppableService {
   ConnectivityService() {
     _subscription = _connectivity.onConnectivityChanged.listen(_emitConnectivity);
     _connectivityResultController.add(ConnectivityStatus.Init);
-    _connectivity.onConnectivityChanged
-        .listen((ConnectivityResult result) => _connectivityResultController.add(_convertResult(result)));
   }
 
   Future<bool> get isConnected async {
-    final result = await _connectivity.checkConnectivity();
+    final connectivityResult = await _connectivity.checkConnectivity();
+    _log.i('Connectivity result: $connectivityResult');
 
-    switch (result) {
-      case ConnectivityResult.mobile:
-      case ConnectivityResult.wifi:
-        return true;
-      case ConnectivityResult.none:
-      default:
-        return false;
-    }
+    if (connectivityResult.contains(ConnectivityResult.mobile)) {
+      return true;
+    } else if (connectivityResult.contains(ConnectivityResult.wifi)) {
+      return true;
+    } else if (connectivityResult.contains(ConnectivityResult.bluetooth)) {
+    } else if (connectivityResult.contains(ConnectivityResult.none)) {}
+    return false;
   }
 
+  @override
   void start() async {
     _log.w('ConnectivityService resumed');
     _serviceStopped = false;
@@ -50,6 +51,7 @@ class ConnectivityService implements StoppableService {
     _subscription.resume();
   }
 
+  @override
   void stop() {
     _log.w('ConnectivityService paused');
     _serviceStopped = true;
@@ -57,12 +59,17 @@ class ConnectivityService implements StoppableService {
     _subscription.pause(_resumeSignal());
   }
 
-  void _emitConnectivity(ConnectivityResult event) {
-    if (event == _lastResult) return;
+  void _emitConnectivity(List<ConnectivityResult> result) {
+    final isChangeStatus = result.isNotEmpty && !result.contains(ConnectivityResult.none);
 
-    _log.i('Connectivity status changed to $event');
-    _connectivityResultController.add(_convertResult(event));
-    _lastResult = event;
+    _log.i('Connectivity status changed to ${result.last}');
+
+    if (isChangeStatus) {
+      _log.i('New data received.');
+    }
+
+    _connectivityResultController.add(_convertResult(result.last));
+    _lastResult = result.last;
   }
 
   ConnectivityStatus _convertResult(ConnectivityResult result) {

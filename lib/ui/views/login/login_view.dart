@@ -11,11 +11,13 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+
   @override
-  _LoginViewState createState() => _LoginViewState();
+  LoginViewState createState() => LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
   final FocusNode loginNameFocus = FocusNode();
   final FocusNode pwdFocus = FocusNode();
@@ -51,7 +53,7 @@ class _LoginViewState extends State<LoginView> {
         body: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
               image: AssetImage(
@@ -73,7 +75,7 @@ class _LoginViewState extends State<LoginView> {
                       focusNode: loginNameFocus,
                       nextFocusNode: pwdFocus,
                       roundBox: true,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 15.0,
                         textBaseline: TextBaseline.alphabetic,
@@ -88,7 +90,7 @@ class _LoginViewState extends State<LoginView> {
                       focusNode: pwdFocus,
                       roundBox: true,
                       obscureText: true,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 15.0,
                         textBaseline: TextBaseline.alphabetic,
@@ -98,18 +100,16 @@ class _LoginViewState extends State<LoginView> {
                       controller: pwdController,
                       borderColor: HexToColor("#CBAEFA"),
                     ),
-                    Gaps.vGap20,
-                    LoginButton(loginNameController: loginNameController, pwdController: pwdController),
-                    Gaps.vGap20,
-                    Center(child: PhoneCodeButton()),
                     Gaps.vGap40,
-                    Consumer(builder: (_, a, build) {
-                      return Center(child: ThirdButton());
+                    Consumer(builder: (context, LoginViewModel model, child) {
+                      return LoginButton(loginNameController: loginNameController, pwdController: pwdController);
                     }),
+                    Gaps.vGap20,
+                    const Center(child: PhoneCodeButton()),
                   ],
                 ),
               ),
-        
+
               // Lottie.asset('assets/animations/lottie/18582-as-the-waters-rise.json', fit: BoxFit.fitWidth),
             ),
           ),
@@ -121,69 +121,45 @@ class _LoginViewState extends State<LoginView> {
 
 class LoginButton extends ViewModelWidget<LoginViewModel> {
   const LoginButton({
-    Key? key,
+    super.key,
     required this.loginNameController,
     required this.pwdController,
-  }) : super(key: key, reactive: false);
+  });
 
   final TextEditingController loginNameController;
   final TextEditingController pwdController;
 
   @override
-  Widget build(BuildContext context, LoginViewModel model) {
+  Widget build(BuildContext context, LoginViewModel viewModel) {
     print("LoginButton build");
     return Center(
-        child: GradientButton(
-      text: '登录 ${model.testString}',
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 15,
+      child: GradientButton(
+        text: 'Sign In ${viewModel.isBusy ? "..." : ""}',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 15,
+        ),
+        colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
+        onPressed: () async {
+          await viewModel.loginWithPassword(loginNameController.text, pwdController.text);
+        },
       ),
-      colors: [HexToColor('#FF696A'), HexToColor('#FF894A')],
-      onPressed: () async {
-        await model.loginWithPassword(loginNameController.text, pwdController.text);
-      },
-    ));
+    );
   }
 }
 
 class PhoneCodeButton extends ViewModelWidget<LoginViewModel> {
   const PhoneCodeButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context, LoginViewModel model) {
+  Widget build(BuildContext context, LoginViewModel viewModel) {
     print("PhoneCodeButton build");
     return GestureDetector(
       child: FittedBox(
         child: Text(
-          "手机验证码登录 ${model.isBusy.toString()}",
-          style: TextStyle(
-            color: HexToColor("#FF696A"),
-            fontSize: 15,
-          ),
-        ),
-      ),
-      onTap: () {
-        locator<NavigationService>().navigateTo(Routes.loginPhoneView);
-      },
-    );
-  }
-}
-
-class ThirdButton extends ViewModelWidget<LoginViewModel> {
-  const ThirdButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, LoginViewModel model) {
-    print("ThirdButton build");
-    return GestureDetector(
-      child: FittedBox(
-        child: Text(
-          "ThirdButton ${model.isBusy.toString()}",
+          "Sign In with Phone Code",
           style: TextStyle(
             color: HexToColor("#FF696A"),
             fontSize: 15,

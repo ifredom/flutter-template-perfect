@@ -15,13 +15,13 @@ class StartUpViewModel extends BaseViewModel {
   final _authService = locator<AuthService>();
   final _localStorageService = locator<LocalStorageService>();
 
-  bool? _isConnected;
-  bool get isConnected => _isConnected ?? true;
+  bool _isConnected = false;
+  bool get isConnected => _isConnected;
 
   Future<void> runStartupLogic({bool? connectivityPassed}) async {
     if (connectivityPassed == null) await checkConnectivity();
 
-    if (!_isConnected!) {
+    if (!_isConnected) {
       print("无法连接到网络, 请稍后尝试");
       return;
     }
@@ -33,7 +33,7 @@ class StartUpViewModel extends BaseViewModel {
       _navigationService.replaceWith(Routes.updateView);
       return;
     }
-    print(_authService.hasLoggedInUser);
+    print('是否登录 ${_authService.hasLoggedInUser}');
     final bool isLoggedIn = _authService.hasLoggedInUser;
 
     if (isLoggedIn) {

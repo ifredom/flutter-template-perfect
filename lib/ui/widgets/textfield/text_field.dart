@@ -37,7 +37,7 @@ class InputField extends StatefulWidget {
   final Future<bool> Function()? getVCode;
 
   const InputField({
-    Key? key,
+    super.key,
     this.isReadOnly = false,
     this.maxLength,
     this.maxLines = 1,
@@ -62,13 +62,13 @@ class InputField extends StatefulWidget {
     this.formatter,
     this.onFieldSubmitted,
     this.keyboardType = TextInputType.text,
-  }) : super(key: key);
+  });
 
   @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
+  CustomTextFieldState createState() => CustomTextFieldState();
 }
 
-class _CustomTextFieldState extends State<InputField> {
+class CustomTextFieldState extends State<InputField> {
   /// 倒计时秒数
   bool _isClick = true;
   final int second = 20;
@@ -89,7 +89,7 @@ class _CustomTextFieldState extends State<InputField> {
         currentSecond = second;
         _isClick = false;
       });
-      _obs = Stream.periodic(Duration(seconds: 1), (i) => i).take(second).listen((i) {
+      _obs = Stream.periodic(const Duration(seconds: 1), (i) => i).take(second).listen((i) {
         setState(() {
           currentSecond = second - i - 1;
           _isClick = currentSecond < 1;
@@ -143,7 +143,7 @@ class _CustomTextFieldState extends State<InputField> {
       decoration: InputDecoration(
         isDense: true,
         labelText: widget.labelText,
-        // contentPadding: EdgeInsets.only(
+        // contentPadding: const EdgeInsets.only(
         //   top: 5,
         //   bottom: 5,
         // ),
@@ -174,51 +174,51 @@ class _CustomTextFieldState extends State<InputField> {
 
 class BuildTextfieldWrapper extends StatelessWidget {
   final Widget child;
-  final widget;
+  final dynamic widget;
   final bool _isClick;
   final Function? getVCodeCallback;
   final String? second;
-  BuildTextfieldWrapper(this.child, this.widget, this._isClick, {this.getVCodeCallback, this.second});
+  const BuildTextfieldWrapper(this.child, this.widget, this._isClick, {super.key, this.getVCodeCallback, this.second});
 
   @override
   Widget build(BuildContext context) {
-    Decoration _decoration = widget.roundBox
+    Decoration decoration = widget.roundBox
         ? BoxDecoration(
             border: Border.all(
               width: 1,
-              color: widget.borderColor ?? Color.fromRGBO(217, 217, 217, 1),
+              color: widget.borderColor ?? const Color.fromRGBO(217, 217, 217, 1),
             ),
             borderRadius: widget.roundBoxRadius == 0
                 ? BorderRadius.zero
                 : BorderRadius.all(Radius.circular(widget.roundBoxRadius ?? 32)),
           )
-        : UnderlineTabIndicator(
+        : const UnderlineTabIndicator(
             borderSide: BorderSide(width: 1.0, color: Colors.black),
           );
 
-    EdgeInsetsGeometry _padding = widget.padding ?? EdgeInsets.fromLTRB(16, 0, 16, 0);
+    EdgeInsetsGeometry padding = widget.padding ?? const EdgeInsets.fromLTRB(16, 0, 16, 0);
 
     return Container(
-      padding: _padding,
-      decoration: _decoration,
+      padding: padding,
+      decoration: decoration,
       child: Flex(
         direction: Axis.horizontal,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          null == widget.prefixIcon ? Gaps.empty : widget.prefixIcon,
+          widget.prefixIcon ?? Gaps.empty,
           null == widget.prefixIcon ? Gaps.empty : Gaps.hGap10,
           Expanded(
             flex: 80,
             child: child,
           ),
-          null == widget.suffixIcon ? Gaps.empty : widget.suffixIcon,
+          widget.suffixIcon ?? Gaps.empty,
           null == widget.suffixIcon ? Gaps.empty : Gaps.hGap10,
           widget.getVCode == null
               ? Gaps.empty
               : Row(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     SizedBox(
                       width: 1,
                       height: 24,
@@ -226,14 +226,15 @@ class BuildTextfieldWrapper extends StatelessWidget {
                         color: HexToColor('#767680'),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     GestureDetector(
+                      // padding: EdgeInsets.symmetric(vertical: 0),
+                      onTap: _isClick ? getVCodeCallback!() : null,
                       // padding: EdgeInsets.symmetric(vertical: 0),
                       child: Text(
                         _isClick ? "获取验证码" : "$second秒后重发",
                         style: TextStyle(color: HexToColor('#A061FD')),
                       ),
-                      onTap: _isClick ? getVCodeCallback!() : null,
                     ),
                   ],
                 ),

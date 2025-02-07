@@ -60,7 +60,7 @@
 - Webview
 - MusicXML Score : render, play ( musicxml 加载五线谱: 渲染，播放 ) -->
 
-## 自动生成模型
+## 自动生成 数据模型
 
 > 在 cmd 中，项目根目录下运行以下指令：
 
@@ -70,4 +70,14 @@
 # or(或者)
 
 > flutter packages pub run build_runner watch
+```
+
+## 自动生成 路由，定位，日志模型
+
+> 在 cmd 中，项目根目录下运行以下指令：
+
+```bash
+# 根据 core/app/app.dart 生成 路由，定位，日志模型文件
+# 生成结果位于 /core/app/
+> flutter pub run build_runner build --delete-conflicting-outputs stacked generate
 ```

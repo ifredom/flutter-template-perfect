@@ -1,4 +1,3 @@
-import 'package:fluttertemplate/core/model/app_models.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OpenLinkService {
@@ -6,10 +5,13 @@ class OpenLinkService {
   ///
   /// Throws error if the link can't be opened
   Future openLink(String url) async {
-    bool canLaunchUrl = await canLaunch(url);
+    final Uri _url = Uri.parse(url);
 
-    if (!canLaunchUrl) return Result.failed("Could not launch $url");
+    // 需要手动更改： https://pub.dev/packages/url_launcher
+    // Check if the url can be launched
+    // bool canLaunchUrl = await canLaunchUrl(url);
+    // if (!canLaunchUrl) return Result.failed("Could not launch $url");
 
-    await launch(url);
+    await launchUrl(_url);
   }
 }

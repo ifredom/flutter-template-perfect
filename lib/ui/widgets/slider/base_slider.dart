@@ -45,10 +45,11 @@ class RoundSliderTrackShape extends SliderTrackShape {
     required RenderBox parentBox,
     required SliderThemeData sliderTheme,
     required Animation<double> enableAnimation,
-    required TextDirection textDirection,
     required Offset thumbCenter,
-    bool isDiscrete = false,
+    Offset? secondaryOffset,
     bool isEnabled = false,
+    bool isDiscrete = false,
+    required TextDirection textDirection,
   }) {
     if (sliderTheme.trackHeight == 0) {
       return;

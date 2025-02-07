@@ -31,8 +31,8 @@ class ScreenBuilder<T extends BaseViewModel> extends StatelessWidget {
       required this.viewModel,
       this.onModelReady,
       this.onDispose,
-      this.disposeViewModel: true,
-      this.isReactive: true})
+      this.disposeViewModel = true,
+      this.isReactive = true})
       : super(key: key);
 
   @override
@@ -41,25 +41,17 @@ class ScreenBuilder<T extends BaseViewModel> extends StatelessWidget {
 
     return (isReactive)
         ? ViewModelBuilder<T>.reactive(
-            builder: (context, model, child) => SafeArea(
-                left: true,
-                right: true,
-                top: false,
-                bottom: false,
-                child: builder(context, uiHelpers, model)),
+            builder: (context, model, child) =>
+                SafeArea(left: true, right: true, top: false, bottom: false, child: builder(context, uiHelpers, model)),
             disposeViewModel: disposeViewModel,
-            onModelReady: onModelReady,
+            onViewModelReady: onModelReady,
             onDispose: onDispose,
             viewModelBuilder: () => viewModel)
         : ViewModelBuilder<T>.nonReactive(
-            builder: (context, model, child) => SafeArea(
-                left: true,
-                right: true,
-                top: false,
-                bottom: false,
-                child: builder(context, uiHelpers, model)),
+            builder: (context, model, child) =>
+                SafeArea(left: true, right: true, top: false, bottom: false, child: builder(context, uiHelpers, model)),
             disposeViewModel: disposeViewModel,
-            onModelReady: onModelReady,
+            onViewModelReady: onModelReady,
             onDispose: onDispose,
             viewModelBuilder: () => viewModel);
   }

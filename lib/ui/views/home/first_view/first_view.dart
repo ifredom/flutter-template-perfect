@@ -7,14 +7,14 @@ import 'package:fluttertemplate/ui/views/home/first_view/title_view.dart';
 import 'package:fluttertemplate/core/app/app.locator.dart';
 
 class FirstScreen extends StatefulWidget {
-  const FirstScreen({Key? key, required this.animationController}) : super(key: key);
+  const FirstScreen({super.key, required this.animationController});
 
   final AnimationController animationController;
   @override
-  _FirstScreenState createState() => _FirstScreenState();
+  FirstScreenState createState() => FirstScreenState();
 }
 
-class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin {
+class FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin {
   final _navigationService = locator<NavigationService>();
   late Animation<double> topBarAnimation;
 
@@ -57,10 +57,11 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
         titleTxt: '油闷大虾',
         subTxt: '北京大酒店',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
+            parent: widget.animationController,
+            curve: const Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
         callback: () {
-          Map post = Map();
+          Map post = {};
           post["title"] = "油闷大虾";
           post["description"] = "油焖大虾是山东省的一道特色名菜，属于鲁菜，使用鲁菜特有的油焖技法。";
 
@@ -74,10 +75,11 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
         titleTxt: '水煮肉片',
         subTxt: '花园大酒店',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
+            parent: widget.animationController,
+            curve: const Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
         callback: () {
-          Map post = Map();
+          Map post = {};
           post["title"] = "水煮肉片";
           post["description"] = "水煮肉片是以猪里脊肉为主料的一道地方新创名菜，起源于自贡";
 
@@ -90,10 +92,11 @@ class _FirstScreenState extends State<FirstScreen> with TickerProviderStateMixin
         titleTxt: '啤酒鸭',
         subTxt: '民宿',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController, curve: Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
+            parent: widget.animationController,
+            curve: const Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
         callback: () {
-          Map post = Map();
+          Map post = {};
           post["title"] = "啤酒鸭";
           post["description"] = "啤酒鸭是一道以鸭子、啤酒为主料的特色佳肴，据传起源于清代";
 

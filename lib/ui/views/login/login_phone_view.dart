@@ -13,14 +13,16 @@ import 'package:fluttertemplate/ui/widgets/textfield/text_field.dart';
 import 'login_phone_view_model.dart';
 
 class LoginPhoneView extends StatefulWidget {
+  const LoginPhoneView({super.key});
+
   @override
-  _LoginPhoneViewState createState() => _LoginPhoneViewState();
+  LoginPhoneViewState createState() => LoginPhoneViewState();
 }
 
-class _LoginPhoneViewState extends State<LoginPhoneView> {
+class LoginPhoneViewState extends State<LoginPhoneView> {
   final formKey = GlobalKey<FormState>();
-  FocusNode _loginFocus = FocusNode();
-  FocusNode _pwdFocus = FocusNode();
+  final FocusNode _loginFocus = FocusNode();
+  final FocusNode _pwdFocus = FocusNode();
   final TextEditingController loginPhoneController = TextEditingController();
   final TextEditingController pwdController = TextEditingController();
 
@@ -47,7 +49,7 @@ class _LoginPhoneViewState extends State<LoginPhoneView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginPhoneViewModel>.nonReactive(
       viewModelBuilder: () => LoginPhoneViewModel(),
-      onModelReady: (model) => model.init(),
+      onViewModelReady: (model) => model.init(),
       builder: (context, model, child) => Scaffold(
         body: Form(
           key: formKey,
@@ -60,11 +62,11 @@ class _LoginPhoneViewState extends State<LoginPhoneView> {
                 color: HexToColor("#e9f1f6"),
               ),
               child: SingleChildScrollView(
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -90,13 +92,13 @@ class _LoginPhoneViewState extends State<LoginPhoneView> {
                               //背景
                               color: HexToColor('#A061FD'),
                               //设置四周圆角 角度 这里的角度应该为 父Container height 的一半
-                              borderRadius: BorderRadius.all(Radius.circular(43.0)),
+                              borderRadius: const BorderRadius.all(Radius.circular(43.0)),
                             ),
                             child: GradientButton(
                               text: '登录',
                               width: 160,
                               height: 44,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                               ),
@@ -142,8 +144,8 @@ class BuildLoginButton extends ViewModelWidget<LoginPhoneViewModel> {
   final String phone;
   final String password;
 
-  BuildLoginButton({
-    Key? key,
+  const BuildLoginButton({
+    super.key,
     required this.formKey,
     required this.phone,
     required this.password,
@@ -158,7 +160,7 @@ class BuildLoginButton extends ViewModelWidget<LoginPhoneViewModel> {
         //背景
         color: HexToColor('#A061FD'),
         //设置四周圆角 角度 这里的角度应该为 父Container height 的一半
-        borderRadius: BorderRadius.all(Radius.circular(43.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(43.0)),
       ),
       child: TextButton(
         child: Text(

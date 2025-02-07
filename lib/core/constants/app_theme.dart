@@ -53,7 +53,7 @@ class AppTheme {
   );
 
   static const TextTheme textTheme = TextTheme(
-    caption: caption,
+    bodySmall: caption,
   );
 
   static const TextStyle headline = TextStyle(

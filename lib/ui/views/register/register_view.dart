@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatefulWidget {
-  const RegisterView({Key? key}) : super(key: key);
+  const RegisterView({super.key});
 
   @override
-  _RegisterViewState createState() => _RegisterViewState();
+  RegisterViewState createState() => RegisterViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
+class RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Text("Register"),
     );
   }

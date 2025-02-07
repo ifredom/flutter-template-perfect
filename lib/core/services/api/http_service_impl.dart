@@ -3,8 +3,8 @@ import 'dart:collection' show HashMap;
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio/adapter.dart';
-import 'package:dio/dio.dart' show Dio, Options, DioError, Response, Headers;
+import 'package:dio/dio.dart' show Dio, DioException, Headers, Options, Response;
+import 'package:dio/io.dart';
 import 'package:fluttertemplate/core/app/app.logger.dart';
 import 'package:fluttertemplate/core/app/app.locator.dart';
 import 'package:fluttertemplate/core/constants/constants.dart';
@@ -22,7 +22,7 @@ import 'interceptors/token_interceptor.dart' show TokenInterceptors;
 /// 请求实体类
 class HttpServiceImpl implements HttpService {
   static HttpServiceImpl getInstance() => HttpServiceImpl();
-  static TokenInterceptors _tokenInterceptors = TokenInterceptors();
+  static final TokenInterceptors _tokenInterceptors = TokenInterceptors();
 
   final _log = getLogger('HttpServiceImpl');
 
@@ -32,8 +32,8 @@ class HttpServiceImpl implements HttpService {
     // 初始化http请求参数
     _dio
       ..options.baseUrl = Constants.BASE_URL
-      ..options.connectTimeout = 5000
-      ..options.receiveTimeout = 3000
+      ..options.connectTimeout = const Duration(seconds: 5)
+      ..options.receiveTimeout = const Duration(seconds: 3)
       ..httpClientAdapter;
 
     // 添加拦截器
@@ -44,25 +44,29 @@ class HttpServiceImpl implements HttpService {
     _dio.interceptors.add(ErrorInterceptors());
 
     if (Constants.useProxy) {
-      final adapter = _dio.httpClientAdapter as DefaultHttpClientAdapter;
-      adapter.onHttpClientCreate = (client) {
+      final adapter = _dio.httpClientAdapter as IOHttpClientAdapter;
+
+      adapter.createHttpClient = () {
+        HttpClient httpClient = HttpClient();
         // 设置Http代理
-        client.findProxy = (uri) {
+        httpClient.findProxy = (uri) {
           return "PROXY ${Constants.proxyAddress}";
         };
+
         // https证书校验
-        client.badCertificateCallback = (cert, host, port) => true;
+        httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+        return httpClient;
       };
     }
   }
 
   @override
   Future<dynamic> request(String apiCode, Map params, {Map<String, dynamic>? headers, Options? options}) async {
-    Options _options = Options(method: 'post', contentType: Headers.jsonContentType);
+    Options options = Options(method: 'post', contentType: Headers.jsonContentType);
     if (headers != null) {
-      Map<String, dynamic> _headers = HashMap();
-      _headers.addAll(headers);
-      _options.headers = _headers;
+      Map<String, dynamic> headers0 = HashMap();
+      headers0.addAll(headers);
+      options.headers = headers0;
     }
 
     Response response;
@@ -70,11 +74,11 @@ class HttpServiceImpl implements HttpService {
       response = await _dio.request(
         Constants.BASE_URL + apiCode,
         data: json.encode(params), // 注意，所有data数据都要encode变为json字符串.
-        options: _options,
+        options: options,
         onSendProgress: network_utils.showLoadingProgress,
         onReceiveProgress: network_utils.showLoadingProgress,
       );
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       _log.e(error.toString());
       return ExceptionHandle.handleDioException(error);
     }
@@ -84,8 +88,8 @@ class HttpServiceImpl implements HttpService {
   @override
   Future<File> downloadFile(String fileUrl) async {
     Response response;
-    final _fileHelper = locator<FileService>();
-    final file = await _fileHelper.getFileFromUrl(fileUrl);
+    final fileHelper = locator<FileService>();
+    final file = await fileHelper.getFileFromUrl(fileUrl);
 
     try {
       response = await _dio.download(
@@ -93,7 +97,7 @@ class HttpServiceImpl implements HttpService {
         file.path,
         onReceiveProgress: network_utils.showLoadingProgress,
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw ExceptionHandle.handleDioException(e);
     }
 
@@ -104,7 +108,6 @@ class HttpServiceImpl implements HttpService {
 
   @override
   void dispose() {
-    _dio.clear();
     _dio.close(force: true);
   }
 }

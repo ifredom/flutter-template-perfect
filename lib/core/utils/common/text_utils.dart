@@ -1,9 +1,3 @@
-/**
- * @Author: Sky24n
- * @GitHub: https://github.com/Sky24n
- * @Description: Text Util.
- */
-
 /// TextUtil.
 class TextUtil {
   /// isEmpty

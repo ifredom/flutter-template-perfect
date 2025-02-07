@@ -10,11 +10,13 @@ import 'package:fluttertemplate/ui/widgets/bottombar/bottom_bar_view.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatefulWidget {
+  const HomeView({super.key});
+
   @override
-  _HomeViewState createState() => _HomeViewState();
+  HomeViewState createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
+class HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late AnimationController animationController;
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -40,9 +42,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     print("home build");
+
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       viewModelBuilder: () => HomeViewModel(),
-      onModelReady: (model) => model.onModelReady(),
+      onViewModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) => SafeArea(
         child: Scaffold(
           body: Container(
@@ -94,13 +97,13 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                   tabBody = FirstScreen(animationController: animationController);
                   break;
                 case 1:
-                  tabBody = SecondScreen();
+                  tabBody = const SecondScreen();
                   break;
                 case 2:
-                  tabBody = ThirdScreen();
+                  tabBody = const ThirdScreen();
                   break;
                 case 3:
-                  tabBody = ForthScreen();
+                  tabBody = const ForthScreen();
                   break;
                 default:
               }
